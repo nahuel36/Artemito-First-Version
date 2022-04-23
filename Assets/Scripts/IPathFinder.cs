@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface PathFinder
+public interface IPathFinder
 {
     void WalkTo(Vector3 destiny);
 
