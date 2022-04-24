@@ -15,7 +15,8 @@ public class PNCCharacter : MonoBehaviour
     // Start is called before the first frame update
     public void Walk(Vector3 destiny)
     {
-        pathFinder.WalkTo(destiny);
+        CharacterWalk characterWalk = new CharacterWalk();
+        characterWalk.Queue(pathFinder, destiny);
     }
 
 }
