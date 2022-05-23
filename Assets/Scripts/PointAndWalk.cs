@@ -18,7 +18,8 @@ public class PointAndWalk : MonoBehaviour
        if(Input.GetMouseButtonDown(0))
         {
             Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            FindObjectOfType<PNCCharacter>().Walk(point.x * Vector3.right + point.y * Vector3.up);
+            FindObjectOfType<PNCCharacter>().CancelWalk();
+            FindObjectOfType<PNCCharacter>().CancelableWalk(point.x * Vector3.right + point.y * Vector3.up);
         }
     }
 }

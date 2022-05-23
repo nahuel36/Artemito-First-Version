@@ -40,6 +40,12 @@ public class InteractionManager
         _conditionals.Clear();
     }
 
+    public void ClearAll()
+    {
+        _conditionals.Clear();
+        _commandsToExecute.Clear();
+    }
+
     public void DebugCount()
     {
         Debug.Log(_conditionals.Count);
