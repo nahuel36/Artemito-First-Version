@@ -7,6 +7,8 @@ public class AStarPathFinder : IPathFinder
 {
     GameObject target;
     AIPath aipath;
+    bool canceled;
+    bool isCancelable;
 
     public AStarPathFinder(GameObject target, AIPath aipath)
     {
@@ -15,8 +17,10 @@ public class AStarPathFinder : IPathFinder
     }
 
     // Start is called before the first frame update
-    public void WalkTo(Vector3 destiny)
+    public void WalkTo(Vector3 destiny, bool isCancelable)
     {
+        canceled = false;
+        this.isCancelable = isCancelable;
         target.transform.position = destiny;
     }
 
@@ -24,5 +28,16 @@ public class AStarPathFinder : IPathFinder
     public bool Reached
     {
         get { return aipath.reachedEndOfPath; }
+    }
+
+    public bool Canceled
+    {
+        get { return isCancelable && canceled; }
+    }
+    
+    public void Cancel()
+    {
+        if(isCancelable)
+            canceled = true;
     }
 }

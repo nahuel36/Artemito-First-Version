@@ -4,8 +4,11 @@ using UnityEngine;
 
 public interface IPathFinder
 {
-    void WalkTo(Vector3 destiny);
-
+    void WalkTo(Vector3 destiny, bool isCancelable);
+    
     bool Reached { get; }
 
+    void Cancel();
+
+    bool Canceled { get; }
 }

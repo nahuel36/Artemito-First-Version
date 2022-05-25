@@ -8,17 +8,14 @@ public class CharacterWalk : IInteraction
     IPathFinder pathfinder;
     Vector3 destiny;
     bool isCancelable;
-    bool cancel;
     // Start is called before the first frame update
     public async Task Execute()
     {
-        pathfinder.WalkTo(destiny);
-
-        cancel = false;
+        pathfinder.WalkTo(destiny, isCancelable);
 
         await Task.Delay(1000);
 
-        while (pathfinder.Reached == false && !cancel)
+        while (pathfinder.Reached == false && pathfinder.Canceled == false)
             await Task.Yield();
     }
 
@@ -33,9 +30,6 @@ public class CharacterWalk : IInteraction
 
     public void Cancel()
     {
-        if(isCancelable)
-        {
-            cancel = true;
-        }
+        pathfinder.Cancel();
     }
 }
