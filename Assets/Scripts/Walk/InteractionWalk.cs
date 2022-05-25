@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class CharacterWalk : IInteraction
+public class InteractionWalk : IInteraction
 {
     IPathFinder pathfinder;
     Vector3 destiny;
