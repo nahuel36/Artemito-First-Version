@@ -8,11 +8,13 @@ public class PNCCharacter : MonoBehaviour
     IMessageTalker messageTalker;
     [SerializeField] GameObject target;
     InteractionWalk cancelableWalk;
+    InteractionTalk skippabletalk; 
 
     private void Awake()
     {
         pathFinder = new AStarPathFinder(target, this.transform);
         messageTalker = new LucasArtText(this.transform);
+
     }
 
     // Start is called before the first frame update
@@ -36,7 +38,19 @@ public class PNCCharacter : MonoBehaviour
 
     public void Talk(string message)
     {
+        skippabletalk = new InteractionTalk();
+        skippabletalk.Queue(messageTalker, message, true,false);
+    }
+
+    public void BackgroundTalk(string message)
+    {
         InteractionTalk talk = new InteractionTalk();
-        talk.Queue(messageTalker, message, true);
+        talk.Queue(messageTalker, message, true, true);
+    }
+
+    public void SkipTalk()
+    {
+        if(skippabletalk != null)
+            skippabletalk.Skip();
     }
 }
