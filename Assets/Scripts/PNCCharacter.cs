@@ -5,24 +5,26 @@ using UnityEngine;
 public class PNCCharacter : MonoBehaviour
 {
     IPathFinder pathFinder;
+    IMessageTalker messageTalker;
     [SerializeField] GameObject target;
-    CharacterWalk cancelableWalk;
+    InteractionWalk cancelableWalk;
 
     private void Awake()
     {
-        pathFinder = new AStarPathFinder(target, GetComponent<Pathfinding.AIPath>());
+        pathFinder = new AStarPathFinder(target, this.transform);
+        messageTalker = new LucasArtText(this.transform);
     }
 
     // Start is called before the first frame update
     public void Walk(Vector3 destiny)
     {
-        CharacterWalk characterWalk = new CharacterWalk();
+        InteractionWalk characterWalk = new InteractionWalk();
         characterWalk.Queue(pathFinder, destiny);
     }
 
     public void CancelableWalk(Vector3 destiny)
     {
-        cancelableWalk = new CharacterWalk();
+        cancelableWalk = new InteractionWalk();
         cancelableWalk.Queue(pathFinder, destiny, true);
     }
 
@@ -30,5 +32,11 @@ public class PNCCharacter : MonoBehaviour
     {
         InteractionManager.Instance.ClearAll();
         if(cancelableWalk != null) cancelableWalk.Cancel();
+    }
+
+    public void Talk(string message)
+    {
+        InteractionTalk talk = new InteractionTalk();
+        talk.Queue(messageTalker, message, true);
     }
 }

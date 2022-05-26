@@ -10,10 +10,10 @@ public class AStarPathFinder : IPathFinder
     bool canceled;
     bool isCancelable;
 
-    public AStarPathFinder(GameObject target, AIPath aipath)
+    public AStarPathFinder(GameObject target, UnityEngine.Transform transform)
     {
         this.target = target;
-        this.aipath = aipath;
+        this.aipath = transform.GetComponentInChildren<AIPath>();
     }
 
     // Start is called before the first frame update
