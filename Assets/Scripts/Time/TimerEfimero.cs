@@ -34,7 +34,7 @@ public class TimerEfimero : IInteraction
         seconds = secondsP;
     }
 
-    public void Cancel()
+    public void Skip()
     {
         canceled = true;
     }

@@ -21,4 +21,8 @@ public class Conditional : IInteraction
         InteractionManager.Instance.AddCommand(this);
     }
 
+    public void Skip()
+    {
+
+    }
 }

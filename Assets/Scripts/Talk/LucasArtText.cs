@@ -47,7 +47,7 @@ public class LucasArtText : IMessageTalker
         if (skippable && currentTimer != null)
         {
             skipped = true;
-            currentTimer.Cancel();
+            currentTimer.Skip();
         }
     }
 }

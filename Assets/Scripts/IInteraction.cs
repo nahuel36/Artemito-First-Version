@@ -7,4 +7,6 @@ public interface IInteraction
 {
     // Start is called before the first frame update
     Task Execute();
+
+    void Skip();
 }

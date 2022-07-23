@@ -20,6 +20,10 @@ public class EndTimer : IInteraction
         InteractionManager.Instance.AddCommand(this);
     }
 
+    public void Skip()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()

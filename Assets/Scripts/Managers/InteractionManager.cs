@@ -11,6 +11,7 @@ public class InteractionManager
     private bool _runningCommand;
     private static InteractionManager _instance;
     private List<bool> _conditionals;
+    private IInteraction actualCommand;
 
     private InteractionManager()
     {
@@ -77,10 +78,18 @@ public class InteractionManager
             }
 
             if (execute)
+            {
+                actualCommand = commandToExecute;
                 await commandToExecute.Execute();
+            }
         }
 
         ClearConditionals();
         _runningCommand = false;
+    }
+
+    public void SkipActualCommand()
+    {
+        actualCommand.Skip();
     }
 }

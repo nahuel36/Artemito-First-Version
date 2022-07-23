@@ -21,4 +21,9 @@ public class StartTimer : IInteraction
         timer.Started = true;
         await Task.Yield();
     }
+
+    public void Skip()
+    {
+
+    }
 }
