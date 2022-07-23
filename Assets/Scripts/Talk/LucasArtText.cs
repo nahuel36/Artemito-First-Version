@@ -20,16 +20,13 @@ public class LucasArtText : IMessageTalker
         talking = true;
         skipped = false;
         text.text = message;
-        float time = 1000;
-        float counter = 0;
-        while (counter < time && skipped == false)
-        { 
-            counter++;
-            await Task.Yield();
-        }
+
+        TimerEfimero timer = new TimerEfimero();
+        timer.ConfigureWithoutQueue(1);
+        await timer.Execute();
+        
         text.text = "";
         talking = false;
-
     }
 
     // Start is called before the first frame update

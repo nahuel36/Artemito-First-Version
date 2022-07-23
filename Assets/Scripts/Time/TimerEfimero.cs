@@ -20,4 +20,9 @@ public class TimerEfimero : IInteraction
         seconds = secondsP;
         InteractionManager.Instance.AddCommand(this);
     }
+
+    public void ConfigureWithoutQueue(float secondsP)
+    {
+        seconds = secondsP;
+    }
 }
