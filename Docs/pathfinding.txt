@@ -1,0 +1,23 @@
+https://forum.arongranberg.com/t/version-pro-and-public-repo/12447/2
+
+https://forum.arongranberg.com/t/detecting-if-a-pathfinding-project-exists-in-project/12396
+
+https://gist.github.com/dunenkoff/31c854d6b02eaa68e7ab
+
+
+2.8 -3.7 (camino de mas) 
+poniendo ispointanobstruction radio 0.49 y smooth path funciona bien
+
+1.95 -1.7 (calcula mal el punto cercano) 
+se arregla poniendo math abs y vector right y vector down
+pero se desajusta el (6 0)
+se arregló poniendo un doble chequeo de la posicion, 
+si el punto sigue dentro del collider, se calcula en direccion contraria
+
+1.7 -1.86 (no calcula punto cercano)
+se arregló cambiando check inside a collider a 0.49
+
+2.7 -0.8 (calcula punto cercano pero no el camino)
+3.5 -0.1 (calcula punto cercano pero no el camino)
+se arregla poniendo la recta que usa scale posicionada con bestClosestPoint en vez de destinyFinal
+se ajustó el scale a 0.9

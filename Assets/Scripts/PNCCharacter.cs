@@ -13,7 +13,7 @@ public class PNCCharacter : MonoBehaviour
     private void Awake()
     {
         pathFinder = new AStarPathFinder(target, this.transform);
-        messageTalker = new LucasArtText(this.transform);
+        messageTalker = new LucasArtText(this.transform, new TextTimeCalculator());
 
     }
 

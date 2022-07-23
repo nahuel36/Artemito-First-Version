@@ -7,11 +7,19 @@ using System;
 public class TimerEfimero : IInteraction
 {
     float seconds;
+    public bool canceled = false;
 
     // Start is called before the first frame update
     public async Task Execute()
     {
-        await Task.Delay(TimeSpan.FromSeconds(seconds));
+        canceled = false;
+        float counter = 0;
+        while(counter < seconds && !canceled)
+        {
+            counter += Time.deltaTime;
+            await Task.Yield();
+        }
+        //await Task.Delay(TimeSpan.FromSeconds(seconds));
     }
 
     // Update is called once per frame
@@ -24,5 +32,10 @@ public class TimerEfimero : IInteraction
     public void ConfigureWithoutQueue(float secondsP)
     {
         seconds = secondsP;
+    }
+
+    public void Cancel()
+    {
+        canceled = true;
     }
 }

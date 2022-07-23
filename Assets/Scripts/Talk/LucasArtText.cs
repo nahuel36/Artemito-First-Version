@@ -8,11 +8,13 @@ public class LucasArtText : IMessageTalker
     bool talking;
     TextMeshProUGUI text;
     bool skipped;
+    TimerEfimero currentTimer;
+    ITextTimeCalculator timeCalculator;
 
-    public LucasArtText(UnityEngine.Transform transform)
+    public LucasArtText(UnityEngine.Transform transform, ITextTimeCalculator calculator)
     {
         text = transform.GetComponentInChildren<TextMeshProUGUI>();
-
+        timeCalculator = calculator;
     }
 
     public async Task Talk(string message)
@@ -21,12 +23,13 @@ public class LucasArtText : IMessageTalker
         skipped = false;
         text.text = message;
 
-        TimerEfimero timer = new TimerEfimero();
-        timer.ConfigureWithoutQueue(1);
-        await timer.Execute();
+        currentTimer = new TimerEfimero();
+        currentTimer.ConfigureWithoutQueue(timeCalculator.CalculateTime(message));
+        await currentTimer.Execute();
         
         text.text = "";
         talking = false;
+        currentTimer = null;
     }
 
     // Start is called before the first frame update
@@ -41,6 +44,10 @@ public class LucasArtText : IMessageTalker
     public bool Skipped { get { return skippable && skipped; } }
 
     public void Skip() {
-        skipped = true;
+        if (skippable && currentTimer != null)
+        {
+            skipped = true;
+            currentTimer.Cancel();
+        }
     }
 }

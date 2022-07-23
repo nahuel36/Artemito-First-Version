@@ -1,0 +1,6 @@
+en pnc
+
+PNCCharacter
+Talk/TalkAnimator
+Carpeta Walk entera
+sistema de path finding

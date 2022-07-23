@@ -1,0 +1,33 @@
+ideas de adventure creator
+*que el icono del cursor cambie si estas arriba de un objeto o nada
+*que el texto tenga expresiones
+*separar cabeza y cuerpo (opcionalmente)
+
+HECHO que pathfinder se configure por si solo
+
+HECHO que custom script no dependa de setear execute y queue
+
+usar un adapter para obtener un recurso por resources o por addressables
+
+usar getcomponentsinchildren con include inactive en true cuando se carga por primera vez la escena
+scene.getrootgameobjects
+
+usar service locator para acciones en codigo?
+
+usar array para acciones (mirar, usar, empujar), porque puede haber mas de 3
+usar custom editor y mostrar segun el modo elegido
+"enum" creado con custom editor
+
+usar scriptable objects para elegir el modo
+
+character no deberia heredar de objeto, 
+usar interfaces?
+
+HECHO usar pattern command para interaction manager
+HECHO usar await async para el mismo
+HECHO empezar a probar esto con TDD
+
+que se pueda acceder a objetos de cualquier escena tanto desde codigo como desde editor
+
+debug tools
+(por ejemplo empezar en una escena determinada)
