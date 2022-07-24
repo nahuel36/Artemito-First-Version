@@ -4,15 +4,19 @@ using UnityEngine;
 using System.Threading.Tasks;
 
 
-public abstract class CustomScript : MonoBehaviour
+public abstract class CustomScript : MonoBehaviour, IInteraction
 {
     public async Task Execute()
     {
         await Task.Yield();
-        LoadScript();
     }
-    
-    public abstract void LoadScript();
 
-    
+    public virtual void LoadScript() {
+        InteractionManager.Instance.AddCommand(this);
+    }
+
+    public void Skip()
+    {
+
+    }
 }
