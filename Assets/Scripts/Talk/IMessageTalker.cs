@@ -9,4 +9,5 @@ public interface IMessageTalker
     bool Talking { get; }
     void Skip();
     bool Skipped { get; }
+    string Text { get; set; }
 }

@@ -6,14 +6,16 @@ public class LucasArtText : IMessageTalker
 {
     bool skippable;
     bool talking;
-    TextMeshProUGUI text;
+    TextMeshProUGUI textmesh;
     bool skipped;
     TimerEfimero currentTimer;
     ITextTimeCalculator timeCalculator;
+    public string Text { get { return textmesh.text; } set { textmesh.text = value; } }
+
 
     public LucasArtText(UnityEngine.Transform transform, ITextTimeCalculator calculator)
     {
-        text = transform.GetComponentInChildren<TextMeshProUGUI>();
+        textmesh = transform.GetComponentInChildren<TextMeshProUGUI>();
         timeCalculator = calculator;
     }
 
@@ -21,13 +23,13 @@ public class LucasArtText : IMessageTalker
     {
         talking = true;
         skipped = false;
-        text.text = message;
+        Text = message;
 
         currentTimer = new TimerEfimero();
         currentTimer.ConfigureWithoutQueue(timeCalculator.CalculateTime(message));
         await currentTimer.Execute();
         
-        text.text = "";
+        Text = "";
         talking = false;
         currentTimer = null;
     }
