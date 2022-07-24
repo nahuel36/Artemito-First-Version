@@ -1,3 +1,5 @@
+poner required component en todas las clases
+
 ideas de adventure creator
 *que el icono del cursor cambie si estas arriba de un objeto o nada
 *que el texto tenga expresiones
