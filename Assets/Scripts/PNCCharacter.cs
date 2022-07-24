@@ -33,7 +33,7 @@ public class PNCCharacter : MonoBehaviour
     public void CancelWalk()
     {
         InteractionManager.Instance.ClearAll();
-        if(cancelableWalk != null) cancelableWalk.Cancel();
+        if(cancelableWalk != null) cancelableWalk.Skip();
     }
 
     public void Talk(string message)

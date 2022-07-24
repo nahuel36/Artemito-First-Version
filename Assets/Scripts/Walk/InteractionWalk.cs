@@ -28,7 +28,7 @@ public class InteractionWalk : IInteraction
         InteractionManager.Instance.AddCommand(this);
     }
 
-    public void Cancel()
+    public void Skip()
     {
         pathfinder.Cancel();
     }
