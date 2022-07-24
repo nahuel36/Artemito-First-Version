@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class InteractionTalk : IInteraction, IBackgroundInteraction
+public class InteractionTalk : IInteraction
 {
     IMessageTalker talker;
     string message;
@@ -22,16 +22,9 @@ public class InteractionTalk : IInteraction, IBackgroundInteraction
         }
         else
         {
-            BackgroundInteractionManager.Instance.AddCommand(this);
+            this.isBackground = false;
+            InteractionManager.BackgroundInstance.AddCommand(this);
         }
-    }
-
-    public async Task ExecuteInBackground()
-    {
-        talker.Talk(message, skippable);
-
-        while (talker.Talking)
-            await Task.Yield();
     }
 
     // Update is called once per frame

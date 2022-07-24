@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 public class InteractionManager  
 {
     public static InteractionManager Instance => _instance ?? (_instance = new InteractionManager());
+    public static InteractionManager BackgroundInstance => _bginstance ?? (_bginstance = new InteractionManager());
 
     private readonly Queue<IInteraction> _commandsToExecute;
     private bool _runningCommand;
     private static InteractionManager _instance;
+    private static InteractionManager _bginstance;
     private List<bool> _conditionals;
     private IInteraction actualCommand;
 
