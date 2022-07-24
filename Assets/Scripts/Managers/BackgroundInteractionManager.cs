@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class BackgroundMessageInteractionManager
+public class BackgroundInteractionManager
 {
-    public static BackgroundMessageInteractionManager Instance => _instance ?? (_instance = new BackgroundMessageInteractionManager());
+    public static BackgroundInteractionManager Instance => _instance ?? (_instance = new BackgroundInteractionManager());
 
-    private readonly Queue<IBackgroundMessageInteraction> _commandsToExecute;
+    private readonly Queue<IBackgroundInteraction> _commandsToExecute;
     private bool _runningCommand;
-    private static BackgroundMessageInteractionManager _instance;
+    private static BackgroundInteractionManager _instance;
     private List<bool> _conditionals;
 
-    private BackgroundMessageInteractionManager()
+    private BackgroundInteractionManager()
     {
-        _commandsToExecute = new Queue<IBackgroundMessageInteraction>();
+        _commandsToExecute = new Queue<IBackgroundInteraction>();
         _conditionals = new List<bool>();
         _runningCommand = false;
     }
 
-    public void AddCommand(IBackgroundMessageInteraction commandToEnqueue)
+    public void AddCommand(IBackgroundInteraction commandToEnqueue)
     {
         _commandsToExecute.Enqueue(commandToEnqueue);
         RunNextCommand();
@@ -77,7 +77,7 @@ public class BackgroundMessageInteractionManager
             }
 
             if (execute)
-                await commandToExecute.ExecuteBGMessage();
+                await commandToExecute.ExecuteInBackground();
         }
 
         ClearConditionals();

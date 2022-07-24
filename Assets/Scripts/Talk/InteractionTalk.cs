@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class InteractionTalk : IInteraction, IBackgroundMessageInteraction
+public class InteractionTalk : IInteraction, IBackgroundInteraction
 {
     IMessageTalker talker;
     string message;
@@ -22,11 +22,11 @@ public class InteractionTalk : IInteraction, IBackgroundMessageInteraction
         }
         else
         {
-            BackgroundMessageInteractionManager.Instance.AddCommand(this);
+            BackgroundInteractionManager.Instance.AddCommand(this);
         }
     }
 
-    public async Task ExecuteBGMessage()
+    public async Task ExecuteInBackground()
     {
         talker.Talk(message, skippable);
 

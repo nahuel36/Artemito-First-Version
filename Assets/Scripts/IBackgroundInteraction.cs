@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public interface IBackgroundMessageInteraction
+public interface IBackgroundInteraction
 {
     // Start is called before the first frame update
-    Task ExecuteBGMessage();
+    Task ExecuteInBackground();
 }

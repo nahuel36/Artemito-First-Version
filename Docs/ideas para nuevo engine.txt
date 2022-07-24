@@ -1,3 +1,5 @@
+background interaction podria usar la misma clase
+
 poner required component en todas las clases
 
 ideas de adventure creator
