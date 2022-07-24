@@ -45,6 +45,7 @@ public class InteractionManager
     {
         _conditionals.Clear();
         _commandsToExecute.Clear();
+        SkipActualCommand();
     }
 
     public void DebugCount()
@@ -90,6 +91,7 @@ public class InteractionManager
 
     public void SkipActualCommand()
     {
-        actualCommand.Skip();
+        if (actualCommand != null)
+            actualCommand.Skip();
     }
 }

@@ -1,2 +1,5 @@
 en el interaction manager, si el interaction es end timer, se cancelan todos los condicionales
 ojo, puede haber mas acciones que no sean del timer mas adelante, y se borrarán los condicionales
+
+interaction manager, al llamar a "clear all" no esta teniendo en cuenta el comando 
+que se esta ejecutando actualmente, si no es "skipeable" va a esperar a que este termine
