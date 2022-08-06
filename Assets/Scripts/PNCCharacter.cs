@@ -8,7 +8,8 @@ public class PNCCharacter : MonoBehaviour
     IMessageTalker messageTalker;
     [SerializeField] GameObject target;
     InteractionWalk cancelableWalk;
-    InteractionTalk skippabletalk; 
+    InteractionTalk skippabletalk;
+    InteractionTalk backgroundTalk;
 
     private void Awake()
     {
@@ -44,13 +45,18 @@ public class PNCCharacter : MonoBehaviour
 
     public void BackgroundTalk(string message)
     {
-        InteractionTalk talk = new InteractionTalk();
-        talk.Queue(messageTalker, message, true, true);
+        backgroundTalk = new InteractionTalk();
+        backgroundTalk.Queue(messageTalker, message, true, true);
     }
 
     public void SkipTalk()
     {
         if(skippabletalk != null)
             skippabletalk.Skip();
+    }
+
+    public bool isTalking()
+    {
+        return (backgroundTalk != null && backgroundTalk.IsTalking()) || (skippabletalk != null && skippabletalk.IsTalking());
     }
 }

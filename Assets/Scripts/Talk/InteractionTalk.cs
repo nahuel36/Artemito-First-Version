@@ -42,4 +42,9 @@ public class InteractionTalk : IInteraction
     {
         talker.Skip();
     }
+
+    public bool IsTalking()
+    {
+        return talker.Talking;
+    }
 }

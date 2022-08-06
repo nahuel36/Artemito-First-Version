@@ -10,6 +10,7 @@ public class CharacterAnimator : MonoBehaviour
     Vector3 lastPos;
     float counter;
     [SerializeField] float delay;
+    [SerializeField] PNCCharacter character;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,8 @@ public class CharacterAnimator : MonoBehaviour
         }
         else
             animator.SetBool("walking", false);
+
+        animator.SetBool("talking", character.isTalking());
 
         if (counter < delay)
             counter++;
