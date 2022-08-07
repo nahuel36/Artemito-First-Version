@@ -6,12 +6,13 @@ using System;
 public class CharacterAnimator : MonoBehaviour
 {
 
-    Animator animator;
+    CharacterAnimatorInterface animator;
     Vector3 lastPos;
     float counter;
     [SerializeField] float delay;
-    [SerializeField] PNCCharacter character;
+    PNCCharacter character;
     int angle;
+    bool configured;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,23 +20,30 @@ public class CharacterAnimator : MonoBehaviour
         lastPos.x = transform.position.x;
         lastPos.y = transform.position.y;
         lastPos.z = transform.position.z;
-        animator = GetComponent<Animator>();
+    }
+
+    public void Configure(CharacterAnimatorInterface anim, PNCCharacter charact)
+    {
+        animator = anim;
+        character = charact;
+        configured = true;
     }
     
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        if(transform.position != lastPos)
+        if (!configured) return;
+
+        if (transform.position != lastPos)
         {
             angle = Mathf.RoundToInt(Vector2.SignedAngle(transform.position - lastPos, Vector2.right));
-            animator.SetBool("walking", true);
+            animator.SetWalking(true);
         }
         else
-            animator.SetBool("walking", false);
-        animator.SetInteger("angle 0", angle);
+            animator.SetWalking(false);
+        animator.SetAngle(angle);
 
-        animator.SetBool("talking", character.isTalking());
+        animator.SetTalking(character.isTalking());
 
         if (counter < delay)
             counter++;

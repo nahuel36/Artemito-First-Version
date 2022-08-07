@@ -483,7 +483,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.1
-  character: {fileID: 653965087}
 --- !u!95 &955073650
 Animator:
   serializedVersion: 3
@@ -694,6 +693,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e21e4df9f2baac46acd8b11796e9b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAnimator: {fileID: 1685477553}
+  PNCCharacter: {fileID: 786958698}
+  anim: {fileID: 1685477552}
 --- !u!4 &1313984164
 Transform:
   m_ObjectHideFlags: 0
@@ -1103,7 +1105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.1
-  character: {fileID: 786958698}
 --- !u!1 &1702490260
 GameObject:
   m_ObjectHideFlags: 0

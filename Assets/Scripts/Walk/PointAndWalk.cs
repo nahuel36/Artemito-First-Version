@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class PointAndWalk : MonoBehaviour
 {
+    [SerializeField]CharacterAnimator characterAnimator;
+    [SerializeField] PNCCharacter PNCCharacter;
+    [SerializeField] Animator anim;
 
+    private void Awake()
+    {
+        CharacterAnimatorAdapter characterAnimatorAdapter = new CharacterAnimatorAdapter();
+        characterAnimatorAdapter.Configure(anim);
+        characterAnimator.Configure(characterAnimatorAdapter, PNCCharacter);
+    }
 
     // Start is called before the first frame update
     void Start()
