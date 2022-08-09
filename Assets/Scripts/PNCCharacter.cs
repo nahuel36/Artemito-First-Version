@@ -18,6 +18,12 @@ public class PNCCharacter : MonoBehaviour
 
     }
 
+    public void Configure(GameObject target)
+    {
+        this.target = target;
+        pathFinder = new AStarPathFinder(target, this.transform);
+    }
+
     // Start is called before the first frame update
     public void Walk(Vector3 destiny)
     {
