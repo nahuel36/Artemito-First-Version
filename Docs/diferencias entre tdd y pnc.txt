@@ -1,6 +1,3 @@
 en pnc
 
-PNCCharacter
-Talk/TalkAnimator
-Carpeta Walk entera
-sistema de path finding
+PnCCharacter tiene las interacciones
