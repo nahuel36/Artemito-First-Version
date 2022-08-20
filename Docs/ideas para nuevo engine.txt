@@ -9,7 +9,7 @@ que por un lado se elija cuantos verbos, y por el otro el modo de mostrarlos (si
 ideas de adventure creator
 *que el icono del cursor cambie si estas arriba de un objeto o nada
 *que el texto tenga expresiones
-*separar cabeza y cuerpo (opcionalmente)
+HECHO *separar cabeza y cuerpo (opcionalmente)
 
 HECHO que pathfinder se configure por si solo
 
@@ -22,8 +22,8 @@ scene.getrootgameobjects
 
 usar service locator para acciones en codigo?
 
-usar array para acciones (mirar, usar, empujar), porque puede haber mas de 3
-usar custom editor y mostrar segun el modo elegido
+HECHO usar array para acciones (mirar, usar, empujar), porque puede haber mas de 3
+HECHO usar custom editor y mostrar segun el modo elegido
 "enum" creado con custom editor
 
 usar scriptable objects para elegir el modo
