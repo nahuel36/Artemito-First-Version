@@ -1,27 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class Interaction
+{
+    [HideInInspector]public string name;
+    public UnityEvent[] interactions;
+    public bool isCyclical = false;
+    public bool show = true;
+}
+
 
 public class PNCCharacter : MonoBehaviour
 {
     IPathFinder pathFinder;
     IMessageTalker messageTalker;
-    [SerializeField] GameObject target;
     InteractionWalk cancelableWalk;
     InteractionTalk skippabletalk;
     InteractionTalk backgroundTalk;
+    public Interaction[] interactions;
 
     private void Awake()
     {
-        pathFinder = new AStarPathFinder(target, this.transform);
-        messageTalker = new LucasArtText(this.transform, new TextTimeCalculator());
 
     }
 
-    public void Configure(GameObject target)
+    public void ConfigureTalker()
     {
-        this.target = target;
-        pathFinder = new AStarPathFinder(target, this.transform);
+        messageTalker = new LucasArtText(this.transform, new TextTimeCalculator());
+    }
+
+    public void ConfigurePathFinder(float velocity)
+    {
+        pathFinder = new AStarPathFinder(this.transform, velocity);
     }
 
     // Start is called before the first frame update
