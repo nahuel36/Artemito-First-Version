@@ -9,12 +9,24 @@ public class AStarPathFinder : IPathFinder
     AIPath aipath;
     bool canceled;
     bool isCancelable;
+    AIDestinationSetter setter;
 
-    public AStarPathFinder(GameObject target, UnityEngine.Transform transform)
+    public AStarPathFinder(UnityEngine.Transform transform, float velocity)
     {
-        this.target = target;
-        this.aipath = transform.GetComponentInChildren<AIPath>();
+        target = new GameObject("target");
+        target.transform.position = transform.position;
+
+        aipath = transform.gameObject.AddComponent<AIPath>();
+        aipath.gravity = Vector3.zero;
+        aipath.orientation = OrientationMode.YAxisForward;
+        aipath.enableRotation = false;
+        aipath.maxSpeed = velocity;
+        aipath.FindComponents();
+
+        setter = transform.gameObject.AddComponent<AIDestinationSetter>();
+        setter.target = target.transform;
     }
+
 
     // Start is called before the first frame update
     public void WalkTo(Vector3 destiny, bool isCancelable)

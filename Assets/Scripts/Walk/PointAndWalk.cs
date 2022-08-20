@@ -5,14 +5,17 @@ using UnityEngine;
 public class PointAndWalk : MonoBehaviour
 {
     [SerializeField]CharacterAnimator characterAnimator;
-    [SerializeField] PNCCharacter PNCCharacter;
+    [SerializeField] PNCCharacter pNCCharacter;
     [SerializeField] Animator anim;
 
     private void Awake()
     {
+        pNCCharacter.ConfigurePathFinder(1);
+        pNCCharacter.ConfigureTalker();
         CharacterAnimatorAdapter characterAnimatorAdapter = new CharacterAnimatorAdapter();
         characterAnimatorAdapter.Configure(anim);
-        characterAnimator.Configure(characterAnimatorAdapter, PNCCharacter);
+        characterAnimator.Configure(characterAnimatorAdapter, pNCCharacter);
+
     }
 
     // Start is called before the first frame update
@@ -27,18 +30,18 @@ public class PointAndWalk : MonoBehaviour
        if(Input.GetMouseButtonDown(0))
         {
             Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            FindObjectOfType<PNCCharacter>().CancelWalk();
-            FindObjectOfType<PNCCharacter>().SkipTalk();
-            FindObjectOfType<PNCCharacter>().CancelableWalk(point.x * Vector3.right + point.y * Vector3.up);
-            FindObjectOfType<PNCCharacter>().Talk("LLegué");
+            pNCCharacter.CancelWalk();
+            pNCCharacter.SkipTalk();
+            pNCCharacter.CancelableWalk(point.x * Vector3.right + point.y * Vector3.up);
+            pNCCharacter.Talk("LLegué");
 
         }
        else if(Input.GetMouseButtonDown(1))
         {
             Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            FindObjectOfType<PNCCharacter>().BackgroundTalk("Estoy caminando");
-            FindObjectOfType<PNCCharacter>().BackgroundTalk("Sigo caminando");
-            FindObjectOfType<PNCCharacter>().Walk(point.x * Vector3.right + point.y * Vector3.up);
+            pNCCharacter.BackgroundTalk("Estoy caminando");
+            pNCCharacter.BackgroundTalk("Sigo caminando");
+            pNCCharacter.Walk(point.x * Vector3.right + point.y * Vector3.up);
         }
     }
 }
