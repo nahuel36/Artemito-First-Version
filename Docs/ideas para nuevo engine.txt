@@ -1,6 +1,10 @@
-background interaction podria usar la misma clase
+HECHO background interaction podria usar la misma clase
+
+NO background interaction debería hacer el queue directamente
 
 poner required component en todas las clases
+
+que por un lado se elija cuantos verbos, y por el otro el modo de mostrarlos (sierra, monkey 3, monkey 2)
 
 ideas de adventure creator
 *que el icono del cursor cambie si estas arriba de un objeto o nada
