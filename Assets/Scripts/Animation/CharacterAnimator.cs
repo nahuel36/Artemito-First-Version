@@ -24,6 +24,7 @@ public class CharacterAnimator : MonoBehaviour
 
     public void Configure(CharacterAnimatorInterface anim, PNCCharacter charact)
     {
+        delay = 0.1f;
         animator = anim;
         character = charact;
         configured = true;
