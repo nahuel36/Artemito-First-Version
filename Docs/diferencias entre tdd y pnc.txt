@@ -1,3 +1,5 @@
 en pnc
 
 PnCCharacter tiene las interacciones
+el mismo tiene variables
+el mismo tiene un editor que personaliza el inspector
