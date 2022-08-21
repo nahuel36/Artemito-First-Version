@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 
 
-public class StartTimer : IInteraction
+public class StartTimer : ICommand
 {
     Timer timer;
     float seconds;
@@ -12,7 +12,7 @@ public class StartTimer : IInteraction
     public void Queue(Timer timer)
     {
         this.timer = timer;
-        InteractionManager.Instance.AddCommand(this);
+        CommandsQueue.Instance.AddCommand(this);
     }
 
 

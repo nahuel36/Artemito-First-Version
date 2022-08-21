@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class InteractionManager  
+public class CommandsQueue  
 {
-    public static InteractionManager Instance => _instance ?? (_instance = new InteractionManager());
-    public static InteractionManager BackgroundInstance => _bginstance ?? (_bginstance = new InteractionManager());
+    public static CommandsQueue Instance => _instance ?? (_instance = new CommandsQueue());
+    public static CommandsQueue BackgroundInstance => _bginstance ?? (_bginstance = new CommandsQueue());
 
-    private readonly Queue<IInteraction> _commandsToExecute;
+    private readonly Queue<ICommand> _commandsToExecute;
     private bool _runningCommand;
-    private static InteractionManager _instance;
-    private static InteractionManager _bginstance;
+    private static CommandsQueue _instance;
+    private static CommandsQueue _bginstance;
     private List<bool> _conditionals;
-    private IInteraction actualCommand;
+    private ICommand actualCommand;
 
-    private InteractionManager()
+    private CommandsQueue()
     {
-        _commandsToExecute = new Queue<IInteraction>();
+        _commandsToExecute = new Queue<ICommand>();
         _conditionals = new List<bool>();
         _runningCommand = false;
     }
 
-    public void AddCommand(IInteraction commandToEnqueue)
+    public void AddCommand(ICommand commandToEnqueue)
     {
         _commandsToExecute.Enqueue(commandToEnqueue);
         RunNextCommand();

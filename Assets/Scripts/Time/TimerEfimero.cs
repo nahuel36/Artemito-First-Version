@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System;
 
-public class TimerEfimero : IInteraction
+public class TimerEfimero : ICommand
 {
     float seconds;
     public bool canceled = false;
@@ -26,7 +26,7 @@ public class TimerEfimero : IInteraction
     public void WaitForSeconds(float secondsP)
     {
         seconds = secondsP;
-        InteractionManager.Instance.AddCommand(this);
+        CommandsQueue.Instance.AddCommand(this);
     }
 
     public void ConfigureWithoutQueue(float secondsP)

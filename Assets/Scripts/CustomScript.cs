@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 
 
-public abstract class CustomScript : MonoBehaviour, IInteraction
+public abstract class CustomScript : MonoBehaviour, ICommand
 {
     public async Task Execute()
     {
@@ -12,7 +12,7 @@ public abstract class CustomScript : MonoBehaviour, IInteraction
     }
 
     public virtual void LoadScript() {
-        InteractionManager.Instance.AddCommand(this);
+        CommandsQueue.Instance.AddCommand(this);
     }
 
     public void Skip()

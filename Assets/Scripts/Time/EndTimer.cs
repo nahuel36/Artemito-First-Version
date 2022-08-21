@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
-public class EndTimer : IInteraction
+public class EndTimer : ICommand
 {
     UnityEvent onEnd;
     // Start is called before the first frame update
@@ -17,7 +17,7 @@ public class EndTimer : IInteraction
     public void QueueOnEnd(UnityEvent action)
     {
         this.onEnd = action;
-        InteractionManager.Instance.AddCommand(this);
+        CommandsQueue.Instance.AddCommand(this);
     }
 
     public void Skip()

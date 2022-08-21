@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class InteractionTalk : IInteraction
+public class CommandTalk : ICommand
 {
     IMessageTalker talker;
     string message;
@@ -23,7 +23,7 @@ public class InteractionTalk : IInteraction
         else
         {
             this.isBackground = false;
-            InteractionManager.BackgroundInstance.AddCommand(this);
+            CommandsQueue.BackgroundInstance.AddCommand(this);
         }
     }
 
@@ -34,7 +34,7 @@ public class InteractionTalk : IInteraction
         this.isBackground = isBackground;
         this.skippable = skippable;
         this.talker = talker;
-        InteractionManager.Instance.AddCommand(this);
+        CommandsQueue.Instance.AddCommand(this);
         
     }
 

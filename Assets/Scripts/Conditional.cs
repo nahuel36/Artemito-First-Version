@@ -4,21 +4,21 @@ using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
-public class Conditional : IInteraction
+public class Conditional : ICommand
 {
     bool condition;
 
     // Start is called before the first frame update
     public async Task Execute()
     {
-        InteractionManager.Instance.AddConditional(condition);
+        CommandsQueue.Instance.AddConditional(condition);
         await Task.Yield();
     }
 
     public void QueueConditional(bool condition)
     {
         this.condition = condition;
-        InteractionManager.Instance.AddCommand(this);
+        CommandsQueue.Instance.AddCommand(this);
     }
 
     public void Skip()

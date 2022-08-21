@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class InteractionWalk : IInteraction
+public class CommandWalk : ICommand
 {
     IPathFinder pathfinder;
     Vector3 destiny;
@@ -25,7 +25,7 @@ public class InteractionWalk : IInteraction
         this.isCancelable = cancelable;
         this.pathfinder = pathfinder;
         this.destiny = destiny;
-        InteractionManager.Instance.AddCommand(this);
+        CommandsQueue.Instance.AddCommand(this);
     }
 
     public void Skip()
