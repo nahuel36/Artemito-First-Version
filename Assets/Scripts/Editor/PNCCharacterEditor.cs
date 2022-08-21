@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
 [CustomEditor(typeof(PNCCharacter))]
 public class PnCCharacterEditor : Editor
 {
     Settings settings;
     SerializedProperty interactions;
+    SerializedProperty variables;
+    bool[] showVariable; 
 
     public void OnEnable()
     {
@@ -17,7 +20,6 @@ public class PnCCharacterEditor : Editor
         while (plusSize < settings.modes.Length)
             plusSize++;
         interactions.arraySize = plusSize;
-        Debug.Log("array size" + interactions.arraySize);
         serializedObject.ApplyModifiedProperties();
 
         for (int i = 0; i < settings.modes.Length; i++)
@@ -25,6 +27,11 @@ public class PnCCharacterEditor : Editor
             ((PNCCharacter)target).interactions[i].name = settings.modes[i];
 
         }
+
+        interactions = serializedObject.FindProperty("interactions");
+        variables = serializedObject.FindProperty("variables");
+
+        showVariable = new bool[variables.arraySize];
     }
 
     public override void OnInspectorGUI()
@@ -36,8 +43,20 @@ public class PnCCharacterEditor : Editor
 
         for (int i = 0; i < settings.modes.Length; i++)
         {
-           //EditorGUILayout.LabelField(settings.modes[i]);
+            //EditorGUILayout.LabelField(settings.modes[i]);
+
             EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i),true);
+            if (((PNCCharacter)target).interactions[i].interactions.Length > 0 && GUILayout.Button("Delete last interaction"))
+            {
+                List<UnityEngine.Events.UnityEvent> list_interactions = ((PNCCharacter)target).interactions[i].interactions.ToList();
+                list_interactions.RemoveAt(list_interactions.Count-1);
+                ((PNCCharacter)target).interactions[i].interactions = list_interactions.ToArray();
+            }
+
+            if (interactions.GetArrayElementAtIndex(i).isExpanded && GUILayout.Button("Create interaction"))
+            {
+                ((PNCCharacter)target).interactions[i].interactions = ((PNCCharacter)target).interactions[i].interactions.Append(new UnityEngine.Events.UnityEvent()).ToArray();
+            }
         }
         /*
         foreach(string mode in set.modes)
@@ -47,6 +66,48 @@ public class PnCCharacterEditor : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("interactions"));
         }
         */
+        
+
+
+        for (int i = 0; i < variables.arraySize; i++)
+        {
+            showVariable[i] = EditorGUILayout.Foldout(showVariable[i], ((PNCCharacter)target).variables[i].name);
+
+            if(showVariable[i])
+            {
+                ((PNCCharacter)target).variables[i].name = EditorGUILayout.TextField("name:", ((PNCCharacter)target).variables[i].name);
+
+                ((PNCCharacter)target).variables[i].type = (PnCInteractuableVariables.types)EditorGUILayout.EnumFlagsField("types:",((PNCCharacter)target).variables[i].type);
+
+                if(((PNCCharacter)target).variables[i].type.HasFlag(PnCInteractuableVariables.types.integer))
+                {
+                    ((PNCCharacter)target).variables[i].integer = EditorGUILayout.IntField("integer value:",((PNCCharacter)target).variables[i].integer);
+                }
+                if (((PNCCharacter)target).variables[i].type.HasFlag(PnCInteractuableVariables.types.boolean))
+                {
+                    ((PNCCharacter)target).variables[i].boolean = EditorGUILayout.Toggle("boolean value:",((PNCCharacter)target).variables[i].boolean);
+                }
+                if (((PNCCharacter)target).variables[i].type.HasFlag(PnCInteractuableVariables.types.String))
+                {
+                    ((PNCCharacter)target).variables[i].String = EditorGUILayout.TextField("string value:",((PNCCharacter)target).variables[i].String);
+                }
+
+                if (GUILayout.Button("Delete " + ((PNCCharacter)target).variables[i].name))
+                {
+                    variables.DeleteArrayElementAtIndex(i);
+                }
+            }
+
+
+        }
+
+
+        if (GUILayout.Button("Create variable"))
+        {
+            variables.arraySize++;
+            showVariable = showVariable.Append(false).ToArray();
+        }
+
         serializedObject.ApplyModifiedProperties();
 
     }

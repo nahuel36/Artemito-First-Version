@@ -7,9 +7,24 @@ using UnityEngine.Events;
 public class Interaction
 {
     [HideInInspector]public string name;
-    public UnityEvent[] interactions;
     public bool isCyclical = false;
     public bool show = true;
+    public UnityEvent[] interactions;
+}
+
+[System.Serializable]
+public class PnCInteractuableVariables
+{
+    public string name = "new variable";
+    public int integer;
+    public bool boolean;
+    public string String;
+    public enum types{
+        integer = (1 << 0),
+        boolean = (1 << 1),
+        String = (1 << 2)
+    }
+    public types type;
 }
 
 
@@ -21,6 +36,7 @@ public class PNCCharacter : MonoBehaviour
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
     public Interaction[] interactions;
+    public PnCInteractuableVariables[] variables;
 
     private void Awake()
     {
