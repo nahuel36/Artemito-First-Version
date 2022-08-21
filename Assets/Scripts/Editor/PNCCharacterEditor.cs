@@ -44,23 +44,22 @@ public class PnCCharacterEditor : Editor
         for (int i = 0; i < settings.modes.Length; i++)
         {
             //EditorGUILayout.LabelField(settings.modes[i]);
-
             EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i),true);
-            if (((PNCCharacter)target).interactions[i].interactions.Length > 0 && GUILayout.Button("Delete last interaction"))
+            if (interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded && ((PNCCharacter)target).interactions[i].interactions.Length > 0 && GUILayout.Button("Delete last interaction"))
             {
                 List<UnityEngine.Events.UnityEvent> list_interactions = ((PNCCharacter)target).interactions[i].interactions.ToList();
                 list_interactions.RemoveAt(list_interactions.Count-1);
                 ((PNCCharacter)target).interactions[i].interactions = list_interactions.ToArray();
             }
 
-            if (interactions.GetArrayElementAtIndex(i).isExpanded && GUILayout.Button("Create interaction"))
+            if (interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded && GUILayout.Button("Create interaction"))
             {
                 ((PNCCharacter)target).interactions[i].interactions = ((PNCCharacter)target).interactions[i].interactions.Append(new UnityEngine.Events.UnityEvent()).ToArray();
             }
         }
         /*
         foreach(string mode in set.modes)
-        {
+        { 
             EditorGUILayout.LabelField(mode);
             (target as PNCCharacter).interactions[]
             EditorGUILayout.PropertyField(serializedObject.FindProperty("interactions"));
