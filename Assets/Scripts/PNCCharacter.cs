@@ -17,9 +17,9 @@ public class PNCCharacter : MonoBehaviour
 {
     IPathFinder pathFinder;
     IMessageTalker messageTalker;
-    InteractionWalk cancelableWalk;
-    InteractionTalk skippabletalk;
-    InteractionTalk backgroundTalk;
+    CommandWalk cancelableWalk;
+    CommandTalk skippabletalk;
+    CommandTalk backgroundTalk;
     public Interaction[] interactions;
 
     private void Awake()
@@ -40,31 +40,31 @@ public class PNCCharacter : MonoBehaviour
     // Start is called before the first frame update
     public void Walk(Vector3 destiny)
     {
-        InteractionWalk characterWalk = new InteractionWalk();
+        CommandWalk characterWalk = new CommandWalk();
         characterWalk.Queue(pathFinder, destiny);
     }
 
     public void CancelableWalk(Vector3 destiny)
     {
-        cancelableWalk = new InteractionWalk();
+        cancelableWalk = new CommandWalk();
         cancelableWalk.Queue(pathFinder, destiny, true);
     }
 
     public void CancelWalk()
     {
-        InteractionManager.Instance.ClearAll();
+        CommandsQueue.Instance.ClearAll();
         if(cancelableWalk != null) cancelableWalk.Skip();
     }
 
     public void Talk(string message)
     {
-        skippabletalk = new InteractionTalk();
+        skippabletalk = new CommandTalk();
         skippabletalk.Queue(messageTalker, message, true,false);
     }
 
     public void BackgroundTalk(string message)
     {
-        backgroundTalk = new InteractionTalk();
+        backgroundTalk = new CommandTalk();
         backgroundTalk.Queue(messageTalker, message, true, true);
     }
 
