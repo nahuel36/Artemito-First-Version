@@ -28,7 +28,6 @@ public class PnCCharacterEditor : Editor
 
         }
 
-        interactions = serializedObject.FindProperty("interactions");
         variables = serializedObject.FindProperty("variables");
 
         showVariable = new bool[variables.arraySize];
@@ -39,7 +38,14 @@ public class PnCCharacterEditor : Editor
         //base.OnInspectorGUI();
         //EditorGUILayout.PropertyField(serializedObject.FindProperty("target"));
         //EditorGUILayout.ObjectField(serializedObject.FindProperty("target"));
-        
+
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("Interactions", EditorStyles.boldLabel);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        //EditorGUILayout.LabelField("Interactions", new GUILayoutOption[] { new GUILayoutOption(GUILayoutOption.});
 
         for (int i = 0; i < settings.modes.Length; i++)
         {
@@ -65,7 +71,12 @@ public class PnCCharacterEditor : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("interactions"));
         }
         */
-        
+
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("Local Variables", EditorStyles.boldLabel);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
 
 
         for (int i = 0; i < variables.arraySize; i++)
