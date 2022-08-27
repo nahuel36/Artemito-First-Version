@@ -13,7 +13,21 @@ public class Mode
 }
 
 [System.Serializable]
-public class PnCInteractuableVariables
+public class GlobalVariableProperty
+{
+    public string name;
+    public enum types
+    {
+        characters = (1 << 0),
+        objects = (1 << 1),
+        inventory = (1 << 2)
+    }
+    types type;
+}
+
+
+[System.Serializable]
+public class InteractuableVariables
 {
     public string name = "new variable";
     public int integer = 0;
@@ -39,7 +53,8 @@ public class PNCCharacter : MonoBehaviour
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
     public Mode[] interactions;
-    public PnCInteractuableVariables[] variables;
+    public InteractuableVariables[] local_variables;
+    public InteractuableVariables[] global_variables;
 
     private void Awake()
     {
