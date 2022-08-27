@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class Interaction
+public class Mode
 {
     [HideInInspector]public string name;
     public bool isCyclical = false;
@@ -38,7 +38,7 @@ public class PNCCharacter : MonoBehaviour
     CommandWalk cancelableWalk;
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
-    public Interaction[] interactions;
+    public Mode[] interactions;
     public PnCInteractuableVariables[] variables;
 
     private void Awake()
