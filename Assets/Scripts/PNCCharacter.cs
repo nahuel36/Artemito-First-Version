@@ -16,9 +16,12 @@ public class Interaction
 public class PnCInteractuableVariables
 {
     public string name = "new variable";
-    public int integer;
-    public bool boolean;
-    public string String;
+    public int integer = 0;
+    public bool integerDefault = true;
+    public bool boolean = false;
+    public bool booleanDefault = true;
+    public string String = "";
+    public bool stringDefault = true;
     public enum types{
         integer = (1 << 0),
         boolean = (1 << 1),

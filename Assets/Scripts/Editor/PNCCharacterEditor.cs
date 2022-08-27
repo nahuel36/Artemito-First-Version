@@ -51,14 +51,14 @@ public class PnCCharacterEditor : Editor
         {
             //EditorGUILayout.LabelField(settings.modes[i]);
             EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i),true);
-            if (interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded && ((PNCCharacter)target).interactions[i].interactions.Length > 0 && GUILayout.Button("Delete last interaction"))
+            if (interactions.GetArrayElementAtIndex(i).isExpanded && interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded && ((PNCCharacter)target).interactions[i].interactions.Length > 0 && GUILayout.Button("Delete last interaction"))
             {
                 List<UnityEngine.Events.UnityEvent> list_interactions = ((PNCCharacter)target).interactions[i].interactions.ToList();
                 list_interactions.RemoveAt(list_interactions.Count-1);
                 ((PNCCharacter)target).interactions[i].interactions = list_interactions.ToArray();
             }
 
-            if (interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded && GUILayout.Button("Create interaction"))
+            if (interactions.GetArrayElementAtIndex(i).isExpanded && interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded && GUILayout.Button("Create interaction"))
             {
                 ((PNCCharacter)target).interactions[i].interactions = ((PNCCharacter)target).interactions[i].interactions.Append(new UnityEngine.Events.UnityEvent()).ToArray();
             }
@@ -91,15 +91,57 @@ public class PnCCharacterEditor : Editor
 
                 if(((PNCCharacter)target).variables[i].type.HasFlag(PnCInteractuableVariables.types.integer))
                 {
-                    ((PNCCharacter)target).variables[i].integer = EditorGUILayout.IntField("integer value:",((PNCCharacter)target).variables[i].integer);
+                    if(!((PNCCharacter)target).variables[i].integerDefault)
+                    { 
+                        ((PNCCharacter)target).variables[i].integer = EditorGUILayout.IntField("integer value:",((PNCCharacter)target).variables[i].integer);
+                        if (GUILayout.Button("Set integer default value"))
+                            ((PNCCharacter)target).variables[i].integerDefault = true;
+                    }
+                    else
+                    { 
+                        GUILayout.Label("integer value : default", EditorStyles.boldLabel);
+                        if (GUILayout.Button("Set integer value"))
+                        { 
+                            ((PNCCharacter)target).variables[i].integer = 0;
+                            ((PNCCharacter)target).variables[i].integerDefault = false;
+                        }
+                    }
                 }
                 if (((PNCCharacter)target).variables[i].type.HasFlag(PnCInteractuableVariables.types.boolean))
                 {
-                    ((PNCCharacter)target).variables[i].boolean = EditorGUILayout.Toggle("boolean value:",((PNCCharacter)target).variables[i].boolean);
+                    if (!((PNCCharacter)target).variables[i].booleanDefault)
+                    {
+                        ((PNCCharacter)target).variables[i].boolean = EditorGUILayout.Toggle("boolean value:", ((PNCCharacter)target).variables[i].boolean);
+                        if (GUILayout.Button("Set boolean default value"))
+                            ((PNCCharacter)target).variables[i].booleanDefault = true;
+                    }
+                    else
+                    {
+                        GUILayout.Label("boolean value : default", EditorStyles.boldLabel);
+                        if (GUILayout.Button("Set boolean value"))
+                        { 
+                           ((PNCCharacter)target).variables[i].boolean = false;
+                            ((PNCCharacter)target).variables[i].booleanDefault = false;
+                        }
+                    }
                 }
                 if (((PNCCharacter)target).variables[i].type.HasFlag(PnCInteractuableVariables.types.String))
                 {
-                    ((PNCCharacter)target).variables[i].String = EditorGUILayout.TextField("string value:",((PNCCharacter)target).variables[i].String);
+                    if(!((PNCCharacter)target).variables[i].stringDefault)
+                    { 
+                        ((PNCCharacter)target).variables[i].String = EditorGUILayout.TextField("string value:", ((PNCCharacter)target).variables[i].String);
+                        if (GUILayout.Button("Set string default value"))
+                            ((PNCCharacter)target).variables[i].stringDefault = true;
+                    }
+                    else
+                    {
+                        GUILayout.Label("string value : default", EditorStyles.boldLabel);
+                        if (GUILayout.Button("Set string value"))
+                        { 
+                            ((PNCCharacter)target).variables[i].String = "";
+                            ((PNCCharacter)target).variables[i].stringDefault = false;
+                        }
+                    }
                 }
 
                 if (GUILayout.Button("Delete " + ((PNCCharacter)target).variables[i].name))
@@ -114,11 +156,31 @@ public class PnCCharacterEditor : Editor
 
         if (GUILayout.Button("Create variable"))
         {
-            variables.arraySize++;
+            //serializedObject.ApplyModifiedProperties();
+            ((PNCCharacter)target).variables = ((PNCCharacter)target).variables.Append<PnCInteractuableVariables>(new PnCInteractuableVariables()).ToArray();
+            //variables.arraySize++;
             showVariable = showVariable.Append(false).ToArray();
         }
 
+        var group = ((PNCCharacter)target).variables.GroupBy(vari => vari.name, (vari) => new { Count = vari.name.Count() });
+        bool repeated = false;
+
+        foreach(var vari in group)
+        {
+            if (vari.Count() > 1)
+                repeated = true;
+            
+        }
+        if(repeated)
+            GUILayout.Label("There are more than one variable with the same name", EditorStyles.boldLabel);
+
+
         serializedObject.ApplyModifiedProperties();
+
+        if(GUI.changed)
+        {
+            EditorUtility.SetDirty(target);
+        }
 
     }
 }
