@@ -16,13 +16,14 @@ public class Mode
 public class GlobalVariableProperty
 {
     public string name;
+    public int ID;
     public enum types
     {
         characters = (1 << 0),
         objects = (1 << 1),
         inventory = (1 << 2)
     }
-    types type;
+    public types type;
 }
 
 
@@ -42,6 +43,7 @@ public class InteractuableVariables
         String = (1 << 2)
     }
     public types type;
+    public int globalHashCode = -1;
 }
 
 

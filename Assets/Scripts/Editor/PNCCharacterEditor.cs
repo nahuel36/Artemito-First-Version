@@ -14,21 +14,94 @@ public class PnCCharacterEditor : Editor
     bool[] showLocalVariable;
     bool[] showGlobalVariable;
 
+    
+
     public void OnEnable()
     {
         settings = AssetDatabase.LoadAssetAtPath<Settings>("Assets/PnC/Settings/Settings.asset");
         interactions = serializedObject.FindProperty("interactions");
-        int plusSize = interactions.arraySize;
-        while (plusSize < settings.modes.Length)
-            plusSize++;
-        interactions.arraySize = plusSize;
-        serializedObject.ApplyModifiedProperties();
 
+        List<Mode> interactionsTempList = new List<Mode>();
         for (int i = 0; i < settings.modes.Length; i++)
         {
-            ((PNCCharacter)target).interactions[i].name = settings.modes[i];
-
+            bool founded = false;
+            for (int j = 0; j < ((PNCCharacter)target).interactions.Length; j++)
+            {
+                if (((PNCCharacter)target).interactions[j].name == settings.modes[i])
+                { 
+                    interactionsTempList.Add(((PNCCharacter)target).interactions[j]);
+                    founded = true;
+                }
+            }
+            if (founded == false)
+            {
+                Mode tempMode = new Mode();
+                tempMode.name = settings.modes[i];
+                tempMode.interactions = new UnityEngine.Events.UnityEvent[0];
+                interactionsTempList.Add(tempMode);
+            }
         }
+        
+        for (int i = 0; i < ((PNCCharacter)target).interactions.Length; i++)
+        {
+            bool contains = false;            
+            for (int j = 0; j < interactionsTempList.Count; j++)
+            {
+                if (((PNCCharacter)target).interactions[i].name == interactionsTempList[j].name)
+                {
+                    contains = true;
+                }
+            }
+            if(contains == false)
+            {
+                interactionsTempList.Add(((PNCCharacter)target).interactions[i]);
+            }
+        }
+        
+        ((PNCCharacter)target).interactions = interactionsTempList.ToArray();
+
+        List<InteractuableVariables> tempGlobalVarList = new List<InteractuableVariables>();
+        for (int i = 0; i < settings.global_variables.Length; i++)
+        {
+            bool founded = false;
+            for (int j = 0; j < ((PNCCharacter)target).global_variables.Length; j++)
+            {
+                if ((settings.global_variables[i].ID == -1 && ((PNCCharacter)target).global_variables[j].name == settings.global_variables[i].name)|| 
+                    (settings.global_variables[i].ID != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode == -1 && ((PNCCharacter)target).global_variables[j].name == settings.global_variables[i].name) ||
+                    (settings.global_variables[i].ID != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode == settings.global_variables[i].ID))
+                {
+                    tempGlobalVarList.Add(((PNCCharacter)target).global_variables[j]);
+                    ((PNCCharacter)target).global_variables[j].name = settings.global_variables[i].name;
+                    if (settings.global_variables[i].ID == -1)
+                    { 
+                        settings.global_variables[i].ID = ((PNCCharacter)target).global_variables[j].GetHashCode();
+                        ((PNCCharacter)target).global_variables[j].globalHashCode = ((PNCCharacter)target).global_variables[j].GetHashCode(); 
+                    }
+                    else if(((PNCCharacter)target).global_variables[j].globalHashCode == -1)
+                    {
+                        ((PNCCharacter)target).global_variables[j].globalHashCode = settings.global_variables[i].ID;
+                    }
+                    founded = true;
+                }
+            }
+            if (founded == false)
+            {
+                InteractuableVariables tempMode = new InteractuableVariables();
+                tempMode.name = settings.global_variables[i].name;
+                if(settings.global_variables[i].ID == -1)
+                { 
+                    settings.global_variables[i].ID = tempMode.GetHashCode();
+                    tempMode.globalHashCode = tempMode.GetHashCode();
+                }
+                else
+                {
+                    tempMode.globalHashCode = settings.global_variables[i].ID;
+                }
+                tempGlobalVarList.Add(tempMode);
+            }
+        }
+
+        ((PNCCharacter)target).global_variables = tempGlobalVarList.ToArray();
 
         local_variables_serialized = serializedObject.FindProperty("local_variables");
         global_variables_serialized = serializedObject.FindProperty("global_variables");
@@ -55,7 +128,10 @@ public class PnCCharacterEditor : Editor
         {
             //EditorGUILayout.LabelField(settings.modes[i]);
             EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i),true);
-            if (interactions.GetArrayElementAtIndex(i).isExpanded && interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded && ((PNCCharacter)target).interactions[i].interactions.Length > 0 && GUILayout.Button("Delete last interaction"))
+            if (((PNCCharacter)target).interactions.Length > 0 && ((PNCCharacter)target).interactions[i].interactions != null &&  ((PNCCharacter)target).interactions[i].interactions.Length > 0)
+                if(interactions.GetArrayElementAtIndex(i).isExpanded)
+                    if(interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded)
+                        if(GUILayout.Button("Delete last interaction"))
             {
                 List<UnityEngine.Events.UnityEvent> list_interactions = ((PNCCharacter)target).interactions[i].interactions.ToList();
                 list_interactions.RemoveAt(list_interactions.Count-1);
@@ -82,7 +158,7 @@ public class PnCCharacterEditor : Editor
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        ShowVariables(ref ((PNCCharacter)target).local_variables, ref local_variables_serialized, ref showLocalVariable);
+        ShowVariables(ref ((PNCCharacter)target).local_variables, ref local_variables_serialized, ref showLocalVariable,false);
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
@@ -90,19 +166,23 @@ public class PnCCharacterEditor : Editor
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        ShowVariables(ref ((PNCCharacter)target).global_variables, ref global_variables_serialized, ref showGlobalVariable);
+        ShowVariables(ref ((PNCCharacter)target).global_variables, ref global_variables_serialized, ref showGlobalVariable, true);
 
         serializedObject.ApplyModifiedProperties();
 
         if(GUI.changed)
         {
             EditorUtility.SetDirty(target);
+            EditorUtility.SetDirty(settings);
         }
 
     }
 
-    public void ShowVariables(ref InteractuableVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables )
+    public void ShowVariables(ref InteractuableVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables, bool isGlobal = false)
     {
+        if (show_variables.Length < variables.Length)
+            show_variables = new bool[variables.Length];
+
         for (int i = 0; i < variables.Length; i++)
         {
             show_variables[i] = EditorGUILayout.Foldout(show_variables[i], variables[i].name);
@@ -110,6 +190,14 @@ public class PnCCharacterEditor : Editor
             if (show_variables[i])
             {
                 variables[i].name = EditorGUILayout.TextField("name:", variables[i].name);
+                if(isGlobal)
+                {
+                    for (int j = 0; j < settings.global_variables.Length; j++)
+                    {
+                        if (settings.global_variables[j].ID == variables[i].globalHashCode)
+                            settings.global_variables[j].name = variables[i].name;
+                    }
+                }
 
                 variables[i].type = (InteractuableVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
 
@@ -177,9 +265,20 @@ public class PnCCharacterEditor : Editor
 
         if (GUILayout.Button("Create variable"))
         {
+            InteractuableVariables newvar = new InteractuableVariables();
             //serializedObject.ApplyModifiedProperties();
-            variables = variables.Append<InteractuableVariables>(new InteractuableVariables()).ToArray();
+            
             //variables.arraySize++;
+            if(isGlobal)
+            {
+                GlobalVariableProperty newprop = new GlobalVariableProperty();
+                newprop.name = newvar.name;
+                newprop.ID = newvar.GetHashCode();
+                newvar.globalHashCode = newvar.GetHashCode();
+                settings.global_variables = settings.global_variables.Append(newprop).ToArray();
+            }
+
+            variables = variables.Append<InteractuableVariables>(newvar).ToArray();
             show_variables = show_variables.Append(false).ToArray();
         }
 

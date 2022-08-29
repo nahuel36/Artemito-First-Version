@@ -6,6 +6,6 @@ using UnityEngine;
 
 public class Settings : ScriptableObject
 {
-
     public string[] modes;
+    public GlobalVariableProperty[] global_variables;
 }
