@@ -255,7 +255,7 @@ public class PnCCharacterEditor : Editor
             }
         }
 
-        if (GUILayout.Button("Create variable"))
+        if (GUILayout.Button("Create local variable"))
         {
             InteractuableVariables newvar = new InteractuableVariables();
             //serializedObject.ApplyModifiedProperties();
@@ -297,9 +297,6 @@ public class PnCCharacterEditor : Editor
                     if (variables[i].globalHashCode != -1 && settings.global_variables[j].ID == variables[i].globalHashCode)
                         variables[i].name = settings.global_variables[j].name;
                 }
-
-                EditorGUILayout.LabelField("name:" + variables[i].name);
-
 
                 variables[i].type = (InteractuableVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
 
