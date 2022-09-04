@@ -158,7 +158,7 @@ public class PnCCharacterEditor : Editor
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        ShowVariables(ref ((PNCCharacter)target).local_variables, ref local_variables_serialized, ref showLocalVariable,false);
+        ShowLocalVariables(ref ((PNCCharacter)target).local_variables, ref local_variables_serialized, ref showLocalVariable);
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
@@ -166,7 +166,7 @@ public class PnCCharacterEditor : Editor
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        ShowVariables(ref ((PNCCharacter)target).global_variables, ref global_variables_serialized, ref showGlobalVariable, true);
+        ShowGlobalVariables(ref ((PNCCharacter)target).global_variables, ref global_variables_serialized, ref showGlobalVariable);
 
         serializedObject.ApplyModifiedProperties();
 
@@ -178,7 +178,7 @@ public class PnCCharacterEditor : Editor
 
     }
 
-    public void ShowVariables(ref InteractuableVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables, bool isGlobal = false)
+    public void ShowLocalVariables(ref InteractuableVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
     {
         if (show_variables.Length < variables.Length)
             show_variables = new bool[variables.Length];
@@ -190,14 +190,6 @@ public class PnCCharacterEditor : Editor
             if (show_variables[i])
             {
                 variables[i].name = EditorGUILayout.TextField("name:", variables[i].name);
-                if(isGlobal)
-                {
-                    for (int j = 0; j < settings.global_variables.Length; j++)
-                    {
-                        if (settings.global_variables[j].ID == variables[i].globalHashCode)
-                            settings.global_variables[j].name = variables[i].name;
-                    }
-                }
 
                 variables[i].type = (InteractuableVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
 
@@ -269,17 +261,103 @@ public class PnCCharacterEditor : Editor
             //serializedObject.ApplyModifiedProperties();
             
             //variables.arraySize++;
-            if(isGlobal)
-            {
-                GlobalVariableProperty newprop = new GlobalVariableProperty();
-                newprop.name = newvar.name;
-                newprop.ID = newvar.GetHashCode();
-                newvar.globalHashCode = newvar.GetHashCode();
-                settings.global_variables = settings.global_variables.Append(newprop).ToArray();
-            }
 
             variables = variables.Append<InteractuableVariables>(newvar).ToArray();
             show_variables = show_variables.Append(false).ToArray();
+        }
+
+        var group = variables.GroupBy(vari => vari.name, (vari) => new { Count = vari.name.Count() });
+        bool repeated = false;
+
+        foreach (var vari in group)
+        {
+            if (vari.Count() > 1)
+                repeated = true;
+
+        }
+        if (repeated)
+            GUILayout.Label("There are more than one variable with the same name", EditorStyles.boldLabel);
+
+    }
+
+    public void ShowGlobalVariables(ref InteractuableVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
+    {
+        if (show_variables.Length < variables.Length)
+            show_variables = new bool[variables.Length];
+
+        for (int i = 0; i < variables.Length; i++)
+        {
+            show_variables[i] = EditorGUILayout.Foldout(show_variables[i], variables[i].name);
+
+            if (show_variables[i])
+            {
+
+                for (int j = 0; j < settings.global_variables.Length; j++)
+                {
+                    if (variables[i].globalHashCode != -1 && settings.global_variables[j].ID == variables[i].globalHashCode)
+                        variables[i].name = settings.global_variables[j].name;
+                }
+
+                EditorGUILayout.LabelField("name:" + variables[i].name);
+
+
+                variables[i].type = (InteractuableVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
+
+                if (variables[i].type.HasFlag(InteractuableVariables.types.integer))
+                {
+                    if (!variables[i].integerDefault)
+                    {
+                        variables[i].integer = EditorGUILayout.IntField("integer value:", variables[i].integer);
+                        if (GUILayout.Button("Set integer default value"))
+                            variables[i].integerDefault = true;
+                    }
+                    else
+                    {
+                        GUILayout.Label("integer value : default", EditorStyles.boldLabel);
+                        if (GUILayout.Button("Set integer value"))
+                        {
+                            variables[i].integer = 0;
+                            variables[i].integerDefault = false;
+                        }
+                    }
+                }
+                if (variables[i].type.HasFlag(InteractuableVariables.types.boolean))
+                {
+                    if (!variables[i].booleanDefault)
+                    {
+                        variables[i].boolean = EditorGUILayout.Toggle("boolean value:", variables[i].boolean);
+                        if (GUILayout.Button("Set boolean default value"))
+                            variables[i].booleanDefault = true;
+                    }
+                    else
+                    {
+                        GUILayout.Label("boolean value : default", EditorStyles.boldLabel);
+                        if (GUILayout.Button("Set boolean value"))
+                        {
+                            variables[i].boolean = false;
+                            variables[i].booleanDefault = false;
+                        }
+                    }
+                }
+                if (variables[i].type.HasFlag(InteractuableVariables.types.String))
+                {
+                    if (!variables[i].stringDefault)
+                    {
+                        variables[i].String = EditorGUILayout.TextField("string value:", variables[i].String);
+                        if (GUILayout.Button("Set string default value"))
+                            variables[i].stringDefault = true;
+                    }
+                    else
+                    {
+                        GUILayout.Label("string value : default", EditorStyles.boldLabel);
+                        if (GUILayout.Button("Set string value"))
+                        {
+                            variables[i].String = "";
+                            variables[i].stringDefault = false;
+                        }
+                    }
+                }
+            }
         }
 
         var group = variables.GroupBy(vari => vari.name, (vari) => new { Count = vari.name.Count() });
