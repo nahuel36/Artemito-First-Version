@@ -17,9 +17,6 @@ MonoBehaviour:
   - Use
   - Talk
   global_variables:
-  - name: IsADooro
-    ID: 784136192
-    type: 2
   - name: isOpened
     ID: -1077307904
     type: 0
@@ -31,6 +28,9 @@ MonoBehaviour:
     type: 0
   - name: new variable25
     ID: -1114401280
+    type: 0
+  - name: IsADooro
+    ID: 784136192
     type: 0
   - name: 6
     ID: 227535360
