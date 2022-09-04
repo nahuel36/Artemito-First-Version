@@ -357,6 +357,13 @@ public class PnCCharacterEditor : Editor
             }
         }
 
+        if(GUILayout.Button("Edit global variables"))
+        {
+            Selection.objects = new UnityEngine.Object[] { settings };
+            EditorGUIUtility.PingObject(settings);
+        }
+
+
         var group = variables.GroupBy(vari => vari.name, (vari) => new { Count = vari.name.Count() });
         bool repeated = false;
 
