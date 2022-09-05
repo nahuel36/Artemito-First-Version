@@ -31,7 +31,10 @@ MonoBehaviour:
     type: 0
   - name: IsADooro
     ID: 784136192
-    type: 0
+    type: 1
   - name: 6
     ID: 227535360
+    type: 0
+  - name: 7
+    ID: -970663424
     type: 0

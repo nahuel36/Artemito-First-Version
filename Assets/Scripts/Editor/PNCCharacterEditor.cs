@@ -70,7 +70,6 @@ public class PnCCharacterEditor : Editor
                     (settings.global_variables[i].ID != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode == -1 && ((PNCCharacter)target).global_variables[j].name == settings.global_variables[i].name) ||
                     (settings.global_variables[i].ID != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode == settings.global_variables[i].ID))
                 {
-                    tempGlobalVarList.Add(((PNCCharacter)target).global_variables[j]);
                     ((PNCCharacter)target).global_variables[j].name = settings.global_variables[i].name;
                     if (settings.global_variables[i].ID == -1)
                     { 
@@ -81,6 +80,8 @@ public class PnCCharacterEditor : Editor
                     {
                         ((PNCCharacter)target).global_variables[j].globalHashCode = settings.global_variables[i].ID;
                     }
+                    if(settings.global_variables[i].type.HasFlag((GlobalVariableProperty.types.characters)))
+                        tempGlobalVarList.Add(((PNCCharacter)target).global_variables[j]);
                     founded = true;
                 }
             }
@@ -97,7 +98,8 @@ public class PnCCharacterEditor : Editor
                 {
                     tempMode.globalHashCode = settings.global_variables[i].ID;
                 }
-                tempGlobalVarList.Add(tempMode);
+                if (settings.global_variables[i].type.HasFlag((GlobalVariableProperty.types.characters)))
+                    tempGlobalVarList.Add(tempMode);
             }
         }
 
@@ -287,17 +289,24 @@ public class PnCCharacterEditor : Editor
 
         for (int i = 0; i < variables.Length; i++)
         {
+            bool areType = true;
+
+            for (int j = 0; j < settings.global_variables.Length; j++)
+            {
+                if (variables[i].globalHashCode != -1 && settings.global_variables[j].ID == variables[i].globalHashCode)
+                {
+                    variables[i].name = settings.global_variables[j].name;
+                    if (!settings.global_variables[j].type.HasFlag(GlobalVariableProperty.types.characters))
+                        areType = false;
+                }
+            }
+            if (!areType)
+                continue;
+
             show_variables[i] = EditorGUILayout.Foldout(show_variables[i], variables[i].name);
 
             if (show_variables[i])
             {
-
-                for (int j = 0; j < settings.global_variables.Length; j++)
-                {
-                    if (variables[i].globalHashCode != -1 && settings.global_variables[j].ID == variables[i].globalHashCode)
-                        variables[i].name = settings.global_variables[j].name;
-                }
-
                 variables[i].type = (InteractuableVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
 
                 if (variables[i].type.HasFlag(InteractuableVariables.types.integer))

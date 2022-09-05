@@ -667,7 +667,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.size
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -722,12 +722,12 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].name
-      value: isOpened
+      value: IsADooro
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].type
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -777,7 +777,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].String
-      value: 
+      value: isa
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -796,13 +796,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: global_variables.Array.data[0].integer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_variables.Array.data[4].integer
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].stringDefault
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -842,12 +847,12 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].globalHashCode
-      value: -1077307904
+      value: 784136192
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].integerDefault
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
