@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   modes:
-  - Look
   - Use
+  - Look
   - Talk
   global_variables:
   - name: isOpened
@@ -23,18 +23,15 @@ MonoBehaviour:
   - name: isOpened2
     ID: 1356215296
     type: 0
-  - name: isOpened245
-    ID: -505228800
-    type: 0
   - name: new variable25
     ID: -1114401280
     type: 0
   - name: IsADooro
     ID: 784136192
+    type: -1
+  - name: New Global Variable 5
+    ID: 365620736
     type: 1
   - name: 6
     ID: 227535360
-    type: 0
-  - name: 7
-    ID: -970663424
-    type: 0
+    type: 1

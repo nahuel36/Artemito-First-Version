@@ -146,12 +146,12 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.size
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[0].name
-      value: Look
+      value: Use
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -161,7 +161,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[1].name
-      value: Use
+      value: Look
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -201,17 +201,27 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].name
-      value: isOpened
+      value: IsADooro
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[1].name
-      value: isOpened2
+      value: New Global Variable 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_variables.Array.data[1].type
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[2].name
-      value: isOpened245
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_variables.Array.data[2].type
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -250,6 +260,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: global_variables.Array.data[1].String
+      value: po
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_variables.Array.data[2].String
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_variables.Array.data[3].String
       value: vavaa
       objectReference: {fileID: 0}
@@ -271,7 +291,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[1].stringDefault
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -306,7 +326,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].globalHashCode
-      value: -1077307904
+      value: 784136192
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -321,7 +341,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[1].globalHashCode
-      value: 1356215296
+      value: 365620736
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -336,7 +356,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[2].globalHashCode
-      value: -505228800
+      value: 227535360
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -667,12 +687,12 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[0].name
-      value: Look
+      value: Use
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -682,7 +702,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[1].name
-      value: Use
+      value: Look
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -727,17 +747,27 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].type
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[1].name
-      value: isOpened2
+      value: New Global Variable 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_variables.Array.data[1].type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[2].name
-      value: isOpened245
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_variables.Array.data[2].type
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -777,7 +807,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].String
-      value: isa
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -797,7 +827,17 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].integer
-      value: 8
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_variables.Array.data[1].boolean
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_variables.Array.data[2].boolean
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -807,7 +847,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].stringDefault
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -852,17 +892,17 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[0].integerDefault
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
-        type: 3}
-      propertyPath: global_variables.Array.data[1].booleanDefault
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: global_variables.Array.data[1].booleanDefault
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_variables.Array.data[1].globalHashCode
-      value: 1356215296
+      value: 365620736
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -877,7 +917,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_variables.Array.data[2].globalHashCode
-      value: -505228800
+      value: 227535360
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -957,7 +997,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[2].interactions.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -1077,7 +1117,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[0].interactions.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: use
+      value: talk
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}

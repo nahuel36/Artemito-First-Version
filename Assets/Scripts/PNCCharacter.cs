@@ -12,19 +12,7 @@ public class Mode
     public UnityEvent[] interactions;
 }
 
-[System.Serializable]
-public class GlobalVariableProperty
-{
-    public string name;
-    public int ID;
-    public enum types
-    {
-        characters = (1 << 0),
-        objects = (1 << 1),
-        inventory = (1 << 2)
-    }
-    public types type;
-}
+
 
 
 [System.Serializable]
