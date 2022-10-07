@@ -19,19 +19,64 @@ MonoBehaviour:
   global_variables:
   - name: isOpened
     ID: -1077307904
-    type: 0
+    object_type: 1
+    variable_type: 3
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1
   - name: isOpened2
     ID: 1356215296
-    type: 0
+    object_type: 0
+    variable_type: 0
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1
   - name: new variable25
     ID: -1114401280
-    type: 0
+    object_type: 0
+    variable_type: 0
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1
   - name: IsADooro
     ID: 784136192
-    type: -1
+    object_type: 0
+    variable_type: 0
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1
   - name: New Global Variable 5
     ID: 365620736
-    type: 1
+    object_type: 0
+    variable_type: 0
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1
   - name: 6
     ID: 227535360
-    type: 1
+    object_type: 0
+    variable_type: 0
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1
+  - name: New Global Variable 14
+    ID: -1221975552
+    object_type: 1
+    variable_type: 2
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1
+  - name: New Global Variable 7
+    ID: -1
+    object_type: 2
+    variable_type: 4
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1
+  - name: New Global Variable 8
+    ID: -1
+    object_type: 4
+    variable_type: 1
+    integerDefault: 1
+    booleanDefault: 1
+    stringDefault: 1

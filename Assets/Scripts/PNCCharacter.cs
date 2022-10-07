@@ -16,7 +16,7 @@ public class Mode
 
 
 [System.Serializable]
-public class InteractuableVariables
+public class InteractuableLocalVariables
 {
     public string name = "new variable";
     public int integer = 0;
@@ -25,6 +25,7 @@ public class InteractuableVariables
     public bool booleanDefault = true;
     public string String = "";
     public bool stringDefault = true;
+    [System.Flags]
     public enum types{
         integer = (1 << 0),
         boolean = (1 << 1),
@@ -32,6 +33,17 @@ public class InteractuableVariables
     }
     public types type;
     public int globalHashCode = -1;
+}
+
+[System.Serializable]
+public class InteractuableGlobalVariables
+{
+    public string name = "new variable";
+    public int integer = 0;
+    public bool boolean = false;
+    public string String = "";
+    public int globalHashCode = -1;
+    public GlobalVariableProperty properties;
 }
 
 
@@ -43,8 +55,8 @@ public class PNCCharacter : MonoBehaviour
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
     public Mode[] interactions;
-    public InteractuableVariables[] local_variables;
-    public InteractuableVariables[] global_variables;
+    public InteractuableLocalVariables[] local_variables;
+    public InteractuableGlobalVariables[] global_variables;
 
     private void Awake()
     {

@@ -60,7 +60,7 @@ public class PnCCharacterEditor : Editor
         
         ((PNCCharacter)target).interactions = interactionsTempList.ToArray();
 
-        List<InteractuableVariables> tempGlobalVarList = new List<InteractuableVariables>();
+        List<InteractuableGlobalVariables> tempGlobalVarList = new List<InteractuableGlobalVariables>();
         for (int i = 0; i < settings.global_variables.Length; i++)
         {
             bool founded = false;
@@ -74,20 +74,23 @@ public class PnCCharacterEditor : Editor
                     if (settings.global_variables[i].ID == -1)
                     { 
                         settings.global_variables[i].ID = ((PNCCharacter)target).global_variables[j].GetHashCode();
-                        ((PNCCharacter)target).global_variables[j].globalHashCode = ((PNCCharacter)target).global_variables[j].GetHashCode(); 
+                        ((PNCCharacter)target).global_variables[j].globalHashCode = ((PNCCharacter)target).global_variables[j].GetHashCode();
                     }
                     else if(((PNCCharacter)target).global_variables[j].globalHashCode == -1)
                     {
                         ((PNCCharacter)target).global_variables[j].globalHashCode = settings.global_variables[i].ID;
                     }
-                    if(settings.global_variables[i].type.HasFlag((GlobalVariableProperty.types.characters)))
+                    
+                    ((PNCCharacter)target).global_variables[j].properties = settings.global_variables[i];
+
+                    if (settings.global_variables[i].object_type.HasFlag((GlobalVariableProperty.object_types.characters)))
                         tempGlobalVarList.Add(((PNCCharacter)target).global_variables[j]);
                     founded = true;
                 }
             }
             if (founded == false)
             {
-                InteractuableVariables tempMode = new InteractuableVariables();
+                InteractuableGlobalVariables tempMode = new InteractuableGlobalVariables();
                 tempMode.name = settings.global_variables[i].name;
                 if(settings.global_variables[i].ID == -1)
                 { 
@@ -98,7 +101,8 @@ public class PnCCharacterEditor : Editor
                 {
                     tempMode.globalHashCode = settings.global_variables[i].ID;
                 }
-                if (settings.global_variables[i].type.HasFlag((GlobalVariableProperty.types.characters)))
+                tempMode.properties = settings.global_variables[i];
+                if (settings.global_variables[i].object_type.HasFlag((GlobalVariableProperty.object_types.characters)))
                     tempGlobalVarList.Add(tempMode);
             }
         }
@@ -180,7 +184,7 @@ public class PnCCharacterEditor : Editor
 
     }
 
-    public void ShowLocalVariables(ref InteractuableVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
+    public void ShowLocalVariables(ref InteractuableLocalVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
     {
         if (show_variables.Length < variables.Length)
             show_variables = new bool[variables.Length];
@@ -193,9 +197,9 @@ public class PnCCharacterEditor : Editor
             {
                 variables[i].name = EditorGUILayout.TextField("name:", variables[i].name);
 
-                variables[i].type = (InteractuableVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
+                variables[i].type = (InteractuableLocalVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
 
-                if (variables[i].type.HasFlag(InteractuableVariables.types.integer))
+                if (variables[i].type.HasFlag(InteractuableLocalVariables.types.integer))
                 {
                     if (!variables[i].integerDefault)
                     {
@@ -213,7 +217,7 @@ public class PnCCharacterEditor : Editor
                         }
                     }
                 }
-                if (variables[i].type.HasFlag(InteractuableVariables.types.boolean))
+                if (variables[i].type.HasFlag(InteractuableLocalVariables.types.boolean))
                 {
                     if (!variables[i].booleanDefault)
                     {
@@ -231,7 +235,7 @@ public class PnCCharacterEditor : Editor
                         }
                     }
                 }
-                if (variables[i].type.HasFlag(InteractuableVariables.types.String))
+                if (variables[i].type.HasFlag(InteractuableLocalVariables.types.String))
                 {
                     if (!variables[i].stringDefault)
                     {
@@ -259,12 +263,12 @@ public class PnCCharacterEditor : Editor
 
         if (GUILayout.Button("Create local variable"))
         {
-            InteractuableVariables newvar = new InteractuableVariables();
+            InteractuableLocalVariables newvar = new InteractuableLocalVariables();
             //serializedObject.ApplyModifiedProperties();
             
             //variables.arraySize++;
 
-            variables = variables.Append<InteractuableVariables>(newvar).ToArray();
+            variables = variables.Append<InteractuableLocalVariables>(newvar).ToArray();
             show_variables = show_variables.Append(false).ToArray();
         }
 
@@ -282,7 +286,7 @@ public class PnCCharacterEditor : Editor
 
     }
 
-    public void ShowGlobalVariables(ref InteractuableVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
+    public void ShowGlobalVariables(ref InteractuableGlobalVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
     {
         if (show_variables.Length < variables.Length)
             show_variables = new bool[variables.Length];
@@ -296,7 +300,7 @@ public class PnCCharacterEditor : Editor
                 if (variables[i].globalHashCode != -1 && settings.global_variables[j].ID == variables[i].globalHashCode)
                 {
                     variables[i].name = settings.global_variables[j].name;
-                    if (!settings.global_variables[j].type.HasFlag(GlobalVariableProperty.types.characters))
+                    if (!settings.global_variables[j].object_type.HasFlag(GlobalVariableProperty.object_types.characters))
                         areType = false;
                 }
             }
@@ -307,15 +311,13 @@ public class PnCCharacterEditor : Editor
 
             if (show_variables[i])
             {
-                variables[i].type = (InteractuableVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
-
-                if (variables[i].type.HasFlag(InteractuableVariables.types.integer))
+                if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.integer))
                 {
-                    if (!variables[i].integerDefault)
+                    if (!variables[i].properties.integerDefault)
                     {
                         variables[i].integer = EditorGUILayout.IntField("integer value:", variables[i].integer);
                         if (GUILayout.Button("Set integer default value"))
-                            variables[i].integerDefault = true;
+                            variables[i].properties.integerDefault = true;
                     }
                     else
                     {
@@ -323,17 +325,17 @@ public class PnCCharacterEditor : Editor
                         if (GUILayout.Button("Set integer value"))
                         {
                             variables[i].integer = 0;
-                            variables[i].integerDefault = false;
+                            variables[i].properties.integerDefault = false;
                         }
                     }
                 }
-                if (variables[i].type.HasFlag(InteractuableVariables.types.boolean))
+                if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.boolean))
                 {
-                    if (!variables[i].booleanDefault)
+                    if (!variables[i].properties.booleanDefault)
                     {
                         variables[i].boolean = EditorGUILayout.Toggle("boolean value:", variables[i].boolean);
                         if (GUILayout.Button("Set boolean default value"))
-                            variables[i].booleanDefault = true;
+                            variables[i].properties.booleanDefault = true;
                     }
                     else
                     {
@@ -341,17 +343,17 @@ public class PnCCharacterEditor : Editor
                         if (GUILayout.Button("Set boolean value"))
                         {
                             variables[i].boolean = false;
-                            variables[i].booleanDefault = false;
+                            variables[i].properties.booleanDefault = false;
                         }
                     }
                 }
-                if (variables[i].type.HasFlag(InteractuableVariables.types.String))
+                if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.String))
                 {
-                    if (!variables[i].stringDefault)
+                    if (!variables[i].properties.stringDefault)
                     {
                         variables[i].String = EditorGUILayout.TextField("string value:", variables[i].String);
                         if (GUILayout.Button("Set string default value"))
-                            variables[i].stringDefault = true;
+                            variables[i].properties.stringDefault = true;
                     }
                     else
                     {
@@ -359,7 +361,7 @@ public class PnCCharacterEditor : Editor
                         if (GUILayout.Button("Set string value"))
                         {
                             variables[i].String = "";
-                            variables[i].stringDefault = false;
+                            variables[i].properties.stringDefault = false;
                         }
                     }
                 }

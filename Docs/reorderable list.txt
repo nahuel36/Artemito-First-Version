@@ -1,0 +1,3 @@
+https://va.lent.in/unity-make-your-lists-functional-with-reorderablelist/
+
+no deberia poder ponerse nothing en objetos, ni en variables

@@ -6,15 +6,28 @@ using UnityEngine;
 public class GlobalVariableProperty
 {
     public string name;
-    public int ID;
+    public int ID = -1;
     [System.Flags]
-    public enum types
+    public enum object_types
     {
         characters = (1 << 0),
         objects = (1 << 1),
         inventory = (1 << 2)
     }
-    public types type;
+    public object_types object_type;
+
+    [System.Flags]
+    public enum variable_types
+    {
+        integer = (1 << 0),
+        boolean = (1 << 1),
+        String = (1 << 2)
+    }
+    public variable_types variable_type;
+
+    public bool integerDefault = true;
+    public bool booleanDefault = true;
+    public bool stringDefault = true;
 }
 
 
