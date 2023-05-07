@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class AStarPathFinder : IPathFinder
+public class AStarPathFinderAdapter : IPathFinder
 {
     GameObject target;
     AIPath aipath;
@@ -11,7 +11,7 @@ public class AStarPathFinder : IPathFinder
     bool isCancelable;
     AIDestinationSetter setter;
 
-    public AStarPathFinder(UnityEngine.Transform transform, float velocity)
+    public AStarPathFinderAdapter(UnityEngine.Transform transform, float velocity)
     {
         target = new GameObject("target");
         target.transform.position = transform.position;
@@ -49,7 +49,11 @@ public class AStarPathFinder : IPathFinder
     
     public void Cancel()
     {
-        if(isCancelable)
+        if (isCancelable)
+        {
+            target.transform.position = aipath.transform.position;
             canceled = true;
+        }
+
     }
 }
