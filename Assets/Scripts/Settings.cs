@@ -38,7 +38,8 @@ public class Settings : ScriptableObject
     public enum PathFindingType
     {
         UnityNavigationMesh,
-        AronGranbergAStarPath
+        AronGranbergAStarPath,
+        Custom
     }
     public string[] modes;
     public GlobalVariableProperty[] global_variables;

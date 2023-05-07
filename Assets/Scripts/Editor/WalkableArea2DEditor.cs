@@ -54,7 +54,11 @@ public class WalkableArea2DEditor : Editor
             if (AstarPath.active)
                 DestroyImmediate(AstarPath.active.gameObject);
 #endif
-
+            WalkObstacle[] obstacles = FindObjectsOfType<WalkObstacle>();
+            for (int i = 0; i < obstacles.Length; i++)
+            {
+                obstacles[i].Init();
+            }
 
             if (settings.pathFindingType == Settings.PathFindingType.AronGranbergAStarPath)
             {
