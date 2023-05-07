@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+#if NAVMESH_PLUS
 using NavMeshPlus;
 using UnityEngine.AI;
+#endif
+
 [CustomEditor(typeof(WalkableArea2D))]
 public class WalkableArea2DEditor : Editor
 {
@@ -32,25 +35,30 @@ public class WalkableArea2DEditor : Editor
         }
         if (GUILayout.Button("Create PathFinder"))
         {
-            for (int i = 0; i < myTarget.transform.childCount; i++)
+            for (int i = myTarget.transform.childCount-1; i >= 0; i--)
                 DestroyImmediate(myTarget.transform.GetChild(i).gameObject);
 
 
             Collider2D collider = myTarget.GetComponent<Collider2D>();
 
             Settings settings = Resources.Load<Settings>("Settings/Settings");
-
+#if NAVMESH_PLUS
             for (int i = myTarget.GetComponents<NavMeshPlus.Components.NavMeshModifier>().Length-1; i >= 0 ; i--)
             {
                 DestroyImmediate(myTarget.GetComponents<NavMeshPlus.Components.NavMeshModifier>()[i]);
             }
-            if(AstarPath.active)
-                DestroyImmediate(AstarPath.active.gameObject);
             if (FindObjectOfType<NavMeshPlus.Components.NavMeshSurface>())
                 DestroyImmediate(FindObjectOfType<NavMeshPlus.Components.NavMeshSurface>().gameObject);
+#endif
+#if ASTAR_ARONGRANBERG_PATHFINDING
+            if (AstarPath.active)
+                DestroyImmediate(AstarPath.active.gameObject);
+#endif
+
 
             if (settings.pathFindingType == Settings.PathFindingType.AronGranbergAStarPath)
             {
+#if ASTAR_ARONGRANBERG_PATHFINDING
                 GameObject pathGO = Instantiate(Resources.Load<GameObject>("Prefabs/AStarPathFinderPrefab"), myTarget.transform);
                 AstarPath.FindAstarPath();
                 ((Pathfinding.GridGraph)AstarPath.active.data.FindGraphOfType(typeof(Pathfinding.GridGraph)))
@@ -62,9 +70,11 @@ public class WalkableArea2DEditor : Editor
                 ((Pathfinding.GridGraph)AstarPath.active.data.FindGraphOfType(typeof(Pathfinding.GridGraph))).Scan();
 
                 Selection.activeGameObject = pathGO;
+#endif
             }
             if (settings.pathFindingType == Settings.PathFindingType.UnityNavigationMesh)
             {
+#if NAVMESH_PLUS
                 myTarget.gameObject.AddComponent<NavMeshPlus.Components.NavMeshModifier>();
 
                 GameObject GO = new GameObject("NavMeshManager");
@@ -80,7 +90,7 @@ public class WalkableArea2DEditor : Editor
 
                 GO.transform.parent = myTarget.transform;
 
-                
+#endif                
             }
         }
 
