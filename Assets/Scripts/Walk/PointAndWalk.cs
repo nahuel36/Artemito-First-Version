@@ -30,7 +30,7 @@ public class PointAndWalk : MonoBehaviour
        if(Input.GetMouseButtonDown(0))
         {
             Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            pNCCharacter.CancelWalk();
+            pNCCharacter.CancelWalkAndTasks();
             pNCCharacter.SkipTalk();
             pNCCharacter.CancelableWalk(point.x * Vector3.right + point.y * Vector3.up);
             pNCCharacter.Talk("LLegué");

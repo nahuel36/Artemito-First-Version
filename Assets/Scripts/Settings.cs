@@ -34,6 +34,13 @@ public class GlobalVariableProperty
 [CreateAssetMenu(fileName = "Settings", menuName = "Pnc/SettingsFile", order = 1)]
 public class Settings : ScriptableObject
 {
+
+    public enum PathFindingType
+    {
+        UnityNavigationMesh,
+        AronGranbergAStarPath
+    }
     public string[] modes;
     public GlobalVariableProperty[] global_variables;
+    public PathFindingType pathFindingType;
 }

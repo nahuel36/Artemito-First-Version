@@ -17,6 +17,8 @@ public class SettingsEditor : Editor
     ReorderableList modesList;
     ReorderableList global_variables_list;
 
+ 
+
     private void OnEnable()
     {
         modesList = new ReorderableList(serializedObject, serializedObject.FindProperty("modes"), true, true, true, true);
@@ -111,6 +113,9 @@ public class SettingsEditor : Editor
 
         if (repeated)
             GUILayout.Label("There are more than one variable with the same name", EditorStyles.boldLabel);
+
+        GUILayout.Label("Path Finding Type");
+        ((Settings)target).pathFindingType = (Settings.PathFindingType)EditorGUILayout.EnumPopup(((Settings)target).pathFindingType);
 
 
         serializedObject.ApplyModifiedProperties();

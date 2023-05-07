@@ -67,16 +67,17 @@ MonoBehaviour:
     booleanDefault: 1
     stringDefault: 1
   - name: New Global Variable 7
-    ID: -1
+    ID: 548777984
     object_type: 2
     variable_type: 4
     integerDefault: 1
     booleanDefault: 1
     stringDefault: 1
   - name: New Global Variable 8
-    ID: -1
+    ID: -1312666112
     object_type: 4
     variable_type: 1
     integerDefault: 1
     booleanDefault: 1
     stringDefault: 1
+  pathFindingType: 0

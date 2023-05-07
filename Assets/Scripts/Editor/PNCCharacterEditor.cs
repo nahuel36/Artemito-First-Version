@@ -18,7 +18,7 @@ public class PnCCharacterEditor : Editor
 
     public void OnEnable()
     {
-        settings = AssetDatabase.LoadAssetAtPath<Settings>("Assets/PnC/Settings/Settings.asset");
+        settings = Resources.Load<Settings>("Settings/Settings");
         interactions = serializedObject.FindProperty("interactions");
 
         List<Mode> interactionsTempList = new List<Mode>();
@@ -60,7 +60,7 @@ public class PnCCharacterEditor : Editor
         
         ((PNCCharacter)target).interactions = interactionsTempList.ToArray();
 
-        List<InteractuableGlobalVariables> tempGlobalVarList = new List<InteractuableGlobalVariables>();
+        List<InteractuableGlobalVariable> tempGlobalVarList = new List<InteractuableGlobalVariable>();
         for (int i = 0; i < settings.global_variables.Length; i++)
         {
             bool founded = false;
@@ -90,7 +90,7 @@ public class PnCCharacterEditor : Editor
             }
             if (founded == false)
             {
-                InteractuableGlobalVariables tempMode = new InteractuableGlobalVariables();
+                InteractuableGlobalVariable tempMode = new InteractuableGlobalVariable();
                 tempMode.name = settings.global_variables[i].name;
                 if(settings.global_variables[i].ID == -1)
                 { 
@@ -184,7 +184,7 @@ public class PnCCharacterEditor : Editor
 
     }
 
-    public void ShowLocalVariables(ref InteractuableLocalVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
+    public void ShowLocalVariables(ref InteractuableLocalVariable[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
     {
         if (show_variables.Length < variables.Length)
             show_variables = new bool[variables.Length];
@@ -197,9 +197,9 @@ public class PnCCharacterEditor : Editor
             {
                 variables[i].name = EditorGUILayout.TextField("name:", variables[i].name);
 
-                variables[i].type = (InteractuableLocalVariables.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
+                variables[i].type = (InteractuableLocalVariable.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
 
-                if (variables[i].type.HasFlag(InteractuableLocalVariables.types.integer))
+                if (variables[i].type.HasFlag(InteractuableLocalVariable.types.integer))
                 {
                     if (!variables[i].integerDefault)
                     {
@@ -217,7 +217,7 @@ public class PnCCharacterEditor : Editor
                         }
                     }
                 }
-                if (variables[i].type.HasFlag(InteractuableLocalVariables.types.boolean))
+                if (variables[i].type.HasFlag(InteractuableLocalVariable.types.boolean))
                 {
                     if (!variables[i].booleanDefault)
                     {
@@ -235,7 +235,7 @@ public class PnCCharacterEditor : Editor
                         }
                     }
                 }
-                if (variables[i].type.HasFlag(InteractuableLocalVariables.types.String))
+                if (variables[i].type.HasFlag(InteractuableLocalVariable.types.String))
                 {
                     if (!variables[i].stringDefault)
                     {
@@ -263,12 +263,12 @@ public class PnCCharacterEditor : Editor
 
         if (GUILayout.Button("Create local variable"))
         {
-            InteractuableLocalVariables newvar = new InteractuableLocalVariables();
+            InteractuableLocalVariable newvar = new InteractuableLocalVariable();
             //serializedObject.ApplyModifiedProperties();
             
             //variables.arraySize++;
 
-            variables = variables.Append<InteractuableLocalVariables>(newvar).ToArray();
+            variables = variables.Append<InteractuableLocalVariable>(newvar).ToArray();
             show_variables = show_variables.Append(false).ToArray();
         }
 
@@ -286,7 +286,7 @@ public class PnCCharacterEditor : Editor
 
     }
 
-    public void ShowGlobalVariables(ref InteractuableGlobalVariables[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
+    public void ShowGlobalVariables(ref InteractuableGlobalVariable[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
     {
         if (show_variables.Length < variables.Length)
             show_variables = new bool[variables.Length];

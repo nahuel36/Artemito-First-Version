@@ -16,7 +16,7 @@ public class Mode
 
 
 [System.Serializable]
-public class InteractuableLocalVariables
+public class InteractuableLocalVariable
 {
     public string name = "new variable";
     public int integer = 0;
@@ -36,7 +36,7 @@ public class InteractuableLocalVariables
 }
 
 [System.Serializable]
-public class InteractuableGlobalVariables
+public class InteractuableGlobalVariable
 {
     public string name = "new variable";
     public int integer = 0;
@@ -55,12 +55,12 @@ public class PNCCharacter : MonoBehaviour
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
     public Mode[] interactions;
-    public InteractuableLocalVariables[] local_variables;
-    public InteractuableGlobalVariables[] global_variables;
+    public InteractuableLocalVariable[] local_variables;
+    public InteractuableGlobalVariable[] global_variables;
 
     private void Awake()
     {
-
+        
     }
 
     public void ConfigureTalker()
@@ -70,7 +70,11 @@ public class PNCCharacter : MonoBehaviour
 
     public void ConfigurePathFinder(float velocity)
     {
-        pathFinder = new AStarPathFinder(this.transform, velocity);
+        Settings settings = Resources.Load<Settings>("Settings/Settings");
+        if (settings.pathFindingType == Settings.PathFindingType.AronGranbergAStarPath)
+            pathFinder = new AStarPathFinderAdapter(this.transform, velocity);
+        else if (settings.pathFindingType == Settings.PathFindingType.UnityNavigationMesh)
+            pathFinder = new NavMesh2DPathFinder(this.transform);
     }
 
     // Start is called before the first frame update
@@ -86,7 +90,7 @@ public class PNCCharacter : MonoBehaviour
         cancelableWalk.Queue(pathFinder, destiny, true);
     }
 
-    public void CancelWalk()
+    public void CancelWalkAndTasks()
     {
         CommandsQueue.Instance.ClearAll();
         if(cancelableWalk != null) cancelableWalk.Skip();
