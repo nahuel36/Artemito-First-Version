@@ -12,16 +12,17 @@ public class PnCCharacterEditor : Editor
     SerializedProperty interactions;
     SerializedProperty local_variables_serialized;
     SerializedProperty global_variables_serialized;
-    bool[] showLocalVariable;
-    bool[] showGlobalVariable;
-    bool[] showmode;
-
+    static bool[] showLocalVariable;
+    static bool[] showGlobalVariable;
+    static bool[] showmode;
+    static Dictionary<string, bool> showAttemp = new Dictionary<string, bool>();
 
     public void OnEnable()
     {
         settings = Resources.Load<Settings>("Settings/Settings");
 
-        showmode = new bool[settings.modes.Length];
+        if(showmode == null || showmode.Length != settings.modes.Length)
+            showmode = new bool[settings.modes.Length];
 
         interactions = serializedObject.FindProperty("interactions");
 
@@ -116,8 +117,10 @@ public class PnCCharacterEditor : Editor
         local_variables_serialized = serializedObject.FindProperty("local_variables");
         global_variables_serialized = serializedObject.FindProperty("global_variables");
 
-        showLocalVariable = new bool[local_variables_serialized.arraySize];
-        showGlobalVariable = new bool[global_variables_serialized.arraySize];
+        if(showLocalVariable == null || showLocalVariable.Length != local_variables_serialized.arraySize)
+            showLocalVariable = new bool[local_variables_serialized.arraySize];
+        if (showGlobalVariable == null || showGlobalVariable.Length != global_variables_serialized.arraySize)
+            showGlobalVariable = new bool[global_variables_serialized.arraySize];
     }
 
     public override void OnInspectorGUI()
@@ -141,15 +144,14 @@ public class PnCCharacterEditor : Editor
 
                     GUIContent content = new GUIContent();
                     content.text = (j + 1) + "° attemp";
+                   // if(EditorGUILayout.Foldout()
+
                     EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists").GetArrayElementAtIndex(j).FindPropertyRelative("interactions"), content);
 
                     EditorGUILayout.EndVertical();
                 }
 
 
-
-
-                //EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i),true);
                 if (((PNCCharacter)target).interactions.Length > 0 && ((PNCCharacter)target).interactions[i].interactionsLists != null &&  ((PNCCharacter)target).interactions[i].interactionsLists.Length > 0)
                     if(showmode[i])
                        if(GUILayout.Button("Delete last attemp"))
@@ -166,14 +168,6 @@ public class PnCCharacterEditor : Editor
             }
             EditorGUILayout.EndVertical();
         }
-        /*
-        foreach(string mode in set.modes)
-        { 
-            EditorGUILayout.LabelField(mode);
-            (target as PNCCharacter).interactions[]
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("interactions"));
-        }
-        */
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();

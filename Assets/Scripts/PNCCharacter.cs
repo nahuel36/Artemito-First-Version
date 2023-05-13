@@ -22,12 +22,19 @@ public class InteractionList
 [System.Serializable]
 public class Interaction
 {
-    public string name;
+    public enum InteractionType { 
+        character,
+        custom
+    }
+
+    public InteractionType type;
+    
     public UnityEvent action;
-    public Test test;
+    public Character character;
 }
 
-public interface Test { 
+public interface Character
+{ 
 
 }
 
@@ -63,7 +70,7 @@ public class InteractuableGlobalVariable
 }
 
 
-public class PNCCharacter : MonoBehaviour
+public class PNCCharacter : MonoBehaviour, Character
 {
     IPathFinder pathFinder;
     IMessageTalker messageTalker;
