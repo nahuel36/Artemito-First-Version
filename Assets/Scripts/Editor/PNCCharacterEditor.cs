@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using UnityEngine.UIElements;
 
 [CustomEditor(typeof(PNCCharacter))]
 public class PnCCharacterEditor : Editor
@@ -13,12 +14,15 @@ public class PnCCharacterEditor : Editor
     SerializedProperty global_variables_serialized;
     bool[] showLocalVariable;
     bool[] showGlobalVariable;
+    bool[] showmode;
 
-    
 
     public void OnEnable()
     {
         settings = Resources.Load<Settings>("Settings/Settings");
+
+        showmode = new bool[settings.modes.Length];
+
         interactions = serializedObject.FindProperty("interactions");
 
         List<Mode> interactionsTempList = new List<Mode>();
@@ -37,7 +41,7 @@ public class PnCCharacterEditor : Editor
             {
                 Mode tempMode = new Mode();
                 tempMode.name = settings.modes[i];
-                tempMode.interactions = new UnityEngine.Events.UnityEvent[0];
+                tempMode.interactionsLists = new InteractionList[0];
                 interactionsTempList.Add(tempMode);
             }
         }
@@ -118,36 +122,49 @@ public class PnCCharacterEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        //base.OnInspectorGUI();
-        //EditorGUILayout.PropertyField(serializedObject.FindProperty("target"));
-        //EditorGUILayout.ObjectField(serializedObject.FindProperty("target"));
-
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         GUILayout.Label("Interactions", EditorStyles.boldLabel);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        //EditorGUILayout.LabelField("Interactions", new GUILayoutOption[] { new GUILayoutOption(GUILayoutOption.});
-
         for (int i = 0; i < settings.modes.Length; i++)
         {
-            //EditorGUILayout.LabelField(settings.modes[i]);
-            EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i),true);
-            if (((PNCCharacter)target).interactions.Length > 0 && ((PNCCharacter)target).interactions[i].interactions != null &&  ((PNCCharacter)target).interactions[i].interactions.Length > 0)
-                if(interactions.GetArrayElementAtIndex(i).isExpanded)
-                    if(interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded)
-                        if(GUILayout.Button("Delete last interaction"))
+            EditorGUILayout.BeginVertical("HelpBox");
+            showmode[i] = EditorGUILayout.Foldout(showmode[i],settings.modes[i].ToString());
+            if (showmode[i])
             {
-                List<UnityEngine.Events.UnityEvent> list_interactions = ((PNCCharacter)target).interactions[i].interactions.ToList();
-                list_interactions.RemoveAt(list_interactions.Count-1);
-                ((PNCCharacter)target).interactions[i].interactions = list_interactions.ToArray();
-            }
 
-            if (interactions.GetArrayElementAtIndex(i).isExpanded && interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactions").isExpanded && GUILayout.Button("Create interaction"))
-            {
-                ((PNCCharacter)target).interactions[i].interactions = ((PNCCharacter)target).interactions[i].interactions.Append(new UnityEngine.Events.UnityEvent()).ToArray();
+                for (int j = 0; j < interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists").arraySize; j++)
+                {
+                    EditorGUILayout.BeginVertical("GroupBox");
+
+                    GUIContent content = new GUIContent();
+                    content.text = (j + 1) + "° attemp";
+                    EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists").GetArrayElementAtIndex(j).FindPropertyRelative("interactions"), content);
+
+                    EditorGUILayout.EndVertical();
+                }
+
+
+
+
+                //EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i),true);
+                if (((PNCCharacter)target).interactions.Length > 0 && ((PNCCharacter)target).interactions[i].interactionsLists != null &&  ((PNCCharacter)target).interactions[i].interactionsLists.Length > 0)
+                    if(showmode[i])
+                       if(GUILayout.Button("Delete last attemp"))
+                        {
+                            List<InteractionList> list_interactions = ((PNCCharacter)target).interactions[i].interactionsLists.ToList();
+                            list_interactions.RemoveAt(list_interactions.Count-1);
+                            ((PNCCharacter)target).interactions[i].interactionsLists = list_interactions.ToArray();
+                        }
+
+                if (showmode[i] && GUILayout.Button("Create new attemp"))
+                {
+                    ((PNCCharacter)target).interactions[i].interactionsLists = ((PNCCharacter)target).interactions[i].interactionsLists.Append(new InteractionList()).ToArray();
+                }
             }
+            EditorGUILayout.EndVertical();
         }
         /*
         foreach(string mode in set.modes)
@@ -195,6 +212,8 @@ public class PnCCharacterEditor : Editor
 
             if (show_variables[i])
             {
+                EditorGUILayout.BeginVertical("GroupBox");
+
                 variables[i].name = EditorGUILayout.TextField("name:", variables[i].name);
 
                 variables[i].type = (InteractuableLocalVariable.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
@@ -258,6 +277,8 @@ public class PnCCharacterEditor : Editor
                 {
                     variables_serialized.DeleteArrayElementAtIndex(i);
                 }
+
+                EditorGUILayout.EndVertical();
             }
         }
 
@@ -311,6 +332,8 @@ public class PnCCharacterEditor : Editor
 
             if (show_variables[i])
             {
+                EditorGUILayout.BeginVertical("GroupBox");
+
                 if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.integer))
                 {
                     if (!variables[i].properties.integerDefault)
@@ -365,6 +388,8 @@ public class PnCCharacterEditor : Editor
                         }
                     }
                 }
+
+                GUILayout.EndVertical();
             }
         }
 

@@ -6,14 +6,30 @@ using UnityEngine.Events;
 [System.Serializable]
 public class Mode
 {
-    [HideInInspector]public string name;
+    public string name;
     public bool isCyclical = false;
     public bool show = true;
-    public UnityEvent[] interactions;
+    public InteractionList[] interactionsLists;
 }
 
+[System.Serializable]
+public class InteractionList
+{
+    [HideInInspector]public string name;
+    public Interaction[] interactions;
+}
 
+[System.Serializable]
+public class Interaction
+{
+    public string name;
+    public UnityEvent action;
+    public Test test;
+}
 
+public interface Test { 
+
+}
 
 [System.Serializable]
 public class InteractuableLocalVariable
@@ -54,9 +70,9 @@ public class PNCCharacter : MonoBehaviour
     CommandWalk cancelableWalk;
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
-    public Mode[] interactions;
-    public InteractuableLocalVariable[] local_variables;
-    public InteractuableGlobalVariable[] global_variables;
+    public Mode[] interactions = new Mode[0];
+    public InteractuableLocalVariable[] local_variables = new InteractuableLocalVariable[0];
+    public InteractuableGlobalVariable[] global_variables = new InteractuableGlobalVariable[0];
 
     private void Awake()
     {
