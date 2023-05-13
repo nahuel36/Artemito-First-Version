@@ -9,34 +9,28 @@ using UnityEngine.UIElements;
 public class PnCCharacterEditor : Editor
 {
     Settings settings;
-    SerializedProperty modes;
+    SerializedProperty modes_serialized;
     SerializedProperty local_variables_serialized;
     SerializedProperty global_variables_serialized;
-    bool[] showLocalVariable;
-    bool[] showGlobalVariable;
-    bool[] showmode;
-    List<List<bool>> showAttemp = new List<List<bool>>();
-    List<List<List<bool>>> showInteracions = new List<List<List<bool>>>();
+
         
 
     public void OnEnable()
     {
+        PNCCharacter myTarget = (PNCCharacter)target;
+
+        modes_serialized = serializedObject.FindProperty("modes");
         settings = Resources.Load<Settings>("Settings/Settings");
-
-        if(showmode == null || showmode.Length != settings.modes.Length)
-            showmode = new bool[settings.modes.Length];
-
-        modes = serializedObject.FindProperty("interactions");
 
         List<Mode> interactionsTempList = new List<Mode>();
         for (int i = 0; i < settings.modes.Length; i++)
         {
             bool founded = false;
-            for (int j = 0; j < ((PNCCharacter)target).interactions.Length; j++)
+            for (int j = 0; j < myTarget.modes.Length; j++)
             {
-                if (((PNCCharacter)target).interactions[j].name == settings.modes[i])
+                if (myTarget.modes[j].name == settings.modes[i])
                 { 
-                    interactionsTempList.Add(((PNCCharacter)target).interactions[j]);
+                    interactionsTempList.Add((myTarget).modes[j]);
                     founded = true;
                 }
             }
@@ -44,54 +38,54 @@ public class PnCCharacterEditor : Editor
             {
                 Mode tempMode = new Mode();
                 tempMode.name = settings.modes[i];
-                tempMode.interactionsLists = new InteractionList[0];
+                tempMode.attemps = new InteractionsAttemp[0];
                 interactionsTempList.Add(tempMode);
             }
         }
         
-        for (int i = 0; i < ((PNCCharacter)target).interactions.Length; i++)
+        for (int i = 0; i < myTarget.modes.Length; i++)
         {
             bool contains = false;            
             for (int j = 0; j < interactionsTempList.Count; j++)
             {
-                if (((PNCCharacter)target).interactions[i].name == interactionsTempList[j].name)
+                if (myTarget.modes[i].name == interactionsTempList[j].name)
                 {
                     contains = true;
                 }
             }
             if(contains == false)
             {
-                interactionsTempList.Add(((PNCCharacter)target).interactions[i]);
+                interactionsTempList.Add(myTarget.modes[i]);
             }
         }
-        
-        ((PNCCharacter)target).interactions = interactionsTempList.ToArray();
+
+        myTarget.modes = interactionsTempList.ToArray();
 
         List<InteractuableGlobalVariable> tempGlobalVarList = new List<InteractuableGlobalVariable>();
         for (int i = 0; i < settings.global_variables.Length; i++)
         {
             bool founded = false;
-            for (int j = 0; j < ((PNCCharacter)target).global_variables.Length; j++)
+            for (int j = 0; j < myTarget.global_variables.Length; j++)
             {
-                if ((settings.global_variables[i].ID == -1 && ((PNCCharacter)target).global_variables[j].name == settings.global_variables[i].name)|| 
-                    (settings.global_variables[i].ID != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode == -1 && ((PNCCharacter)target).global_variables[j].name == settings.global_variables[i].name) ||
-                    (settings.global_variables[i].ID != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode != -1 && ((PNCCharacter)target).global_variables[j].globalHashCode == settings.global_variables[i].ID))
+                if ((settings.global_variables[i].ID == -1 && myTarget.global_variables[j].name == settings.global_variables[i].name)|| 
+                    (settings.global_variables[i].ID != -1 && myTarget.global_variables[j].globalHashCode == -1 && myTarget.global_variables[j].name == settings.global_variables[i].name) ||
+                    (settings.global_variables[i].ID != -1 && myTarget.global_variables[j].globalHashCode != -1 && myTarget.global_variables[j].globalHashCode == settings.global_variables[i].ID))
                 {
-                    ((PNCCharacter)target).global_variables[j].name = settings.global_variables[i].name;
+                    myTarget.global_variables[j].name = settings.global_variables[i].name;
                     if (settings.global_variables[i].ID == -1)
                     { 
-                        settings.global_variables[i].ID = ((PNCCharacter)target).global_variables[j].GetHashCode();
-                        ((PNCCharacter)target).global_variables[j].globalHashCode = ((PNCCharacter)target).global_variables[j].GetHashCode();
+                        settings.global_variables[i].ID = myTarget.global_variables[j].GetHashCode();
+                        myTarget.global_variables[j].globalHashCode = myTarget.global_variables[j].GetHashCode();
                     }
-                    else if(((PNCCharacter)target).global_variables[j].globalHashCode == -1)
+                    else if(myTarget.global_variables[j].globalHashCode == -1)
                     {
-                        ((PNCCharacter)target).global_variables[j].globalHashCode = settings.global_variables[i].ID;
+                        myTarget.global_variables[j].globalHashCode = settings.global_variables[i].ID;
                     }
                     
-                    ((PNCCharacter)target).global_variables[j].properties = settings.global_variables[i];
+                    myTarget.global_variables[j].properties = settings.global_variables[i];
 
                     if (settings.global_variables[i].object_type.HasFlag((GlobalVariableProperty.object_types.characters)))
-                        tempGlobalVarList.Add(((PNCCharacter)target).global_variables[j]);
+                        tempGlobalVarList.Add(myTarget.global_variables[j]);
                     founded = true;
                 }
             }
@@ -114,16 +108,14 @@ public class PnCCharacterEditor : Editor
             }
         }
 
-        ((PNCCharacter)target).global_variables = tempGlobalVarList.ToArray();
+        myTarget.global_variables = tempGlobalVarList.ToArray();
 
         local_variables_serialized = serializedObject.FindProperty("local_variables");
         global_variables_serialized = serializedObject.FindProperty("global_variables");
 
-        if(showLocalVariable == null || showLocalVariable.Length != local_variables_serialized.arraySize)
-            showLocalVariable = new bool[local_variables_serialized.arraySize];
-        if (showGlobalVariable == null || showGlobalVariable.Length != global_variables_serialized.arraySize)
-            showGlobalVariable = new bool[global_variables_serialized.arraySize];
     }
+
+
 
     public override void OnInspectorGUI()
     {
@@ -133,77 +125,27 @@ public class PnCCharacterEditor : Editor
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        if (showAttemp.Count < settings.modes.Length)
-        {
-            int count = settings.modes.Length - showAttemp.Count;
-            for (int i = 0; i < count; i++)
-            {
-                showAttemp.Add(new List<bool>());
-            }
-        }
+        PNCCharacter myTarget = (PNCCharacter)target;
 
-        if (showInteracions.Count < settings.modes.Length)
-        {
-            int count = settings.modes.Length - showInteracions.Count;
-            for (int i = 0; i < count; i++)
-            {
-                showInteracions.Add(new List<List<bool>>());
-            }
-        }
+
         for (int i = 0; i < settings.modes.Length; i++)
         {
-            showmode[i] = EditorGUILayout.Foldout(showmode[i],settings.modes[i].ToString());
-            if (showmode[i])
+            myTarget.modes[i].expandedInInspector = EditorGUILayout.Foldout(myTarget.modes[i].expandedInInspector, settings.modes[i].ToString());
+            if (myTarget.modes[i].expandedInInspector)
             {
                 EditorGUILayout.BeginVertical("HelpBox");
-                SerializedProperty mode_attemps = modes.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists");
-                if (showAttemp[i] == null)
-                {
-                    showAttemp[i] = new List<bool>();
-                }
-                if (showAttemp[i].Count < mode_attemps.arraySize)
-                {
-                    int count = mode_attemps.arraySize - showAttemp[i].Count;
-                    for (int j = 0; j < count; j++)
-                    {
-                        showAttemp[i].Add(false);
-                    }
-                }
-                if (showInteracions[i] == null)
-                {
-                    showInteracions[i] = new List<List<bool>>();
-                }
-                if (showInteracions[i].Count < mode_attemps.arraySize)
-                {
-                    int count = mode_attemps.arraySize - showInteracions[i].Count;
-                    for (int j = 0; j < count; j++)
-                    {
-                        showInteracions[i].Add(new List<bool>());
-                    }
-                }
+                SerializedProperty mode_attemps = modes_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("attemps");
+
                 for (int j = 0; j < mode_attemps.arraySize; j++)
                 {
-                    SerializedProperty attemp_interactions = modes.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists").GetArrayElementAtIndex(j).FindPropertyRelative("interactions");
-
-                    if (showInteracions[i][j] == null)
-                    {
-                        showInteracions[i][j] = new List<bool>();
-                    }    
-                    if (showInteracions[i][j].Count < attemp_interactions.arraySize)
-                    {
-                        int count = mode_attemps.arraySize - showInteracions[i][j].Count;
-                        for (int k = 0; k < count; k++)
-                        {
-                            showInteracions[i][j].Add(false);
-                        }
-                    }
+                    SerializedProperty attemp_interactions = mode_attemps.GetArrayElementAtIndex(j).FindPropertyRelative("interactions");
 
                     GUIContent attemp_content = new GUIContent();
                     attemp_content.text = (j + 1) + "° attemp";
 
-                    showAttemp[i][j] = EditorGUILayout.Foldout(showAttemp[i][j], attemp_content);
+                    myTarget.modes[i].attemps[j].expandedInInspector = EditorGUILayout.Foldout(myTarget.modes[i].attemps[j].expandedInInspector, attemp_content);
 
-                    if (showAttemp[i][j])
+                    if (myTarget.modes[i].attemps[j].expandedInInspector)
                     {
                         EditorGUILayout.BeginVertical("GroupBox");
 
@@ -212,8 +154,8 @@ public class PnCCharacterEditor : Editor
                             GUIContent interaction_content = new GUIContent();
                             interaction_content.text = (k + 1) + "° action";
 
-                            showInteracions[i][j][k] = EditorGUILayout.Foldout(showInteracions[i][j][k], interaction_content);
-                            if (showInteracions[i][j][k])
+                            myTarget.modes[i].attemps[j].interactions[k].expandedInInspector = EditorGUILayout.Foldout(myTarget.modes[i].attemps[j].interactions[k].expandedInInspector, interaction_content);
+                            if (myTarget.modes[i].attemps[j].interactions[k].expandedInInspector)
                             {
                                 EditorGUILayout.BeginVertical("GroupBox");
 
@@ -225,14 +167,18 @@ public class PnCCharacterEditor : Editor
 
                         if (attemp_interactions.arraySize > 0 && GUILayout.Button("Delete last interaction"))
                         {
-                            List<Interaction> list_interactions = ((PNCCharacter)target).interactions[i].interactionsLists[j].interactions.ToList();
+                            List<Interaction> list_interactions = myTarget.modes[i].attemps[j].interactions.ToList();
                             list_interactions.RemoveAt(list_interactions.Count - 1);
-                            ((PNCCharacter)target).interactions[i].interactionsLists[j].interactions = list_interactions.ToArray();
+                            myTarget.modes[i].attemps[j].interactions = list_interactions.ToArray();
                         }
 
                         if (GUILayout.Button("Create new interaction"))
                         {
-                            ((PNCCharacter)target).interactions[i].interactionsLists[j].interactions = ((PNCCharacter)target).interactions[i].interactionsLists[j].interactions.Append(new Interaction()).ToArray();
+                            if (myTarget.modes[i].attemps[j].interactions == null)
+                            {
+                                myTarget.modes[i].attemps[j].interactions = new Interaction[0];
+                            }
+                            myTarget.modes[i].attemps[j].interactions = myTarget.modes[i].attemps[j].interactions.Append(new Interaction()).ToArray();
                         }
 
                         EditorGUILayout.EndVertical();
@@ -243,14 +189,14 @@ public class PnCCharacterEditor : Editor
 
                 if(mode_attemps.arraySize > 0 && GUILayout.Button("Delete last attemp"))
                 {
-                    List<InteractionList> list_interactions = ((PNCCharacter)target).interactions[i].interactionsLists.ToList();
+                    List<InteractionsAttemp> list_interactions = myTarget.modes[i].attemps.ToList();
                     list_interactions.RemoveAt(list_interactions.Count-1);
-                    ((PNCCharacter)target).interactions[i].interactionsLists = list_interactions.ToArray();
+                    myTarget.modes[i].attemps = list_interactions.ToArray();
                 }
 
                 if (GUILayout.Button("Create new attemp"))
                 {
-                    ((PNCCharacter)target).interactions[i].interactionsLists = ((PNCCharacter)target).interactions[i].interactionsLists.Append(new InteractionList()).ToArray();
+                    myTarget.modes[i].attemps = myTarget.modes[i].attemps.Append(new InteractionsAttemp()).ToArray();
                 }
                 EditorGUILayout.EndVertical();
             }
@@ -262,7 +208,7 @@ public class PnCCharacterEditor : Editor
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        ShowLocalVariables(ref ((PNCCharacter)target).local_variables, ref local_variables_serialized, ref showLocalVariable);
+        ShowLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
@@ -270,7 +216,7 @@ public class PnCCharacterEditor : Editor
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        ShowGlobalVariables(ref ((PNCCharacter)target).global_variables, ref global_variables_serialized, ref showGlobalVariable);
+        ShowGlobalVariables(ref myTarget.global_variables, ref global_variables_serialized);
 
         serializedObject.ApplyModifiedProperties();
 
@@ -282,16 +228,13 @@ public class PnCCharacterEditor : Editor
 
     }
 
-    public void ShowLocalVariables(ref InteractuableLocalVariable[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
+    public void ShowLocalVariables(ref InteractuableLocalVariable[] variables, ref SerializedProperty variables_serialized)
     {
-        if (show_variables.Length < variables.Length)
-            show_variables = new bool[variables.Length];
-
         for (int i = 0; i < variables.Length; i++)
         {
-            show_variables[i] = EditorGUILayout.Foldout(show_variables[i], variables[i].name);
+            variables[i].expandedInInspector = EditorGUILayout.Foldout(variables[i].expandedInInspector, variables[i].name);
 
-            if (show_variables[i])
+            if (variables[i].expandedInInspector)
             {
                 EditorGUILayout.BeginVertical("GroupBox");
 
@@ -371,7 +314,6 @@ public class PnCCharacterEditor : Editor
             //variables.arraySize++;
 
             variables = variables.Append<InteractuableLocalVariable>(newvar).ToArray();
-            show_variables = show_variables.Append(false).ToArray();
         }
 
         var group = variables.GroupBy(vari => vari.name, (vari) => new { Count = vari.name.Count() });
@@ -388,11 +330,8 @@ public class PnCCharacterEditor : Editor
 
     }
 
-    public void ShowGlobalVariables(ref InteractuableGlobalVariable[] variables, ref SerializedProperty variables_serialized, ref bool[] show_variables)
+    public void ShowGlobalVariables(ref InteractuableGlobalVariable[] variables, ref SerializedProperty variables_serialized)
     {
-        if (show_variables.Length < variables.Length)
-            show_variables = new bool[variables.Length];
-
         for (int i = 0; i < variables.Length; i++)
         {
             bool areType = true;
@@ -409,9 +348,9 @@ public class PnCCharacterEditor : Editor
             if (!areType)
                 continue;
 
-            show_variables[i] = EditorGUILayout.Foldout(show_variables[i], variables[i].name);
+            variables[i].expandedInInspector = EditorGUILayout.Foldout(variables[i].expandedInInspector, variables[i].name);
 
-            if (show_variables[i])
+            if (variables[i].expandedInInspector)
             {
                 EditorGUILayout.BeginVertical("GroupBox");
 

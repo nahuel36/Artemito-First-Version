@@ -8,15 +8,16 @@ public class Mode
 {
     public string name;
     public bool isCyclical = false;
-    public bool show = true;
-    public InteractionList[] interactionsLists;
+    public bool use = true;
+    public InteractionsAttemp[] attemps;
+    public bool expandedInInspector;
 }
 
 [System.Serializable]
-public class InteractionList
+public class InteractionsAttemp
 {
-    [HideInInspector]public string name;
     public Interaction[] interactions;
+    public bool expandedInInspector;
 }
 
 [System.Serializable]
@@ -31,6 +32,7 @@ public class Interaction
     
     public UnityEvent action;
     public Character character;
+    public bool expandedInInspector;
 }
 
 public interface Character
@@ -56,6 +58,7 @@ public class InteractuableLocalVariable
     }
     public types type;
     public int globalHashCode = -1;
+    public bool expandedInInspector;
 }
 
 [System.Serializable]
@@ -67,6 +70,7 @@ public class InteractuableGlobalVariable
     public string String = "";
     public int globalHashCode = -1;
     public GlobalVariableProperty properties;
+    public bool expandedInInspector;
 }
 
 
@@ -77,7 +81,7 @@ public class PNCCharacter : MonoBehaviour, Character
     CommandWalk cancelableWalk;
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
-    public Mode[] interactions = new Mode[0];
+    public Mode[] modes = new Mode[0];
     public InteractuableLocalVariable[] local_variables = new InteractuableLocalVariable[0];
     public InteractuableGlobalVariable[] global_variables = new InteractuableGlobalVariable[0];
 
