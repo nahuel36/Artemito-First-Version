@@ -9,13 +9,15 @@ using UnityEngine.UIElements;
 public class PnCCharacterEditor : Editor
 {
     Settings settings;
-    SerializedProperty interactions;
+    SerializedProperty modes;
     SerializedProperty local_variables_serialized;
     SerializedProperty global_variables_serialized;
-    static bool[] showLocalVariable;
-    static bool[] showGlobalVariable;
-    static bool[] showmode;
-    static Dictionary<string, bool> showAttemp = new Dictionary<string, bool>();
+    bool[] showLocalVariable;
+    bool[] showGlobalVariable;
+    bool[] showmode;
+    List<List<bool>> showAttemp = new List<List<bool>>();
+    List<List<List<bool>>> showInteracions = new List<List<List<bool>>>();
+        
 
     public void OnEnable()
     {
@@ -24,7 +26,7 @@ public class PnCCharacterEditor : Editor
         if(showmode == null || showmode.Length != settings.modes.Length)
             showmode = new bool[settings.modes.Length];
 
-        interactions = serializedObject.FindProperty("interactions");
+        modes = serializedObject.FindProperty("interactions");
 
         List<Mode> interactionsTempList = new List<Mode>();
         for (int i = 0; i < settings.modes.Length; i++)
@@ -131,42 +133,127 @@ public class PnCCharacterEditor : Editor
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
+        if (showAttemp.Count < settings.modes.Length)
+        {
+            int count = settings.modes.Length - showAttemp.Count;
+            for (int i = 0; i < count; i++)
+            {
+                showAttemp.Add(new List<bool>());
+            }
+        }
+
+        if (showInteracions.Count < settings.modes.Length)
+        {
+            int count = settings.modes.Length - showInteracions.Count;
+            for (int i = 0; i < count; i++)
+            {
+                showInteracions.Add(new List<List<bool>>());
+            }
+        }
         for (int i = 0; i < settings.modes.Length; i++)
         {
-            EditorGUILayout.BeginVertical("HelpBox");
             showmode[i] = EditorGUILayout.Foldout(showmode[i],settings.modes[i].ToString());
             if (showmode[i])
             {
-
-                for (int j = 0; j < interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists").arraySize; j++)
+                EditorGUILayout.BeginVertical("HelpBox");
+                SerializedProperty mode_attemps = modes.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists");
+                if (showAttemp[i] == null)
                 {
-                    EditorGUILayout.BeginVertical("GroupBox");
+                    showAttemp[i] = new List<bool>();
+                }
+                if (showAttemp[i].Count < mode_attemps.arraySize)
+                {
+                    int count = mode_attemps.arraySize - showAttemp[i].Count;
+                    for (int j = 0; j < count; j++)
+                    {
+                        showAttemp[i].Add(false);
+                    }
+                }
+                if (showInteracions[i] == null)
+                {
+                    showInteracions[i] = new List<List<bool>>();
+                }
+                if (showInteracions[i].Count < mode_attemps.arraySize)
+                {
+                    int count = mode_attemps.arraySize - showInteracions[i].Count;
+                    for (int j = 0; j < count; j++)
+                    {
+                        showInteracions[i].Add(new List<bool>());
+                    }
+                }
+                for (int j = 0; j < mode_attemps.arraySize; j++)
+                {
+                    SerializedProperty attemp_interactions = modes.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists").GetArrayElementAtIndex(j).FindPropertyRelative("interactions");
 
-                    GUIContent content = new GUIContent();
-                    content.text = (j + 1) + "° attemp";
-                   // if(EditorGUILayout.Foldout()
+                    if (showInteracions[i][j] == null)
+                    {
+                        showInteracions[i][j] = new List<bool>();
+                    }    
+                    if (showInteracions[i][j].Count < attemp_interactions.arraySize)
+                    {
+                        int count = mode_attemps.arraySize - showInteracions[i][j].Count;
+                        for (int k = 0; k < count; k++)
+                        {
+                            showInteracions[i][j].Add(false);
+                        }
+                    }
 
-                    EditorGUILayout.PropertyField(interactions.GetArrayElementAtIndex(i).FindPropertyRelative("interactionsLists").GetArrayElementAtIndex(j).FindPropertyRelative("interactions"), content);
+                    GUIContent attemp_content = new GUIContent();
+                    attemp_content.text = (j + 1) + "° attemp";
 
-                    EditorGUILayout.EndVertical();
+                    showAttemp[i][j] = EditorGUILayout.Foldout(showAttemp[i][j], attemp_content);
+
+                    if (showAttemp[i][j])
+                    {
+                        EditorGUILayout.BeginVertical("GroupBox");
+
+                        for (int k = 0; k < attemp_interactions.arraySize; k++)
+                        {
+                            GUIContent interaction_content = new GUIContent();
+                            interaction_content.text = (k + 1) + "° action";
+
+                            showInteracions[i][j][k] = EditorGUILayout.Foldout(showInteracions[i][j][k], interaction_content);
+                            if (showInteracions[i][j][k])
+                            {
+                                EditorGUILayout.BeginVertical("GroupBox");
+
+                                EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("type"));
+
+                                EditorGUILayout.EndVertical();
+                            }
+                        }
+
+                        if (attemp_interactions.arraySize > 0 && GUILayout.Button("Delete last interaction"))
+                        {
+                            List<Interaction> list_interactions = ((PNCCharacter)target).interactions[i].interactionsLists[j].interactions.ToList();
+                            list_interactions.RemoveAt(list_interactions.Count - 1);
+                            ((PNCCharacter)target).interactions[i].interactionsLists[j].interactions = list_interactions.ToArray();
+                        }
+
+                        if (GUILayout.Button("Create new interaction"))
+                        {
+                            ((PNCCharacter)target).interactions[i].interactionsLists[j].interactions = ((PNCCharacter)target).interactions[i].interactionsLists[j].interactions.Append(new Interaction()).ToArray();
+                        }
+
+                        EditorGUILayout.EndVertical();
+                    }
+
                 }
 
 
-                if (((PNCCharacter)target).interactions.Length > 0 && ((PNCCharacter)target).interactions[i].interactionsLists != null &&  ((PNCCharacter)target).interactions[i].interactionsLists.Length > 0)
-                    if(showmode[i])
-                       if(GUILayout.Button("Delete last attemp"))
-                        {
-                            List<InteractionList> list_interactions = ((PNCCharacter)target).interactions[i].interactionsLists.ToList();
-                            list_interactions.RemoveAt(list_interactions.Count-1);
-                            ((PNCCharacter)target).interactions[i].interactionsLists = list_interactions.ToArray();
-                        }
+                if(mode_attemps.arraySize > 0 && GUILayout.Button("Delete last attemp"))
+                {
+                    List<InteractionList> list_interactions = ((PNCCharacter)target).interactions[i].interactionsLists.ToList();
+                    list_interactions.RemoveAt(list_interactions.Count-1);
+                    ((PNCCharacter)target).interactions[i].interactionsLists = list_interactions.ToArray();
+                }
 
-                if (showmode[i] && GUILayout.Button("Create new attemp"))
+                if (GUILayout.Button("Create new attemp"))
                 {
                     ((PNCCharacter)target).interactions[i].interactionsLists = ((PNCCharacter)target).interactions[i].interactionsLists.Append(new InteractionList()).ToArray();
                 }
+                EditorGUILayout.EndVertical();
             }
-            EditorGUILayout.EndVertical();
         }
 
         GUILayout.BeginHorizontal();
