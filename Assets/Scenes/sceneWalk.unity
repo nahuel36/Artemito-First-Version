@@ -454,21 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6e2360705e9e947aadcc3f831a1ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactions:
-  - name: 
-    isCyclical: 0
-    show: 0
-    interactionsLists:
-    - name: 
-      interactions:
-      - name: int 1
-        action:
-          m_PersistentCalls:
-            m_Calls: []
-      - name: int 2
-        action:
-          m_PersistentCalls:
-            m_Calls: []
+  modes: []
   local_variables: []
   global_variables: []
 --- !u!4 &1056786447
@@ -504,6 +490,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: modes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: variables.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -511,6 +502,36 @@ PrefabInstance:
         type: 3}
       propertyPath: interactions.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].use
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].use
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].use
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].name
+      value: Use
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].name
+      value: Look
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].name
+      value: Talk
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -691,6 +712,31 @@ PrefabInstance:
         type: 3}
       propertyPath: global_variables.Array.data[4].integer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].attemps.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].expandedInInspector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].expandedInInspector
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -914,6 +960,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: local_variables.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: interactions.Array.data[0].interactions.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1064,6 +1115,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[1].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: interactions.Array.data[0].interactionsLists.Array.data[0].name
       value: attemp 1
       objectReference: {fileID: 0}
@@ -1081,6 +1142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: interactions.Array.data[2].interactionsLists.Array.data[1].name
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -1110,7 +1176,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[2].interactionsLists.Array.data[0].interactions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -1141,6 +1207,16 @@ PrefabInstance:
         type: 3}
       propertyPath: interactions.Array.data[0].interactions2.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].expandedInInspector
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
