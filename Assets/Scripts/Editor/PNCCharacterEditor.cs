@@ -161,6 +161,19 @@ public class PnCCharacterEditor : Editor
 
                                 EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("type"));
 
+
+                                if (myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.character)
+                                { 
+                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("character"));
+                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("characterAction"));
+                                    if (myTarget.modes[i].attemps[j].interactions[k].characterAction == Interaction.CharacterAction.say)
+                                        EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("WhatToSay"));
+                                    if (myTarget.modes[i].attemps[j].interactions[k].characterAction == Interaction.CharacterAction.walk)
+                                        EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("WhereToWalk"));
+                                }
+                                else if(myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.custom)
+                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("action"));
+
                                 EditorGUILayout.EndVertical();
                             }
                         }

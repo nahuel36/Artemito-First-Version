@@ -21,24 +21,29 @@ public class InteractionsAttemp
 }
 
 [System.Serializable]
-public class Interaction
+public class Interaction 
 {
     public enum InteractionType { 
         character,
+        variables,
         custom
+    }
+
+    public enum CharacterAction { 
+        say,
+        walk
     }
 
     public InteractionType type;
     
     public UnityEvent action;
-    public Character character;
+    public PNCCharacter character;
+    public string WhatToSay;
+    public Transform WhereToWalk;
+    public CharacterAction characterAction;
     public bool expandedInInspector;
 }
 
-public interface Character
-{ 
-
-}
 
 [System.Serializable]
 public class InteractuableLocalVariable
@@ -74,7 +79,7 @@ public class InteractuableGlobalVariable
 }
 
 
-public class PNCCharacter : MonoBehaviour, Character
+public class PNCCharacter : MonoBehaviour
 {
     IPathFinder pathFinder;
     IMessageTalker messageTalker;
