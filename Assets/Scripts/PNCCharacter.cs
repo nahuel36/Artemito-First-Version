@@ -28,20 +28,35 @@ public class Interaction
         variables,
         custom
     }
+    public InteractionType type;
 
-    public enum CharacterAction { 
+    public bool expandedInInspector;
+
+    //CHARACTER
+    public enum CharacterAction
+    {
         say,
         walk
     }
-
-    public InteractionType type;
-    
-    public UnityEvent action;
     public PNCCharacter character;
+    public CharacterAction characterAction;
     public string WhatToSay;
     public Transform WhereToWalk;
-    public CharacterAction characterAction;
-    public bool expandedInInspector;
+    //VARIABLES
+    public enum VariablesAction
+    {
+        setLocalVariable,
+        getLocalVariable,
+        setGlobalVariable,
+        getGlobalVariable
+    }
+    public int globalVariableSelected;
+    public int localVariableSelected;
+    public VariablesAction variablesAction;
+    public PNCCharacter variableObject;
+    //CUSTOM
+    public UnityEvent action;
+    
 }
 
 

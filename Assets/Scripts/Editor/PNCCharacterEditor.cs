@@ -163,15 +163,44 @@ public class PnCCharacterEditor : Editor
 
 
                                 if (myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.character)
-                                { 
+                                {
                                     EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("character"));
                                     EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("characterAction"));
                                     if (myTarget.modes[i].attemps[j].interactions[k].characterAction == Interaction.CharacterAction.say)
                                         EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("WhatToSay"));
-                                    if (myTarget.modes[i].attemps[j].interactions[k].characterAction == Interaction.CharacterAction.walk)
+                                    else if (myTarget.modes[i].attemps[j].interactions[k].characterAction == Interaction.CharacterAction.walk)
                                         EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("WhereToWalk"));
                                 }
-                                else if(myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.custom)
+                                else if (myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.variables)
+                                {
+                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("variablesAction"));
+                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("variableObject"));
+                                    if (myTarget.modes[i].attemps[j].interactions[k].variablesAction == Interaction.VariablesAction.getGlobalVariable ||
+                                        myTarget.modes[i].attemps[j].interactions[k].variablesAction == Interaction.VariablesAction.setGlobalVariable)
+                                    {
+                                        InteractuableGlobalVariable[] variables = myTarget.modes[i].attemps[j].interactions[k].variableObject.global_variables;
+                                        string[] content = new string[variables.Length];
+
+                                        for (int z= 0; z < variables.Length; z++)
+                                        {
+                                            content[z] = myTarget.modes[i].attemps[j].interactions[k].variableObject.global_variables[z].name;
+                                        }
+                                        myTarget.modes[i].attemps[j].interactions[k].globalVariableSelected = EditorGUILayout.Popup("Variable", myTarget.modes[i].attemps[j].interactions[k].globalVariableSelected, content);
+                                    }
+                                    else if (myTarget.modes[i].attemps[j].interactions[k].variablesAction == Interaction.VariablesAction.getLocalVariable ||
+                                        myTarget.modes[i].attemps[j].interactions[k].variablesAction == Interaction.VariablesAction.setLocalVariable)
+                                    {
+                                        InteractuableLocalVariable[] variables = myTarget.modes[i].attemps[j].interactions[k].variableObject.local_variables;
+                                        string[] content = new string[variables.Length];
+
+                                        for (int z = 0; z < variables.Length; z++)
+                                        {
+                                            content[z] = myTarget.modes[i].attemps[j].interactions[k].variableObject.local_variables[z].name;
+                                        }
+                                        myTarget.modes[i].attemps[j].interactions[k].localVariableSelected = EditorGUILayout.Popup("Variable", myTarget.modes[i].attemps[j].interactions[k].localVariableSelected, content);
+                                    }
+                                }
+                                else if (myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.custom)
                                     EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("action"));
 
                                 EditorGUILayout.EndVertical();
