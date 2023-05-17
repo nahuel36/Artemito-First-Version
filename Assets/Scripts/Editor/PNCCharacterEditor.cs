@@ -58,7 +58,7 @@ public class PnCCharacterEditor : Editor
 
         settings = Resources.Load<Settings>("Settings/Settings");
 
-        modesList = new ReorderableList(serializedObject, serializedObject.FindProperty("modes"), true, true, true, true)
+        modesList = new ReorderableList(serializedObject, serializedObject.FindProperty("modes"), true, true, false, false)
         {
             drawHeaderCallback = (rect) =>
             {
