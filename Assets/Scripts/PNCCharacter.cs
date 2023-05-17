@@ -9,14 +9,14 @@ public class Mode
     public string name;
     public bool isCyclical = false;
     public bool use = true;
-    public InteractionsAttemp[] attemps;
+    public List<InteractionsAttemp> attemps = new List<InteractionsAttemp>();
     public bool expandedInInspector;
 }
 
 [System.Serializable]
 public class InteractionsAttemp
 {
-    public Interaction[] interactions;
+    public List<Interaction> interactions = new List<Interaction>();
     public bool expandedInInspector;
 }
 
@@ -101,7 +101,7 @@ public class PNCCharacter : MonoBehaviour
     CommandWalk cancelableWalk;
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
-    public Mode[] modes = new Mode[0];
+    public List<Mode> modes = new List<Mode>();
     public InteractuableLocalVariable[] local_variables = new InteractuableLocalVariable[0];
     public InteractuableGlobalVariable[] global_variables = new InteractuableGlobalVariable[0];
 

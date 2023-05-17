@@ -584,7 +584,12 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -594,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -989,11 +994,16 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[1].expandedInInspector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].expandedInInspector
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -1028,6 +1038,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].interactions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].type
       value: 1
       objectReference: {fileID: 0}
@@ -1035,6 +1050,16 @@ PrefabInstance:
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[1].type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].interactions.Array.data[0].type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -1046,6 +1071,16 @@ PrefabInstance:
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].character
       value: 
       objectReference: {fileID: 537382614}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[1].WhatToSay
+      value: aaa
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].WhatToSay
+      value: aaa
+      objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[0].interactionsLists.Array.data[0].interactions.Array.size
@@ -1124,17 +1159,22 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[1].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].expandedInInspector
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].interactions.Array.data[0].expandedInInspector
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -1338,6 +1378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: interactions.Array.data[0].interactions.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: talk
       objectReference: {fileID: 0}
@@ -1360,6 +1405,66 @@ PrefabInstance:
         type: 3}
       propertyPath: interactions.Array.data[3].interactions.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: talk2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].action.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -1601,7 +1706,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6e2360705e9e947aadcc3f831a1ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modes: []
+  modes:
+  - name: 
+    isCyclical: 0
+    use: 0
+    attemps: []
+    expandedInInspector: 0
+  - name: 
+    isCyclical: 0
+    use: 0
+    attemps:
+    - interactions:
+      - type: 0
+        expandedInInspector: 0
+        character: {fileID: 0}
+        characterAction: 0
+        WhatToSay: 
+        WhereToWalk: {fileID: 0}
+        globalVariableSelected: 0
+        localVariableSelected: 0
+        variablesAction: 0
+        variableObject: {fileID: 0}
+        action:
+          m_PersistentCalls:
+            m_Calls: []
+      - type: 0
+        expandedInInspector: 0
+        character: {fileID: 0}
+        characterAction: 0
+        WhatToSay: 
+        WhereToWalk: {fileID: 0}
+        globalVariableSelected: 0
+        localVariableSelected: 0
+        variablesAction: 0
+        variableObject: {fileID: 0}
+        action:
+          m_PersistentCalls:
+            m_Calls: []
+      expandedInInspector: 0
+    - interactions: []
+      expandedInInspector: 0
+    expandedInInspector: 0
+  - name: 
+    isCyclical: 0
+    use: 0
+    attemps: []
+    expandedInInspector: 0
   local_variables: []
   global_variables: []
 --- !u!4 &1056786447
@@ -1867,6 +2017,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: modes.Array.data[2].attemps.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1878,12 +2033,12 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[1].expandedInInspector
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[2].expandedInInspector
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -2273,7 +2428,7 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[2].attemps.Array.data[0].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -2302,13 +2457,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[1].interactions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].interactions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].attemps.Array.data[0].interactions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[1].interactions.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].interactions.Array.data[2].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].attemps.Array.data[0].interactions.Array.data[2].type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -2319,7 +2509,17 @@ PrefabInstance:
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].character
       value: 
-      objectReference: {fileID: 1747983476}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[1].character
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].character
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: interactions.Array.data[0].interactionsLists.Array.data[0].interactions.Array.size
@@ -2369,7 +2569,17 @@ PrefabInstance:
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].variableObject
       value: 
-      objectReference: {fileID: 1747983476}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[1].variableObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].variableObject
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].characterAction
@@ -2408,7 +2618,47 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].expandedInInspector
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[1].interactions.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[1].interactions.Array.data[1].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].interactions.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].interactions.Array.data[1].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[1].attemps.Array.data[0].interactions.Array.data[2].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].attemps.Array.data[0].interactions.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].attemps.Array.data[0].interactions.Array.data[1].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[2].attemps.Array.data[0].interactions.Array.data[2].expandedInInspector
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -2458,7 +2708,17 @@ PrefabInstance:
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[0].globalVariableSelected
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[1].globalVariableSelected
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: modes.Array.data[0].attemps.Array.data[0].interactions.Array.data[2].globalVariableSelected
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}

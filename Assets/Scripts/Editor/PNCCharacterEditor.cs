@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using UnityEngine.UIElements;
-
+using UnityEditorInternal;
 [CustomEditor(typeof(PNCCharacter))]
 public class PnCCharacterEditor : Editor
 {
@@ -13,20 +13,222 @@ public class PnCCharacterEditor : Editor
     SerializedProperty local_variables_serialized;
     SerializedProperty global_variables_serialized;
 
-        
+    ReorderableList modesList;
+    Dictionary<string,ReorderableList> attempsListDict = new Dictionary<string, ReorderableList>();
+    Dictionary<string, ReorderableList> interactionsListDict = new Dictionary<string, ReorderableList>();
+
+
+    public float GetInteractionHeight(SerializedProperty interactionSerialized, Interaction interactionNoSerialized)
+    {
+    
+        if (interactionSerialized.FindPropertyRelative("expandedInInspector").boolValue)
+        {
+            if (interactionNoSerialized.type == Interaction.InteractionType.character)
+                return EditorGUIUtility.singleLineHeight * 5;
+            if (interactionNoSerialized.type == Interaction.InteractionType.variables)
+                return EditorGUIUtility.singleLineHeight * 8;
+            if (interactionNoSerialized.type == Interaction.InteractionType.custom)
+                return EditorGUIUtility.singleLineHeight * (8 + interactionNoSerialized.action.GetPersistentEventCount() * 3);
+        }
+        return EditorGUIUtility.singleLineHeight;
+
+    }
+
+    public float GetAttempHeight(SerializedProperty attempSerialized, InteractionsAttemp attempNoSerialized)
+    {
+        if (attempSerialized.FindPropertyRelative("expandedInInspector").boolValue)
+        {
+            float height = 5 * EditorGUIUtility.singleLineHeight;
+            for (int i = 0; i < attempSerialized.FindPropertyRelative("interactions").arraySize; i++)
+            {
+                height += GetInteractionHeight(attempSerialized.FindPropertyRelative("interactions").GetArrayElementAtIndex(i), attempNoSerialized.interactions[i]);
+            }
+            return height;
+        }
+
+        return EditorGUIUtility.singleLineHeight;
+
+    }
 
     public void OnEnable()
     {
         PNCCharacter myTarget = (PNCCharacter)target;
 
         modes_serialized = serializedObject.FindProperty("modes");
+
         settings = Resources.Load<Settings>("Settings/Settings");
+
+        modesList = new ReorderableList(serializedObject, serializedObject.FindProperty("modes"), true, true, true, true)
+        {
+            drawHeaderCallback = (rect) =>
+            {
+                EditorGUI.LabelField(rect, "modes");
+            },
+            elementHeightCallback = (int indexM) =>
+            {
+                if (serializedObject.FindProperty("modes").GetArrayElementAtIndex(indexM).FindPropertyRelative("expandedInInspector").boolValue)
+                {
+                    float heightM = 5 * EditorGUIUtility.singleLineHeight;
+                    var attemps = serializedObject.FindProperty("modes").GetArrayElementAtIndex(indexM).FindPropertyRelative("attemps");
+                    for (int i = 0; i < attemps.arraySize; i++)
+                    {
+                        heightM += GetAttempHeight(attemps.GetArrayElementAtIndex(i), myTarget.modes[indexM].attemps[i]);
+                        
+                    }
+                    return heightM;
+                }
+                return EditorGUIUtility.singleLineHeight;
+            },
+            drawElementCallback = (rect, indexM, active, focus) =>
+            {
+                var mode = modes_serialized.GetArrayElementAtIndex(indexM);
+                var attemps = mode.FindPropertyRelative("attemps");
+                var modeName = settings.modes[indexM];
+                var modeRect = new Rect(rect);
+                var modeExpanded = mode.FindPropertyRelative("expandedInInspector");
+
+                modeExpanded.boolValue = EditorGUI.Foldout(new Rect(modeRect.x, modeRect.y, modeRect.width, EditorGUIUtility.singleLineHeight), modeExpanded.boolValue, modeName);
+
+                modeRect.y += EditorGUIUtility.singleLineHeight;
+
+                if (modeExpanded.boolValue)
+                { 
+                    var attempKey = mode.propertyPath;
+
+                    if (!attempsListDict.ContainsKey(attempKey))
+                    {
+                        var attempsList = new ReorderableList(attemps.serializedObject, attemps, true, true, true, true)
+                        {
+                            drawHeaderCallback = (rectA) =>
+                            {
+                                EditorGUI.LabelField(rectA, "attemps");
+                            },
+                            elementHeightCallback = (indexA) =>
+                            {
+                                return GetAttempHeight(serializedObject.FindProperty("modes").GetArrayElementAtIndex(indexM).FindPropertyRelative("attemps").GetArrayElementAtIndex(indexA), myTarget.modes[indexM].attemps[indexA]);
+                            },
+                            drawElementCallback = (rectA, indexA, activeA, focusA) =>
+                            {
+                                var attemp = attempsListDict[attempKey].serializedProperty.GetArrayElementAtIndex(indexA);
+
+                                var interactionKey = attemp.propertyPath;
+                                var interactions = attemp.FindPropertyRelative("interactions");
+                                var attempRect = new Rect(rectA);
+                                var attempExpanded = attemp.FindPropertyRelative("expandedInInspector");
+
+                                attempExpanded.boolValue = EditorGUI.Foldout(new Rect(attempRect.x, attempRect.y, attempRect.width, EditorGUIUtility.singleLineHeight),attempExpanded.boolValue, (indexA+1).ToString() + "° attemp");
+                                attempRect.y += EditorGUIUtility.singleLineHeight;
+
+                                if (attempExpanded.boolValue)
+                                { 
+                                    if (!interactionsListDict.ContainsKey(interactionKey))
+                                    {
+                                        var interactionList = new ReorderableList(interactions.serializedObject, interactions, true, true, true, true)
+                                        {
+                                            drawHeaderCallback = (rectI) =>
+                                            {
+                                                EditorGUI.LabelField(rectI, "interactions");
+                                            },
+                                            elementHeightCallback = (indexI) =>
+                                            {
+                                                var interactionSerializated = interactionsListDict[interactionKey].serializedProperty.GetArrayElementAtIndex(indexI);
+                                                var interactionNoSerializated = myTarget.modes[indexM].attemps[indexA].interactions[indexI];
+
+                                                return GetInteractionHeight(interactionSerializated, interactionNoSerializated);
+                                            }
+                                            ,
+                                            drawElementCallback = (rectI, indexI, activeI, focusI) =>
+                                            {
+                                                var interactionSerializated = interactionsListDict[interactionKey].serializedProperty.GetArrayElementAtIndex(indexI);
+                                                var interactionNoSerializated = myTarget.modes[indexM].attemps[indexA].interactions[indexI];
+                                                var interactRect = new Rect(rectI);
+                                                var interactExpanded = interactionSerializated.FindPropertyRelative("expandedInInspector");
+                                                interactRect.height = EditorGUIUtility.singleLineHeight;
+
+                                                interactExpanded.boolValue = EditorGUI.Foldout(interactRect,interactExpanded.boolValue, (indexI + 1).ToString() + "° interaction");
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+
+                                                if (interactExpanded.boolValue)
+                                                {        
+                                                    EditorGUI.PropertyField(interactRect, interactionSerializated.FindPropertyRelative("type"));
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                    if (interactionNoSerializated.type == Interaction.InteractionType.character)
+                                                        {
+                                                        EditorGUI.PropertyField(interactRect,interactionSerializated.FindPropertyRelative("character"));
+                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                        EditorGUI.PropertyField(interactRect,interactionSerializated.FindPropertyRelative("characterAction"));
+                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                        if (interactionNoSerializated.characterAction == Interaction.CharacterAction.say)
+                                                            EditorGUI.PropertyField(interactRect, interactionSerializated.FindPropertyRelative("WhatToSay"));
+                                                        else if (interactionNoSerializated.characterAction == Interaction.CharacterAction.walk)
+                                                            EditorGUI.PropertyField(interactRect, interactionSerializated.FindPropertyRelative("WhereToWalk"));
+                                                        }
+                                                    else if (interactionNoSerializated.type == Interaction.InteractionType.variables)
+                                                        {
+                                                        EditorGUI.PropertyField(interactRect, interactionSerializated.FindPropertyRelative("variablesAction"));
+                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                        EditorGUI.PropertyField(interactRect, interactionSerializated.FindPropertyRelative("variableObject"));
+                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                        if (interactionNoSerializated.variablesAction == Interaction.VariablesAction.getGlobalVariable ||
+                                                            interactionNoSerializated.variablesAction == Interaction.VariablesAction.setGlobalVariable)
+                                                        {
+                                                            if (interactionNoSerializated.variableObject)
+                                                            {
+                                                                InteractuableGlobalVariable[] variables = interactionNoSerializated.variableObject.global_variables;
+                                                                string[] content = new string[variables.Length];
+
+                                                                for (int z = 0; z < variables.Length; z++)
+                                                                {
+                                                                    content[z] = interactionNoSerializated.variableObject.global_variables[z].name;
+                                                                }
+                                                                interactionNoSerializated.globalVariableSelected = EditorGUI.Popup(interactRect, "Variable", interactionNoSerializated.globalVariableSelected, content);
+                                                            }
+                                                        }
+                                                            else if (interactionNoSerializated.variablesAction == Interaction.VariablesAction.getLocalVariable ||
+                                                                interactionNoSerializated.variablesAction == Interaction.VariablesAction.setLocalVariable)
+                                                            {
+                                                                if (interactionNoSerializated.variableObject)
+                                                                {
+                                                                    InteractuableLocalVariable[] variables = interactionNoSerializated.variableObject.local_variables;
+                                                                    string[] content = new string[variables.Length];
+
+                                                                    for (int z = 0; z < variables.Length; z++)
+                                                                    {
+                                                                        content[z] = interactionNoSerializated.variableObject.local_variables[z].name;
+                                                                    }
+                                                                    interactionNoSerializated.localVariableSelected = EditorGUI.Popup(interactRect,"Variable", interactionNoSerializated.localVariableSelected, content);
+                                                                }
+                                                            }
+                                                        }
+                                                        else if (interactionNoSerializated.type == Interaction.InteractionType.custom)
+                                                            EditorGUI.PropertyField(interactRect, interactionSerializated.FindPropertyRelative("action"));
+
+                                                }
+
+                                            }
+                                        };
+                                        interactionsListDict.Add(interactionKey, interactionList);
+                                    }
+                                    interactionsListDict[interactionKey].DoList(attempRect);
+                                }
+                            }
+                        };
+
+                        attempsListDict.Add(attempKey, attempsList);
+                    }
+                    attempsListDict[attempKey].DoList(modeRect);
+                }
+            }
+        };
+
+           
+
 
         List<Mode> interactionsTempList = new List<Mode>();
         for (int i = 0; i < settings.modes.Length; i++)
         {
             bool founded = false;
-            for (int j = 0; j < myTarget.modes.Length; j++)
+            for (int j = 0; j < myTarget.modes.Count; j++)
             {
                 if (myTarget.modes[j].name == settings.modes[i])
                 { 
@@ -38,12 +240,12 @@ public class PnCCharacterEditor : Editor
             {
                 Mode tempMode = new Mode();
                 tempMode.name = settings.modes[i];
-                tempMode.attemps = new InteractionsAttemp[0];
+                tempMode.attemps = new List<InteractionsAttemp>();
                 interactionsTempList.Add(tempMode);
             }
         }
         
-        for (int i = 0; i < myTarget.modes.Length; i++)
+        for (int i = 0; i < myTarget.modes.Count; i++)
         {
             bool contains = false;            
             for (int j = 0; j < interactionsTempList.Count; j++)
@@ -59,7 +261,7 @@ public class PnCCharacterEditor : Editor
             }
         }
 
-        myTarget.modes = interactionsTempList.ToArray();
+        myTarget.modes = interactionsTempList;
 
         List<InteractuableGlobalVariable> tempGlobalVarList = new List<InteractuableGlobalVariable>();
         for (int i = 0; i < settings.global_variables.Length; i++)
@@ -127,122 +329,8 @@ public class PnCCharacterEditor : Editor
 
         PNCCharacter myTarget = (PNCCharacter)target;
 
+        modesList.DoLayoutList();
 
-        for (int i = 0; i < settings.modes.Length; i++)
-        {
-            myTarget.modes[i].expandedInInspector = EditorGUILayout.Foldout(myTarget.modes[i].expandedInInspector, settings.modes[i].ToString());
-            if (myTarget.modes[i].expandedInInspector)
-            {
-                EditorGUILayout.BeginVertical("HelpBox");
-                SerializedProperty mode_attemps = modes_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("attemps");
-
-                for (int j = 0; j < mode_attemps.arraySize; j++)
-                {
-                    SerializedProperty attemp_interactions = mode_attemps.GetArrayElementAtIndex(j).FindPropertyRelative("interactions");
-
-                    GUIContent attemp_content = new GUIContent();
-                    attemp_content.text = (j + 1) + "° attemp";
-
-                    myTarget.modes[i].attemps[j].expandedInInspector = EditorGUILayout.Foldout(myTarget.modes[i].attemps[j].expandedInInspector, attemp_content);
-
-                    if (myTarget.modes[i].attemps[j].expandedInInspector)
-                    {
-                        EditorGUILayout.BeginVertical("GroupBox");
-
-                        for (int k = 0; k < attemp_interactions.arraySize; k++)
-                        {
-                            GUIContent interaction_content = new GUIContent();
-                            interaction_content.text = (k + 1) + "° action";
-
-                            myTarget.modes[i].attemps[j].interactions[k].expandedInInspector = EditorGUILayout.Foldout(myTarget.modes[i].attemps[j].interactions[k].expandedInInspector, interaction_content);
-                            if (myTarget.modes[i].attemps[j].interactions[k].expandedInInspector)
-                            {
-                                EditorGUILayout.BeginVertical("GroupBox");
-
-                                EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("type"));
-
-
-                                if (myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.character)
-                                {
-                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("character"));
-                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("characterAction"));
-                                    if (myTarget.modes[i].attemps[j].interactions[k].characterAction == Interaction.CharacterAction.say)
-                                        EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("WhatToSay"));
-                                    else if (myTarget.modes[i].attemps[j].interactions[k].characterAction == Interaction.CharacterAction.walk)
-                                        EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("WhereToWalk"));
-                                }
-                                else if (myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.variables)
-                                {
-                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("variablesAction"));
-                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("variableObject"));
-                                    if (myTarget.modes[i].attemps[j].interactions[k].variablesAction == Interaction.VariablesAction.getGlobalVariable ||
-                                        myTarget.modes[i].attemps[j].interactions[k].variablesAction == Interaction.VariablesAction.setGlobalVariable)
-                                    {
-                                        InteractuableGlobalVariable[] variables = myTarget.modes[i].attemps[j].interactions[k].variableObject.global_variables;
-                                        string[] content = new string[variables.Length];
-
-                                        for (int z= 0; z < variables.Length; z++)
-                                        {
-                                            content[z] = myTarget.modes[i].attemps[j].interactions[k].variableObject.global_variables[z].name;
-                                        }
-                                        myTarget.modes[i].attemps[j].interactions[k].globalVariableSelected = EditorGUILayout.Popup("Variable", myTarget.modes[i].attemps[j].interactions[k].globalVariableSelected, content);
-                                    }
-                                    else if (myTarget.modes[i].attemps[j].interactions[k].variablesAction == Interaction.VariablesAction.getLocalVariable ||
-                                        myTarget.modes[i].attemps[j].interactions[k].variablesAction == Interaction.VariablesAction.setLocalVariable)
-                                    {
-                                        InteractuableLocalVariable[] variables = myTarget.modes[i].attemps[j].interactions[k].variableObject.local_variables;
-                                        string[] content = new string[variables.Length];
-
-                                        for (int z = 0; z < variables.Length; z++)
-                                        {
-                                            content[z] = myTarget.modes[i].attemps[j].interactions[k].variableObject.local_variables[z].name;
-                                        }
-                                        myTarget.modes[i].attemps[j].interactions[k].localVariableSelected = EditorGUILayout.Popup("Variable", myTarget.modes[i].attemps[j].interactions[k].localVariableSelected, content);
-                                    }
-                                }
-                                else if (myTarget.modes[i].attemps[j].interactions[k].type == Interaction.InteractionType.custom)
-                                    EditorGUILayout.PropertyField(attemp_interactions.GetArrayElementAtIndex(k).FindPropertyRelative("action"));
-
-                                EditorGUILayout.EndVertical();
-                            }
-                        }
-
-                        if (attemp_interactions.arraySize > 0 && GUILayout.Button("Delete last interaction"))
-                        {
-                            List<Interaction> list_interactions = myTarget.modes[i].attemps[j].interactions.ToList();
-                            list_interactions.RemoveAt(list_interactions.Count - 1);
-                            myTarget.modes[i].attemps[j].interactions = list_interactions.ToArray();
-                        }
-
-                        if (GUILayout.Button("Create new interaction"))
-                        {
-                            if (myTarget.modes[i].attemps[j].interactions == null)
-                            {
-                                myTarget.modes[i].attemps[j].interactions = new Interaction[0];
-                            }
-                            myTarget.modes[i].attemps[j].interactions = myTarget.modes[i].attemps[j].interactions.Append(new Interaction()).ToArray();
-                        }
-
-                        EditorGUILayout.EndVertical();
-                    }
-
-                }
-
-
-                if(mode_attemps.arraySize > 0 && GUILayout.Button("Delete last attemp"))
-                {
-                    List<InteractionsAttemp> list_interactions = myTarget.modes[i].attemps.ToList();
-                    list_interactions.RemoveAt(list_interactions.Count-1);
-                    myTarget.modes[i].attemps = list_interactions.ToArray();
-                }
-
-                if (GUILayout.Button("Create new attemp"))
-                {
-                    myTarget.modes[i].attemps = myTarget.modes[i].attemps.Append(new InteractionsAttemp()).ToArray();
-                }
-                EditorGUILayout.EndVertical();
-            }
-        }
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
