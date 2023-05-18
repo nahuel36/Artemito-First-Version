@@ -14,32 +14,32 @@ public class SettingsEditor : Editor
         public GlobalVariableProperty.variable_types variable_type;
     }
 
-    ReorderableList modesList;
+    ReorderableList verbsList;
     ReorderableList global_variables_list;
 
  
 
     private void OnEnable()
     {
-        modesList = new ReorderableList(serializedObject, serializedObject.FindProperty("modes"), true, true, true, true);
-        modesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+        verbsList = new ReorderableList(serializedObject, serializedObject.FindProperty("verbs"), true, true, true, true);
+        verbsList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
         {
-            EditorGUI.PropertyField(rect, modesList.serializedProperty.GetArrayElementAtIndex(index), GUIContent.none);
+            EditorGUI.PropertyField(rect, verbsList.serializedProperty.GetArrayElementAtIndex(index), GUIContent.none);
         };
-        modesList.drawHeaderCallback = (Rect rect) =>
+        verbsList.drawHeaderCallback = (Rect rect) =>
         {
-            EditorGUI.LabelField(rect, "Modes");
+            EditorGUI.LabelField(rect, "Verbs");
         };
-        modesList.onAddCallback = (ReorderableList list) =>
+        verbsList.onAddCallback = (ReorderableList list) =>
         {
             var index = list.serializedProperty.arraySize;
             list.serializedProperty.arraySize++;
             list.index = index;
             var element = list.serializedProperty.GetArrayElementAtIndex(index);
-            element.stringValue = "New Mode " + index;
+            element.stringValue = "New Verb " + index;
         };
         
-        modesList.onCanRemoveCallback = (ReorderableList list) =>
+        verbsList.onCanRemoveCallback = (ReorderableList list) =>
         {
             return list.count > 1;
         };
@@ -90,7 +90,7 @@ public class SettingsEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        modesList.DoLayoutList();
+        verbsList.DoLayoutList();
         global_variables_list.DoLayoutList();
 
         Dictionary<string, int> tempDict = new Dictionary<string, int>();

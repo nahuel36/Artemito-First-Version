@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class Mode
+public class Verb
 {
     public string name;
     public bool isCyclical = false;
@@ -101,7 +101,7 @@ public class PNCCharacter : MonoBehaviour
     CommandWalk cancelableWalk;
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
-    public List<Mode> modes = new List<Mode>();
+    public List<Verb> verbs = new List<Verb>();
     public InteractuableLocalVariable[] local_variables = new InteractuableLocalVariable[0];
     public InteractuableGlobalVariable[] global_variables = new InteractuableGlobalVariable[0];
 

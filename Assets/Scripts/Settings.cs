@@ -41,7 +41,7 @@ public class Settings : ScriptableObject
         AronGranbergAStarPath,
         Custom
     }
-    public string[] modes;
+    public string[] verbs;
     public GlobalVariableProperty[] global_variables;
     public PathFindingType pathFindingType;
 }

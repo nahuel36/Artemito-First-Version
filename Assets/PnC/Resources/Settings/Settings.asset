@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378bb5a00f0790049ba42cc5c2d65aa6, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  modes:
+  verbs:
   - Use
   - Look
   - Talk

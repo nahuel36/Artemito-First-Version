@@ -9,11 +9,11 @@ using UnityEditorInternal;
 public class PnCCharacterEditor : Editor
 {
     Settings settings;
-    SerializedProperty modes_serialized;
+    SerializedProperty verbs_serialized;
     SerializedProperty local_variables_serialized;
     SerializedProperty global_variables_serialized;
 
-    ReorderableList modesList;
+    ReorderableList verbsList;
     Dictionary<string,ReorderableList> attempsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> interactionsListDict = new Dictionary<string, ReorderableList>();
 
@@ -54,46 +54,46 @@ public class PnCCharacterEditor : Editor
     {
         PNCCharacter myTarget = (PNCCharacter)target;
 
-        modes_serialized = serializedObject.FindProperty("modes");
+        verbs_serialized = serializedObject.FindProperty("verbs");
 
         settings = Resources.Load<Settings>("Settings/Settings");
 
-        modesList = new ReorderableList(serializedObject, serializedObject.FindProperty("modes"), true, true, false, false)
+        verbsList = new ReorderableList(serializedObject, serializedObject.FindProperty("verbs"), true, true, false, false)
         {
             drawHeaderCallback = (rect) =>
             {
-                EditorGUI.LabelField(rect, "modes");
+                EditorGUI.LabelField(rect, "verbs");
             },
-            elementHeightCallback = (int indexM) =>
+            elementHeightCallback = (int indexV) =>
             {
-                if (serializedObject.FindProperty("modes").GetArrayElementAtIndex(indexM).FindPropertyRelative("expandedInInspector").boolValue)
+                if (serializedObject.FindProperty("verbs").GetArrayElementAtIndex(indexV).FindPropertyRelative("expandedInInspector").boolValue)
                 {
                     float heightM = 5 * EditorGUIUtility.singleLineHeight;
-                    var attemps = serializedObject.FindProperty("modes").GetArrayElementAtIndex(indexM).FindPropertyRelative("attemps");
+                    var attemps = serializedObject.FindProperty("verbs").GetArrayElementAtIndex(indexV).FindPropertyRelative("attemps");
                     for (int i = 0; i < attemps.arraySize; i++)
                     {
-                        heightM += GetAttempHeight(attemps.GetArrayElementAtIndex(i), myTarget.modes[indexM].attemps[i]);
+                        heightM += GetAttempHeight(attemps.GetArrayElementAtIndex(i), myTarget.verbs[indexV].attemps[i]);
                         
                     }
                     return heightM;
                 }
                 return EditorGUIUtility.singleLineHeight;
             },
-            drawElementCallback = (rect, indexM, active, focus) =>
+            drawElementCallback = (rect, indexV, active, focus) =>
             {
-                var mode = modes_serialized.GetArrayElementAtIndex(indexM);
-                var attemps = mode.FindPropertyRelative("attemps");
-                var modeName = settings.modes[indexM];
-                var modeRect = new Rect(rect);
-                var modeExpanded = mode.FindPropertyRelative("expandedInInspector");
+                var verb = verbs_serialized.GetArrayElementAtIndex(indexV);
+                var attemps = verb.FindPropertyRelative("attemps");
+                var verbName = settings.verbs[indexV];
+                var verbRect = new Rect(rect);
+                var verbExpanded = verb.FindPropertyRelative("expandedInInspector");
 
-                modeExpanded.boolValue = EditorGUI.Foldout(new Rect(modeRect.x, modeRect.y, modeRect.width, EditorGUIUtility.singleLineHeight), modeExpanded.boolValue, modeName);
+                verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, verbName);
 
-                modeRect.y += EditorGUIUtility.singleLineHeight;
+                verbRect.y += EditorGUIUtility.singleLineHeight;
 
-                if (modeExpanded.boolValue)
+                if (verbExpanded.boolValue)
                 { 
-                    var attempKey = mode.propertyPath;
+                    var attempKey = verb.propertyPath;
 
                     if (!attempsListDict.ContainsKey(attempKey))
                     {
@@ -105,7 +105,7 @@ public class PnCCharacterEditor : Editor
                             },
                             elementHeightCallback = (indexA) =>
                             {
-                                return GetAttempHeight(serializedObject.FindProperty("modes").GetArrayElementAtIndex(indexM).FindPropertyRelative("attemps").GetArrayElementAtIndex(indexA), myTarget.modes[indexM].attemps[indexA]);
+                                return GetAttempHeight(serializedObject.FindProperty("verbs").GetArrayElementAtIndex(indexV).FindPropertyRelative("attemps").GetArrayElementAtIndex(indexA), myTarget.verbs[indexV].attemps[indexA]);
                             },
                             drawElementCallback = (rectA, indexA, activeA, focusA) =>
                             {
@@ -132,7 +132,7 @@ public class PnCCharacterEditor : Editor
                                             elementHeightCallback = (indexI) =>
                                             {
                                                 var interactionSerializated = interactionsListDict[interactionKey].serializedProperty.GetArrayElementAtIndex(indexI);
-                                                var interactionNoSerializated = myTarget.modes[indexM].attemps[indexA].interactions[indexI];
+                                                var interactionNoSerializated = myTarget.verbs[indexV].attemps[indexA].interactions[indexI];
 
                                                 return GetInteractionHeight(interactionSerializated, interactionNoSerializated);
                                             }
@@ -140,7 +140,7 @@ public class PnCCharacterEditor : Editor
                                             drawElementCallback = (rectI, indexI, activeI, focusI) =>
                                             {
                                                 var interactionSerializated = interactionsListDict[interactionKey].serializedProperty.GetArrayElementAtIndex(indexI);
-                                                var interactionNoSerializated = myTarget.modes[indexM].attemps[indexA].interactions[indexI];
+                                                var interactionNoSerializated = myTarget.verbs[indexV].attemps[indexA].interactions[indexI];
                                                 var interactRect = new Rect(rectI);
                                                 var interactExpanded = interactionSerializated.FindPropertyRelative("expandedInInspector");
                                                 interactRect.height = EditorGUIUtility.singleLineHeight;
@@ -216,7 +216,7 @@ public class PnCCharacterEditor : Editor
 
                         attempsListDict.Add(attempKey, attempsList);
                     }
-                    attempsListDict[attempKey].DoList(modeRect);
+                    attempsListDict[attempKey].DoList(verbRect);
                 }
             }
         };
@@ -224,44 +224,44 @@ public class PnCCharacterEditor : Editor
            
 
 
-        List<Mode> interactionsTempList = new List<Mode>();
-        for (int i = 0; i < settings.modes.Length; i++)
+        List<Verb> interactionsTempList = new List<Verb>();
+        for (int i = 0; i < settings.verbs.Length; i++)
         {
             bool founded = false;
-            for (int j = 0; j < myTarget.modes.Count; j++)
+            for (int j = 0; j < myTarget.verbs.Count; j++)
             {
-                if (myTarget.modes[j].name == settings.modes[i])
+                if (myTarget.verbs[j].name == settings.verbs[i])
                 { 
-                    interactionsTempList.Add((myTarget).modes[j]);
+                    interactionsTempList.Add((myTarget).verbs[j]);
                     founded = true;
                 }
             }
             if (founded == false)
             {
-                Mode tempMode = new Mode();
-                tempMode.name = settings.modes[i];
-                tempMode.attemps = new List<InteractionsAttemp>();
-                interactionsTempList.Add(tempMode);
+                Verb tempVerb = new Verb();
+                tempVerb.name = settings.verbs[i];
+                tempVerb.attemps = new List<InteractionsAttemp>();
+                interactionsTempList.Add(tempVerb);
             }
         }
         
-        for (int i = 0; i < myTarget.modes.Count; i++)
+        for (int i = 0; i < myTarget.verbs.Count; i++)
         {
             bool contains = false;            
             for (int j = 0; j < interactionsTempList.Count; j++)
             {
-                if (myTarget.modes[i].name == interactionsTempList[j].name)
+                if (myTarget.verbs[i].name == interactionsTempList[j].name)
                 {
                     contains = true;
                 }
             }
             if(contains == false)
             {
-                interactionsTempList.Add(myTarget.modes[i]);
+                interactionsTempList.Add(myTarget.verbs[i]);
             }
         }
 
-        myTarget.modes = interactionsTempList;
+        myTarget.verbs = interactionsTempList;
 
         List<InteractuableGlobalVariable> tempGlobalVarList = new List<InteractuableGlobalVariable>();
         for (int i = 0; i < settings.global_variables.Length; i++)
@@ -293,20 +293,20 @@ public class PnCCharacterEditor : Editor
             }
             if (founded == false)
             {
-                InteractuableGlobalVariable tempMode = new InteractuableGlobalVariable();
-                tempMode.name = settings.global_variables[i].name;
+                InteractuableGlobalVariable tempVerb = new InteractuableGlobalVariable();
+                tempVerb.name = settings.global_variables[i].name;
                 if(settings.global_variables[i].ID == -1)
                 { 
-                    settings.global_variables[i].ID = tempMode.GetHashCode();
-                    tempMode.globalHashCode = tempMode.GetHashCode();
+                    settings.global_variables[i].ID = tempVerb.GetHashCode();
+                    tempVerb.globalHashCode = tempVerb.GetHashCode();
                 }
                 else
                 {
-                    tempMode.globalHashCode = settings.global_variables[i].ID;
+                    tempVerb.globalHashCode = settings.global_variables[i].ID;
                 }
-                tempMode.properties = settings.global_variables[i];
+                tempVerb.properties = settings.global_variables[i];
                 if (settings.global_variables[i].object_type.HasFlag((GlobalVariableProperty.object_types.characters)))
-                    tempGlobalVarList.Add(tempMode);
+                    tempGlobalVarList.Add(tempVerb);
             }
         }
 
@@ -329,7 +329,7 @@ public class PnCCharacterEditor : Editor
 
         PNCCharacter myTarget = (PNCCharacter)target;
 
-        modesList.DoLayoutList();
+        verbsList.DoLayoutList();
 
 
         GUILayout.BeginHorizontal();
