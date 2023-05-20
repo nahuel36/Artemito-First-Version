@@ -25,7 +25,7 @@ public class PnCCharacterEditor : Editor
         public int indexA;
         public ReorderableList list;
     }
-    Interaction copiedInteraction;
+    static Interaction copiedInteraction;
 
     public float GetInteractionHeight(SerializedProperty interactionSerialized, Interaction interactionNoSerialized)
     {
