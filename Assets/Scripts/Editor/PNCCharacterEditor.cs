@@ -33,9 +33,69 @@ public class PnCCharacterEditor : Editor
         if (interactionSerialized.FindPropertyRelative("expandedInInspector").boolValue)
         {
             if (interactionNoSerialized.type == Interaction.InteractionType.character)
-                return EditorGUIUtility.singleLineHeight * 5;
+                return EditorGUIUtility.singleLineHeight * 5.25f;
             if (interactionNoSerialized.type == Interaction.InteractionType.variables)
-                return EditorGUIUtility.singleLineHeight * 8;
+            {
+                float height = 5.25f;
+                if (interactionNoSerialized.variableObject)
+                { 
+                    if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.getGlobalVariable
+                        || interactionNoSerialized.variablesAction == Interaction.VariablesAction.setGlobalVariable)
+                    {
+                        int index = interactionNoSerialized.globalVariableSelected;
+
+                        if (interactionNoSerialized.variableObject.global_variables.Length > index)
+                        {
+                            if (interactionNoSerialized.variableObject.global_variables[index].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.boolean))
+                            { 
+                                height += 1;
+                                if (interactionNoSerialized.global_changeBooleanValue)
+                                    height += 1;
+                            }
+                            if (interactionNoSerialized.variableObject.global_variables[index].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.integer))
+                            { 
+                                height += 1;
+                                if(interactionNoSerialized.global_changeIntegerValue)
+                                    height += 1;
+                            }
+                            if (interactionNoSerialized.variableObject.global_variables[index].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.String))
+                            { 
+                                height += 1;
+                                if (interactionNoSerialized.global_changeStringValue)
+                                    height += 1;
+                            }
+                        }
+                    }
+                    if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.getLocalVariable
+                        || interactionNoSerialized.variablesAction == Interaction.VariablesAction.setLocalVariable)
+                    {
+                        int index = interactionNoSerialized.localVariableSelected;
+                        if (interactionNoSerialized.variableObject.local_variables.Length > index)
+                        {
+                            if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.boolean))
+                            { 
+                                height += 1;
+                                if (interactionNoSerialized.local_changeBooleanValue)
+                                    height += 1;
+                            }
+                            if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.integer))
+                            { 
+                                height += 1;
+                                if (interactionNoSerialized.local_changeIntegerValue)
+                                    height += 1;
+                            }
+                            if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.String))
+                            { 
+                                height += 1;
+                                if (interactionNoSerialized.local_changeStringValue)
+                                    height += 1;
+                            }
+                        }
+
+                    }
+                }
+                return EditorGUIUtility.singleLineHeight * height;
+            }
             if (interactionNoSerialized.type == Interaction.InteractionType.custom)
                 return EditorGUIUtility.singleLineHeight * (8 + interactionNoSerialized.action.GetPersistentEventCount() * 3);
         }
@@ -200,6 +260,64 @@ public class PnCCharacterEditor : Editor
                                                                     content[z] = interactionNoSerializated.variableObject.global_variables[z].name;
                                                                 }
                                                                 interactionNoSerializated.globalVariableSelected = EditorGUI.Popup(interactRect, "Variable", interactionNoSerializated.globalVariableSelected, content);
+                                                                
+                                                                int index = interactionNoSerializated.globalVariableSelected;
+                                                                if (interactionNoSerializated.variableObject.global_variables.Length > index)
+                                                                {
+                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                    if (interactionNoSerializated.variableObject.global_variables[index].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.boolean))
+                                                                    {
+                                                                        interactRect.x = rectI.x;
+                                                                        EditorGUI.LabelField(interactRect, "change boolean value");
+                                                                        interactRect.x += EditorGUIUtility.labelWidth;
+                                                                        interactionNoSerializated.global_changeBooleanValue = EditorGUI.Toggle(interactRect, interactionNoSerializated.global_changeBooleanValue);
+                                                                        if (interactionNoSerializated.global_changeBooleanValue)
+                                                                        { 
+                                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                            interactRect.x = rectI.x;
+                                                                            EditorGUI.LabelField(interactRect, "value");
+                                                                            interactRect.x += EditorGUIUtility.labelWidth;
+                                                                            interactionNoSerializated.global_BooleanValue= EditorGUI.Toggle(interactRect, interactionNoSerializated.global_BooleanValue);
+                                                                        }
+                                                                    }
+                                                                    if (interactionNoSerializated.variableObject.global_variables[index].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.integer))
+                                                                    {
+                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                        interactRect.x = rectI.x;
+                                                                        interactRect.width = rectI.width;
+                                                                        EditorGUI.LabelField(interactRect, "change integer value");
+                                                                        interactRect.x += EditorGUIUtility.labelWidth;
+                                                                        interactionNoSerializated.global_changeIntegerValue = EditorGUI.Toggle(interactRect, interactionNoSerializated.global_changeIntegerValue);
+                                                                        if (interactionNoSerializated.global_changeIntegerValue)
+                                                                        {
+                                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                            interactRect.x = rectI.x;
+                                                                            EditorGUI.LabelField(interactRect, "value");
+                                                                            interactRect.x += EditorGUIUtility.labelWidth;
+                                                                            interactRect.width = rectI.width / 2;
+                                                                            interactionNoSerializated.global_IntegerValue = EditorGUI.IntField(interactRect, interactionNoSerializated.global_IntegerValue);
+                                                                        }
+                                                                    }
+                                                                    if (interactionNoSerializated.variableObject.global_variables[index].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.String))
+                                                                    {
+                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                        interactRect.x = rectI.x;
+                                                                        interactRect.width = rectI.width;
+                                                                        EditorGUI.LabelField(interactRect, "change string value");
+                                                                        interactRect.x += EditorGUIUtility.labelWidth;
+                                                                        interactionNoSerializated.global_changeStringValue = EditorGUI.Toggle(interactRect, interactionNoSerializated.global_changeStringValue);
+                                                                        if (interactionNoSerializated.global_changeStringValue)
+                                                                        {
+                                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                            interactRect.x = rectI.x;
+                                                                            EditorGUI.LabelField(interactRect, "value");
+                                                                            interactRect.x += EditorGUIUtility.labelWidth;
+                                                                            interactRect.width = rectI.width / 2;
+                                                                            interactionNoSerializated.global_StringValue = EditorGUI.TextField(interactRect, interactionNoSerializated.global_StringValue);
+                                                                        }
+                                                                    }
+                                                                }
+                                                                
                                                             }
                                                         }
                                                             else if (interactionNoSerializated.variablesAction == Interaction.VariablesAction.getLocalVariable ||
@@ -215,6 +333,63 @@ public class PnCCharacterEditor : Editor
                                                                         content[z] = interactionNoSerializated.variableObject.local_variables[z].name;
                                                                     }
                                                                     interactionNoSerializated.localVariableSelected = EditorGUI.Popup(interactRect,"Variable", interactionNoSerializated.localVariableSelected, content);
+                                                                    int index = interactionNoSerializated.localVariableSelected;
+                                                                    if (interactionNoSerializated.variableObject.local_variables.Length > index)
+                                                                    {
+                                                                        if (interactionNoSerializated.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.boolean))
+                                                                        {
+                                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                            interactRect.x = rectI.x;
+                                                                            interactRect.width = rectI.width;
+                                                                            EditorGUI.LabelField(interactRect, "change boolean value");
+                                                                            interactRect.x += EditorGUIUtility.labelWidth;
+                                                                            interactionNoSerializated.local_changeBooleanValue = EditorGUI.Toggle(interactRect, interactionNoSerializated.local_changeBooleanValue);
+                                                                            if (interactionNoSerializated.local_changeBooleanValue)
+                                                                            {
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactRect.x = rectI.x;
+                                                                                EditorGUI.LabelField(interactRect, "value");
+                                                                                interactRect.x += EditorGUIUtility.labelWidth;
+                                                                                interactionNoSerializated.local_BooleanValue = EditorGUI.Toggle(interactRect, interactionNoSerializated.local_BooleanValue);
+                                                                            }
+                                                                        }
+                                                                        if (interactionNoSerializated.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.integer))
+                                                                        {
+                                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                            interactRect.x = rectI.x;
+                                                                            interactRect.width = rectI.width;
+                                                                            EditorGUI.LabelField(interactRect, "change integer value");
+                                                                            interactRect.x += EditorGUIUtility.labelWidth;
+                                                                            interactionNoSerializated.local_changeIntegerValue = EditorGUI.Toggle(interactRect, interactionNoSerializated.local_changeIntegerValue);
+                                                                            if (interactionNoSerializated.local_changeIntegerValue)
+                                                                            {
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactRect.x = rectI.x;
+                                                                                EditorGUI.LabelField(interactRect, "value");
+                                                                                interactRect.x += EditorGUIUtility.labelWidth;
+                                                                                interactRect.width = rectI.width/2;
+                                                                                interactionNoSerializated.local_IntegerValue = EditorGUI.IntField(interactRect, interactionNoSerializated.local_IntegerValue);
+                                                                            }
+                                                                        }
+                                                                        if (interactionNoSerializated.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.String))
+                                                                        {
+                                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                            interactRect.x = rectI.x;
+                                                                            interactRect.width = rectI.width;
+                                                                            EditorGUI.LabelField(interactRect, "change string value");
+                                                                            interactRect.x += EditorGUIUtility.labelWidth;
+                                                                            interactionNoSerializated.local_changeStringValue = EditorGUI.Toggle(interactRect, interactionNoSerializated.local_changeStringValue);
+                                                                            if (interactionNoSerializated.local_changeStringValue)
+                                                                            {
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactRect.x = rectI.x;
+                                                                                EditorGUI.LabelField(interactRect, "value");
+                                                                                interactRect.x += EditorGUIUtility.labelWidth;
+                                                                                interactRect.width = rectI.width / 2;
+                                                                                interactionNoSerializated.local_StringValue = EditorGUI.TextField(interactRect, interactionNoSerializated.local_StringValue);
+                                                                            }
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }

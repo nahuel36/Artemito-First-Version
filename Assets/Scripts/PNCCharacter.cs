@@ -56,7 +56,18 @@ public class Interaction
     public PNCCharacter variableObject;
     //CUSTOM
     public UnityEvent action;
-
+    public bool global_changeBooleanValue;
+    public bool global_changeStringValue;
+    public bool global_changeIntegerValue;
+    public bool local_changeBooleanValue;
+    public bool local_changeStringValue;
+    public bool local_changeIntegerValue;
+    public bool global_BooleanValue;
+    public string global_StringValue;
+    public int global_IntegerValue;
+    public bool local_BooleanValue;
+    public string local_StringValue;
+    public int local_IntegerValue;
     //averiguar sobre deep copy / clone
     public void Copy(Interaction destiny)
     {
@@ -71,6 +82,18 @@ public class Interaction
         destiny.variablesAction = variablesAction;
         destiny.WhatToSay = WhatToSay;
         destiny.WhereToWalk = WhereToWalk;
+        destiny.local_changeBooleanValue = local_changeBooleanValue;
+        destiny.local_changeIntegerValue = local_changeIntegerValue;
+        destiny.local_changeStringValue = local_changeStringValue;
+        destiny.global_changeBooleanValue = global_changeBooleanValue;
+        destiny.global_changeIntegerValue = global_changeIntegerValue;
+        destiny.global_changeStringValue = global_changeStringValue;
+        destiny.local_BooleanValue = local_BooleanValue;
+        destiny.local_IntegerValue = local_IntegerValue;
+        destiny.local_StringValue = local_StringValue;
+        destiny.global_BooleanValue = global_BooleanValue;
+        destiny.global_IntegerValue = global_IntegerValue;
+        destiny.global_StringValue = global_StringValue;
     }
 }
 
