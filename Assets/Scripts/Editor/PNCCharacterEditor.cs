@@ -339,8 +339,8 @@ public class PnCCharacterEditor : Editor
     {
         GenericMenu menu = new GenericMenu();
         
-        menu.AddItem(new GUIContent("Copy"), false, Copy, interactioncopy);
-        menu.AddItem(new GUIContent("Paste"), false, Paste, interactioncopy);
+        menu.AddItem(new GUIContent("Copy interaction"), false, Copy, interactioncopy);
+        menu.AddItem(new GUIContent("Paste interaction"), false, Paste, interactioncopy);
         menu.AddItem(new GUIContent("Cancel"), false, Cancel);
 
         menu.ShowAsContext();
