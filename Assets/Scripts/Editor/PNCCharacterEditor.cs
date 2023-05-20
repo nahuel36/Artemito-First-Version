@@ -358,6 +358,8 @@ public class PnCCharacterEditor : Editor
 
     private void Paste(object interaction)
     {
+        if (copiedInteraction == null) return;
+
         copiedInteraction.Copy(((PNCCharacter)target).verbs[((InteractionData)interaction).indexV].attemps[((InteractionData)interaction).indexA].interactions[((InteractionData)interaction).list.index]);
     }
 
