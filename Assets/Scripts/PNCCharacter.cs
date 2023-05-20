@@ -56,7 +56,22 @@ public class Interaction
     public PNCCharacter variableObject;
     //CUSTOM
     public UnityEvent action;
-    
+
+    //averiguar sobre deep copy / clone
+    public void Copy(Interaction destiny)
+    {
+        destiny.action = action;
+        destiny.character = character;
+        destiny.characterAction = characterAction;
+        destiny.expandedInInspector = false;
+        destiny.globalVariableSelected = globalVariableSelected;
+        destiny.localVariableSelected = localVariableSelected;
+        destiny.type = type;
+        destiny.variableObject = variableObject;
+        destiny.variablesAction = variablesAction;
+        destiny.WhatToSay = WhatToSay;
+        destiny.WhereToWalk = WhereToWalk;
+    }
 }
 
 

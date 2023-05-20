@@ -18,6 +18,15 @@ public class PnCCharacterEditor : Editor
     Dictionary<string, ReorderableList> interactionsListDict = new Dictionary<string, ReorderableList>();
 
 
+    [System.Serializable]
+    public class InteractionData
+    {
+        public int indexV;
+        public int indexA;
+        public ReorderableList list;
+    }
+    Interaction copiedInteraction;
+
     public float GetInteractionHeight(SerializedProperty interactionSerialized, Interaction interactionNoSerialized)
     {
     
@@ -125,6 +134,15 @@ public class PnCCharacterEditor : Editor
                                     {
                                         var interactionList = new ReorderableList(interactions.serializedObject, interactions, true, true, true, true)
                                         {
+                                            onMouseUpCallback = (ReorderableList list) => 
+                                            {
+                                                InteractionData data = new InteractionData();
+                                                data.indexA = indexA;
+                                                data.indexV = indexV;
+                                                data.list = interactionsListDict[interactionKey];
+                                                onMouse(data); 
+                                            
+                                            },
                                             drawHeaderCallback = (rectI) =>
                                             {
                                                 EditorGUI.LabelField(rectI, "interactions");
@@ -317,7 +335,31 @@ public class PnCCharacterEditor : Editor
 
     }
 
+    private void onMouse(InteractionData interactioncopy)
+    {
+        GenericMenu menu = new GenericMenu();
+        
+        menu.AddItem(new GUIContent("Copy"), false, Copy, interactioncopy);
+        menu.AddItem(new GUIContent("Paste"), false, Paste, interactioncopy);
+        menu.AddItem(new GUIContent("Cancel"), false, Cancel);
 
+        menu.ShowAsContext();
+    }
+
+    private void Cancel()
+    {
+    }
+
+    
+    private void Copy(object interaction)
+    {
+        copiedInteraction = ((PNCCharacter)target).verbs[((InteractionData)interaction).indexV].attemps[((InteractionData)interaction).indexA].interactions[((InteractionData)interaction).list.index];
+    }
+
+    private void Paste(object interaction)
+    {
+        copiedInteraction.Copy(((PNCCharacter)target).verbs[((InteractionData)interaction).indexV].attemps[((InteractionData)interaction).indexA].interactions[((InteractionData)interaction).list.index]);
+    }
 
     public override void OnInspectorGUI()
     {
