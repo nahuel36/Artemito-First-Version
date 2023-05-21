@@ -54,6 +54,16 @@ public class Interaction
     public int localVariableSelected;
     public VariablesAction variablesAction;
     public PNCCharacter variableObject;
+
+    public enum GetVariableAction { 
+        Stop,
+        Continue,
+        GoToSpecificLine
+    }
+    public GetVariableAction OnCompareResultTrueAction;
+    public GetVariableAction OnCompareResultFalseAction;
+    public int LineToGoOnTrueResult;
+    public int LineToGoOnFalseResult;
     //CUSTOM
     public UnityEvent action;
     public bool global_changeBooleanValue;
@@ -62,6 +72,12 @@ public class Interaction
     public bool local_changeBooleanValue;
     public bool local_changeStringValue;
     public bool local_changeIntegerValue;
+    public bool global_compareBooleanValue;
+    public bool global_compareStringValue;
+    public bool global_compareIntegerValue;
+    public bool local_compareBooleanValue;
+    public bool local_compareStringValue;
+    public bool local_compareIntegerValue;
     public bool global_BooleanValue;
     public string global_StringValue;
     public int global_IntegerValue;
@@ -88,12 +104,22 @@ public class Interaction
         destiny.global_changeBooleanValue = global_changeBooleanValue;
         destiny.global_changeIntegerValue = global_changeIntegerValue;
         destiny.global_changeStringValue = global_changeStringValue;
+        destiny.local_compareBooleanValue = local_compareBooleanValue;
+        destiny.local_compareIntegerValue = local_compareIntegerValue;
+        destiny.local_compareStringValue = local_compareStringValue;
+        destiny.global_compareBooleanValue = global_compareBooleanValue;
+        destiny.global_compareIntegerValue = global_compareIntegerValue;
+        destiny.global_compareStringValue = global_compareStringValue;
         destiny.local_BooleanValue = local_BooleanValue;
         destiny.local_IntegerValue = local_IntegerValue;
         destiny.local_StringValue = local_StringValue;
         destiny.global_BooleanValue = global_BooleanValue;
         destiny.global_IntegerValue = global_IntegerValue;
         destiny.global_StringValue = global_StringValue;
+        destiny.LineToGoOnFalseResult = LineToGoOnFalseResult;
+        destiny.LineToGoOnTrueResult = LineToGoOnTrueResult;
+        destiny.OnCompareResultFalseAction = OnCompareResultFalseAction;
+        destiny.OnCompareResultTrueAction = OnCompareResultTrueAction;
     }
 }
 
