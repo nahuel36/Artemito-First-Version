@@ -158,16 +158,15 @@ public class InteractuableGlobalVariable
 }
 
 
-public class PNCCharacter : MonoBehaviour
+public class PNCCharacter : PNCInteractuable
 {
     IPathFinder pathFinder;
     IMessageTalker messageTalker;
     CommandWalk cancelableWalk;
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
-    public List<Verb> verbs = new List<Verb>();
-    public InteractuableLocalVariable[] local_variables = new InteractuableLocalVariable[0];
-    public InteractuableGlobalVariable[] global_variables = new InteractuableGlobalVariable[0];
+    
+    
 
     private void Awake()
     {
