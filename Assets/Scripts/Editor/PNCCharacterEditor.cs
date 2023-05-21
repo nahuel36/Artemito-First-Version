@@ -36,9 +36,10 @@ public class PnCCharacterEditor : Editor
                 return EditorGUIUtility.singleLineHeight * 5.25f;
             if (interactionNoSerialized.type == Interaction.InteractionType.variables)
             {
-                float height = 5.25f;
+                float height = 4.25f;
                 if (interactionNoSerialized.variableObject)
                 { 
+                    height += 1;
                     if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.getGlobalVariable
                         || interactionNoSerialized.variablesAction == Interaction.VariablesAction.setGlobalVariable)
                     {
