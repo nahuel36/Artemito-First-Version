@@ -651,7 +651,11 @@ public class PnCCharacterEditor : Editor
         PNCCharacter myTarget = (PNCCharacter)target;
 
         verbsList.DoLayoutList();
-
+        if (GUILayout.Button("Edit verbs"))
+        {
+            Selection.objects = new UnityEngine.Object[] { settings };
+            EditorGUIUtility.PingObject(settings);
+        }
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
