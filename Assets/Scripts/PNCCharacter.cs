@@ -165,8 +165,8 @@ public class PNCCharacter : PNCInteractuable
     CommandWalk cancelableWalk;
     CommandTalk skippabletalk;
     CommandTalk backgroundTalk;
-    
-    
+
+    [SerializeField]Sprite SierraTextFace;
 
     private void Awake()
     {
@@ -175,7 +175,11 @@ public class PNCCharacter : PNCInteractuable
 
     public void ConfigureTalker()
     {
-        messageTalker = new LucasArtText(this.transform, new TextTimeCalculator());
+        Settings settings = Resources.Load<Settings>("Settings/Settings");
+        if (settings.speechStyle == Settings.SpeechStyle.LucasArts)
+            messageTalker = new LucasArtText(this.transform, new TextTimeCalculator());
+        else if (settings.speechStyle == Settings.SpeechStyle.Sierra)
+            messageTalker = new SierraText(this.transform, new TextTimeCalculator(), SierraTextFace);
     }
 
     public void ConfigurePathFinder(float velocity)

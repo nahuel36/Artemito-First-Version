@@ -657,6 +657,9 @@ public class PnCCharacterEditor : Editor
             EditorGUIUtility.PingObject(settings);
         }
 
+        if(settings.speechStyle == Settings.SpeechStyle.Sierra)
+            EditorGUILayout.ObjectField(serializedObject.FindProperty("SierraTextFace"), typeof(Sprite),GUILayout.Height(100),GUILayout.Width(225));
+                
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         GUILayout.Label("Local Variables", EditorStyles.boldLabel);

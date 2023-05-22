@@ -34,7 +34,12 @@ public class GlobalVariableProperty
 [CreateAssetMenu(fileName = "Settings", menuName = "Pnc/SettingsFile", order = 1)]
 public class Settings : ScriptableObject
 {
-
+    public enum SpeechStyle
+    {
+        LucasArts, 
+        Sierra,
+        Custom
+    }
     public enum PathFindingType
     {
         UnityNavigationMesh,
@@ -44,4 +49,5 @@ public class Settings : ScriptableObject
     public string[] verbs;
     public GlobalVariableProperty[] global_variables;
     public PathFindingType pathFindingType;
+    public SpeechStyle speechStyle;
 }

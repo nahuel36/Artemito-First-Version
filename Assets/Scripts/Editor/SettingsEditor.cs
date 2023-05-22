@@ -117,6 +117,9 @@ public class SettingsEditor : Editor
         GUILayout.Label("Path Finding Type");
         ((Settings)target).pathFindingType = (Settings.PathFindingType)EditorGUILayout.EnumPopup(((Settings)target).pathFindingType);
 
+        GUILayout.Label("Speech Style");
+        ((Settings)target).speechStyle = (Settings.SpeechStyle)EditorGUILayout.EnumPopup(((Settings)target).speechStyle);
+
 
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed)

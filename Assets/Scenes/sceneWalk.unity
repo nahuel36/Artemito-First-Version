@@ -444,6 +444,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: SierraTextFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 91976e8b9ce0f0341838727acd55621c,
+        type: 3}
+    - target: {fileID: 2760371074358426923, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: modes.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1779,52 +1785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20568ab849dbe004fa37d1b2a6989df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verbs:
-  - name: Use
-    isCyclical: 0
-    use: 1
-    attemps:
-    - interactions: []
-      expandedInInspector: 0
-    expandedInInspector: 1
-  - name: Look
-    isCyclical: 0
-    use: 1
-    attemps:
-    - interactions:
-      - type: 0
-        expandedInInspector: 1
-        character: {fileID: 0}
-        characterAction: 0
-        WhatToSay: 
-        WhereToWalk: {fileID: 0}
-        globalVariableSelected: 0
-        localVariableSelected: 0
-        variablesAction: 0
-        variableObject: {fileID: 0}
-        action:
-          m_PersistentCalls:
-            m_Calls: []
-      - type: 0
-        expandedInInspector: 1
-        character: {fileID: 0}
-        characterAction: 0
-        WhatToSay: 
-        WhereToWalk: {fileID: 0}
-        globalVariableSelected: 0
-        localVariableSelected: 0
-        variablesAction: 0
-        variableObject: {fileID: 0}
-        action:
-          m_PersistentCalls:
-            m_Calls: []
-      expandedInInspector: 1
-    expandedInInspector: 1
-  - name: Talk
-    isCyclical: 0
-    use: 1
-    attemps: []
-    expandedInInspector: 1
   local_variables: []
   global_variables:
   - name: isOpened
@@ -1855,6 +1815,97 @@ MonoBehaviour:
       booleanDefault: 1
       stringDefault: 1
     expandedInInspector: 0
+  verbs:
+  - name: Use
+    isCyclical: 0
+    use: 1
+    attemps:
+    - interactions: []
+      expandedInInspector: 0
+    expandedInInspector: 1
+  - name: Look
+    isCyclical: 0
+    use: 1
+    attemps:
+    - interactions:
+      - type: 0
+        expandedInInspector: 1
+        character: {fileID: 0}
+        characterAction: 0
+        WhatToSay: 
+        WhereToWalk: {fileID: 0}
+        globalVariableSelected: 0
+        localVariableSelected: 0
+        variablesAction: 0
+        variableObject: {fileID: 0}
+        OnCompareResultTrueAction: 0
+        OnCompareResultFalseAction: 0
+        LineToGoOnTrueResult: 0
+        LineToGoOnFalseResult: 0
+        action:
+          m_PersistentCalls:
+            m_Calls: []
+        global_changeBooleanValue: 0
+        global_changeStringValue: 0
+        global_changeIntegerValue: 0
+        local_changeBooleanValue: 0
+        local_changeStringValue: 0
+        local_changeIntegerValue: 0
+        global_compareBooleanValue: 0
+        global_compareStringValue: 0
+        global_compareIntegerValue: 0
+        local_compareBooleanValue: 0
+        local_compareStringValue: 0
+        local_compareIntegerValue: 0
+        global_BooleanValue: 0
+        global_StringValue: 
+        global_IntegerValue: 0
+        local_BooleanValue: 0
+        local_StringValue: 
+        local_IntegerValue: 0
+      - type: 0
+        expandedInInspector: 1
+        character: {fileID: 0}
+        characterAction: 0
+        WhatToSay: 
+        WhereToWalk: {fileID: 0}
+        globalVariableSelected: 0
+        localVariableSelected: 0
+        variablesAction: 0
+        variableObject: {fileID: 0}
+        OnCompareResultTrueAction: 0
+        OnCompareResultFalseAction: 0
+        LineToGoOnTrueResult: 0
+        LineToGoOnFalseResult: 0
+        action:
+          m_PersistentCalls:
+            m_Calls: []
+        global_changeBooleanValue: 0
+        global_changeStringValue: 0
+        global_changeIntegerValue: 0
+        local_changeBooleanValue: 0
+        local_changeStringValue: 0
+        local_changeIntegerValue: 0
+        global_compareBooleanValue: 0
+        global_compareStringValue: 0
+        global_compareIntegerValue: 0
+        local_compareBooleanValue: 0
+        local_compareStringValue: 0
+        local_compareIntegerValue: 0
+        global_BooleanValue: 0
+        global_StringValue: 
+        global_IntegerValue: 0
+        local_BooleanValue: 0
+        local_StringValue: 
+        local_IntegerValue: 0
+      expandedInInspector: 1
+    expandedInInspector: 1
+  - name: Talk
+    isCyclical: 0
+    use: 1
+    attemps: []
+    expandedInInspector: 1
+  SierraTextFace: {fileID: 0}
 --- !u!4 &1180133437
 Transform:
   m_ObjectHideFlags: 0
