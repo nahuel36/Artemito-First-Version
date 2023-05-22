@@ -156,7 +156,7 @@ public class PnCCharacterEditor : Editor
 
         settings = Resources.Load<Settings>("Settings/Settings");
 
-        verbsList = new ReorderableList(serializedObject, serializedObject.FindProperty("verbs"), true, true, false, false)
+        verbsList = new ReorderableList(serializedObject, verbs_serialized, true, true, false, false)
         {
             drawHeaderCallback = (rect) =>
             {
@@ -181,9 +181,10 @@ public class PnCCharacterEditor : Editor
             {
                 var verb = verbs_serialized.GetArrayElementAtIndex(indexV);
                 var attemps = verb.FindPropertyRelative("attemps");
-                var verbName = settings.verbs[indexV];
+                var verbName = verb.FindPropertyRelative("name").stringValue;
                 var verbRect = new Rect(rect);
                 var verbExpanded = verb.FindPropertyRelative("expandedInInspector");
+                verbRect.x += 8;
 
                 verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, verbName);
 
@@ -516,9 +517,9 @@ public class PnCCharacterEditor : Editor
             }
         };
 
-           
 
 
+        bool verbAdded = false;
         List<Verb> interactionsTempList = new List<Verb>();
         for (int i = 0; i < settings.verbs.Length; i++)
         {
@@ -533,13 +534,15 @@ public class PnCCharacterEditor : Editor
             }
             if (founded == false)
             {
+                verbAdded = true;
                 Verb tempVerb = new Verb();
                 tempVerb.name = settings.verbs[i];
                 tempVerb.attemps = new List<InteractionsAttemp>();
                 interactionsTempList.Add(tempVerb);
             }
         }
-        
+
+        bool verbAdded2 = false;
         for (int i = 0; i < myTarget.verbs.Count; i++)
         {
             bool contains = false;            
@@ -552,11 +555,13 @@ public class PnCCharacterEditor : Editor
             }
             if(contains == false)
             {
+                verbAdded2 = true;
                 interactionsTempList.Add(myTarget.verbs[i]);
             }
         }
 
-        myTarget.verbs = interactionsTempList;
+        if(verbAdded || verbAdded2)
+            myTarget.verbs = interactionsTempList;
 
         List<InteractuableGlobalVariable> tempGlobalVarList = new List<InteractuableGlobalVariable>();
         for (int i = 0; i < settings.global_variables.Length; i++)
