@@ -647,6 +647,8 @@ public class PnCCharacterEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("name"));
+        
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         GUILayout.Label("Interactions", EditorStyles.boldLabel);
