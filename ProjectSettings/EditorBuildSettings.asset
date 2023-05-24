@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/sceneWalk.unity
+    guid: df694018d5f932c4fa0dfe91e65ed315
   m_configObjects: {}

@@ -18,9 +18,17 @@ public class PNCCharacter : PNCInteractuable
 
     [SerializeField]Sprite SierraTextFace;
 
+    Animator anim;
+    CharacterAnimator characterAnimator;
+
     private void Awake()
     {
-        
+        ConfigurePathFinder(1);
+        ConfigureTalker();
+        CharacterAnimatorAdapter characterAnimatorAdapter = new CharacterAnimatorAdapter();
+        characterAnimatorAdapter.Configure(anim);
+        characterAnimator = new CharacterAnimator();
+        characterAnimator.Configure(characterAnimatorAdapter, this);
     }
 
     public void ConfigureTalker()

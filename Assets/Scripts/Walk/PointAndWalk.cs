@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class PointAndWalk : MonoBehaviour
 {
-    [SerializeField]CharacterAnimator characterAnimator;
     [SerializeField] PNCCharacter pNCCharacter;
-    [SerializeField] Animator anim;
-    private void Awake()
-    {
-        pNCCharacter.ConfigurePathFinder(1);
-        pNCCharacter.ConfigureTalker();
-        CharacterAnimatorAdapter characterAnimatorAdapter = new CharacterAnimatorAdapter();
-        characterAnimatorAdapter.Configure(anim);
-        characterAnimator.Configure(characterAnimatorAdapter, pNCCharacter);
-    }
-
 
 
     public void WalkCancelable(){

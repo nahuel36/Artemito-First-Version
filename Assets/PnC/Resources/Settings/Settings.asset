@@ -81,5 +81,5 @@ MonoBehaviour:
     booleanDefault: 1
     stringDefault: 1
   pathFindingType: 1
-  speechStyle: 1
+  speechStyle: 0
   interactionExecuteMethod: 1

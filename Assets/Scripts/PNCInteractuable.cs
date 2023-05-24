@@ -133,6 +133,23 @@ public class PNCInteractuable : PNCVariablesContainer
 
     public List<Verb> verbs = new List<Verb>();
 
+    private void Start()
+    {
+        for (int i = 0; i < verbs.Count; i++)
+        {
+            for (int j = 0; j < verbs[i].attemps.Count; j++)
+            {
+                for (int k = 0; k < verbs[i].attemps[j].interactions.Count; k++)
+                {
+                    verbs[i].attemps[j].interactions[k].action = new UnityEvent();
+                    PNCCharacter charact = verbs[i].attemps[j].interactions[k].character;
+                    string verb = verbs[i].name;
+                    verbs[i].attemps[j].interactions[k].action.AddListener(()=>charact.Talk(verb));
+                }
+            }
+        }
+    }
+
     public string[] getActiveVerbs() 
     {
         List<string> activeVerbs = new List<string>();
@@ -146,15 +163,15 @@ public class PNCInteractuable : PNCVariablesContainer
 
     public void RunInteraction(string verbToRunString) 
     {
-        /*
+        
         Verb verbToRun = FindVerb(verbToRunString);
                         
         verbToRun.attemps[verbToRun.executedTimes].interactions[0].action.Invoke();
-        verbToRun.attemps[verbToRun.executedTimes].interactions[1].action.Invoke();
+        //verbToRun.attemps[verbToRun.executedTimes].interactions[1].action.Invoke();
 
-        verbToRun.executedTimes++;
-        */
-        Debug.Log("RUN");
+      //  verbToRun.executedTimes++;
+        
+        //Debug.Log("RUN");
     }
 
     public Verb FindVerb(string verb) {
