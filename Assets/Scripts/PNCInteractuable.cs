@@ -11,6 +11,7 @@ public class Verb
     public bool use = true;
     public List<InteractionsAttemp> attemps = new List<InteractionsAttemp>();
     public bool expandedInInspector;
+    public int executedTimes = 0;
 }
 
 [System.Serializable]
@@ -132,6 +133,36 @@ public class PNCInteractuable : PNCVariablesContainer
 
     public List<Verb> verbs = new List<Verb>();
 
+    public string[] getActiveVerbs() 
+    {
+        List<string> activeVerbs = new List<string>();
+        for (int i = 0; i < verbs.Count; i++)
+        {
+            if (verbs[i].use)
+                activeVerbs.Add(verbs[i].name);
+        }
+        return activeVerbs.ToArray();
+    }
 
-    
+    public void RunInteraction(string verbToRunString) 
+    {
+        /*
+        Verb verbToRun = FindVerb(verbToRunString);
+                        
+        verbToRun.attemps[verbToRun.executedTimes].interactions[0].action.Invoke();
+        verbToRun.attemps[verbToRun.executedTimes].interactions[1].action.Invoke();
+
+        verbToRun.executedTimes++;
+        */
+        Debug.Log("RUN");
+    }
+
+    public Verb FindVerb(string verb) {
+        for (int i = 0; i < verbs.Count; i++)
+        {
+            if (verbs[i].name == verb)
+                return verbs[i];
+        }
+        return null;
+    }
 }

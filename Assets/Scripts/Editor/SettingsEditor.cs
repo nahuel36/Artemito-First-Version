@@ -120,6 +120,8 @@ public class SettingsEditor : Editor
         GUILayout.Label("Speech Style");
         ((Settings)target).speechStyle = (Settings.SpeechStyle)EditorGUILayout.EnumPopup(((Settings)target).speechStyle);
 
+        GUILayout.Label("Interaction execute method");
+        ((Settings)target).interactionExecuteMethod = (Settings.InteractionExecuteMethod)EditorGUILayout.EnumPopup(((Settings)target).interactionExecuteMethod);
 
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed)

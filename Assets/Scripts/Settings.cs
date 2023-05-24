@@ -40,6 +40,12 @@ public class Settings : ScriptableObject
         Sierra,
         Custom
     }
+
+    public enum InteractionExecuteMethod
+    {
+        FirstActionThenObject,
+        FirstObjectThenAction
+    }
     public enum PathFindingType
     {
         UnityNavigationMesh,
@@ -50,4 +56,5 @@ public class Settings : ScriptableObject
     public GlobalVariableProperty[] global_variables;
     public PathFindingType pathFindingType;
     public SpeechStyle speechStyle;
+    public InteractionExecuteMethod interactionExecuteMethod;
 }
