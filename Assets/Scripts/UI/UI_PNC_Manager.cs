@@ -25,7 +25,13 @@ public class UI_PNC_Manager : MonoBehaviour
     {
         ui_text.text.text = "";
 
-        if (!string.IsNullOrEmpty(verbsUI.overCursorVerb))
+        if (!string.IsNullOrEmpty(verbsUI.actualVerb))
+        {
+            ui_text.text.text = verbsUI.actualVerb;
+            if (objetive.actualObject != null)
+                ui_text.text.text += " " + objetive.actualObject.name;
+        }
+        else if (!string.IsNullOrEmpty(verbsUI.overCursorVerb))
         {
             ui_text.text.text = verbsUI.overCursorVerb;
             if (objetiveClicked)
@@ -45,10 +51,13 @@ public class UI_PNC_Manager : MonoBehaviour
             if (settings.interactionExecuteMethod == Settings.InteractionExecuteMethod.FirstActionThenObject)
             {
                 if (!string.IsNullOrEmpty(verbsUI.overCursorVerb))
+                    return;
+                if (!string.IsNullOrEmpty(verbsUI.actualVerb))
                 {
                     if (objetive.actualObject != null)
                     {
                         objetive.actualObject.RunInteraction(verbsUI.actualVerb);
+                        verbsUI.ResetActualVerb();
                     }
                     else
                     {
@@ -58,6 +67,7 @@ public class UI_PNC_Manager : MonoBehaviour
                 else
                 {
                     pointAndWalk.WalkCancelable();
+                    verbsUI.ResetActualVerb();
                 }
             }
             else if (settings.interactionExecuteMethod == Settings.InteractionExecuteMethod.FirstObjectThenAction)

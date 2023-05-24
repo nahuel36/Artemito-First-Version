@@ -48,6 +48,8 @@ public class VerbsUI : MonoBehaviour
         {
             buttons[i].gameObject.SetActive(true);
             activeButtons.Add(buttons[i]);
+            string verb = settings.verbs[i];
+            buttons[i].onClick.AddListener(() => ChangeActiveVerb(verb));
             activeVerbs.Add(settings.verbs[i]);
         }
     }
@@ -74,7 +76,8 @@ public class VerbsUI : MonoBehaviour
         {
             buttons[i].gameObject.SetActive(true);
             buttons[i].onClick.RemoveAllListeners();
-            buttons[i].onClick.AddListener(() => ChangeActiveVerb(verbs[i]));
+            string verb = verbs[i];
+            buttons[i].onClick.AddListener(() => ChangeActiveVerb(verb));
             activeButtons.Add(buttons[i]);
             activeVerbs.Add(verbs[i]);
         }

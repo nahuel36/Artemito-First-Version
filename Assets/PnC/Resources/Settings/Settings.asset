@@ -82,4 +82,4 @@ MonoBehaviour:
     stringDefault: 1
   pathFindingType: 1
   speechStyle: 0
-  interactionExecuteMethod: 1
+  interactionExecuteMethod: 0

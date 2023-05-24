@@ -3754,9 +3754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e21e4df9f2baac46acd8b11796e9b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterAnimator: {fileID: 2119691741}
   pNCCharacter: {fileID: 1747983476}
-  anim: {fileID: 2119691740}
 --- !u!4 &1313984164
 Transform:
   m_ObjectHideFlags: 0
@@ -4513,21 +4511,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2119691740 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2760371073395191025, guid: d6814d23b62b95a46a297e31d019ff29,
-    type: 3}
-  m_PrefabInstance: {fileID: 1124651538}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2119691741 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2760371073395191024, guid: d6814d23b62b95a46a297e31d019ff29,
-    type: 3}
-  m_PrefabInstance: {fileID: 1124651538}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cdd68f5734db2349812174d94e538fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
