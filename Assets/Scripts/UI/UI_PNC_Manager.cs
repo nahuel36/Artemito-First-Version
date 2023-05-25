@@ -23,6 +23,8 @@ public class UI_PNC_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (CommandsQueue.Instance.Executing()) return; //No permite cancelar caminata    
+
         ui_text.text.text = "";
 
         if (!string.IsNullOrEmpty(verbsUI.actualVerb))
@@ -46,7 +48,7 @@ public class UI_PNC_Manager : MonoBehaviour
             ui_text.text.text = objetive.actualObject.name;
         }
         
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (settings.interactionExecuteMethod == Settings.InteractionExecuteMethod.FirstActionThenObject)
             {

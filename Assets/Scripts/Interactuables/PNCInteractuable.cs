@@ -57,14 +57,9 @@ public class Interaction
     public VariablesAction variablesAction;
     public PNCVariablesContainer variableObject;
 
-    public enum GetVariableAction
-    {
-        Stop,
-        Continue,
-        GoToSpecificLine
-    }
-    public GetVariableAction OnCompareResultTrueAction;
-    public GetVariableAction OnCompareResultFalseAction;
+
+    public Conditional.GetVariableAction OnCompareResultTrueAction;
+    public Conditional.GetVariableAction OnCompareResultFalseAction;
     public int LineToGoOnTrueResult;
     public int LineToGoOnFalseResult;
     //CUSTOM
@@ -193,10 +188,20 @@ public class PNCInteractuable : PNCVariablesContainer
                         }
                         if (interaction.variablesAction == Interaction.VariablesAction.setGlobalVariable)
                         {
-
-
                             verbs[i].attemps[j].interactions[k].action.AddListener(() =>
                             varContainer.SetGlobalVariable(interaction,
+                                                            interaction.variableObject.global_variables[interaction.globalVariableSelected]));
+                        }
+                        if (interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
+                        {
+                            verbs[i].attemps[j].interactions[k].action.AddListener(() =>
+                            varContainer.GetLocalVariable(interaction,
+                                                            interaction.variableObject.local_variables[interaction.localVariableSelected]));
+                        }
+                        if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable)
+                        {
+                            verbs[i].attemps[j].interactions[k].action.AddListener(() =>
+                            varContainer.GetGlobalVariable(interaction,
                                                             interaction.variableObject.global_variables[interaction.globalVariableSelected]));
                         }
                     }

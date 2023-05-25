@@ -394,16 +394,16 @@ public class PnCCharacterEditor : Editor
                                                                             interactionNoSerialized.global_compareStringValue))
                                                                     {
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionNoSerialized.OnCompareResultTrueAction = (Interaction.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s match", (System.Enum)interactionNoSerialized.OnCompareResultTrueAction);
+                                                                        interactionNoSerialized.OnCompareResultTrueAction = (Conditional.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s match", (System.Enum)interactionNoSerialized.OnCompareResultTrueAction);
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        if (interactionNoSerialized.OnCompareResultTrueAction == Interaction.GetVariableAction.GoToSpecificLine)
+                                                                        if (interactionNoSerialized.OnCompareResultTrueAction == Conditional.GetVariableAction.GoToSpecificLine)
                                                                         {
                                                                             interactionNoSerialized.LineToGoOnTrueResult = EditorGUI.IntField(interactRect, "line to go", interactionNoSerialized.LineToGoOnTrueResult);
                                                                             interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                         }
-                                                                        interactionNoSerialized.OnCompareResultFalseAction = (Interaction.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s doesn't match", (System.Enum)interactionNoSerialized.OnCompareResultFalseAction);
+                                                                        interactionNoSerialized.OnCompareResultFalseAction = (Conditional.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s doesn't match", (System.Enum)interactionNoSerialized.OnCompareResultFalseAction);
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        if (interactionNoSerialized.OnCompareResultFalseAction == Interaction.GetVariableAction.GoToSpecificLine)
+                                                                        if (interactionNoSerialized.OnCompareResultFalseAction == Conditional.GetVariableAction.GoToSpecificLine)
                                                                         {
                                                                             interactionNoSerialized.LineToGoOnFalseResult = EditorGUI.IntField(interactRect, "line to go", interactionNoSerialized.LineToGoOnFalseResult);
                                                                         }
@@ -509,16 +509,16 @@ public class PnCCharacterEditor : Editor
                                                                             interactionNoSerialized.local_compareStringValue))
                                                                     {
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionNoSerialized.OnCompareResultTrueAction = (Interaction.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s match", (System.Enum)interactionNoSerialized.OnCompareResultTrueAction);
+                                                                        interactionNoSerialized.OnCompareResultTrueAction = (Conditional.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s match", (System.Enum)interactionNoSerialized.OnCompareResultTrueAction);
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        if (interactionNoSerialized.OnCompareResultTrueAction == Interaction.GetVariableAction.GoToSpecificLine)
+                                                                        if (interactionNoSerialized.OnCompareResultTrueAction == Conditional.GetVariableAction.GoToSpecificLine)
                                                                         {
                                                                             interactionNoSerialized.LineToGoOnTrueResult = EditorGUI.IntField(interactRect, "line to go", interactionNoSerialized.LineToGoOnTrueResult);
                                                                             interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                         }
-                                                                        interactionNoSerialized.OnCompareResultFalseAction = (Interaction.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s doesn't match", (System.Enum)interactionNoSerialized.OnCompareResultFalseAction);
+                                                                        interactionNoSerialized.OnCompareResultFalseAction = (Conditional.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s doesn't match", (System.Enum)interactionNoSerialized.OnCompareResultFalseAction);
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        if (interactionNoSerialized.OnCompareResultFalseAction == Interaction.GetVariableAction.GoToSpecificLine)
+                                                                        if (interactionNoSerialized.OnCompareResultFalseAction == Conditional.GetVariableAction.GoToSpecificLine)
                                                                         {
                                                                             interactionNoSerialized.LineToGoOnFalseResult = EditorGUI.IntField(interactRect, "line to go", interactionNoSerialized.LineToGoOnFalseResult);
                                                                         }

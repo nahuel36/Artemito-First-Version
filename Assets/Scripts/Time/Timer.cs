@@ -39,10 +39,10 @@ public class Timer : MonoBehaviour//, IInteraction
         }
     }
 
-    public bool ifEnded()
+    public bool ifEnded(Conditional cond)
     {
-        Conditional onend = new Conditional();
-        onend.QueueConditional(ended);
+        BoolConditional onend = new BoolConditional();
+        onend.QueueConditional(cond);
         return ended;
     }
     
