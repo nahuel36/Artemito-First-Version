@@ -46,7 +46,7 @@ public class UI_PNC_Manager : MonoBehaviour
             ui_text.text.text = objetive.actualObject.name;
         }
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             if (settings.interactionExecuteMethod == Settings.InteractionExecuteMethod.FirstActionThenObject)
             {
