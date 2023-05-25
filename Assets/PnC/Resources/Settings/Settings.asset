@@ -80,6 +80,6 @@ MonoBehaviour:
     integerDefault: 1
     booleanDefault: 1
     stringDefault: 1
-  pathFindingType: 1
+  pathFindingType: 0
   speechStyle: 0
-  interactionExecuteMethod: 0
+  interactionExecuteMethod: 1
