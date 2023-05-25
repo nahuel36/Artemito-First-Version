@@ -55,7 +55,7 @@ public class Interaction
     public int globalVariableSelected;
     public int localVariableSelected;
     public VariablesAction variablesAction;
-    public PNCCharacter variableObject;
+    public PNCVariablesContainer variableObject;
 
     public enum GetVariableAction
     {
@@ -81,6 +81,12 @@ public class Interaction
     public bool local_compareBooleanValue;
     public bool local_compareStringValue;
     public bool local_compareIntegerValue;
+    public bool local_defaultBooleanValue;
+    public int local_defaultIntegerValue;
+    public string local_defaultStringValue;
+    public bool global_defaultBooleanValue;
+    public int global_defaultIntegerValue;
+    public string global_defaultStringValue;
     public bool global_BooleanValue;
     public string global_StringValue;
     public int global_IntegerValue;
@@ -121,6 +127,12 @@ public class Interaction
         destiny.global_BooleanValue = global_BooleanValue;
         destiny.global_IntegerValue = global_IntegerValue;
         destiny.global_StringValue = global_StringValue;
+        destiny.local_defaultBooleanValue = local_defaultBooleanValue;
+        destiny.local_defaultIntegerValue = local_defaultIntegerValue;
+        destiny.local_defaultStringValue = local_defaultStringValue;
+        destiny.global_defaultBooleanValue = global_defaultBooleanValue;
+        destiny.global_defaultIntegerValue = global_defaultIntegerValue;
+        destiny.global_defaultStringValue = global_defaultStringValue;
         destiny.LineToGoOnFalseResult = LineToGoOnFalseResult;
         destiny.LineToGoOnTrueResult = LineToGoOnTrueResult;
         destiny.OnCompareResultFalseAction = OnCompareResultFalseAction;
@@ -168,6 +180,24 @@ public class PNCInteractuable : PNCVariablesContainer
                         if (interaction.characterAction == Interaction.CharacterAction.walk)
                         {
                             verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Walk(interaction.WhereToWalk.position));
+                        }
+                    }
+                    if (interaction.type == Interaction.InteractionType.variables)
+                    {
+                        PNCVariablesContainer varContainer = interaction.variableObject;
+                        if (interaction.variablesAction == Interaction.VariablesAction.setLocalVariable)
+                        {
+                            verbs[i].attemps[j].interactions[k].action.AddListener(() => 
+                            varContainer.SetLocalVariable(interaction, 
+                                                            interaction.variableObject.local_variables[interaction.localVariableSelected]));
+                        }
+                        if (interaction.variablesAction == Interaction.VariablesAction.setGlobalVariable)
+                        {
+
+
+                            verbs[i].attemps[j].interactions[k].action.AddListener(() =>
+                            varContainer.SetGlobalVariable(interaction,
+                                                            interaction.variableObject.global_variables[interaction.globalVariableSelected]));
                         }
                     }
                     

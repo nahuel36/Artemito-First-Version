@@ -76,11 +76,11 @@ public class PnCCharacterEditor : Editor
                             if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.getGlobalVariable)
                             {
                                 if (interactionNoSerialized.global_compareBooleanValue)
-                                    height += 1;
+                                    height += 2;
                                 if (interactionNoSerialized.global_compareIntegerValue)
-                                    height += 1;
+                                    height += 2;
                                 if (interactionNoSerialized.global_compareStringValue)
-                                    height += 1;
+                                    height += 2;
                                 if (interactionNoSerialized.global_compareBooleanValue ||
                                     interactionNoSerialized.global_compareIntegerValue ||
                                     interactionNoSerialized.global_compareStringValue)
@@ -115,11 +115,11 @@ public class PnCCharacterEditor : Editor
                             if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.getLocalVariable)
                             {
                                 if (interactionNoSerialized.local_compareBooleanValue)
-                                    height += 1;
+                                    height += 2;
                                 if (interactionNoSerialized.local_compareIntegerValue)
-                                    height += 1;
+                                    height += 2;
                                 if (interactionNoSerialized.local_compareStringValue)
-                                    height += 1;
+                                    height += 2;
                                 if (interactionNoSerialized.local_compareBooleanValue ||
                                     interactionNoSerialized.local_compareIntegerValue ||
                                     interactionNoSerialized.local_compareStringValue)
@@ -333,6 +333,8 @@ public class PnCCharacterEditor : Editor
                                                                             {
                                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                                 interactionNoSerialized.global_BooleanValue = EditorGUI.Toggle(interactRect, "value to compare", interactionNoSerialized.global_BooleanValue);
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactionNoSerialized.global_defaultBooleanValue = EditorGUI.Toggle(interactRect, "default value", interactionNoSerialized.global_defaultBooleanValue);
                                                                             }
                                                                         }
                                                                     }
@@ -356,6 +358,8 @@ public class PnCCharacterEditor : Editor
                                                                             {
                                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                                 interactionNoSerialized.global_IntegerValue = EditorGUI.IntField(interactRect, "value to compare", interactionNoSerialized.global_IntegerValue);
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactionNoSerialized.global_defaultIntegerValue = EditorGUI.IntField(interactRect, "default value", interactionNoSerialized.global_defaultIntegerValue);
                                                                             }
                                                                         }
                                                                     }
@@ -379,6 +383,8 @@ public class PnCCharacterEditor : Editor
                                                                             {
                                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                                 interactionNoSerialized.global_StringValue = EditorGUI.TextField(interactRect, "value to compare", interactionNoSerialized.global_StringValue);
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactionNoSerialized.global_defaultStringValue = EditorGUI.TextField(interactRect, "default value", interactionNoSerialized.global_defaultStringValue);
                                                                             }
                                                                         }
                                                                     }
@@ -442,6 +448,8 @@ public class PnCCharacterEditor : Editor
                                                                             {
                                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                                 interactionNoSerialized.local_BooleanValue = EditorGUI.Toggle(interactRect, "value to compare", interactionNoSerialized.local_BooleanValue);
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactionNoSerialized.local_defaultBooleanValue = EditorGUI.Toggle(interactRect, "default value", interactionNoSerialized.local_defaultBooleanValue);
                                                                             }
                                                                         }
                                                                     }
@@ -465,6 +473,8 @@ public class PnCCharacterEditor : Editor
                                                                             {
                                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                                 interactionNoSerialized.local_IntegerValue = EditorGUI.IntField(interactRect, "value to compare", interactionNoSerialized.local_IntegerValue);
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactionNoSerialized.local_defaultIntegerValue = EditorGUI.IntField(interactRect, "default value", interactionNoSerialized.local_defaultIntegerValue);
                                                                             }
                                                                         }
                                                                     }
@@ -488,6 +498,8 @@ public class PnCCharacterEditor : Editor
                                                                             {
                                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                                 interactionNoSerialized.local_StringValue= EditorGUI.TextField(interactRect, "value to compare", interactionNoSerialized.local_StringValue);
+                                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                                interactionNoSerialized.local_defaultStringValue = EditorGUI.TextField(interactRect, "default value", interactionNoSerialized.local_defaultStringValue);
                                                                             }
                                                                         }
                                                                     }
@@ -841,11 +853,11 @@ public class PnCCharacterEditor : Editor
 
                 if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.integer))
                 {
-                    if (!variables[i].properties.integerDefault)
+                    if (!variables[i].integerDefault)
                     {
                         variables[i].integer = EditorGUILayout.IntField("integer value:", variables[i].integer);
                         if (GUILayout.Button("Set integer default value"))
-                            variables[i].properties.integerDefault = true;
+                            variables[i].integerDefault = true;
                     }
                     else
                     {
@@ -853,17 +865,17 @@ public class PnCCharacterEditor : Editor
                         if (GUILayout.Button("Set integer value"))
                         {
                             variables[i].integer = 0;
-                            variables[i].properties.integerDefault = false;
+                            variables[i].integerDefault = false;
                         }
                     }
                 }
                 if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.boolean))
                 {
-                    if (!variables[i].properties.booleanDefault)
+                    if (!variables[i].booleanDefault)
                     {
                         variables[i].boolean = EditorGUILayout.Toggle("boolean value:", variables[i].boolean);
                         if (GUILayout.Button("Set boolean default value"))
-                            variables[i].properties.booleanDefault = true;
+                            variables[i].booleanDefault = true;
                     }
                     else
                     {
@@ -871,17 +883,17 @@ public class PnCCharacterEditor : Editor
                         if (GUILayout.Button("Set boolean value"))
                         {
                             variables[i].boolean = false;
-                            variables[i].properties.booleanDefault = false;
+                            variables[i].booleanDefault = false;
                         }
                     }
                 }
                 if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.String))
                 {
-                    if (!variables[i].properties.stringDefault)
+                    if (!variables[i].stringDefault)
                     {
                         variables[i].String = EditorGUILayout.TextField("string value:", variables[i].String);
                         if (GUILayout.Button("Set string default value"))
-                            variables[i].properties.stringDefault = true;
+                            variables[i].stringDefault = true;
                     }
                     else
                     {
@@ -889,7 +901,7 @@ public class PnCCharacterEditor : Editor
                         if (GUILayout.Button("Set string value"))
                         {
                             variables[i].String = "";
-                            variables[i].properties.stringDefault = false;
+                            variables[i].stringDefault = false;
                         }
                     }
                 }

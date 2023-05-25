@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class InteractuableLocalVariable
     public types type;
     public int globalHashCode = -1;
     public bool expandedInInspector;
+
 }
 
 [System.Serializable]
@@ -34,11 +36,26 @@ public class InteractuableGlobalVariable
     public int globalHashCode = -1;
     public GlobalVariableProperty properties;
     public bool expandedInInspector;
+    public bool integerDefault = true;
+    public bool booleanDefault = true;
+    public bool stringDefault = true;
 }
 
 public class PNCVariablesContainer : MonoBehaviour
 {
     public InteractuableLocalVariable[] local_variables = new InteractuableLocalVariable[0];
     public InteractuableGlobalVariable[] global_variables = new InteractuableGlobalVariable[0];
+
+    public void SetLocalVariable(Interaction interact, InteractuableLocalVariable variable)
+    {
+        CommandSetLocalVariable command = new CommandSetLocalVariable();
+        command.Queue(variable, interact);
+    }
+
+    internal void SetGlobalVariable(Interaction interaction, InteractuableGlobalVariable interactuableGlobalVariable)
+    {
+        CommandSetGlobalVariable command = new CommandSetGlobalVariable();
+        command.Queue(interactuableGlobalVariable, interaction);
+    }
 
 }

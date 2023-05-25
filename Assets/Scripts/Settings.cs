@@ -24,10 +24,6 @@ public class GlobalVariableProperty
         String = (1 << 2)
     }
     public variable_types variable_type;
-
-    public bool integerDefault = true;
-    public bool booleanDefault = true;
-    public bool stringDefault = true;
 }
 
 
