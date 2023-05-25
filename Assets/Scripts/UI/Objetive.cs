@@ -7,12 +7,12 @@ using UnityEngine.EventSystems;
 public class Objetive : MonoBehaviour
 {
     [HideInInspector]public PNCInteractuable actualObject;
-    Cursor cursor;
+    PNCCursor cursor;
 
     // Start is called before the first frame update
     void Start()
     {
-        cursor = GameObject.FindObjectOfType<Cursor>();
+        cursor = GameObject.FindObjectOfType<PNCCursor>();
        
     }
 

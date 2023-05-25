@@ -10,7 +10,7 @@ public class VerbsUI : MonoBehaviour
     [HideInInspector] public string overCursorVerb;
     UnityEngine.UI.GraphicRaycaster raycaster;
     EventSystem eventSystem;
-    Cursor cursor;
+    PNCCursor cursor;
     List<Button> activeButtons;
     List<string> activeVerbs;
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class VerbsUI : MonoBehaviour
 
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
         eventSystem = FindObjectOfType<EventSystem>();
-        cursor = GameObject.FindObjectOfType<Cursor>();
+        cursor = GameObject.FindObjectOfType<PNCCursor>();
 
     }
 

@@ -5,7 +5,10 @@ using UnityEngine.Events;
 
 
 
-
+public interface SayScript
+{
+    string SayWithScript();
+}
 
 
 public class PNCCharacter : PNCInteractuable

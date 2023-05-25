@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -38,6 +37,7 @@ public class Interaction
     public enum CharacterAction
     {
         say,
+        sayWithScript,
         walk
     }
     public PNCCharacter character;
@@ -87,6 +87,7 @@ public class Interaction
     public bool local_BooleanValue;
     public string local_StringValue;
     public int local_IntegerValue;
+    public MonoBehaviour SayScript; 
     //averiguar sobre deep copy / clone
     public void Copy(Interaction destiny)
     {
@@ -150,6 +151,10 @@ public class PNCInteractuable : PNCVariablesContainer
                         {
                             string whattosay = interaction.WhatToSay;
                             verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Talk(whattosay));
+                        }
+                        if (interaction.characterAction == Interaction.CharacterAction.sayWithScript)
+                        {
+                            verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Talk(((SayScript)interaction.SayScript).SayWithScript()));
                         }
                     }
                     

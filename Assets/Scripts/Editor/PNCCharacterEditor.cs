@@ -268,6 +268,14 @@ public class PnCCharacterEditor : Editor
                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
                                                         if (interactionNoSerialized.characterAction == Interaction.CharacterAction.say)
                                                             EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhatToSay"));
+                                                        if (interactionNoSerialized.characterAction == Interaction.CharacterAction.sayWithScript)
+                                                        { 
+                                                            EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("SayScript"));
+                                                            if (!(interactionSerialized.FindPropertyRelative("SayScript").objectReferenceValue is SayScript))
+                                                            {
+                                                                interactionSerialized.FindPropertyRelative("SayScript").objectReferenceValue = null;
+                                                            }
+                                                        }
                                                         else if (interactionNoSerialized.characterAction == Interaction.CharacterAction.walk)
                                                             EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhereToWalk"));
                                                         }
