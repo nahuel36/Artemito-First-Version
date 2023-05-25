@@ -143,8 +143,8 @@ public class PNCInteractuable : PNCVariablesContainer
                 {
                     verbs[i].attemps[j].interactions[k].action = new UnityEvent();
                     PNCCharacter charact = verbs[i].attemps[j].interactions[k].character;
-                    string verb = verbs[i].name;
-                    verbs[i].attemps[j].interactions[k].action.AddListener(()=>charact.Talk(verb));
+                    string whattosay = verbs[i].attemps[j].interactions[k].WhatToSay;
+                    verbs[i].attemps[j].interactions[k].action.AddListener(()=>charact.Talk(whattosay));
                 }
             }
         }
