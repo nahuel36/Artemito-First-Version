@@ -29,7 +29,7 @@ public class CommandsQueue
     private Conditional _conditional;
     private ICommand actualCommand;
     private int actualCommandIndex = 0;
-
+    private bool execute = true;
     private CommandsQueue()
     {
         _commandsToExecute = new List<ICommand>();
@@ -51,6 +51,40 @@ public class CommandsQueue
     public void AddConditional(Conditional cond)
     {
         _conditional = cond;
+
+         if (_conditional != null && _conditional.condition == true)
+            {
+                if (_conditional.actionIfTrue == Conditional.GetVariableAction.Stop)
+                {
+                    execute = false;
+                }
+                if (_conditional.actionIfTrue == Conditional.GetVariableAction.Continue)
+                {
+                    execute = true;
+                }
+                if (_conditional.actionIfTrue == Conditional.GetVariableAction.GoToSpecificLine)
+                {
+                    actualCommandIndex = _conditional.lineToGoIfTrue;
+                    execute = true;
+                }
+            }
+            if (_conditional != null && _conditional.condition == false)
+            {
+                if (_conditional.actionIfFalse == Conditional.GetVariableAction.Stop)
+                {
+                    execute = false;
+                }
+                if (_conditional.actionIfFalse == Conditional.GetVariableAction.Continue)
+                {
+                    execute = true;
+                }
+                if (_conditional.actionIfFalse == Conditional.GetVariableAction.GoToSpecificLine)
+                {
+                    actualCommandIndex = _conditional.lineToGoIfFalse;
+                    execute = true;
+                }
+            }
+
     }
 
     public void ClearConditionals()
@@ -84,44 +118,9 @@ public class CommandsQueue
             _runningCommand = true;
             var commandToExecute = _commandsToExecute[actualCommandIndex];
             actualCommandIndex++;
-            bool execute = true;
 
             if (commandToExecute is EndTimer)
-                ClearConditionals();
-
-
-            if (_conditional != null && _conditional.condition == true)
-            {
-                if (_conditional.actionIfTrue == Conditional.GetVariableAction.Stop)
-                {
-                    execute = false;
-                }
-                if (_conditional.actionIfTrue == Conditional.GetVariableAction.Continue)
-                {
-                    execute = true;
-                }
-                if (_conditional.actionIfTrue == Conditional.GetVariableAction.GoToSpecificLine)
-                {
-                    actualCommandIndex = _conditional.lineToGoIfTrue;
-                    continue;
-                }
-            }
-            if (_conditional != null && _conditional.condition == false)
-            {
-                if (_conditional.actionIfFalse == Conditional.GetVariableAction.Stop)
-                {
-                    execute = false;
-                }
-                if (_conditional.actionIfFalse == Conditional.GetVariableAction.Continue)
-                {
-                    execute = true;
-                }
-                if (_conditional.actionIfFalse == Conditional.GetVariableAction.GoToSpecificLine)
-                {
-                    actualCommandIndex = _conditional.lineToGoIfFalse;
-                    continue;
-                }
-            }
+                execute = true;
 
             if (execute)
             {
@@ -130,8 +129,8 @@ public class CommandsQueue
             }
         }
 
+        execute = true;
         _commandsToExecute.Clear();
-        ClearConditionals();
         actualCommandIndex = 0;
         _runningCommand = false;
     }

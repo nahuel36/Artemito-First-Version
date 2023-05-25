@@ -81,6 +81,10 @@ public class PnCCharacterEditor : Editor
                                     height += 2;
                                 if (interactionNoSerialized.global_compareStringValue)
                                     height += 2;
+                                if (interactionNoSerialized.OnCompareResultFalseAction == Conditional.GetVariableAction.GoToSpecificLine)
+                                    height += 1;
+                                if (interactionNoSerialized.OnCompareResultTrueAction == Conditional.GetVariableAction.GoToSpecificLine)
+                                    height += 1;
                                 if (interactionNoSerialized.global_compareBooleanValue ||
                                     interactionNoSerialized.global_compareIntegerValue ||
                                     interactionNoSerialized.global_compareStringValue)
@@ -120,6 +124,10 @@ public class PnCCharacterEditor : Editor
                                     height += 2;
                                 if (interactionNoSerialized.local_compareStringValue)
                                     height += 2;
+                                if (interactionNoSerialized.OnCompareResultFalseAction == Conditional.GetVariableAction.GoToSpecificLine)
+                                    height += 1;
+                                if (interactionNoSerialized.OnCompareResultTrueAction == Conditional.GetVariableAction.GoToSpecificLine)
+                                    height += 1;
                                 if (interactionNoSerialized.local_compareBooleanValue ||
                                     interactionNoSerialized.local_compareIntegerValue ||
                                     interactionNoSerialized.local_compareStringValue)
