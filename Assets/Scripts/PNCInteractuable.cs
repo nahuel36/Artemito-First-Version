@@ -87,7 +87,8 @@ public class Interaction
     public bool local_BooleanValue;
     public string local_StringValue;
     public int local_IntegerValue;
-    public MonoBehaviour SayScript; 
+    public MonoBehaviour SayScript;
+    public bool CanSkip;
     //averiguar sobre deep copy / clone
     public void Copy(Interaction destiny)
     {
@@ -124,6 +125,8 @@ public class Interaction
         destiny.LineToGoOnTrueResult = LineToGoOnTrueResult;
         destiny.OnCompareResultFalseAction = OnCompareResultFalseAction;
         destiny.OnCompareResultTrueAction = OnCompareResultTrueAction;
+        destiny.SayScript = SayScript;
+        destiny.CanSkip = CanSkip;
     }
 }
 
@@ -150,11 +153,17 @@ public class PNCInteractuable : PNCVariablesContainer
                         if (interaction.characterAction == Interaction.CharacterAction.say)
                         {
                             string whattosay = interaction.WhatToSay;
-                            verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Talk(whattosay));
+                            if(interaction.CanSkip)
+                                verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Talk(whattosay));
+                            else
+                                verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.UnskippableTalk(whattosay));
                         }
                         if (interaction.characterAction == Interaction.CharacterAction.sayWithScript)
                         {
-                            verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Talk(((SayScript)interaction.SayScript).SayWithScript()));
+                            if (interaction.CanSkip)
+                                verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Talk(((SayScript)interaction.SayScript).SayWithScript()));
+                            else
+                                verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.UnskippableTalk(((SayScript)interaction.SayScript).SayWithScript()));
                         }
                     }
                     
@@ -178,13 +187,19 @@ public class PNCInteractuable : PNCVariablesContainer
     {
         
         Verb verbToRun = FindVerb(verbToRunString);
-                        
-        verbToRun.attemps[verbToRun.executedTimes].interactions[0].action.Invoke();
-        //verbToRun.attemps[verbToRun.executedTimes].interactions[1].action.Invoke();
 
-      //  verbToRun.executedTimes++;
-        
-        //Debug.Log("RUN");
+        for (int i = 0; i < verbToRun.attemps[verbToRun.executedTimes].interactions.Count; i++)
+        {
+            verbToRun.attemps[verbToRun.executedTimes].interactions[i].action.Invoke();
+        }
+        if (verbToRun.executedTimes + 1 == verbToRun.attemps.Count)
+        {
+            if (verbToRun.isCyclical) verbToRun.executedTimes = 0;
+            else verbToRun.executedTimes = verbToRun.attemps.Count - 1;
+        }
+        else
+            verbToRun.executedTimes++;
+
     }
 
     public Verb FindVerb(string verb) {

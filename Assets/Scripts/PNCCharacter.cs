@@ -16,7 +16,7 @@ public class PNCCharacter : PNCInteractuable
     IPathFinder pathFinder;
     IMessageTalker messageTalker;
     CommandWalk cancelableWalk;
-    CommandTalk skippabletalk;
+    CommandTalk normalTalk;
     CommandTalk backgroundTalk;
 
     [SerializeField]Sprite SierraTextFace;
@@ -74,9 +74,16 @@ public class PNCCharacter : PNCInteractuable
 
     public void Talk(string message)
     {
-        skippabletalk = new CommandTalk();
-        skippabletalk.Queue(messageTalker, message, true,false);
+        normalTalk = new CommandTalk();
+        normalTalk.Queue(messageTalker, message, true,false);
     }
+
+    public void UnskippableTalk(string message)
+    {
+        normalTalk = new CommandTalk();
+        normalTalk.Queue(messageTalker, message, false, false);
+    }
+
 
     public void BackgroundTalk(string message)
     {
@@ -86,12 +93,19 @@ public class PNCCharacter : PNCInteractuable
 
     public void SkipTalk()
     {
-        if(skippabletalk != null)
-            skippabletalk.Skip();
+        if(normalTalk != null)
+            normalTalk.Skip();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+            SkipTalk();
+
     }
 
     public bool isTalking()
     {
-        return (backgroundTalk != null && backgroundTalk.IsTalking()) || (skippabletalk != null && skippabletalk.IsTalking());
+        return (backgroundTalk != null && backgroundTalk.IsTalking()) || (normalTalk != null && normalTalk.IsTalking());
     }
 }

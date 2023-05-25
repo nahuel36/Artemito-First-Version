@@ -33,7 +33,13 @@ public class PnCCharacterEditor : Editor
         if (interactionSerialized.FindPropertyRelative("expandedInInspector").boolValue)
         {
             if (interactionNoSerialized.type == Interaction.InteractionType.character)
-                return EditorGUIUtility.singleLineHeight * 5.25f;
+            {
+                float height = 5.25f;
+                if (interactionNoSerialized.characterAction == Interaction.CharacterAction.say ||
+                    interactionNoSerialized.characterAction == Interaction.CharacterAction.sayWithScript)
+                    height++;
+                return EditorGUIUtility.singleLineHeight * height;
+            }
             if (interactionNoSerialized.type == Interaction.InteractionType.variables)
             {
                 float height = 4.25f;
@@ -267,7 +273,11 @@ public class PnCCharacterEditor : Editor
                                                         EditorGUI.PropertyField(interactRect,interactionSerialized.FindPropertyRelative("characterAction"));
                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
                                                         if (interactionNoSerialized.characterAction == Interaction.CharacterAction.say)
+                                                        { 
                                                             EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhatToSay"));
+                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                            EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("CanSkip"));
+                                                        }
                                                         if (interactionNoSerialized.characterAction == Interaction.CharacterAction.sayWithScript)
                                                         { 
                                                             EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("SayScript"));
@@ -275,6 +285,8 @@ public class PnCCharacterEditor : Editor
                                                             {
                                                                 interactionSerialized.FindPropertyRelative("SayScript").objectReferenceValue = null;
                                                             }
+                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                            EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("CanSkip"));
                                                         }
                                                         else if (interactionNoSerialized.characterAction == Interaction.CharacterAction.walk)
                                                             EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhereToWalk"));
