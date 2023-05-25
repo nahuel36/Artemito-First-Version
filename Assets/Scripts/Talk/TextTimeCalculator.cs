@@ -10,6 +10,6 @@ public class TextTimeCalculator : ITextTimeCalculator
 
     public float CalculateTime(string text)
     {
-        return 1;
+        return 1 + text.Length * 0.075f;
     }
 }
