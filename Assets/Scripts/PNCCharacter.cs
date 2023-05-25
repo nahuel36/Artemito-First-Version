@@ -26,11 +26,12 @@ public class PNCCharacter : PNCInteractuable
 
     private void Awake()
     {
+        anim = GetComponentInChildren<Animator>();
         ConfigurePathFinder(1);
         ConfigureTalker();
         CharacterAnimatorAdapter characterAnimatorAdapter = new CharacterAnimatorAdapter();
         characterAnimatorAdapter.Configure(anim);
-        characterAnimator = new CharacterAnimator();
+        characterAnimator = GetComponentInChildren<CharacterAnimator>();
         characterAnimator.Configure(characterAnimatorAdapter, this);
     }
 
