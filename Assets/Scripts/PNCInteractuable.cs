@@ -142,9 +142,17 @@ public class PNCInteractuable : PNCVariablesContainer
                 for (int k = 0; k < verbs[i].attemps[j].interactions.Count; k++)
                 {
                     verbs[i].attemps[j].interactions[k].action = new UnityEvent();
-                    PNCCharacter charact = verbs[i].attemps[j].interactions[k].character;
-                    string whattosay = verbs[i].attemps[j].interactions[k].WhatToSay;
-                    verbs[i].attemps[j].interactions[k].action.AddListener(()=>charact.Talk(whattosay));
+                    Interaction interaction = verbs[i].attemps[j].interactions[k];
+                    if (interaction.type == Interaction.InteractionType.character)
+                    {
+                        PNCCharacter charact = interaction.character;
+                        if (interaction.characterAction == Interaction.CharacterAction.say)
+                        {
+                            string whattosay = interaction.WhatToSay;
+                            verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Talk(whattosay));
+                        }
+                    }
+                    
                 }
             }
         }
