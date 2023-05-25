@@ -165,6 +165,10 @@ public class PNCInteractuable : PNCVariablesContainer
                             else
                                 verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.UnskippableTalk(((SayScript)interaction.SayScript).SayWithScript()));
                         }
+                        if (interaction.characterAction == Interaction.CharacterAction.walk)
+                        {
+                            verbs[i].attemps[j].interactions[k].action.AddListener(() => charact.Walk(interaction.WhereToWalk.position));
+                        }
                     }
                     
                 }

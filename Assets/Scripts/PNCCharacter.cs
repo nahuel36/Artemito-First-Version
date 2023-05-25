@@ -97,6 +97,12 @@ public class PNCCharacter : PNCInteractuable
             normalTalk.Skip();
     }
 
+    public void SkipWalk()
+    {
+        if (cancelableWalk != null)
+            cancelableWalk.Skip();
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
