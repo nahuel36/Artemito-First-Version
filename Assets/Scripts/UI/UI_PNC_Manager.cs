@@ -78,6 +78,7 @@ public class UI_PNC_Manager : MonoBehaviour
                         objetiveClicked.RunInteraction(verbsUI.overCursorVerb);
                     objetiveClicked = null;
                     verbsUI.HideAllVerbs();
+                    verbsUI.ResetActualVerb();
                 }
                 else if (objetive.actualObject != null)
                 {
@@ -88,6 +89,7 @@ public class UI_PNC_Manager : MonoBehaviour
                 {
                     objetiveClicked = null;
                     verbsUI.HideAllVerbs();
+                    verbsUI.ResetActualVerb();
                     pointAndWalk.WalkCancelable();
                 }
             }
