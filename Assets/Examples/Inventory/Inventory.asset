@@ -18,50 +18,40 @@ MonoBehaviour:
     selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b, type: 3}
     haveItOnStart: 0
     cuantity: 1
-    globalVariables: []
-    localVariables: []
+    local_variables: []
+    global_variables: []
   - itemName: bone
     normalImage: {fileID: 21300000, guid: cee9dbe90b270c944ae1dabf41c93b10, type: 3}
     selectedImage: {fileID: 21300000, guid: 68e5a78013e33f247822a837e55b0ab4, type: 3}
     haveItOnStart: 0
     cuantity: 1
-    globalVariables: []
-    localVariables: []
+    local_variables: []
+    global_variables: []
   - itemName: 3
     normalImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd, type: 3}
     selectedImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd, type: 3}
     haveItOnStart: 0
     cuantity: 1
-    globalVariables: []
-    localVariables: []
+    local_variables: []
+    global_variables: []
   - itemName: clavo3
     normalImage: {fileID: 21300000, guid: 923ef30b017f66d48bc529e9489a1f76, type: 3}
     selectedImage: {fileID: 21300000, guid: 923ef30b017f66d48bc529e9489a1f76, type: 3}
     haveItOnStart: 0
     cuantity: 1
-    globalVariables: []
-    localVariables: []
+    local_variables: []
+    global_variables: []
   - itemName: resorte2
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     haveItOnStart: 0
     cuantity: 1
-    globalVariables: []
-    localVariables:
-    - name: 
-      integer: 0
-      integerDefault: 0
-      boolean: 0
-      booleanDefault: 0
-      String: 
-      stringDefault: 0
-      type: 0
-      globalHashCode: 0
-      expandedInInspector: 0
+    local_variables: []
+    global_variables: []
   - itemName: malla
     normalImage: {fileID: 21300000, guid: 143f2f17dee481c4bb0fe34d2738962d, type: 3}
     selectedImage: {fileID: 21300000, guid: 143f2f17dee481c4bb0fe34d2738962d, type: 3}
     haveItOnStart: 0
     cuantity: 1
-    globalVariables: []
-    localVariables: []
+    local_variables: []
+    global_variables: []
