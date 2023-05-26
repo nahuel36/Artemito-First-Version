@@ -13,31 +13,32 @@ public class CommandGetLocalVariable : ICommand
         await Task.Yield();
         if (interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
         {
-            bool result = false;
+            bool result = true;
             if (interaction.local_compareBooleanValue)
             {
-                if (variable.booleanDefault && interaction.local_BooleanValue == interaction.local_defaultBooleanValue)
-                    result = true;
-                if (!variable.booleanDefault && interaction.local_BooleanValue == variable.boolean)
-                    result = true;
+                if (variable.booleanDefault && interaction.local_BooleanValue != interaction.local_defaultBooleanValue)
+                    result = false;
+                if (!variable.booleanDefault && interaction.local_BooleanValue != variable.boolean)
+                    result = false;
             }
             if (interaction.local_compareIntegerValue)
             {
-                if (variable.integerDefault && interaction.local_IntegerValue == interaction.local_defaultIntegerValue)
-                    result = true;
-                if (!variable.integerDefault && interaction.local_IntegerValue == variable.integer)
-                    result = true;
+                if (variable.integerDefault && interaction.local_IntegerValue != interaction.local_defaultIntegerValue)
+                    result = false;
+                if (!variable.integerDefault && interaction.local_IntegerValue != variable.integer)
+                    result = false;
             }
             if (interaction.local_compareStringValue)
             {
-                if (variable.stringDefault && interaction.local_StringValue == interaction.local_defaultStringValue)
-                    result = true;
-                if (!variable.stringDefault && interaction.local_StringValue == variable.String)
-                    result = true;
+                if (variable.stringDefault && interaction.local_StringValue != interaction.local_defaultStringValue)
+                    result = false;
+                if (!variable.stringDefault && interaction.local_StringValue != variable.String)
+                    result = false;
             }
             conditional.condition = result;
         }
-        CommandsQueue.Instance.AddConditional(conditional);
+        if(interaction.local_compareBooleanValue || interaction.local_compareIntegerValue || interaction.local_compareStringValue)
+            CommandsQueue.Instance.AddConditional(conditional);
 
     }
 
