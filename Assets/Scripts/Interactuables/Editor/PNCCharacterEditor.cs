@@ -704,8 +704,11 @@ public class PnCCharacterEditor : Editor
             EditorGUIUtility.PingObject(settings);
         }
 
-        if(settings.speechStyle == Settings.SpeechStyle.Sierra)
-            EditorGUILayout.ObjectField(serializedObject.FindProperty("SierraTextFace"), typeof(Sprite),GUILayout.Height(100),GUILayout.Width(225));
+        if (settings.speechStyle == Settings.SpeechStyle.Sierra)
+        { 
+            GUILayout.Box(myTarget.SierraTextFace.texture,GUILayout.MaxHeight(100),GUILayout.MaxWidth(100),GUILayout.MinHeight(100),GUILayout.MinWidth(100));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("SierraTextFace"));
+        }
                 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();

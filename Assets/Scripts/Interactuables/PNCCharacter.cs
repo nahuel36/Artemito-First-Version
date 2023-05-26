@@ -19,7 +19,7 @@ public class PNCCharacter : PNCInteractuable
     CommandTalk normalTalk;
     CommandTalk backgroundTalk;
 
-    [SerializeField]Sprite SierraTextFace;
+    public Sprite SierraTextFace;
 
     Animator anim;
     CharacterAnimator characterAnimator;
