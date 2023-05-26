@@ -8,7 +8,7 @@ public class InventoryItem
     public string itemName;
     public Sprite normalImage;
     public Sprite selectedImage;
-    public bool haveItOnStart = false;
+    public bool startWithThisItem = false;
     public float cuantity = 1;
     public InteractuableLocalVariable[] local_variables;
     public InteractuableGlobalVariable[] global_variables;
