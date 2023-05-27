@@ -600,7 +600,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
         if(verbAdded || verbAdded2)
             myTarget.verbs = interactionsTempList;
 
-        InitializeGlobalVariables(GlobalVariableProperty.object_types.characters);
+        PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.characters, ref ((PNCCharacter)target).global_variables);
 
         local_variables_serialized = serializedObject.FindProperty("local_variables");
         global_variables_serialized = serializedObject.FindProperty("global_variables");
@@ -661,9 +661,9 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
         }
                 
 
-        ShowLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
+        PNCEditorUtils.ShowLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
         
-        ShowGlobalVariables(GlobalVariableProperty.object_types.characters, ref myTarget.global_variables, ref global_variables_serialized);
+        PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.characters, ref myTarget.global_variables, ref global_variables_serialized);
 
         serializedObject.ApplyModifiedProperties();
 
