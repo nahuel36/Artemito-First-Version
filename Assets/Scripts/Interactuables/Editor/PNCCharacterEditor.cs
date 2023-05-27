@@ -8,11 +8,8 @@ using UnityEditorInternal;
 [CustomEditor(typeof(PNCCharacter))]
 public class PnCCharacterEditor : PNCVariablesContainerEditor
 {
-    Settings settings;
     SerializedProperty verbs_serialized;
-    SerializedProperty local_variables_serialized;
-    SerializedProperty global_variables_serialized;
-
+    
     ReorderableList verbsList;
     Dictionary<string,ReorderableList> attempsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> interactionsListDict = new Dictionary<string, ReorderableList>();

@@ -6,9 +6,9 @@ using System.Linq;
 [CustomEditor(typeof(PNCVariablesContainer))]
 public class PNCVariablesContainerEditor : Editor
 {
-    Settings settings;
-    SerializedProperty local_variables_serialized;
-    SerializedProperty global_variables_serialized;
+    protected Settings settings;
+    protected SerializedProperty local_variables_serialized;
+    protected SerializedProperty global_variables_serialized;
     public void InitializeGlobalVariables(System.Enum type) {
         PNCVariablesContainer myTarget = (PNCVariablesContainer)target;
 
