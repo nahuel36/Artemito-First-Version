@@ -24,8 +24,15 @@ public class InventoryListEditor : Editor
         for (int i = 0; i < myTarget.items.Length; i++)
         {
             k++;
+            GUIContent content = new GUIContent();
+            if(myTarget.items[i].normalImage != null)
+                content.image = myTarget.items[i].normalImage.texture;
+            else
+                content.text = myTarget.items[i].itemName;
+
+            content.tooltip = myTarget.items[i].itemName;
+            buttons.Add(GUILayout.Button(content, GUILayout.MaxHeight(size), GUILayout.MaxWidth(size), GUILayout.MinHeight(size), GUILayout.MinWidth(size)));
             
-            buttons.Add(GUILayout.Button(myTarget.items[i].normalImage.texture, GUILayout.MaxHeight(size), GUILayout.MaxWidth(size), GUILayout.MinHeight(size), GUILayout.MinWidth(size)));
             if ((k +1.46f)* (size*0.99f) > EditorGUIUtility.currentViewWidth)
             {
                 k = 0;
@@ -51,8 +58,10 @@ public class InventoryListEditor : Editor
         if (selectedButton != -1)
         {
             EditorGUILayout.BeginHorizontal();
-            GUILayout.Box(myTarget.items[selectedButton].normalImage.texture, GUILayout.MaxHeight(size), GUILayout.MaxWidth(size), GUILayout.MinHeight(size), GUILayout.MinWidth(size));
-            GUILayout.Box(myTarget.items[selectedButton].selectedImage.texture, GUILayout.MaxHeight(size), GUILayout.MaxWidth(size), GUILayout.MinHeight(size), GUILayout.MinWidth(size));
+            if(myTarget.items[selectedButton].normalImage)
+                GUILayout.Box(myTarget.items[selectedButton].normalImage.texture, GUILayout.MaxHeight(size), GUILayout.MaxWidth(size), GUILayout.MinHeight(size), GUILayout.MinWidth(size));
+            if(myTarget.items[selectedButton].selectedImage)
+                GUILayout.Box(myTarget.items[selectedButton].selectedImage.texture, GUILayout.MaxHeight(size), GUILayout.MaxWidth(size), GUILayout.MinHeight(size), GUILayout.MinWidth(size));
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.PropertyField(serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("itemName"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("normalImage"));
