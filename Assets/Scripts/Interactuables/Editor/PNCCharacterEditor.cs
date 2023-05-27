@@ -663,7 +663,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
 
         ShowLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
         
-        ShowGlobalVariables(ref myTarget.global_variables, ref global_variables_serialized);
+        ShowGlobalVariables(GlobalVariableProperty.object_types.characters, ref myTarget.global_variables, ref global_variables_serialized);
 
         serializedObject.ApplyModifiedProperties();
 

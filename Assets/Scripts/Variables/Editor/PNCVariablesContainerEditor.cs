@@ -174,7 +174,7 @@ public class PNCVariablesContainerEditor : Editor
 
     }
 
-    public void ShowGlobalVariables(ref InteractuableGlobalVariable[] variables, ref SerializedProperty variables_serialized)
+    public void ShowGlobalVariables(System.Enum type,ref InteractuableGlobalVariable[] variables, ref SerializedProperty variables_serialized)
     {
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
@@ -191,7 +191,7 @@ public class PNCVariablesContainerEditor : Editor
                 if (variables[i].globalHashCode != -1 && settings.global_variables[j].ID == variables[i].globalHashCode)
                 {
                     variables[i].name = settings.global_variables[j].name;
-                    if (!settings.global_variables[j].object_type.HasFlag(GlobalVariableProperty.object_types.characters))
+                    if (!settings.global_variables[j].object_type.HasFlag(type))
                         areType = false;
                 }
             }
@@ -298,7 +298,7 @@ public class PNCVariablesContainerEditor : Editor
 
         ShowLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
 
-        ShowGlobalVariables(ref myTarget.global_variables, ref global_variables_serialized);
+        ShowGlobalVariables(GlobalVariableProperty.object_types.variableContainer, ref myTarget.global_variables, ref global_variables_serialized);
     }
 
 }
