@@ -44,6 +44,7 @@ public class InventoryListEditor : Editor
             if (buttons[i] == true)
             {
                 selectedButton = i;
+                GUI.FocusControl(null);
             }
         }
 
