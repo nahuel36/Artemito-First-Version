@@ -13,7 +13,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
     ReorderableList verbsList;
     Dictionary<string,ReorderableList> attempsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> interactionsListDict = new Dictionary<string, ReorderableList>();
-
+    ReorderableList localVariablesList;
 
     [System.Serializable]
     public class InteractionData
@@ -95,19 +95,19 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                         int index = interactionNoSerialized.localVariableSelected;
                         if (interactionNoSerialized.variableObject.local_variables.Length > index)
                         {
-                            if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.boolean))
+                            if (interactionNoSerialized.variableObject.local_variables[index].haveBoolean)
                             { 
                                 height += 1;
                                 if (interactionNoSerialized.local_changeBooleanValue)
                                     height += 1;
                             }
-                            if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.integer))
+                            if (interactionNoSerialized.variableObject.local_variables[index].haveInteger)
                             { 
                                 height += 1;
                                 if (interactionNoSerialized.local_changeIntegerValue)
                                     height += 1;
                             }
-                            if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.String))
+                            if (interactionNoSerialized.variableObject.local_variables[index].haveString)
                             { 
                                 height += 1;
                                 if (interactionNoSerialized.local_changeStringValue)
@@ -433,7 +433,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                                                                 int index = interactionNoSerialized.localVariableSelected;
                                                                 if (interactionNoSerialized.variableObject.local_variables.Length > index)
                                                                 {
-                                                                    if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.boolean))
+                                                                    if (interactionNoSerialized.variableObject.local_variables[index].haveBoolean)
                                                                     {
                                                                         if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.setLocalVariable)
                                                                         {
@@ -458,7 +458,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                                                                             }
                                                                         }
                                                                     }
-                                                                    if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.integer))
+                                                                    if (interactionNoSerialized.variableObject.local_variables[index].haveInteger)
                                                                     {
                                                                         if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.setLocalVariable)
                                                                         {
@@ -483,7 +483,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                                                                             }
                                                                         }
                                                                     }
-                                                                    if (interactionNoSerialized.variableObject.local_variables[index].type.HasFlag(InteractuableLocalVariable.types.String))
+                                                                    if (interactionNoSerialized.variableObject.local_variables[index].haveString)
                                                                     {
                                                                         if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.setLocalVariable)
                                                                         {
@@ -601,6 +601,8 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
             myTarget.verbs = interactionsTempList;
 
         PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.characters, ref ((PNCCharacter)target).global_variables);
+        PNCEditorUtils.InitializeLocalVariables(out localVariablesList, serializedObject, serializedObject.FindProperty("local_variables"));
+
 
         local_variables_serialized = serializedObject.FindProperty("local_variables");
         global_variables_serialized = serializedObject.FindProperty("global_variables");
@@ -659,10 +661,12 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
             GUILayout.Box(myTarget.SierraTextFace.texture,GUILayout.MaxHeight(100),GUILayout.MaxWidth(100),GUILayout.MinHeight(100),GUILayout.MinWidth(100));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SierraTextFace"));
         }
-                
 
-        PNCEditorUtils.ShowLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
-        
+        localVariablesList.DoLayoutList();
+
+        PNCEditorUtils.VerificateLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
+
+
         PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.characters, ref myTarget.global_variables, ref global_variables_serialized);
 
         serializedObject.ApplyModifiedProperties();

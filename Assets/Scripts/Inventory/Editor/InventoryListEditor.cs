@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using UnityEditorInternal;
 
 [CustomEditor(typeof(InventoryList))]
 public class InventoryListEditor : Editor
@@ -11,12 +12,19 @@ public class InventoryListEditor : Editor
     int selectedButton = -1;
 
     Settings settings;
+    Dictionary<string,ReorderableList> localVariablesLists = new Dictionary<string, ReorderableList>();
+
     private void OnEnable()
     {
         InventoryList myTarget = (InventoryList)target;
         for (int i = 0; i < myTarget.items.Length; i++)
         {
             PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.inventory,ref myTarget.items[i].global_variables);
+            string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(i).propertyPath;
+            localVariablesLists.Add(key,null);
+            ReorderableList list = localVariablesLists[key];
+            PNCEditorUtils.InitializeLocalVariables(out list, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("local_variables"));
+            localVariablesLists[key] = list;
         }
         
     }
@@ -101,8 +109,11 @@ public class InventoryListEditor : Editor
             SerializedProperty local_variables_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("local_variables");
             SerializedProperty global_variables_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("global_variables");
 
-            PNCEditorUtils.ShowLocalVariables(ref myTarget.items[selectedButton].local_variables,ref local_variables_serialized);
-            PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);            
+            localVariablesLists[serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).propertyPath].DoLayoutList();
+
+            PNCEditorUtils.VerificateLocalVariables(ref myTarget.items[selectedButton].local_variables, ref local_variables_serialized);
+            
+            PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);
 
         }
 

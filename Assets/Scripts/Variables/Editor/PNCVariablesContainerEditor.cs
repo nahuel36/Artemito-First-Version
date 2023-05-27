@@ -24,7 +24,7 @@ public class PNCVariablesContainerEditor : Editor
     {
         PNCCharacter myTarget = (PNCCharacter)target;
 
-        PNCEditorUtils.ShowLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
+        PNCEditorUtils.VerificateLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
 
         PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.variableContainer, ref myTarget.global_variables, ref global_variables_serialized);
     }

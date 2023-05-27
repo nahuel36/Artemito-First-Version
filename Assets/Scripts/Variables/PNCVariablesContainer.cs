@@ -7,21 +7,15 @@ using UnityEngine;
 public class InteractuableLocalVariable
 {
     public string name = "new variable";
+    public bool haveInteger = false;
     public int integer = 0;
     public bool integerDefault = true;
+    public bool haveBoolean = false;
     public bool boolean = false;
     public bool booleanDefault = true;
+    public bool haveString = false;
     public string String = "";
     public bool stringDefault = true;
-    [System.Flags]
-    public enum types
-    {
-        integer = (1 << 0),
-        boolean = (1 << 1),
-        String = (1 << 2)
-    }
-    public types type;
-    public int globalHashCode = -1;
     public bool expandedInInspector;
 
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using UnityEditorInternal;
+using UnityEditor.Rendering;
 public static class PNCEditorUtils 
 {
     public static void InitializeGlobalVariables(System.Enum type, ref InteractuableGlobalVariable[] globalVariables)
@@ -59,101 +61,113 @@ public static class PNCEditorUtils
         globalVariables = tempGlobalVarList.ToArray();
     }
 
-
-
-    public static void ShowLocalVariables(ref InteractuableLocalVariable[] variables, ref SerializedProperty variables_serialized)
+    public static void InitializeLocalVariables(out ReorderableList list, SerializedObject serializedObject, SerializedProperty property)
     {
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("Local Variables", EditorStyles.boldLabel);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-
-        for (int i = 0; i < variables.Length; i++)
+        list = new ReorderableList(serializedObject, property, true, true, true, true)
         {
-            variables[i].expandedInInspector = EditorGUILayout.Foldout(variables[i].expandedInInspector, variables[i].name);
-
-            if (variables[i].expandedInInspector)
+            drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
-                EditorGUILayout.BeginVertical("GroupBox");
+                SerializedProperty element = property.GetArrayElementAtIndex(index);
 
-                variables[i].name = EditorGUILayout.TextField("name:", variables[i].name);
-
-                variables[i].type = (InteractuableLocalVariable.types)EditorGUILayout.EnumFlagsField("types:", variables[i].type);
-
-                if (variables[i].type.HasFlag(InteractuableLocalVariable.types.integer))
-                {
-                    if (!variables[i].integerDefault)
+                Rect variablesRect = rect;
+                variablesRect.height = EditorGUIUtility.singleLineHeight;
+                EditorGUI.PropertyField(variablesRect, property.GetArrayElementAtIndex(index).FindPropertyRelative("name"));
+                variablesRect.y += EditorGUIUtility.singleLineHeight;
+                element.FindPropertyRelative("haveBoolean").boolValue = EditorGUI.Toggle(variablesRect, "have boolean value:", element.FindPropertyRelative("haveBoolean").boolValue);
+                if (element.FindPropertyRelative("haveBoolean").boolValue)
+                { 
+                    variablesRect.y += EditorGUIUtility.singleLineHeight;
+                    if (element.FindPropertyRelative("booleanDefault").boolValue)
                     {
-                        variables[i].integer = EditorGUILayout.IntField("integer value:", variables[i].integer);
-                        if (GUILayout.Button("Set integer default value"))
-                            variables[i].integerDefault = true;
+                        EditorGUI.LabelField(variablesRect, "boolean value: default");
+                        variablesRect.y += EditorGUIUtility.singleLineHeight;
+                        if (GUI.Button(variablesRect, "set boolean value"))
+                        {
+                            element.FindPropertyRelative("booleanDefault").boolValue = false;
+                        }
                     }
                     else
                     {
-                        GUILayout.Label("integer value : default", EditorStyles.boldLabel);
-                        if (GUILayout.Button("Set integer value"))
+                        element.FindPropertyRelative("boolean").boolValue =
+                            EditorGUI.Toggle(variablesRect, "boolean value:", element.FindPropertyRelative("boolean").boolValue);
+                        variablesRect.y += EditorGUIUtility.singleLineHeight;
+                        if (GUI.Button(variablesRect, "set boolean default value"))
                         {
-                            variables[i].integer = 0;
-                            variables[i].integerDefault = false;
+                            element.FindPropertyRelative("booleanDefault").boolValue = true;
                         }
                     }
                 }
-                if (variables[i].type.HasFlag(InteractuableLocalVariable.types.boolean))
+                variablesRect.y += EditorGUIUtility.singleLineHeight;
+                element.FindPropertyRelative("haveInteger").boolValue = EditorGUI.Toggle(variablesRect, "have integer value:", element.FindPropertyRelative("haveInteger").boolValue);
+                if (element.FindPropertyRelative("haveInteger").boolValue)
                 {
-                    if (!variables[i].booleanDefault)
+                    variablesRect.y += EditorGUIUtility.singleLineHeight;
+                    if (element.FindPropertyRelative("integerDefault").boolValue)
                     {
-                        variables[i].boolean = EditorGUILayout.Toggle("boolean value:", variables[i].boolean);
-                        if (GUILayout.Button("Set boolean default value"))
-                            variables[i].booleanDefault = true;
+                        EditorGUI.LabelField(variablesRect, "integer value: default");
+                        variablesRect.y += EditorGUIUtility.singleLineHeight;
+                        if (GUI.Button(variablesRect, "set integer value"))
+                        {
+                            element.FindPropertyRelative("integerDefault").boolValue = false;
+                        }
                     }
                     else
                     {
-                        GUILayout.Label("boolean value : default", EditorStyles.boldLabel);
-                        if (GUILayout.Button("Set boolean value"))
+                        element.FindPropertyRelative("integer").intValue =
+                            EditorGUI.IntField(variablesRect, "integer value:", element.FindPropertyRelative("integer").intValue);
+                        variablesRect.y += EditorGUIUtility.singleLineHeight;
+                        if (GUI.Button(variablesRect, "set integer default value"))
                         {
-                            variables[i].boolean = false;
-                            variables[i].booleanDefault = false;
+                            element.FindPropertyRelative("integerDefault").boolValue = true;
                         }
                     }
                 }
-                if (variables[i].type.HasFlag(InteractuableLocalVariable.types.String))
+                variablesRect.y += EditorGUIUtility.singleLineHeight;
+                element.FindPropertyRelative("haveString").boolValue = EditorGUI.Toggle(variablesRect, "have string value:", element.FindPropertyRelative("haveString").boolValue);
+                if (element.FindPropertyRelative("haveString").boolValue)
                 {
-                    if (!variables[i].stringDefault)
+                    variablesRect.y += EditorGUIUtility.singleLineHeight;
+                    if (element.FindPropertyRelative("stringDefault").boolValue)
                     {
-                        variables[i].String = EditorGUILayout.TextField("string value:", variables[i].String);
-                        if (GUILayout.Button("Set string default value"))
-                            variables[i].stringDefault = true;
+                        EditorGUI.LabelField(variablesRect, "string value: default");
+                        variablesRect.y += EditorGUIUtility.singleLineHeight;
+                        if (GUI.Button(variablesRect, "set string value"))
+                        {
+                            property.GetArrayElementAtIndex(index).FindPropertyRelative("stringDefault").boolValue = false;
+                        }
                     }
                     else
                     {
-                        GUILayout.Label("string value : default", EditorStyles.boldLabel);
-                        if (GUILayout.Button("Set string value"))
+                        property.GetArrayElementAtIndex(index).FindPropertyRelative("String").stringValue=
+                            EditorGUI.TextField(variablesRect, "string value:", property.GetArrayElementAtIndex(index).FindPropertyRelative("String").stringValue);
+                        variablesRect.y += EditorGUIUtility.singleLineHeight;
+                        if (GUI.Button(variablesRect, "set string default value"))
                         {
-                            variables[i].String = "";
-                            variables[i].stringDefault = false;
+                            element.FindPropertyRelative("stringDefault").boolValue = true;
                         }
                     }
                 }
 
-                if (GUILayout.Button("Delete " + variables[i].name))
-                {
-                    variables_serialized.DeleteArrayElementAtIndex(i);
-                }
+            },
+            elementHeightCallback = (int index) => 
+            {
+                SerializedProperty element = property.GetArrayElementAtIndex(index);
 
-                EditorGUILayout.EndVertical();
+                float height = 5f;
+                if (element.FindPropertyRelative("haveBoolean").boolValue)
+                    height += 2;
+                if (element.FindPropertyRelative("haveInteger").boolValue)
+                    height += 2;
+                if (element.FindPropertyRelative("haveString").boolValue)
+                    height += 2;
+                return height * EditorGUIUtility.singleLineHeight;            
             }
-        }
+        };
+        
+    }
 
-        if (GUILayout.Button("Create local variable"))
-        {
-            InteractuableLocalVariable newvar = new InteractuableLocalVariable();
-            //serializedObject.ApplyModifiedProperties();
-
-            //variables.arraySize++;
-
-            variables = variables.Append<InteractuableLocalVariable>(newvar).ToArray();
-        }
+    public static void VerificateLocalVariables(ref InteractuableLocalVariable[] variables, ref SerializedProperty variables_serialized)
+    {
 
         var group = variables.GroupBy(vari => vari.name, (vari) => new { Count = vari.name.Count() });
         bool repeated = false;
