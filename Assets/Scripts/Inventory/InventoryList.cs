@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Inventory", menuName = "Pnc/InventoryList", order = 1)]
 public class InventoryList : ScriptableObject
 {
-    public InventoryItem[] items;
+    public InventoryItem[] items = new InventoryItem[0];
 
 }

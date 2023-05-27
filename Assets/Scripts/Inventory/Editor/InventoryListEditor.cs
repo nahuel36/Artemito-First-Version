@@ -46,6 +46,22 @@ public class InventoryListEditor : Editor
         //EditorGUILayout.ObjectField(serializedObject.FindProperty("items").GetArrayElementAtIndex(1).FindPropertyRelative("normalImage"), typeof(Sprite), GUILayout.Height(size * 0.75f), GUILayout.Width(size * 2));
         //GUILayout.FlexibleSpace();
 
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("+", GUILayout.MaxHeight(25), GUILayout.MinHeight(25), GUILayout.MaxWidth(25), GUILayout.MinWidth(25)))
+        {
+            serializedObject.FindProperty("items").arraySize++;
+        }
+        if(GUILayout.Button("-", GUILayout.MaxHeight(25), GUILayout.MinHeight(25), GUILayout.MaxWidth(25), GUILayout.MinWidth(25)))
+        {
+            if (selectedButton != -1)
+            { 
+                serializedObject.FindProperty("items").DeleteArrayElementAtIndex(selectedButton);
+                selectedButton = -1;
+            
+            }
+        }
+        GUILayout.EndHorizontal();
+
         for (int i = 0; i < buttons.Count; i++)
         {
             if (buttons[i] == true)
