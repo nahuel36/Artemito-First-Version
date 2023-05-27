@@ -12,7 +12,8 @@ public class GlobalVariableProperty
     {
         characters = (1 << 0),
         objects = (1 << 1),
-        inventory = (1 << 2)
+        inventory = (1 << 2),
+        variableContainer = (1 << 3)
     }
     public object_types object_type;
 
