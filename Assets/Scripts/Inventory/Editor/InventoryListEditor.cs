@@ -13,7 +13,7 @@ public class InventoryListEditor : Editor
 
         InventoryList myTarget = (InventoryList)target;
 
-        EditorGUILayout.LabelField(EditorGUIUtility.currentViewWidth.ToString());
+        //EditorGUILayout.LabelField(EditorGUIUtility.currentViewWidth.ToString());
 
         //EditorGUILayout.ObjectField(serializedObject.FindProperty("items").GetArrayElementAtIndex(0).FindPropertyRelative("normalImage"), typeof(Sprite), GUILayout.Height(size), GUILayout.Width(EditorGUIUtility.currentViewWidth * size));
         //EditorGUI.ObjectField(new Rect(0, 0, size*2, size*0.75f), serializedObject.FindProperty("items").GetArrayElementAtIndex(0).FindPropertyRelative("normalImage"));
