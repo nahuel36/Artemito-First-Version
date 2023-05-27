@@ -97,8 +97,8 @@ public class InventoryListEditor : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("startWithThisItem"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("cuantity"));
 
-            local_variables_serialized = serializedObject.FindProperty("local_variables");
-            global_variables_serialized = serializedObject.FindProperty("global_variables");
+            SerializedProperty local_variables_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("local_variables");
+            SerializedProperty global_variables_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("global_variables");
 
             ShowLocalVariables(ref myTarget.items[selectedButton].local_variables,ref local_variables_serialized);
             ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);            
@@ -120,8 +120,7 @@ public class InventoryListEditor : Editor
 
 
     protected Settings settings;
-    protected SerializedProperty local_variables_serialized;
-    protected SerializedProperty global_variables_serialized;
+    
     public void InitializeGlobalVariables(System.Enum type, InventoryItem myTarget)
     {
         settings = Resources.Load<Settings>("Settings/Settings");
@@ -264,12 +263,11 @@ public class InventoryListEditor : Editor
 
         if (GUILayout.Button("Create local variable"))
         {
-            InteractuableLocalVariable newvar = new InteractuableLocalVariable();
+            //InteractuableLocalVariable newvar = new InteractuableLocalVariable();
             //serializedObject.ApplyModifiedProperties();
 
-            //variables.arraySize++;
-
-            variables = variables.Append<InteractuableLocalVariable>(newvar).ToArray();
+            //variables = variables.Append<InteractuableLocalVariable>(newvar).ToArray();
+            variables_serialized.arraySize++;
         }
 
         var group = variables.GroupBy(vari => vari.name, (vari) => new { Count = vari.name.Count() });
