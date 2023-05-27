@@ -160,8 +160,13 @@ public static class PNCEditorUtils
                     height += 2;
                 if (element.FindPropertyRelative("haveString").boolValue)
                     height += 2;
-                return height * EditorGUIUtility.singleLineHeight;            
+                return height * EditorGUIUtility.singleLineHeight;
+            },
+            drawHeaderCallback = (rect) =>
+            {
+                EditorGUI.LabelField(rect, "Local Variables");
             }
+
         };
         
     }
