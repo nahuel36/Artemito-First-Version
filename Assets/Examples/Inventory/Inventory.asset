@@ -34,14 +34,14 @@ MonoBehaviour:
     cuantity: 0
     local_variables: []
     global_variables: []
-  - itemName: clavo y alambre
+  - itemName: malla
     normalImage: {fileID: 21300000, guid: 143f2f17dee481c4bb0fe34d2738962d, type: 3}
     selectedImage: {fileID: 21300000, guid: 143f2f17dee481c4bb0fe34d2738962d, type: 3}
     startWithThisItem: 0
     cuantity: 0
     local_variables: []
     global_variables: []
-  - itemName: clavo y alambre
+  - itemName: resorte
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     startWithThisItem: 0
