@@ -13,6 +13,8 @@ public class VerbsUI : MonoBehaviour
     PNCCursor cursor;
     List<Button> activeButtons;
     List<string> activeVerbs;
+    RectTransform cursorRect;
+    RectTransform verbsRect;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,8 @@ public class VerbsUI : MonoBehaviour
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
         eventSystem = FindObjectOfType<EventSystem>();
         cursor = GameObject.FindObjectOfType<PNCCursor>();
-
+        cursorRect = cursor.GetComponent<RectTransform>();
+        verbsRect = GetComponent<RectTransform>();
     }
 
     public void HideAllVerbs()
@@ -66,6 +69,9 @@ public class VerbsUI : MonoBehaviour
 
     public void ShowVerbs(string[] verbs)
     {
+        if(settings.interactionExecuteMethod == Settings.InteractionExecuteMethod.FirstObjectThenAction)
+            verbsRect.anchoredPosition = cursorRect.anchoredPosition;
+
         gameObject.SetActive(true);
 
         activeButtons = new List<Button>();
