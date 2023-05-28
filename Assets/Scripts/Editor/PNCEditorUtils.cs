@@ -184,7 +184,14 @@ public static class PNCEditorUtils
 
         }
         if (repeated)
-            GUILayout.Label("There are more than one variable with the same name", EditorStyles.boldLabel);
+        {
+            GUIStyle style = new GUIStyle();
+            style.normal.textColor = Color.red;
+            style.fontSize = 12;
+
+            GUILayout.Label("<b>There are more than one local variable with the same name</b>", style);
+        }
+
 
     }
 
@@ -194,7 +201,10 @@ public static class PNCEditorUtils
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        GUILayout.Label("Global Variables", EditorStyles.boldLabel);
+        GUIStyle style = new GUIStyle();
+        style.normal.textColor = Color.white;
+        style.fontSize = 14;
+        GUILayout.Label("<b>Global Variables</b>", style);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
@@ -296,7 +306,13 @@ public static class PNCEditorUtils
 
         }
         if (repeated)
-            GUILayout.Label("There are more than one variable with the same name", EditorStyles.boldLabel);
+        {
+            GUIStyle styleRepeated = new GUIStyle();
+            styleRepeated.normal.textColor = Color.red;
+            styleRepeated.fontSize = 5;
+            
+            GUILayout.Label("<b>There are more than one global variable with the same name</b>", styleRepeated);
+        }
 
     }
 

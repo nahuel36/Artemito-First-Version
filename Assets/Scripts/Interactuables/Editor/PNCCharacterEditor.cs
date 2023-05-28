@@ -643,7 +643,10 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
         
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        GUILayout.Label("Interactions", EditorStyles.boldLabel);
+        GUIStyle style = new GUIStyle();
+        style.normal.textColor = Color.white;
+        style.fontSize = 14;
+        GUILayout.Label("<b>Interactions</b>", style);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
