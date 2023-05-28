@@ -7,17 +7,19 @@ public class UI_Text : MonoBehaviour
     // Start is called before the first frame update
     public TMPro.TextMeshProUGUI text;
     Settings settings;
-    PNCCursor cursor;
+    RectTransform cursorRect;
+    RectTransform textRect;
     private void Start()
     {
         text = GetComponentInChildren<TMPro.TextMeshProUGUI>();
         settings = Resources.Load<Settings>("Settings/Settings");
-        cursor = FindObjectOfType<PNCCursor>();
+        cursorRect = FindObjectOfType<PNCCursor>().GetComponent<RectTransform>();
+        textRect = GetComponent<RectTransform>();
     }
 
     private void Update()
     {
         if (settings.objetivePosition == Settings.ObjetivePosition.overCursor)
-            GetComponent<RectTransform>().anchoredPosition = cursor.GetComponent<RectTransform>().anchoredPosition;
+            textRect.anchoredPosition = cursorRect.anchoredPosition;
     }
 }
