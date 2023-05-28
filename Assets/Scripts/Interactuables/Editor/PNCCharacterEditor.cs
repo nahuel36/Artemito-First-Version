@@ -403,14 +403,14 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                         if (interactionNoSerialized.OnCompareResultTrueAction == Conditional.GetVariableAction.GoToSpecificLine)
                                                                         {
-                                                                            interactionNoSerialized.LineToGoOnTrueResult = EditorGUI.IntField(interactRect, "line to go", interactionNoSerialized.LineToGoOnTrueResult);
+                                                                            interactionNoSerialized.LineToGoOnTrueResult = EditorGUI.Popup(interactRect, "line to go", interactionNoSerialized.LineToGoOnTrueResult, PNCEditorUtils.GetInteractionsText(myTarget.verbs[indexV].attemps[indexA].interactions));
                                                                             interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                         }
                                                                         interactionNoSerialized.OnCompareResultFalseAction = (Conditional.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s doesn't match", (System.Enum)interactionNoSerialized.OnCompareResultFalseAction);
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                         if (interactionNoSerialized.OnCompareResultFalseAction == Conditional.GetVariableAction.GoToSpecificLine)
                                                                         {
-                                                                            interactionNoSerialized.LineToGoOnFalseResult = EditorGUI.IntField(interactRect, "line to go", interactionNoSerialized.LineToGoOnFalseResult);
+                                                                            interactionNoSerialized.LineToGoOnFalseResult = EditorGUI.Popup(interactRect, "line to go", interactionNoSerialized.LineToGoOnFalseResult, PNCEditorUtils.GetInteractionsText(myTarget.verbs[indexV].attemps[indexA].interactions));
                                                                         }
                                                                     }
                                                                 }
@@ -518,14 +518,14 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                         if (interactionNoSerialized.OnCompareResultTrueAction == Conditional.GetVariableAction.GoToSpecificLine)
                                                                         {
-                                                                            interactionNoSerialized.LineToGoOnTrueResult = EditorGUI.IntField(interactRect, "line to go", interactionNoSerialized.LineToGoOnTrueResult);
+                                                                            interactionNoSerialized.LineToGoOnTrueResult = EditorGUI.Popup(interactRect,"line to go", interactionNoSerialized.LineToGoOnTrueResult, PNCEditorUtils.GetInteractionsText(myTarget.verbs[indexV].attemps[indexA].interactions));
                                                                             interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                         }
                                                                         interactionNoSerialized.OnCompareResultFalseAction = (Conditional.GetVariableAction)EditorGUI.EnumPopup(interactRect, "action if value/s doesn't match", (System.Enum)interactionNoSerialized.OnCompareResultFalseAction);
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                         if (interactionNoSerialized.OnCompareResultFalseAction == Conditional.GetVariableAction.GoToSpecificLine)
                                                                         {
-                                                                            interactionNoSerialized.LineToGoOnFalseResult = EditorGUI.IntField(interactRect, "line to go", interactionNoSerialized.LineToGoOnFalseResult);
+                                                                            interactionNoSerialized.LineToGoOnFalseResult = EditorGUI.Popup(interactRect, "line to go", interactionNoSerialized.LineToGoOnFalseResult, PNCEditorUtils.GetInteractionsText(myTarget.verbs[indexV].attemps[indexA].interactions));
                                                                         }
                                                                     }
                                                                 }

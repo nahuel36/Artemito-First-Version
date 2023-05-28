@@ -299,4 +299,25 @@ public static class PNCEditorUtils
             GUILayout.Label("There are more than one variable with the same name", EditorStyles.boldLabel);
 
     }
+
+    public static string[] GetInteractionsText(List<Interaction> interactions) 
+    {
+        string[] texts = new string[interactions.Count];
+        for (int i = 0; i < interactions.Count; i++)
+        {
+            texts[i] = (i+1) + " " + interactions[i].type.ToString();
+            if (interactions[i].type == Interaction.InteractionType.character)
+            { 
+                texts[i] += " " + interactions[i].characterAction;
+            }
+            if (interactions[i].type == Interaction.InteractionType.variables)
+            {
+                texts[i] += " " + interactions[i].variablesAction;
+            }
+        }
+
+        return texts;
+
+    }
+
 }
