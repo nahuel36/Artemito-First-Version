@@ -123,6 +123,9 @@ public class SettingsEditor : Editor
         GUILayout.Label("Interaction execute method");
         ((Settings)target).interactionExecuteMethod = (Settings.InteractionExecuteMethod)EditorGUILayout.EnumPopup(((Settings)target).interactionExecuteMethod);
 
+        GUILayout.Label("Objetive position");
+        ((Settings)target).objetivePosition = (Settings.ObjetivePosition)EditorGUILayout.EnumPopup(((Settings)target).objetivePosition);
+
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed)
         {

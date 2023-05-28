@@ -49,9 +49,15 @@ public class Settings : ScriptableObject
         AronGranbergAStarPath,
         Custom
     }
+    public enum ObjetivePosition 
+    { 
+        fixedPosition,
+        overCursor
+    }
     public string[] verbs;
     public GlobalVariableProperty[] global_variables;
     public PathFindingType pathFindingType;
     public SpeechStyle speechStyle;
     public InteractionExecuteMethod interactionExecuteMethod;
+    public ObjetivePosition objetivePosition;
 }

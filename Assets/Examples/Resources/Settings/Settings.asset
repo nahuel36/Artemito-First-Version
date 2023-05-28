@@ -56,3 +56,4 @@ MonoBehaviour:
   pathFindingType: 0
   speechStyle: 0
   interactionExecuteMethod: 1
+  objetivePosition: 0
