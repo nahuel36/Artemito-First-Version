@@ -95,19 +95,19 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                         int index = interactionNoSerialized.localVariableSelected;
                         if (interactionNoSerialized.variableObject.local_variables.Length > index)
                         {
-                            if (interactionNoSerialized.variableObject.local_variables[index].haveBoolean)
+                            if (interactionNoSerialized.variableObject.local_variables[index].hasBoolean)
                             { 
                                 height += 1;
                                 if (interactionNoSerialized.local_changeBooleanValue)
                                     height += 1;
                             }
-                            if (interactionNoSerialized.variableObject.local_variables[index].haveInteger)
+                            if (interactionNoSerialized.variableObject.local_variables[index].hasInteger)
                             { 
                                 height += 1;
                                 if (interactionNoSerialized.local_changeIntegerValue)
                                     height += 1;
                             }
-                            if (interactionNoSerialized.variableObject.local_variables[index].haveString)
+                            if (interactionNoSerialized.variableObject.local_variables[index].hasString)
                             { 
                                 height += 1;
                                 if (interactionNoSerialized.local_changeStringValue)
@@ -433,7 +433,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                                                                 int index = interactionNoSerialized.localVariableSelected;
                                                                 if (interactionNoSerialized.variableObject.local_variables.Length > index)
                                                                 {
-                                                                    if (interactionNoSerialized.variableObject.local_variables[index].haveBoolean)
+                                                                    if (interactionNoSerialized.variableObject.local_variables[index].hasBoolean)
                                                                     {
                                                                         if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.setLocalVariable)
                                                                         {
@@ -458,7 +458,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                                                                             }
                                                                         }
                                                                     }
-                                                                    if (interactionNoSerialized.variableObject.local_variables[index].haveInteger)
+                                                                    if (interactionNoSerialized.variableObject.local_variables[index].hasInteger)
                                                                     {
                                                                         if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.setLocalVariable)
                                                                         {
@@ -483,7 +483,7 @@ public class PnCCharacterEditor : PNCVariablesContainerEditor
                                                                             }
                                                                         }
                                                                     }
-                                                                    if (interactionNoSerialized.variableObject.local_variables[index].haveString)
+                                                                    if (interactionNoSerialized.variableObject.local_variables[index].hasString)
                                                                     {
                                                                         if (interactionNoSerialized.variablesAction == Interaction.VariablesAction.setLocalVariable)
                                                                         {

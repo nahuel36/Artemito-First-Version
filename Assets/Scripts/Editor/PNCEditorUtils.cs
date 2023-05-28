@@ -73,8 +73,8 @@ public static class PNCEditorUtils
                 variablesRect.height = EditorGUIUtility.singleLineHeight;
                 EditorGUI.PropertyField(variablesRect, property.GetArrayElementAtIndex(index).FindPropertyRelative("name"));
                 variablesRect.y += EditorGUIUtility.singleLineHeight;
-                element.FindPropertyRelative("haveBoolean").boolValue = EditorGUI.Toggle(variablesRect, "have boolean value:", element.FindPropertyRelative("haveBoolean").boolValue);
-                if (element.FindPropertyRelative("haveBoolean").boolValue)
+                element.FindPropertyRelative("hasBoolean").boolValue = EditorGUI.Toggle(variablesRect, "have boolean value:", element.FindPropertyRelative("hasBoolean").boolValue);
+                if (element.FindPropertyRelative("hasBoolean").boolValue)
                 { 
                     variablesRect.y += EditorGUIUtility.singleLineHeight;
                     if (element.FindPropertyRelative("booleanDefault").boolValue)
@@ -98,8 +98,8 @@ public static class PNCEditorUtils
                     }
                 }
                 variablesRect.y += EditorGUIUtility.singleLineHeight;
-                element.FindPropertyRelative("haveInteger").boolValue = EditorGUI.Toggle(variablesRect, "have integer value:", element.FindPropertyRelative("haveInteger").boolValue);
-                if (element.FindPropertyRelative("haveInteger").boolValue)
+                element.FindPropertyRelative("hasInteger").boolValue = EditorGUI.Toggle(variablesRect, "have integer value:", element.FindPropertyRelative("hasInteger").boolValue);
+                if (element.FindPropertyRelative("hasInteger").boolValue)
                 {
                     variablesRect.y += EditorGUIUtility.singleLineHeight;
                     if (element.FindPropertyRelative("integerDefault").boolValue)
@@ -123,8 +123,8 @@ public static class PNCEditorUtils
                     }
                 }
                 variablesRect.y += EditorGUIUtility.singleLineHeight;
-                element.FindPropertyRelative("haveString").boolValue = EditorGUI.Toggle(variablesRect, "have string value:", element.FindPropertyRelative("haveString").boolValue);
-                if (element.FindPropertyRelative("haveString").boolValue)
+                element.FindPropertyRelative("hasString").boolValue = EditorGUI.Toggle(variablesRect, "have string value:", element.FindPropertyRelative("hasString").boolValue);
+                if (element.FindPropertyRelative("hasString").boolValue)
                 {
                     variablesRect.y += EditorGUIUtility.singleLineHeight;
                     if (element.FindPropertyRelative("stringDefault").boolValue)
@@ -154,11 +154,11 @@ public static class PNCEditorUtils
                 SerializedProperty element = property.GetArrayElementAtIndex(index);
 
                 float height = 5f;
-                if (element.FindPropertyRelative("haveBoolean").boolValue)
+                if (element.FindPropertyRelative("hasBoolean").boolValue)
                     height += 2;
-                if (element.FindPropertyRelative("haveInteger").boolValue)
+                if (element.FindPropertyRelative("hasInteger").boolValue)
                     height += 2;
-                if (element.FindPropertyRelative("haveString").boolValue)
+                if (element.FindPropertyRelative("hasString").boolValue)
                     height += 2;
                 return height * EditorGUIUtility.singleLineHeight;
             },

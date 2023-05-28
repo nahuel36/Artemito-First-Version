@@ -7,13 +7,13 @@ using UnityEngine;
 public class InteractuableLocalVariable
 {
     public string name = "new variable";
-    public bool haveInteger = false;
+    public bool hasInteger = false;
     public int integer = 0;
     public bool integerDefault = true;
-    public bool haveBoolean = false;
+    public bool hasBoolean = false;
     public bool boolean = false;
     public bool booleanDefault = true;
-    public bool haveString = false;
+    public bool hasString = false;
     public string String = "";
     public bool stringDefault = true;
     public bool expandedInInspector;
