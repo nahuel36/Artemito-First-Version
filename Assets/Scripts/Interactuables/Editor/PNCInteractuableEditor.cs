@@ -111,26 +111,8 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             }
         }
 
-        bool verbAdded2 = false;
-        for (int i = 0; i < myTarget.verbs.Count; i++)
-        {
-            bool contains = false;
-            for (int j = 0; j < interactionsTempList.Count; j++)
-            {
-                if (myTarget.verbs[i].name == interactionsTempList[j].name)
-                {
-                    contains = true;
-                }
-            }
-            if (contains == false)
-            {
-                verbAdded2 = true;
-                interactionsTempList.Add(myTarget.verbs[i]);
-            }
-        }
-
-        if (verbAdded || verbAdded2)
-            myTarget.verbs = interactionsTempList;
+        if (verbAdded || settings.verbs.Length != myTarget.verbs.Count)
+           myTarget.verbs = interactionsTempList;
 
     }
 
