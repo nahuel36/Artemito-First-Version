@@ -5,11 +5,8 @@ using UnityEditor;
 using UnityEditorInternal;
 public class PNCInteractuableEditor : PNCVariablesContainerEditor
 {
-    Dictionary<string, ReorderableList> attempsListDict = new Dictionary<string, ReorderableList>();
-    Dictionary<string, ReorderableList> interactionsListDict = new Dictionary<string, ReorderableList>();
-
-    SerializedProperty verbs_serialized;
-
+    Dictionary<string, ReorderableList> verbAttempsListDict = new Dictionary<string, ReorderableList>();
+    Dictionary<string, ReorderableList> verbInteractionsListDict = new Dictionary<string, ReorderableList>();
     protected ReorderableList verbsList;
 
 
@@ -18,7 +15,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
     {
         PNCInteractuable myTarget = (PNCInteractuable)target;
 
-        verbs_serialized = serializedObject.FindProperty("verbs");
+        SerializedProperty verbs_serialized = serializedObject.FindProperty("verbs");
 
         settings = Resources.Load<Settings>("Settings/Settings");
 
@@ -34,7 +31,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, attempsListDict, interactionsListDict, myTarget.verbs[indexV].attemps);
+                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attemps);
             }
         };
 
