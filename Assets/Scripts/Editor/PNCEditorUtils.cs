@@ -234,17 +234,18 @@ public static class PNCEditorUtils
                 {
                     if (!variables[i].integerDefault)
                     {
-                        variables[i].integer = EditorGUILayout.IntField("integer value:", variables[i].integer);
+                        variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue = EditorGUILayout.IntField("integer value:", variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue);
                         if (GUILayout.Button("Set integer default value"))
-                            variables[i].integerDefault = true;
+                        {
+                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integerDefault").boolValue = true;
+                        }
                     }
                     else
                     {
                         GUILayout.Label("integer value : default", EditorStyles.boldLabel);
                         if (GUILayout.Button("Set integer value"))
                         {
-                            variables[i].integer = 0;
-                            variables[i].integerDefault = false;
+                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integerDefault").boolValue = false;
                         }
                     }
                 }
@@ -252,17 +253,16 @@ public static class PNCEditorUtils
                 {
                     if (!variables[i].booleanDefault)
                     {
-                        variables[i].boolean = EditorGUILayout.Toggle("boolean value:", variables[i].boolean);
+                        variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue = EditorGUILayout.Toggle("boolean value:", variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue);
                         if (GUILayout.Button("Set boolean default value"))
-                            variables[i].booleanDefault = true;
+                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = false;
                     }
                     else
                     {
                         GUILayout.Label("boolean value : default", EditorStyles.boldLabel);
                         if (GUILayout.Button("Set boolean value"))
                         {
-                            variables[i].boolean = false;
-                            variables[i].booleanDefault = false;
+                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = true;
                         }
                     }
                 }
@@ -270,17 +270,16 @@ public static class PNCEditorUtils
                 {
                     if (!variables[i].stringDefault)
                     {
-                        variables[i].String = EditorGUILayout.TextField("string value:", variables[i].String);
+                        variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue = EditorGUILayout.TextField("string value:", variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue);
                         if (GUILayout.Button("Set string default value"))
-                            variables[i].stringDefault = true;
+                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("stringDefault").boolValue = true;
                     }
                     else
                     {
                         GUILayout.Label("string value : default", EditorStyles.boldLabel);
                         if (GUILayout.Button("Set string value"))
                         {
-                            variables[i].String = "";
-                            variables[i].stringDefault = false;
+                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("stringDefault").boolValue = false;
                         }
                     }
                 }
