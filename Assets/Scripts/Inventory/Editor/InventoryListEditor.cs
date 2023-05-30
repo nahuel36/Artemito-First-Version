@@ -14,19 +14,30 @@ public class InventoryListEditor : Editor
     Settings settings;
     Dictionary<string,ReorderableList> localVariablesLists = new Dictionary<string, ReorderableList>();
 
+    Dictionary<string, ReorderableList> invAttempsListDict = new Dictionary<string, ReorderableList>();
+    Dictionary<string, ReorderableList> invInteractionsListDict = new Dictionary<string, ReorderableList>();
+    Dictionary<string, ReorderableList> invList = new Dictionary<string, ReorderableList>();
+
     private void OnEnable()
     {
+
         InventoryList myTarget = (InventoryList)target;
         for (int i = 0; i < myTarget.items.Length; i++)
         {
             PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.inventory,ref myTarget.items[i].global_variables);
             string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(i).propertyPath;
+
             localVariablesLists.Add(key,null);
             ReorderableList list = localVariablesLists[key];
             PNCEditorUtils.InitializeLocalVariables(out list, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("local_variables"));
             localVariablesLists[key] = list;
+            
+            invList.Add(key, null);
+            ReorderableList listInv = invList[key]; 
+            InitializeInventoryInteractions(out listInv, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("inventoryActions"), myTarget.items[i]);
+            invList[key] = listInv;
         }
-        
+
     }
 
     public override void OnInspectorGUI()
@@ -115,6 +126,7 @@ public class InventoryListEditor : Editor
             
             PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);
 
+            invList[serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).propertyPath].DoLayoutList();
         }
 
         //base.OnInspectorGUI();
@@ -131,5 +143,50 @@ public class InventoryListEditor : Editor
     }
 
 
-    
+    protected void InitializeInventoryInteractions(out ReorderableList inventoryList, SerializedObject serializedInventory, SerializedProperty inventoryProperty, InventoryItem myTarget)
+    {
+        settings = Resources.Load<Settings>("Settings/Settings");
+
+        InventoryList inventory = Resources.Load<InventoryList>("Inventory");
+
+        inventoryList = new ReorderableList(serializedInventory, inventoryProperty, true, true, true, true)
+        {
+            drawHeaderCallback = (rect) =>
+            {
+                EditorGUI.LabelField(rect, "inventory actions");
+            },
+            elementHeightCallback = (int indexInv) =>
+            {
+                return PNCEditorUtils.GetAttempsContainerHeight(inventoryProperty, myTarget.inventoryActions[indexInv].attemps, indexInv);
+            },
+            drawElementCallback = (rect, indexInv, active, focus) =>
+            {
+                string[] content = new string[inventory.items.Length];
+                for (int i = 0; i < inventory.items.Length; i++)
+                {
+                    content[i] = inventory.items[i].itemName;
+                }
+                int selected = 0;
+                if (myTarget.inventoryActions[indexInv].item != null)
+                {
+                    for (int i = 0; i < inventory.items.Length; i++)
+                    {
+                        if (inventory.items[i].Equals(myTarget.inventoryActions[indexInv].item))
+                            selected = i;
+                    }
+                }
+                rect.height = EditorGUIUtility.singleLineHeight;
+
+                selected = EditorGUI.Popup(rect, "item", selected, content);
+
+                myTarget.inventoryActions[indexInv].item = inventory.items[selected];
+
+
+                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attemps);
+            }
+        };
+
+    }
+
+
 }

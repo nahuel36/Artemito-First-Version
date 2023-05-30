@@ -12,4 +12,6 @@ public class InventoryItem
     public float cuantity = 1;
     public InteractuableLocalVariable[] local_variables;
     public InteractuableGlobalVariable[] global_variables;
+    public InventoryItemAction[] inventoryActions;
+    public bool expandedInInspector = false;
 }
