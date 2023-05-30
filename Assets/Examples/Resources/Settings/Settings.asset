@@ -16,7 +16,6 @@ MonoBehaviour:
   - Use
   - Look
   - Talk
-  - New Verb 3
   global_variables:
   - name: isOpened
     ID: -1077307904

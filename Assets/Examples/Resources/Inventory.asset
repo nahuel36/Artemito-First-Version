@@ -122,16 +122,27 @@ MonoBehaviour:
       expandedInInspector: 0
       executedTimes: 0
     - item:
-        itemName: malla
-        normalImage: {fileID: 21300000, guid: 143f2f17dee481c4bb0fe34d2738962d, type: 3}
-        selectedImage: {fileID: 21300000, guid: 143f2f17dee481c4bb0fe34d2738962d,
+        itemName: blister
+        normalImage: {fileID: 21300000, guid: 884c8d9e17732594fb108349614cb726, type: 3}
+        selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b,
           type: 3}
         startWithThisItem: 0
-        cuantity: 1
-        local_variables: []
+        cuantity: 0
+        local_variables:
+        - name: 
+          hasInteger: 0
+          integer: 0
+          integerDefault: 0
+          hasBoolean: 0
+          boolean: 0
+          booleanDefault: 0
+          hasString: 0
+          String: 
+          stringDefault: 0
+          expandedInInspector: 0
         global_variables:
         - name: New Global Variable 8
-          integer: 6
+          integer: 0
           boolean: 0
           String: 
           globalHashCode: -1312666112
@@ -140,11 +151,400 @@ MonoBehaviour:
             ID: -1312666112
             object_type: 4
             variable_type: 1
-          expandedInInspector: 1
+          expandedInInspector: 0
           integerDefault: 1
           booleanDefault: 1
           stringDefault: 1
-        inventoryActions: []
+        inventoryActions:
+        - item:
+            itemName: clavo y alambre
+            normalImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd,
+              type: 3}
+            selectedImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd,
+              type: 3}
+            startWithThisItem: 0
+            cuantity: 0
+            local_variables: []
+            global_variables:
+            - name: New Global Variable 8
+              integer: 0
+              boolean: 0
+              String: 
+              globalHashCode: -1312666112
+              properties:
+                name: New Global Variable 8
+                ID: -1312666112
+                object_type: 4
+                variable_type: 1
+              expandedInInspector: 0
+              integerDefault: 1
+              booleanDefault: 1
+              stringDefault: 1
+            inventoryActions: []
+            expandedInInspector: 0
+          name: 
+          isCyclical: 0
+          attemps:
+          - interactions: []
+            expandedInInspector: 1
+          - interactions: []
+            expandedInInspector: 1
+          expandedInInspector: 1
+          executedTimes: 0
+        - item:
+            itemName: resorte
+            normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58,
+              type: 3}
+            selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58,
+              type: 3}
+            startWithThisItem: 0
+            cuantity: 0
+            local_variables:
+            - name: 
+              hasInteger: 1
+              integer: 0
+              integerDefault: 0
+              hasBoolean: 0
+              boolean: 0
+              booleanDefault: 0
+              hasString: 1
+              String: 
+              stringDefault: 0
+              expandedInInspector: 0
+            global_variables:
+            - name: New Global Variable 8
+              integer: 6
+              boolean: 0
+              String: 
+              globalHashCode: -1312666112
+              properties:
+                name: New Global Variable 8
+                ID: -1312666112
+                object_type: 4
+                variable_type: 1
+              expandedInInspector: 1
+              integerDefault: 0
+              booleanDefault: 1
+              stringDefault: 1
+            inventoryActions: []
+            expandedInInspector: 0
+          name: 
+          isCyclical: 0
+          attemps: []
+          expandedInInspector: 0
+          executedTimes: 0
+        - item:
+            itemName: blister
+            normalImage: {fileID: 21300000, guid: 884c8d9e17732594fb108349614cb726,
+              type: 3}
+            selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b,
+              type: 3}
+            startWithThisItem: 0
+            cuantity: 0
+            local_variables:
+            - name: 
+              hasInteger: 0
+              integer: 0
+              integerDefault: 0
+              hasBoolean: 0
+              boolean: 0
+              booleanDefault: 0
+              hasString: 0
+              String: 
+              stringDefault: 0
+              expandedInInspector: 0
+            global_variables:
+            - name: New Global Variable 8
+              integer: 0
+              boolean: 0
+              String: 
+              globalHashCode: -1312666112
+              properties:
+                name: New Global Variable 8
+                ID: -1312666112
+                object_type: 4
+                variable_type: 1
+              expandedInInspector: 0
+              integerDefault: 1
+              booleanDefault: 1
+              stringDefault: 1
+            inventoryActions:
+            - item:
+                itemName: clavo y alambre
+                normalImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd,
+                  type: 3}
+                selectedImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd,
+                  type: 3}
+                startWithThisItem: 0
+                cuantity: 0
+                local_variables: []
+                global_variables:
+                - name: New Global Variable 8
+                  integer: 0
+                  boolean: 0
+                  String: 
+                  globalHashCode: -1312666112
+                  properties:
+                    name: New Global Variable 8
+                    ID: -1312666112
+                    object_type: 4
+                    variable_type: 1
+                  expandedInInspector: 0
+                  integerDefault: 1
+                  booleanDefault: 1
+                  stringDefault: 1
+                inventoryActions: []
+                expandedInInspector: 0
+              name: 
+              isCyclical: 0
+              attemps:
+              - interactions: []
+                expandedInInspector: 1
+              - interactions: []
+                expandedInInspector: 1
+              expandedInInspector: 1
+              executedTimes: 0
+            - item:
+                itemName: resorte
+                normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58,
+                  type: 3}
+                selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58,
+                  type: 3}
+                startWithThisItem: 0
+                cuantity: 0
+                local_variables:
+                - name: 
+                  hasInteger: 1
+                  integer: 0
+                  integerDefault: 0
+                  hasBoolean: 0
+                  boolean: 0
+                  booleanDefault: 0
+                  hasString: 1
+                  String: 
+                  stringDefault: 0
+                  expandedInInspector: 0
+                global_variables:
+                - name: New Global Variable 8
+                  integer: 6
+                  boolean: 0
+                  String: 
+                  globalHashCode: -1312666112
+                  properties:
+                    name: New Global Variable 8
+                    ID: -1312666112
+                    object_type: 4
+                    variable_type: 1
+                  expandedInInspector: 1
+                  integerDefault: 0
+                  booleanDefault: 1
+                  stringDefault: 1
+                inventoryActions: []
+                expandedInInspector: 0
+              name: 
+              isCyclical: 0
+              attemps: []
+              expandedInInspector: 0
+              executedTimes: 0
+            - item:
+                itemName: blister
+                normalImage: {fileID: 21300000, guid: 884c8d9e17732594fb108349614cb726,
+                  type: 3}
+                selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b,
+                  type: 3}
+                startWithThisItem: 0
+                cuantity: 0
+                local_variables:
+                - name: 
+                  hasInteger: 0
+                  integer: 0
+                  integerDefault: 0
+                  hasBoolean: 0
+                  boolean: 0
+                  booleanDefault: 0
+                  hasString: 0
+                  String: 
+                  stringDefault: 0
+                  expandedInInspector: 0
+                global_variables:
+                - name: New Global Variable 8
+                  integer: 0
+                  boolean: 0
+                  String: 
+                  globalHashCode: -1312666112
+                  properties:
+                    name: New Global Variable 8
+                    ID: -1312666112
+                    object_type: 4
+                    variable_type: 1
+                  expandedInInspector: 0
+                  integerDefault: 1
+                  booleanDefault: 1
+                  stringDefault: 1
+                inventoryActions:
+                - item:
+                    itemName: clavo y alambre
+                    normalImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd,
+                      type: 3}
+                    selectedImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd,
+                      type: 3}
+                    startWithThisItem: 0
+                    cuantity: 0
+                    local_variables: []
+                    global_variables:
+                    - name: New Global Variable 8
+                      integer: 0
+                      boolean: 0
+                      String: 
+                      globalHashCode: -1312666112
+                      properties:
+                        name: New Global Variable 8
+                        ID: -1312666112
+                        object_type: 4
+                        variable_type: 1
+                      expandedInInspector: 0
+                      integerDefault: 1
+                      booleanDefault: 1
+                      stringDefault: 1
+                    inventoryActions: []
+                    expandedInInspector: 0
+                  name: 
+                  isCyclical: 0
+                  attemps:
+                  - interactions: []
+                    expandedInInspector: 1
+                  - interactions: []
+                    expandedInInspector: 1
+                  expandedInInspector: 1
+                  executedTimes: 0
+                - item:
+                    itemName: resorte
+                    normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58,
+                      type: 3}
+                    selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58,
+                      type: 3}
+                    startWithThisItem: 0
+                    cuantity: 0
+                    local_variables:
+                    - name: 
+                      hasInteger: 1
+                      integer: 0
+                      integerDefault: 0
+                      hasBoolean: 0
+                      boolean: 0
+                      booleanDefault: 0
+                      hasString: 1
+                      String: 
+                      stringDefault: 0
+                      expandedInInspector: 0
+                    global_variables:
+                    - name: New Global Variable 8
+                      integer: 6
+                      boolean: 0
+                      String: 
+                      globalHashCode: -1312666112
+                      properties:
+                        name: New Global Variable 8
+                        ID: -1312666112
+                        object_type: 4
+                        variable_type: 1
+                      expandedInInspector: 1
+                      integerDefault: 0
+                      booleanDefault: 1
+                      stringDefault: 1
+                    inventoryActions: []
+                    expandedInInspector: 0
+                  name: 
+                  isCyclical: 0
+                  attemps: []
+                  expandedInInspector: 0
+                  executedTimes: 0
+                - item:
+                    itemName: blister
+                    normalImage: {fileID: 21300000, guid: 884c8d9e17732594fb108349614cb726,
+                      type: 3}
+                    selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b,
+                      type: 3}
+                    startWithThisItem: 0
+                    cuantity: 0
+                    local_variables:
+                    - name: 
+                      hasInteger: 0
+                      integer: 0
+                      integerDefault: 0
+                      hasBoolean: 0
+                      boolean: 0
+                      booleanDefault: 0
+                      hasString: 0
+                      String: 
+                      stringDefault: 0
+                      expandedInInspector: 0
+                    global_variables:
+                    - name: New Global Variable 8
+                      integer: 0
+                      boolean: 0
+                      String: 
+                      globalHashCode: -1312666112
+                      properties:
+                        name: New Global Variable 8
+                        ID: -1312666112
+                        object_type: 4
+                        variable_type: 1
+                      expandedInInspector: 0
+                      integerDefault: 1
+                      booleanDefault: 1
+                      stringDefault: 1
+                    inventoryActions:
+                    - item:
+                        itemName: clavo y alambre
+                        startWithThisItem: 0
+                        cuantity: 0
+                        expandedInInspector: 0
+                      name: 
+                      isCyclical: 0
+                      attemps:
+                      - expandedInInspector: 1
+                      - expandedInInspector: 1
+                      expandedInInspector: 1
+                      executedTimes: 0
+                    - item:
+                        itemName: resorte
+                        startWithThisItem: 0
+                        cuantity: 0
+                        expandedInInspector: 0
+                      name: 
+                      isCyclical: 0
+                      attemps: []
+                      expandedInInspector: 0
+                      executedTimes: 0
+                    - item:
+                        itemName: blister
+                        startWithThisItem: 0
+                        cuantity: 0
+                        expandedInInspector: 0
+                      name: 
+                      isCyclical: 0
+                      attemps: []
+                      expandedInInspector: 0
+                      executedTimes: 0
+                    expandedInInspector: 0
+                  name: 
+                  isCyclical: 0
+                  attemps: []
+                  expandedInInspector: 0
+                  executedTimes: 0
+                expandedInInspector: 0
+              name: 
+              isCyclical: 0
+              attemps: []
+              expandedInInspector: 0
+              executedTimes: 0
+            expandedInInspector: 0
+          name: 
+          isCyclical: 0
+          attemps: []
+          expandedInInspector: 0
+          executedTimes: 0
         expandedInInspector: 0
       name: 
       isCyclical: 0
