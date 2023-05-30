@@ -9,8 +9,59 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
     Dictionary<string, ReorderableList> verbInteractionsListDict = new Dictionary<string, ReorderableList>();
     protected ReorderableList verbsList;
 
+    Dictionary<string, ReorderableList> invAttempsListDict = new Dictionary<string, ReorderableList>();
+    Dictionary<string, ReorderableList> invInteractionsListDict = new Dictionary<string, ReorderableList>();
+    protected ReorderableList invList;
 
-    
+    protected void InitializeInventoryInteractions() 
+    {
+        PNCInteractuable myTarget = (PNCInteractuable)target;
+
+        SerializedProperty inv_serialized = serializedObject.FindProperty("inventoryActions");
+
+        settings = Resources.Load<Settings>("Settings/Settings");
+
+        InventoryList inventory = Resources.Load<InventoryList>("Inventory");
+
+        invList = new ReorderableList(serializedObject, inv_serialized, true, true, true, true)
+        {
+            drawHeaderCallback = (rect) =>
+            {
+                EditorGUI.LabelField(rect, "inventory actions");
+            },
+            elementHeightCallback = (int indexInv) =>
+            {
+                return PNCEditorUtils.GetAttempsContainerHeight(inv_serialized, myTarget.inventoryActions[indexInv].attemps, indexInv);
+            },
+            drawElementCallback = (rect, indexInv, active, focus) =>
+            {
+                string[] content = new string[inventory.items.Length];
+                for (int i = 0; i < inventory.items.Length; i++)
+                {
+                    content[i] = inventory.items[i].itemName;
+                }
+                int selected = 0;
+                if (myTarget.inventoryActions[indexInv].item != null)
+                {
+                    for (int i = 0; i < inventory.items.Length; i++)
+                    {
+                        if (inventory.items[i].Equals(myTarget.inventoryActions[indexInv].item))
+                            selected = i;
+                    }
+                }
+                rect.height = EditorGUIUtility.singleLineHeight;
+
+                selected = EditorGUI.Popup(rect, "item", selected, content);
+
+                myTarget.inventoryActions[indexInv].item = inventory.items[selected];
+
+
+                PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attemps);
+            }
+        };
+
+    }
+
     protected void InitializeVerbs() 
     {
         PNCInteractuable myTarget = (PNCInteractuable)target;

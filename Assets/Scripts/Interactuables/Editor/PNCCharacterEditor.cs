@@ -26,6 +26,7 @@ public class PnCCharacterEditor : PNCInteractuableEditor
         local_variables_serialized = serializedObject.FindProperty("local_variables");
         global_variables_serialized = serializedObject.FindProperty("global_variables");
 
+        InitializeInventoryInteractions();
     }
 
    
@@ -51,6 +52,9 @@ public class PnCCharacterEditor : PNCInteractuableEditor
             Selection.objects = new UnityEngine.Object[] { settings };
             EditorGUIUtility.PingObject(settings);
         }
+
+        invList.DoLayoutList();
+
 
         if (settings.speechStyle == Settings.SpeechStyle.Sierra)
         { 

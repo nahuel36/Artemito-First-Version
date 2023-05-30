@@ -14,6 +14,17 @@ public class Verb
 }
 
 [System.Serializable]
+public class InventoryItemAction {
+    public InventoryItem item;
+    public string name;
+    public bool isCyclical = false;
+    public List<InteractionsAttemp> attemps = new List<InteractionsAttemp>();
+    public bool expandedInInspector;
+    public int executedTimes = 0;
+}
+
+
+[System.Serializable]
 public class InteractionsAttemp
 {
     public List<Interaction> interactions = new List<Interaction>();
@@ -143,6 +154,7 @@ public class PNCInteractuable : PNCVariablesContainer
     public string name;
 
     public List<Verb> verbs = new List<Verb>();
+    public List<InventoryItemAction> inventoryActions = new List<InventoryItemAction>();
 
     private void Start()
     {
@@ -210,6 +222,7 @@ public class PNCInteractuable : PNCVariablesContainer
             }
         }
     }
+
 
     public string[] getActiveVerbs() 
     {
