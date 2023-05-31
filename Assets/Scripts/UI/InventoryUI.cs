@@ -7,31 +7,27 @@ using UnityEngine.EventSystems;
 public class InventoryUI : MonoBehaviour
 {
     public InventoryItem overInventory;
-    List<int> activeItems;
-    PNCCursor cursor;
+     PNCCursor cursor;
     UnityEngine.UI.GraphicRaycaster raycaster;
-    InventoryList inventory;
-    EventSystem eventSystem;
+     EventSystem eventSystem;
     // Start is called before the first frame update
     void Start()
     {
-        activeItems = new List<int>();
-        inventory = Resources.Load<InventoryList>("Inventory");
-        for (int i = 0; i < inventory.items.Length; i++)
-        {
-            if (inventory.items[i].startWithThisItem)
-            {
-                GameObject newGO = new GameObject("item " + inventory.items[i].itemName);
-                newGO.transform.parent = transform;
-                newGO.AddComponent<Image>().sprite = inventory.items[i].normalImage;
-                newGO.transform.localScale = Vector3.one;
-                activeItems.Add(i);
-            }
-        }
+        InventoryManager.OnAddItem += OnAddItem;
+        InventoryManager.Instance.Initialize();
+
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
         eventSystem = FindObjectOfType<EventSystem>();
         cursor = GameObject.FindObjectOfType<PNCCursor>();
 
+    }
+
+    void OnAddItem(InventoryItem item)
+    {
+         GameObject newGO = new GameObject("item " + item.itemName);
+         newGO.transform.parent = transform;
+         newGO.AddComponent<Image>().sprite = item.normalImage;
+         newGO.transform.localScale = Vector3.one;
     }
 
     // Update is called once per frame
@@ -50,7 +46,7 @@ public class InventoryUI : MonoBehaviour
             {
                 if (result.gameObject.transform == transform.GetChild(i))
                 {
-                    overInventory = inventory.items[activeItems[i]];
+                    overInventory = InventoryManager.Instance.GetItemAtIndex(i);
                 }
             }
         }
