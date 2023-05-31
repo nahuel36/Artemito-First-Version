@@ -99,13 +99,14 @@ public class VerbsUI : MonoBehaviour
         raycaster.Raycast(pointerData, results);
         foreach (RaycastResult result in results)
         {
-            for (int i = 0; i < activeButtons.Count; i++)
-            {
-                if (result.gameObject == activeButtons[i].gameObject)
+            if(activeButtons != null)
+                for (int i = 0; i < activeButtons.Count; i++)
                 {
-                    overCursorVerb = activeVerbs[i];
+                    if (result.gameObject == activeButtons[i].gameObject)
+                    {
+                        overCursorVerb = activeVerbs[i];
+                    }
                 }
-            }
         }
     }
 }

@@ -10,6 +10,8 @@ public class UI_PNC_Manager : MonoBehaviour
     PointAndWalk pointAndWalk;
     PNCInteractuable objetiveClicked;
     UI_Text ui_text;
+    InventoryUI inventoryUI;
+    InventoryItem itemActive;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class UI_PNC_Manager : MonoBehaviour
         objetive = FindObjectOfType<Objetive>();
         pointAndWalk = FindObjectOfType<PointAndWalk>();
         ui_text = FindObjectOfType<UI_Text>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
     // Update is called once per frame
@@ -27,7 +30,17 @@ public class UI_PNC_Manager : MonoBehaviour
 
         ui_text.text.text = "";
 
-        if (!string.IsNullOrEmpty(verbsUI.actualVerb))
+        if (inventoryUI.overInventory != null)
+        {
+            ui_text.text.text = inventoryUI.overInventory.itemName;
+        }
+        else if (itemActive != null)
+        {
+            ui_text.text.text = itemActive.itemName;
+            if (objetive.actualObject != null)
+                ui_text.text.text += " en " + objetive.actualObject.name;
+        }
+        else if (!string.IsNullOrEmpty(verbsUI.actualVerb))
         {
             ui_text.text.text = verbsUI.actualVerb;
             if (objetive.actualObject != null)
@@ -37,7 +50,7 @@ public class UI_PNC_Manager : MonoBehaviour
         {
             ui_text.text.text = verbsUI.overCursorVerb;
             if (objetiveClicked)
-                ui_text.text.text += " " + objetiveClicked.name;        
+                ui_text.text.text += " " + objetiveClicked.name;
         }
         else if (objetiveClicked)
         {
@@ -50,6 +63,14 @@ public class UI_PNC_Manager : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
+            if (inventoryUI.overInventory != null)
+            {
+                itemActive = inventoryUI.overInventory;
+                objetiveClicked = null;
+                verbsUI.ResetActualVerb();
+                return;
+            }
+
             if (settings.interactionExecuteMethod == Settings.InteractionExecuteMethod.FirstActionThenObject)
             {
                 if (!string.IsNullOrEmpty(verbsUI.overCursorVerb))
@@ -66,6 +87,16 @@ public class UI_PNC_Manager : MonoBehaviour
                         verbsUI.ResetActualVerb();
                     }
                 }
+                else if (itemActive != null)
+                {
+                    if (objetive.actualObject != null)
+                    {
+                        objetive.actualObject.RunInventoryInteraction(itemActive);
+                        itemActive = null;
+                    }
+                    else
+                        itemActive = null;
+                }
                 else
                 {
                     pointAndWalk.WalkCancelable();
@@ -74,21 +105,32 @@ public class UI_PNC_Manager : MonoBehaviour
             }
             else if (settings.interactionExecuteMethod == Settings.InteractionExecuteMethod.FirstObjectThenAction)
             {
-                if (objetiveClicked != null)
+                if (itemActive != null && objetive.actualObject != null)
+                {
+                    objetive.actualObject.RunInventoryInteraction(itemActive);
+                    itemActive = null;
+                }
+                else if (objetiveClicked != null)
                 {
                     if(!string.IsNullOrEmpty(verbsUI.overCursorVerb))
                         objetiveClicked.RunInteraction(verbsUI.overCursorVerb);
+
                     objetiveClicked = null;
                     verbsUI.HideAllVerbs();
                     verbsUI.ResetActualVerb();
                 }
                 else if (objetive.actualObject != null)
                 {
-                     verbsUI.ShowVerbs(objetive.actualObject.getActiveVerbs());
-                     objetiveClicked = objetive.actualObject;
+                    if(itemActive == null)
+                    {
+                        verbsUI.ShowVerbs(objetive.actualObject.getActiveVerbs());
+                        objetiveClicked = objetive.actualObject;
+                    }
+                     
                 }
                 else 
                 {
+                    itemActive = null;
                     objetiveClicked = null;
                     verbsUI.HideAllVerbs();
                     verbsUI.ResetActualVerb();
