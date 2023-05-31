@@ -212,12 +212,6 @@ public class InventoryListEditor : Editor
                 inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = inventory.items[selected].specialIndex;
 
                 PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attemps);
-            },
-            onAddCallback = (ReorderableList list) =>
-            {
-                list.serializedProperty.serializedObject.ApplyModifiedProperties();
-                list.serializedProperty.arraySize++;
-                list.serializedProperty.serializedObject.ApplyModifiedProperties();           
             }
         };
 
