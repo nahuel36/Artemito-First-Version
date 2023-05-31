@@ -41,20 +41,20 @@ public static class PNCEditorUtils
             }
             if (founded == false)
             {
-                InteractuableGlobalVariable tempVerb = new InteractuableGlobalVariable();
-                tempVerb.name = settings.global_variables[i].name;
+                InteractuableGlobalVariable tempVar = new InteractuableGlobalVariable();
+                tempVar.name = settings.global_variables[i].name;
                 if (settings.global_variables[i].ID == -1)
                 {
-                    settings.global_variables[i].ID = tempVerb.GetHashCode();
-                    tempVerb.globalHashCode = tempVerb.GetHashCode();
+                    settings.global_variables[i].ID = tempVar.GetHashCode();
+                    tempVar.globalHashCode = tempVar.GetHashCode();
                 }
                 else
                 {
-                    tempVerb.globalHashCode = settings.global_variables[i].ID;
+                    tempVar.globalHashCode = settings.global_variables[i].ID;
                 }
-                tempVerb.properties = settings.global_variables[i];
+                tempVar.properties = settings.global_variables[i];
                 if (settings.global_variables[i].object_type.HasFlag(type))
-                    tempGlobalVarList.Add(tempVerb);
+                    tempGlobalVarList.Add(tempVar);
             }
         }
 
