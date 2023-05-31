@@ -10,8 +10,9 @@ public class InventoryItem
     public Sprite selectedImage;
     public bool startWithThisItem = false;
     public float cuantity = 1;
-    public InteractuableLocalVariable[] local_variables;
+    public InteractuableLocalVariable[] local_variables = new InteractuableLocalVariable[0];
     public InteractuableGlobalVariable[] global_variables;
     public InventoryItemAction[] inventoryActions;
     public bool expandedInInspector = false;
+    public int specialIndex = -1;
 }

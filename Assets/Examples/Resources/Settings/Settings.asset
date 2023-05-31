@@ -55,5 +55,5 @@ MonoBehaviour:
     variable_type: 1
   pathFindingType: 0
   speechStyle: 0
-  interactionExecuteMethod: 1
+  interactionExecuteMethod: 0
   objetivePosition: 1

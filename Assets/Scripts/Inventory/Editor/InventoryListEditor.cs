@@ -25,7 +25,7 @@ public class InventoryListEditor : Editor
         for (int i = 0; i < myTarget.items.Length; i++)
         {
             PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.inventory,ref myTarget.items[i].global_variables);
-            string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(i).propertyPath;
+            string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("specialIndex").intValue.ToString();
 
             localVariablesLists.Add(key,null);
             ReorderableList list = localVariablesLists[key];
@@ -82,8 +82,36 @@ public class InventoryListEditor : Editor
         if (GUILayout.Button("+", GUILayout.MaxHeight(25), GUILayout.MinHeight(25), GUILayout.MaxWidth(25), GUILayout.MinWidth(25)))
         {
             serializedObject.FindProperty("items").arraySize++;
+
+            serializedObject.ApplyModifiedProperties();
+
+            serializedObject.FindProperty("specialIndex").intValue++;
+            int index = serializedObject.FindProperty("items").arraySize - 1;
+            serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("specialIndex").intValue = serializedObject.FindProperty("specialIndex").intValue;
+            serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("itemName").stringValue = "new item " + serializedObject.FindProperty("specialIndex").intValue;
+                                    
+            string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("specialIndex").intValue.ToString();
+
+            if (!localVariablesLists.ContainsKey(key))
+            { 
+                localVariablesLists.Add(key, null);
+                ReorderableList list = localVariablesLists[key];
+                PNCEditorUtils.InitializeLocalVariables(out list, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("local_variables"));
+                localVariablesLists[key] = list;
+            }
+
+            if (!invList.ContainsKey(key))
+            {
+                invList.Add(key, null);
+                ReorderableList listInv = invList[key];
+                InitializeInventoryInteractions(out listInv, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("inventoryActions"), myTarget.items[index]);
+                invList[key] = listInv;
+            }
+   
+           
+
         }
-        if(GUILayout.Button("-", GUILayout.MaxHeight(25), GUILayout.MinHeight(25), GUILayout.MaxWidth(25), GUILayout.MinWidth(25)))
+        if (GUILayout.Button("-", GUILayout.MaxHeight(25), GUILayout.MinHeight(25), GUILayout.MaxWidth(25), GUILayout.MinWidth(25)))
         {
             if (selectedButton != -1)
             { 
@@ -120,13 +148,15 @@ public class InventoryListEditor : Editor
             SerializedProperty local_variables_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("local_variables");
             SerializedProperty global_variables_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("global_variables");
 
-            localVariablesLists[serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).propertyPath].DoLayoutList();
+            string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("specialIndex").intValue.ToString();
+
+            localVariablesLists[key].DoLayoutList();
 
             PNCEditorUtils.VerificateLocalVariables(ref myTarget.items[selectedButton].local_variables, ref local_variables_serialized);
             
             PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);
 
-            invList[serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).propertyPath].DoLayoutList();
+            invList[key].DoLayoutList();
         }
 
         //base.OnInspectorGUI();
@@ -167,11 +197,11 @@ public class InventoryListEditor : Editor
                     content[i] = inventory.items[i].itemName;
                 }
                 int selected = 0;
-                if (myTarget.inventoryActions[indexInv].item != null)
+                if (myTarget.inventoryActions[indexInv].specialIndex != -1 && myTarget.inventoryActions[indexInv].specialIndex != 0)
                 {
                     for (int i = 0; i < inventory.items.Length; i++)
                     {
-                        if (inventory.items[i].Equals(myTarget.inventoryActions[indexInv].item))
+                        if (inventory.items[i].specialIndex == myTarget.inventoryActions[indexInv].specialIndex)
                             selected = i;
                     }
                 }
@@ -179,10 +209,15 @@ public class InventoryListEditor : Editor
 
                 selected = EditorGUI.Popup(rect, "item", selected, content);
 
-                myTarget.inventoryActions[indexInv].item = inventory.items[selected];
-
+                inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = inventory.items[selected].specialIndex;
 
                 PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attemps);
+            },
+            onAddCallback = (ReorderableList list) =>
+            {
+                list.serializedProperty.serializedObject.ApplyModifiedProperties();
+                list.serializedProperty.arraySize++;
+                list.serializedProperty.serializedObject.ApplyModifiedProperties();           
             }
         };
 

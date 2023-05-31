@@ -41,11 +41,11 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                     content[i] = inventory.items[i].itemName;
                 }
                 int selected = 0;
-                if (myTarget.inventoryActions[indexInv].item != null)
+                if (myTarget.inventoryActions[indexInv].specialIndex != -1)
                 {
                     for (int i = 0; i < inventory.items.Length; i++)
                     {
-                        if (inventory.items[i].Equals(myTarget.inventoryActions[indexInv].item))
+                        if (inventory.items[i].specialIndex == myTarget.inventoryActions[indexInv].specialIndex)
                             selected = i;
                     }
                 }
@@ -53,7 +53,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
 
                 selected = EditorGUI.Popup(rect, "item", selected, content);
 
-                myTarget.inventoryActions[indexInv].item = inventory.items[selected];
+                myTarget.inventoryActions[indexInv].specialIndex = inventory.items[selected].specialIndex;
 
 
                 PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attemps);

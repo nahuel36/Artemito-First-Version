@@ -15,7 +15,7 @@ public class Verb
 
 [System.Serializable]
 public class InventoryItemAction {
-    public InventoryItem item;
+    public int specialIndex = -1;
     public string name;
     public bool isCyclical = false;
     public List<InteractionsAttemp> attemps = new List<InteractionsAttemp>();
@@ -273,7 +273,7 @@ public class PNCInteractuable : PNCVariablesContainer
     {
         for (int i = 0; i < inventoryActions.Count; i++)
         {
-            if (item.Equals(inventoryActions[i].item))
+            if (item.specialIndex == inventoryActions[i].specialIndex)
             {
                 int times = inventoryActions[i].executedTimes;
                 for (int j = 0; j < inventoryActions[i].attemps[times].interactions.Count; j++)

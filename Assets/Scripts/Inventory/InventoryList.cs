@@ -6,5 +6,5 @@ using UnityEngine;
 public class InventoryList : ScriptableObject
 {
     public InventoryItem[] items = new InventoryItem[0];
-
+    public int specialIndex = 0;
 }
