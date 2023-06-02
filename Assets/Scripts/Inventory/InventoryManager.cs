@@ -36,7 +36,7 @@ public class InventoryManager : MonoBehaviour
             }
             for (int j = 0; j < inventory.items[i].inventoryActions.Count; j++)
             {
-                InteractionUtils.InitializeInteractions(ref inventory.items[i].inventoryActions[j].attemps);
+                InteractionUtils.InitializeInteractions(ref inventory.items[i].inventoryActions[j].attempsContainer.attemps);
 
             }
 
@@ -94,12 +94,7 @@ public class InventoryManager : MonoBehaviour
         }
         if (index != -1)
         {
-           int times = itemWithAction.inventoryActions[index].executedTimes;
-           for (int j = 0; j < itemWithAction.inventoryActions[index].attemps[times].interactions.Count; j++)
-           {
-                itemWithAction.inventoryActions[index].attemps[times].interactions[j].action.Invoke();
-           }
-           InteractionUtils.increaseExecutedTimes(ref itemWithAction.inventoryActions[index].executedTimes, itemWithAction.inventoryActions[index].attemps.Count, itemWithAction.inventoryActions[index].isCyclical);
+            InteractionUtils.RunAttempsInteraction(itemWithAction.inventoryActions[index].attempsContainer);
         }
     }
 

@@ -31,7 +31,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             },
             elementHeightCallback = (int indexInv) =>
             {
-                return PNCEditorUtils.GetAttempsContainerHeight(inv_serialized, myTarget.inventoryActions[indexInv].attemps, indexInv);
+                return PNCEditorUtils.GetAttempsContainerHeight(inv_serialized, myTarget.inventoryActions[indexInv].attempsContainer.attemps, indexInv);
             },
             drawElementCallback = (rect, indexInv, active, focus) =>
             {
@@ -56,7 +56,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                 myTarget.inventoryActions[indexInv].specialIndex = inventory.items[selected].specialIndex;
 
 
-                PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attemps);
+                PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps);
             }
         };
 
@@ -78,11 +78,11 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             },
             elementHeightCallback = (int indexV) =>
             {
-                return PNCEditorUtils.GetAttempsContainerHeight(verbs_serialized, myTarget.verbs[indexV].attemps,indexV);
+                return PNCEditorUtils.GetAttempsContainerHeight(verbs_serialized, myTarget.verbs[indexV].attempsContainer.attemps,indexV);
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attemps);
+                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps);
             }
         };
 
@@ -106,7 +106,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                 verbAdded = true;
                 Verb tempVerb = new Verb();
                 tempVerb.name = settings.verbs[i];
-                tempVerb.attemps = new List<InteractionsAttemp>();
+                tempVerb.attempsContainer.attemps = new List<InteractionsAttemp>();
                 interactionsTempList.Add(tempVerb);
             }
         }

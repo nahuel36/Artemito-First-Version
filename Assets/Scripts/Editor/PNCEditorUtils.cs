@@ -315,13 +315,13 @@ public static class PNCEditorUtils
 
     }
 
-    public static float GetAttempsContainerHeight(SerializedProperty serializedContainer, List<InteractionsAttemp> noSerializedAttemps, int indexC)
+    public static float GetAttempsContainerHeight(SerializedProperty serializedVerb, List<InteractionsAttemp> noSerializedAttemps, int indexC)
     {
 
-        if (serializedContainer.GetArrayElementAtIndex(indexC).FindPropertyRelative("expandedInInspector").boolValue)
+        if (serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector").boolValue)
         {
             float heightM = 5 * EditorGUIUtility.singleLineHeight;
-            var attemps = serializedContainer.GetArrayElementAtIndex(indexC).FindPropertyRelative("attemps");
+            var attemps = serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("attemps");
             for (int i = 0; i < attemps.arraySize; i++)
             {
                 heightM += GetAttempHeight(attemps.GetArrayElementAtIndex(i), noSerializedAttemps[i]);
@@ -471,13 +471,13 @@ public static class PNCEditorUtils
 
     public static void DrawElementAttempContainer(SerializedProperty containerProperty, int indexC, Rect rect, Dictionary<string, ReorderableList> attempsListDict, Dictionary<string, ReorderableList> interactionsListDict, List<InteractionsAttemp> noSerializedAttemps)
     {
-        var attempContainer = containerProperty.GetArrayElementAtIndex(indexC);
+        var attempContainer = containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer");
         var attemps = attempContainer.FindPropertyRelative("attemps");
         var verbRect = new Rect(rect);
         var verbExpanded = attempContainer.FindPropertyRelative("expandedInInspector");
         verbRect.x += 8;
 
-        verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, attempContainer.FindPropertyRelative("name").stringValue);
+        verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("name").stringValue);
 
         verbRect.y += EditorGUIUtility.singleLineHeight;
 

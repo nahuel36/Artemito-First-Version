@@ -6,23 +6,24 @@ using UnityEngine.Events;
 public class Verb
 {
     public string name;
-    public bool isCyclical = false;
     public bool use = true;
-    public List<InteractionsAttemp> attemps = new List<InteractionsAttemp>();
-    public bool expandedInInspector;
-    public int executedTimes = 0;
+    public AttempsContainer attempsContainer;
 }
 
 [System.Serializable]
 public class InventoryItemAction {
     public int specialIndex = -1;
     public string name;
+    public AttempsContainer attempsContainer;
+}
+
+[System.Serializable]
+public class AttempsContainer{
     public bool isCyclical = false;
     public List<InteractionsAttemp> attemps = new List<InteractionsAttemp>();
     public bool expandedInInspector;
     public int executedTimes = 0;
 }
-
 
 [System.Serializable]
 public class InteractionsAttemp
@@ -163,11 +164,11 @@ public class PNCInteractuable : PNCVariablesContainer
     {
         for (int i = 0; i < verbs.Count; i++)
         {
-            InteractionUtils.InitializeInteractions(ref verbs[i].attemps);
+            InteractionUtils.InitializeInteractions(ref verbs[i].attempsContainer.attemps);
         }
         for (int i = 0; i < inventoryActions.Count; i++)
         {
-            InteractionUtils.InitializeInteractions(ref inventoryActions[i].attemps);
+            InteractionUtils.InitializeInteractions(ref inventoryActions[i].attempsContainer.attemps);
         }
     }
 
@@ -183,41 +184,32 @@ public class PNCInteractuable : PNCVariablesContainer
         return activeVerbs.ToArray();
     }
 
-    public void RunInteraction(string verbToRunString) 
+
+
+    public Verb FindVerb(string verb)
     {
-        
-        Verb verbToRun = FindVerb(verbToRunString);
-
-        for (int i = 0; i < verbToRun.attemps[verbToRun.executedTimes].interactions.Count; i++)
-        {
-            verbToRun.attemps[verbToRun.executedTimes].interactions[i].action.Invoke();
-        }
-        InteractionUtils.increaseExecutedTimes(ref verbToRun.executedTimes, verbToRun.attemps.Count, verbToRun.isCyclical);
-
-    }
-
-
-
-    public void RunInventoryInteraction(InventoryItem item)
-    {
-        int index = InventoryManager.Instance.getInventoryActionsIndex(item, inventoryActions);
-        if (index != -1)
-        {
-            int times = inventoryActions[index].executedTimes;
-            for (int j = 0; j < inventoryActions[index].attemps[times].interactions.Count; j++)
-            {
-                inventoryActions[index].attemps[times].interactions[j].action.Invoke();
-            }
-            InteractionUtils.increaseExecutedTimes(ref inventoryActions[index].executedTimes, inventoryActions[index].attemps.Count, inventoryActions[index].isCyclical);
-        }
-    }
-
-    public Verb FindVerb(string verb) {
         for (int i = 0; i < verbs.Count; i++)
         {
             if (verbs[i].name == verb)
                 return verbs[i];
         }
         return null;
+    }
+
+    public void RunInventoryInteraction(InventoryItem item)
+    {
+        int index = InventoryManager.Instance.getInventoryActionsIndex(item, inventoryActions);
+        if (index != -1)
+        {
+            InteractionUtils.RunAttempsInteraction(item.inventoryActions[index].attempsContainer);
+        }
+    }
+
+    public void RunVerbInteraction(string verbToRunString)
+    {
+        Verb verbToRun = FindVerb(verbToRunString);
+
+        if (verbToRun != null)
+            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer);
     }
 }

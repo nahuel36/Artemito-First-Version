@@ -187,7 +187,7 @@ public class InventoryListEditor : Editor
             },
             elementHeightCallback = (int indexInv) =>
             {
-                return PNCEditorUtils.GetAttempsContainerHeight(inventoryProperty, myTarget.inventoryActions[indexInv].attemps, indexInv);
+                return PNCEditorUtils.GetAttempsContainerHeight(inventoryProperty, myTarget.inventoryActions[indexInv].attempsContainer.attemps, indexInv);
             },
             drawElementCallback = (rect, indexInv, active, focus) =>
             {
@@ -211,7 +211,7 @@ public class InventoryListEditor : Editor
 
                 inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = inventory.items[selected].specialIndex;
 
-                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attemps);
+                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps);
             }
         };
 

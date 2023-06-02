@@ -4,6 +4,28 @@ using UnityEngine;
 using UnityEngine.Events;
 public static class InteractionUtils 
 {
+    public static void RunAttempsInteraction(AttempsContainer attempsContainer)
+    {
+        for (int i = 0; i < attempsContainer.attemps[attempsContainer.executedTimes].interactions.Count; i++)
+        {
+            attempsContainer.attemps[attempsContainer.executedTimes].interactions[i].action.Invoke();
+        }
+        InteractionUtils.increaseExecutedTimes(ref attempsContainer.executedTimes, attempsContainer.attemps.Count, attempsContainer.isCyclical);
+    }
+
+    public static void increaseExecutedTimes(ref int executedTimes, int count, bool isCyclical)
+    {
+        if (executedTimes + 1 == count)
+        {
+            if (isCyclical) executedTimes = 0;
+            else executedTimes = count - 1;
+        }
+        else
+            executedTimes++;
+    }
+
+
+
     public static void InitializeInteractions(ref List<InteractionsAttemp> attemps)
     {
         for (int j = 0; j < attemps.Count; j++)
@@ -69,14 +91,5 @@ public static class InteractionUtils
         }
     }
 
-    public static void increaseExecutedTimes(ref int executedTimes, int count, bool isCyclical)
-    {
-        if (executedTimes + 1 == count)
-        {
-            if (isCyclical) executedTimes = 0;
-            else executedTimes = count - 1;
-        }
-        else
-            executedTimes++;
-    }
+
 }

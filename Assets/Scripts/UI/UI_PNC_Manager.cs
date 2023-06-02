@@ -81,7 +81,7 @@ public class UI_PNC_Manager : MonoBehaviour
                 {
                     if (objetive.actualObject != null)
                     {
-                        objetive.actualObject.RunInteraction(verbsUI.actualVerb);
+                        objetive.actualObject.RunVerbInteraction(verbsUI.actualVerb);
                         verbsUI.ResetActualVerb();
                     }
                     else
@@ -125,7 +125,7 @@ public class UI_PNC_Manager : MonoBehaviour
                 else if (objetiveClicked != null)
                 {
                     if (!string.IsNullOrEmpty(verbsUI.overCursorVerb))
-                        objetiveClicked.RunInteraction(verbsUI.overCursorVerb);
+                        objetiveClicked.RunVerbInteraction(verbsUI.overCursorVerb);
 
                     objetiveClicked = null;
                     verbsUI.HideAllVerbs();
