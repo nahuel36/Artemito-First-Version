@@ -192,34 +192,23 @@ public class PNCInteractuable : PNCVariablesContainer
         {
             verbToRun.attemps[verbToRun.executedTimes].interactions[i].action.Invoke();
         }
-        increaseExecutedTimes(ref verbToRun.executedTimes, verbToRun.attemps.Count, verbToRun.isCyclical);
+        InteractionUtils.increaseExecutedTimes(ref verbToRun.executedTimes, verbToRun.attemps.Count, verbToRun.isCyclical);
 
     }
 
-    public void increaseExecutedTimes(ref int executedTimes, int count, bool isCyclical)
-    {
-        if (executedTimes + 1 == count)
-        {
-            if (isCyclical) executedTimes = 0;
-            else executedTimes = count - 1;
-        }
-        else
-            executedTimes++;
-    }
+
 
     public void RunInventoryInteraction(InventoryItem item)
     {
-        for (int i = 0; i < inventoryActions.Count; i++)
+        int index = InventoryManager.Instance.getInventoryActionsIndex(item, inventoryActions);
+        if (index != -1)
         {
-            if (item.specialIndex == inventoryActions[i].specialIndex)
+            int times = inventoryActions[index].executedTimes;
+            for (int j = 0; j < inventoryActions[index].attemps[times].interactions.Count; j++)
             {
-                int times = inventoryActions[i].executedTimes;
-                for (int j = 0; j < inventoryActions[i].attemps[times].interactions.Count; j++)
-                {
-                    inventoryActions[i].attemps[times].interactions[j].action.Invoke();
-                }
-                increaseExecutedTimes(ref inventoryActions[i].executedTimes, inventoryActions[i].attemps.Count, inventoryActions[i].isCyclical);
+                inventoryActions[index].attemps[times].interactions[j].action.Invoke();
             }
+            InteractionUtils.increaseExecutedTimes(ref inventoryActions[index].executedTimes, inventoryActions[index].attemps.Count, inventoryActions[index].isCyclical);
         }
     }
 

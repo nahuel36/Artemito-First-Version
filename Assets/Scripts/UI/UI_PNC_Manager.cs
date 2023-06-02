@@ -34,11 +34,13 @@ public class UI_PNC_Manager : MonoBehaviour
         {
             ui_text.text.text = inventoryUI.overInventory.itemName;
         }
-        else if (itemActive != null)
+        if (itemActive != null)
         {
             ui_text.text.text = itemActive.itemName;
             if (objetive.actualObject != null)
                 ui_text.text.text += " en " + objetive.actualObject.name;
+            else if(inventoryUI.overInventory != null && inventoryUI.overInventory != itemActive)
+                ui_text.text.text += " en " + inventoryUI.overInventory.itemName;
         }
         else if (!string.IsNullOrEmpty(verbsUI.actualVerb))
         {
@@ -63,7 +65,7 @@ public class UI_PNC_Manager : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            if (inventoryUI.overInventory != null)
+            if (inventoryUI.overInventory != null && itemActive == null)
             {
                 itemActive = inventoryUI.overInventory;
                 objetiveClicked = null;
@@ -94,6 +96,11 @@ public class UI_PNC_Manager : MonoBehaviour
                         objetive.actualObject.RunInventoryInteraction(itemActive);
                         itemActive = null;
                     }
+                    else if (inventoryUI.overInventory != null)
+                    {
+                        InventoryManager.Instance.RunInventoryInteraction(itemActive, inventoryUI.overInventory);
+                        itemActive = null;
+                    }
                     else
                         itemActive = null;
                 }
@@ -110,9 +117,14 @@ public class UI_PNC_Manager : MonoBehaviour
                     objetive.actualObject.RunInventoryInteraction(itemActive);
                     itemActive = null;
                 }
+                else if (itemActive != null && inventoryUI.overInventory != null)
+                {
+                    InventoryManager.Instance.RunInventoryInteraction(itemActive, inventoryUI.overInventory);
+                    itemActive = null;
+                }
                 else if (objetiveClicked != null)
                 {
-                    if(!string.IsNullOrEmpty(verbsUI.overCursorVerb))
+                    if (!string.IsNullOrEmpty(verbsUI.overCursorVerb))
                         objetiveClicked.RunInteraction(verbsUI.overCursorVerb);
 
                     objetiveClicked = null;
@@ -121,14 +133,14 @@ public class UI_PNC_Manager : MonoBehaviour
                 }
                 else if (objetive.actualObject != null)
                 {
-                    if(itemActive == null)
+                    if (itemActive == null)
                     {
                         verbsUI.ShowVerbs(objetive.actualObject.getActiveVerbs());
                         objetiveClicked = objetive.actualObject;
                     }
-                     
+
                 }
-                else 
+                else
                 {
                     itemActive = null;
                     objetiveClicked = null;

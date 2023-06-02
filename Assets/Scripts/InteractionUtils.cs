@@ -10,8 +10,9 @@ public static class InteractionUtils
         {
             for (int k = 0; k < attemps[j].interactions.Count; k++)
             {
-                attemps[j].interactions[k].action = new UnityEvent();
                 Interaction interaction = attemps[j].interactions[k];
+                if (interaction.type != Interaction.InteractionType.custom)
+                    attemps[j].interactions[k].action = new UnityEvent();
                 if (interaction.type == Interaction.InteractionType.character)
                 {
                     PNCCharacter charact = interaction.character;
@@ -23,19 +24,19 @@ public static class InteractionUtils
                         else
                             attemps[j].interactions[k].action.AddListener(() => charact.UnskippableTalk(whattosay));
                     }
-                    if (interaction.characterAction == Interaction.CharacterAction.sayWithScript)
+                    else if (interaction.characterAction == Interaction.CharacterAction.sayWithScript)
                     {
                         if (interaction.CanSkip)
                             attemps[j].interactions[k].action.AddListener(() => charact.Talk(((SayScript)interaction.SayScript).SayWithScript()));
                         else
                             attemps[j].interactions[k].action.AddListener(() => charact.UnskippableTalk(((SayScript)interaction.SayScript).SayWithScript()));
                     }
-                    if (interaction.characterAction == Interaction.CharacterAction.walk)
+                    else if (interaction.characterAction == Interaction.CharacterAction.walk)
                     {
                         attemps[j].interactions[k].action.AddListener(() => charact.Walk(interaction.WhereToWalk.position));
                     }
                 }
-                if (interaction.type == Interaction.InteractionType.variables)
+                else if (interaction.type == Interaction.InteractionType.variables)
                 {
                     PNCVariablesContainer varContainer = interaction.variableObject;
                     if (interaction.variablesAction == Interaction.VariablesAction.setLocalVariable)
@@ -44,19 +45,19 @@ public static class InteractionUtils
                         varContainer.SetLocalVariable(interaction,
                                                         interaction.variableObject.local_variables[interaction.localVariableSelected]));
                     }
-                    if (interaction.variablesAction == Interaction.VariablesAction.setGlobalVariable)
+                    else if (interaction.variablesAction == Interaction.VariablesAction.setGlobalVariable)
                     {
                         attemps[j].interactions[k].action.AddListener(() =>
                         varContainer.SetGlobalVariable(interaction,
                                                         interaction.variableObject.global_variables[interaction.globalVariableSelected]));
                     }
-                    if (interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
+                    else if (interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
                     {
                         attemps[j].interactions[k].action.AddListener(() =>
                         varContainer.GetLocalVariable(interaction,
                                                         interaction.variableObject.local_variables[interaction.localVariableSelected]));
                     }
-                    if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable)
+                    else if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable)
                     {
                         attemps[j].interactions[k].action.AddListener(() =>
                         varContainer.GetGlobalVariable(interaction,
@@ -66,5 +67,16 @@ public static class InteractionUtils
 
             }
         }
+    }
+
+    public static void increaseExecutedTimes(ref int executedTimes, int count, bool isCyclical)
+    {
+        if (executedTimes + 1 == count)
+        {
+            if (isCyclical) executedTimes = 0;
+            else executedTimes = count - 1;
+        }
+        else
+            executedTimes++;
     }
 }

@@ -12,7 +12,7 @@ public class InventoryItem
     public float cuantity = 1;
     public InteractuableLocalVariable[] local_variables = new InteractuableLocalVariable[0];
     public InteractuableGlobalVariable[] global_variables;
-    public InventoryItemAction[] inventoryActions;
+    public List<InventoryItemAction> inventoryActions;
     public bool expandedInInspector = false;
     public int specialIndex = -1;
 }
