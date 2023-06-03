@@ -6,6 +6,15 @@ public class PointAndWalk : MonoBehaviour
 {
     [SerializeField] PNCCharacter pNCCharacter;
 
+    public void Start()
+    {
+        PNCCharacter[] characters = FindObjectsOfType<PNCCharacter>();
+        foreach (PNCCharacter character in characters)
+        {
+            character.Initialize();
+        }
+        
+    }
 
     public void WalkUnCancelable(){
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);

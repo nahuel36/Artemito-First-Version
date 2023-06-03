@@ -23,31 +23,39 @@ public class PNCCharacter : PNCInteractuable
 
     Animator anim;
     CharacterAnimator characterAnimator;
-
-    private void Awake()
+    [HideInInspector]
+    public bool forceAronPathFinder = false;
+    [HideInInspector]
+    public bool forceTalkerLucasArts = false;
+    [HideInInspector]
+    public bool dontConfigureAnimator = false;
+    public void Initialize()
     {
         anim = GetComponentInChildren<Animator>();
-        ConfigurePathFinder(1);
-        ConfigureTalker();
-        CharacterAnimatorAdapter characterAnimatorAdapter = new CharacterAnimatorAdapter();
-        characterAnimatorAdapter.Configure(anim);
-        characterAnimator = GetComponentInChildren<CharacterAnimator>();
-        characterAnimator.Configure(characterAnimatorAdapter, this);
+        ConfigurePathFinder(1, forceAronPathFinder);
+        ConfigureTalker(forceTalkerLucasArts);
+        if (dontConfigureAnimator == false)
+        { 
+            CharacterAnimatorAdapter characterAnimatorAdapter = new CharacterAnimatorAdapter();
+            characterAnimatorAdapter.Configure(anim);
+            characterAnimator = GetComponentInChildren<CharacterAnimator>();
+            characterAnimator.Configure(characterAnimatorAdapter, this);
+        }
     }
 
-    public void ConfigureTalker()
+    public void ConfigureTalker(bool forceLucas = false)
     {
         Settings settings = Resources.Load<Settings>("Settings/Settings");
-        if (settings.speechStyle == Settings.SpeechStyle.LucasArts)
+        if (forceLucas || settings.speechStyle == Settings.SpeechStyle.LucasArts)
             messageTalker = new LucasArtText(this.transform, new TextTimeCalculator());
         else if (settings.speechStyle == Settings.SpeechStyle.Sierra)
             messageTalker = new SierraText(this.transform, new TextTimeCalculator(), SierraTextFace);
     }
 
-    public void ConfigurePathFinder(float velocity)
+    public void ConfigurePathFinder(float velocity, bool forceAron = false)
     {
         Settings settings = Resources.Load<Settings>("Settings/Settings");
-        if (settings.pathFindingType == Settings.PathFindingType.AronGranbergAStarPath)
+        if (forceAron || settings.pathFindingType == Settings.PathFindingType.AronGranbergAStarPath)
             pathFinder = new AStarPathFinderAdapter(this.transform, velocity);
         else if (settings.pathFindingType == Settings.PathFindingType.UnityNavigationMesh)
             pathFinder = new NavMesh2DPathFinder(this.transform);
