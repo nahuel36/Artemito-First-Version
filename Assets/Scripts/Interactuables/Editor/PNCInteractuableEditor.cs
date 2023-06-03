@@ -13,6 +13,42 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
     Dictionary<string, ReorderableList> invInteractionsListDict = new Dictionary<string, ReorderableList>();
     protected ReorderableList invList;
 
+    protected void ShowInteractionVerbs()
+    {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUIStyle tittleStyle = new GUIStyle();
+        tittleStyle.normal.textColor = Color.white;
+        tittleStyle.fontSize = 14;
+        GUILayout.Label("<b>Interactions</b>", tittleStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        PNCCharacter myTarget = (PNCCharacter)target;
+
+        if (GUILayout.Button("Edit verbs"))
+        {
+            Selection.objects = new UnityEngine.Object[] { settings };
+            EditorGUIUtility.PingObject(settings);
+        }
+        verbsList.DoLayoutList();
+    }
+
+    protected void ShowInventoryInteractions()
+    {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUIStyle tittleStyle = new GUIStyle();
+        tittleStyle.normal.textColor = Color.white;
+        tittleStyle.fontSize = 14;
+        GUILayout.Label("<b>Inventory Interactions</b>", tittleStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        invList.DoLayoutList();
+    }
+
+    
     protected void InitializeInventoryInteractions() 
     {
         PNCInteractuable myTarget = (PNCInteractuable)target;

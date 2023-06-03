@@ -161,16 +161,8 @@ public class InventoryListEditor : Editor
 
             invList[key].DoLayoutList();
 
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label("<b>Local Variables</b>", tittleStyle);
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
+            PNCEditorUtils.ShowLocalVariables(localVariablesLists[key], ref myTarget.items[selectedButton].local_variables, ref local_variables_serialized);
 
-            localVariablesLists[key].DoLayoutList();
-
-            PNCEditorUtils.VerificateLocalVariables(ref myTarget.items[selectedButton].local_variables, ref local_variables_serialized);
-            
             PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);
 
 

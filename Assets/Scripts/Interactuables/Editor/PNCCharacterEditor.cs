@@ -9,9 +9,6 @@ using UnityEditorInternal;
 public class PnCCharacterEditor : PNCInteractuableEditor
 {
 
-    
-    ReorderableList localVariablesList;
-
 
 
 
@@ -29,38 +26,19 @@ public class PnCCharacterEditor : PNCInteractuableEditor
         InitializeInventoryInteractions();
     }
 
-   
 
+    
     public override void OnInspectorGUI()
     {
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("name"));
-        
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUIStyle tittleStyle = new GUIStyle();
-        tittleStyle.normal.textColor = Color.white;
-        tittleStyle.fontSize = 14;
-        GUILayout.Label("<b>Interactions</b>", tittleStyle);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-
         PNCCharacter myTarget = (PNCCharacter)target;
 
-        if (GUILayout.Button("Edit verbs"))
-        {
-            Selection.objects = new UnityEngine.Object[] { settings };
-            EditorGUIUtility.PingObject(settings);
-        }
-        verbsList.DoLayoutList();
+
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("name"));
+
+        ShowInteractionVerbs();
 
 
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("<b>Inventory Interactions</b>", tittleStyle);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-
-        invList.DoLayoutList();
+        ShowInventoryInteractions();
 
 
         if (settings.speechStyle == Settings.SpeechStyle.Sierra)
@@ -69,16 +47,7 @@ public class PnCCharacterEditor : PNCInteractuableEditor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SierraTextFace"));
         }
 
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("<b>Local Variables</b>", tittleStyle);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-
-        localVariablesList.DoLayoutList();
-
-        PNCEditorUtils.VerificateLocalVariables(ref myTarget.local_variables, ref local_variables_serialized);
-
+        PNCEditorUtils.ShowLocalVariables(localVariablesList, ref myTarget.local_variables, ref local_variables_serialized);
 
         PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.characters, ref myTarget.global_variables, ref global_variables_serialized);
 

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
+using UnityEditorInternal;
 [CustomEditor(typeof(PNCVariablesContainer))]
 public class PNCVariablesContainerEditor : Editor
 {
     protected Settings settings;
     protected SerializedProperty local_variables_serialized;
     protected SerializedProperty global_variables_serialized;
-    
+    protected ReorderableList localVariablesList;
+
 
     private void OnEnable()
     {

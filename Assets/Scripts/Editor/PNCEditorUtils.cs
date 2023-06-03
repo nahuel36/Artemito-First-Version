@@ -195,6 +195,22 @@ public static class PNCEditorUtils
 
     }
 
+    public static void ShowLocalVariables(ReorderableList list, ref InteractuableLocalVariable[] local_variables, ref SerializedProperty local_variables_serialized)
+    {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUIStyle tittleStyle = new GUIStyle();
+        tittleStyle.normal.textColor = Color.white;
+        tittleStyle.fontSize = 14;
+        GUILayout.Label("<b>Local Variables</b>", tittleStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        list.DoLayoutList();
+
+        PNCEditorUtils.VerificateLocalVariables(ref local_variables, ref local_variables_serialized);
+    }
+
     public static void ShowGlobalVariables(System.Enum type, ref InteractuableGlobalVariable[] variables, ref SerializedProperty variables_serialized)
     {
         Settings settings = Resources.Load<Settings>("Settings/Settings");
