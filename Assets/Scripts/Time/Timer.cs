@@ -39,7 +39,7 @@ public class Timer : MonoBehaviour//, IInteraction
         }
     }
 
-    public bool ifEnded(Conditional cond)
+    public bool ifEnded(ref Conditional cond)
     {
         cond.condition = ended;
         ConditionalCommand onend = new ConditionalCommand();
