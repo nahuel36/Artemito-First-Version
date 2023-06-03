@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
-public class BoolConditional : ICommand
+public class ConditionalCommand : ICommand
 {
     Conditional conditional;
 
