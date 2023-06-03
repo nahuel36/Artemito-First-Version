@@ -155,6 +155,14 @@ public class InventoryListEditor : Editor
             GUIStyle tittleStyle = new GUIStyle();
             tittleStyle.normal.textColor = Color.white;
             tittleStyle.fontSize = 14;
+            GUILayout.Label("<b>Inventory Interactions</b>", tittleStyle);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            invList[key].DoLayoutList();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
             GUILayout.Label("<b>Local Variables</b>", tittleStyle);
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -165,13 +173,7 @@ public class InventoryListEditor : Editor
             
             PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);
 
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label("<b>Inventory Interactions</b>", tittleStyle);
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
 
-            invList[key].DoLayoutList();
         }
 
         //base.OnInspectorGUI();
