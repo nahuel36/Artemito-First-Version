@@ -37,21 +37,28 @@ public class PnCCharacterEditor : PNCInteractuableEditor
         
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        GUIStyle style = new GUIStyle();
-        style.normal.textColor = Color.white;
-        style.fontSize = 14;
-        GUILayout.Label("<b>Interactions</b>", style);
+        GUIStyle tittleStyle = new GUIStyle();
+        tittleStyle.normal.textColor = Color.white;
+        tittleStyle.fontSize = 14;
+        GUILayout.Label("<b>Interactions</b>", tittleStyle);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
         PNCCharacter myTarget = (PNCCharacter)target;
 
-        verbsList.DoLayoutList();
         if (GUILayout.Button("Edit verbs"))
         {
             Selection.objects = new UnityEngine.Object[] { settings };
             EditorGUIUtility.PingObject(settings);
         }
+        verbsList.DoLayoutList();
+
+
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("<b>Inventory Interactions</b>", tittleStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
 
         invList.DoLayoutList();
 
@@ -61,6 +68,12 @@ public class PnCCharacterEditor : PNCInteractuableEditor
             GUILayout.Box(myTarget.SierraTextFace.texture,GUILayout.MaxHeight(100),GUILayout.MaxWidth(100),GUILayout.MinHeight(100),GUILayout.MinWidth(100));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SierraTextFace"));
         }
+
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("<b>Local Variables</b>", tittleStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
 
         localVariablesList.DoLayoutList();
 

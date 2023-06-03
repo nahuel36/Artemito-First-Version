@@ -150,11 +150,26 @@ public class InventoryListEditor : Editor
 
             string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("specialIndex").intValue.ToString();
 
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUIStyle tittleStyle = new GUIStyle();
+            tittleStyle.normal.textColor = Color.white;
+            tittleStyle.fontSize = 14;
+            GUILayout.Label("<b>Local Variables</b>", tittleStyle);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
             localVariablesLists[key].DoLayoutList();
 
             PNCEditorUtils.VerificateLocalVariables(ref myTarget.items[selectedButton].local_variables, ref local_variables_serialized);
             
             PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("<b>Inventory Interactions</b>", tittleStyle);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
 
             invList[key].DoLayoutList();
         }
