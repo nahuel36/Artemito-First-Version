@@ -9,6 +9,7 @@ public class PNCCursor : MonoBehaviour
     Canvas canvas;
     CanvasScaler scaler;
     Image cursorImage;
+    [SerializeField] Vector2 offset;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +32,6 @@ public class PNCCursor : MonoBehaviour
         position /= canvas.scaleFactor;
         position.x -= scaler.referenceResolution.x / 2;
         position.y -= scaler.referenceResolution.y / 2;
-        position.y += cursorImage.rectTransform.sizeDelta.y;
-        position.x += cursorImage.rectTransform.sizeDelta.x/2;
-        position.y += cursorImage.rectTransform.sizeDelta.y/2;
-        trans.anchoredPosition = position;
+        trans.anchoredPosition = position + (Vector3)offset;
     }
 }
