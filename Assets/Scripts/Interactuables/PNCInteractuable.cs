@@ -149,7 +149,7 @@ public class Interaction
     }
 }
 
-public class PNCInteractuable : PNCVariablesContainer
+public abstract class PNCInteractuable : PNCVariablesContainer
 {
 
     public string name;
