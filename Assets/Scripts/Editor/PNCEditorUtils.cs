@@ -271,14 +271,14 @@ public static class PNCEditorUtils
                     {
                         variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue = EditorGUILayout.Toggle("boolean value:", variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue);
                         if (GUILayout.Button("Set boolean default value"))
-                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = false;
+                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = true;
                     }
                     else
                     {
                         GUILayout.Label("boolean value : default", EditorStyles.boldLabel);
                         if (GUILayout.Button("Set boolean value"))
                         {
-                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = true;
+                            variables_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = false;
                         }
                     }
                 }
