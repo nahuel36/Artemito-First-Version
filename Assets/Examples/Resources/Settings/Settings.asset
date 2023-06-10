@@ -17,14 +17,6 @@ MonoBehaviour:
   - Look
   - Talk
   global_variables:
-  - name: isOpened
-    ID: -1077307904
-    object_type: 1
-    variable_type: 3
-  - name: isOpened2
-    ID: 1356215296
-    object_type: 0
-    variable_type: 0
   - name: new variable25
     ID: -1114401280
     object_type: 0
@@ -33,14 +25,22 @@ MonoBehaviour:
     ID: 784136192
     object_type: 0
     variable_type: 0
+  - name: isOpened
+    ID: -1077307904
+    object_type: 1
+    variable_type: 3
+  - name: isOpened2
+    ID: 1356215296
+    object_type: 0
+    variable_type: 0
   - name: New Global Variable 5
     ID: 365620736
     object_type: 0
     variable_type: 0
   - name: 6
     ID: 227535360
-    object_type: 0
-    variable_type: 0
+    object_type: 8
+    variable_type: 1
   - name: New Global Variable 14
     ID: -1221975552
     object_type: 1
@@ -57,3 +57,4 @@ MonoBehaviour:
   speechStyle: 0
   interactionExecuteMethod: 1
   objetivePosition: 1
+  cursorPrioritys: 040000000100000005000000000000000200000003000000

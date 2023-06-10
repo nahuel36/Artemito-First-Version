@@ -31,6 +31,16 @@ public class GlobalVariableProperty
 [CreateAssetMenu(fileName = "Settings", menuName = "Pnc/SettingsFile", order = 1)]
 public class Settings : ScriptableObject
 {
+    public enum PriorityOnCursor { 
+        VerbSelected,
+        OverVerb,
+        InventorySelected,
+        OverInventory,
+        CharacterOrObjectSelected,
+        OverCharacterOrObject,
+    }
+
+
     public enum SpeechStyle
     {
         LucasArts, 
@@ -60,4 +70,5 @@ public class Settings : ScriptableObject
     public SpeechStyle speechStyle;
     public InteractionExecuteMethod interactionExecuteMethod;
     public ObjetivePosition objetivePosition;
+    public List<PriorityOnCursor> cursorPrioritys;
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 using System.Linq;
+using System;
 
 [CustomEditor(typeof(Settings))]
 public class SettingsEditor : Editor
@@ -16,11 +17,50 @@ public class SettingsEditor : Editor
 
     ReorderableList verbsList;
     ReorderableList global_variables_list;
-
+    ReorderableList priorityList;
  
 
     private void OnEnable()
     {
+        Settings myTarget = (Settings)target;
+
+        priorityList = new ReorderableList(serializedObject, serializedObject.FindProperty("cursorPrioritys"), true, true, false, false);
+        priorityList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+        {
+           EditorGUI.LabelField(rect, priorityList.serializedProperty.enumDisplayNames[priorityList.serializedProperty.GetArrayElementAtIndex(index).enumValueIndex]);
+        };
+        priorityList.drawHeaderCallback = (Rect rect) =>
+        {
+            EditorGUI.LabelField(rect, "Mouse Over Prioritys");
+        };
+
+        List<Settings.PriorityOnCursor> repeated = new List<Settings.PriorityOnCursor>();
+
+        for (int i = 0; i < myTarget.cursorPrioritys.Count; i++)
+            for (int j = 0; j < myTarget.cursorPrioritys.Count; j++)
+            {
+                if (i != j && myTarget.cursorPrioritys[j].ToString() == myTarget.cursorPrioritys[i].ToString())
+                 repeated.Add(myTarget.cursorPrioritys[j]);
+            }
+
+        for (int i = repeated.Count-1; i >= 0; i--)
+        {
+            myTarget.cursorPrioritys.Remove(repeated[i]);
+            repeated.Remove(repeated[i]);
+        }            
+
+        for (int i = 0; i < Enum.GetNames(typeof(Settings.PriorityOnCursor)).Length; i++)
+        {
+            bool contains = false;
+            for (int j = 0; j < myTarget.cursorPrioritys.Count; j++)
+            {
+                if (Enum.GetNames(typeof(Settings.PriorityOnCursor))[i] == myTarget.cursorPrioritys[j].ToString())
+                    contains = true;
+            }
+            if (contains == false)
+                myTarget.cursorPrioritys.Add(((Settings.PriorityOnCursor)(Enum.GetValues(typeof(Settings.PriorityOnCursor)).GetValue(i))));
+        }
+
         verbsList = new ReorderableList(serializedObject, serializedObject.FindProperty("verbs"), true, true, true, true);
         verbsList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
         {
@@ -125,6 +165,8 @@ public class SettingsEditor : Editor
 
         GUILayout.Label("Objetive position");
         ((Settings)target).objetivePosition = (Settings.ObjetivePosition)EditorGUILayout.EnumPopup(((Settings)target).objetivePosition);
+
+        priorityList.DoLayoutList();
 
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed)
