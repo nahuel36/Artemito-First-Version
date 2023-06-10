@@ -21,13 +21,17 @@ public class Objetive : MonoBehaviour
     {
         actualObject = null;
         RaycastHit2D[] hits = Physics2D.RaycastAll(cursor.transform.position,Vector2.zero);
+        int bestpriority = -1;
         foreach(RaycastHit2D hit in hits)
         {
             if (hit.collider)
             {
                 PNCInteractuable pncInteractuable = hit.collider.GetComponent<PNCInteractuable>();
-                if (pncInteractuable)
+                if (pncInteractuable && pncInteractuable.priority > bestpriority)
+                { 
                     actualObject = pncInteractuable;
+                    bestpriority = pncInteractuable.priority;
+                }
             }
         }
 
