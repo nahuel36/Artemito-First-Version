@@ -18,13 +18,15 @@ public class PNCVariablesContainerEditor : Editor
         local_variables_serialized = serializedObject.FindProperty("local_variables");
         global_variables_serialized = serializedObject.FindProperty("global_variables");
 
+        PNCEditorUtils.InitializeLocalVariables(out localVariablesList, serializedObject, serializedObject.FindProperty("local_variables"));
+
         PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.variableContainer, ref ((PNCVariablesContainer)target).global_variables);
     }
 
 
     public override void OnInspectorGUI()
     {
-        PNCCharacter myTarget = (PNCCharacter)target;
+        PNCVariablesContainer myTarget = (PNCVariablesContainer)target;
 
         PNCEditorUtils.ShowLocalVariables(localVariablesList, ref myTarget.local_variables, ref local_variables_serialized);
 
