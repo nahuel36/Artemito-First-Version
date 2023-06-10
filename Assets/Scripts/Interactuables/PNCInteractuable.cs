@@ -151,14 +151,10 @@ public class Interaction
 
 public abstract class PNCInteractuable : PNCVariablesContainer
 {
-
-    public string name;
+    public new string name;
 
     public List<Verb> verbs = new List<Verb>();
     public List<InventoryItemAction> inventoryActions = new List<InventoryItemAction>();
-
-    
-
 
     private void Start()
     {
