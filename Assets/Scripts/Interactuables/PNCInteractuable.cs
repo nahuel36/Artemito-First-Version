@@ -153,6 +153,8 @@ public abstract class PNCInteractuable : PNCVariablesContainer
 {
     public new string name;
 
+    public int priority = 0;
+
     public List<Verb> verbs = new List<Verb>();
     public List<InventoryItemAction> inventoryActions = new List<InventoryItemAction>();
 
