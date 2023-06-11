@@ -22,46 +22,48 @@ public class UI_PNC_Manager : MonoBehaviour
         ui_text = FindObjectOfType<UI_Text>();
         inventoryUI = FindObjectOfType<InventoryUI>();
     }
+    string GetPointerString() {
+        for (int i = 0; i < settings.cursorPrioritys.Count; i++)
+        {
+            switch (settings.cursorPrioritys[i])
+            {
+                case Settings.PriorityOnCursor.VerbSelected:
+                    if (!string.IsNullOrEmpty(verbsUI.actualVerb))
+                        return verbsUI.actualVerb;
+                    break;
+                case Settings.PriorityOnCursor.OverVerb:
+                    if (!string.IsNullOrEmpty(verbsUI.overCursorVerb))
+                        return verbsUI.overCursorVerb;
+                    break;
+                case Settings.PriorityOnCursor.InventorySelected:
+                    if (itemActive != null)
+                        return itemActive.itemName;
+                    break;
+                case Settings.PriorityOnCursor.OverInventory:
+                    if (inventoryUI.overInventory != null)
+                        return inventoryUI.overInventory.itemName;
+                    break;
+                case Settings.PriorityOnCursor.CharacterOrObjectSelected:
+                    if (objetiveClicked != null)
+                        return objetiveClicked.name;
+                    break;
+                case Settings.PriorityOnCursor.OverCharacterOrObject:
+                    if (objetive.actualObject != null)
+                        return objetive.actualObject.name;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return "";
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (CommandsQueue.Instance.Executing()) return; //No permite cancelar caminata    
 
-        ui_text.text.text = "";
-
-        if (inventoryUI.overInventory != null)
-        {
-            ui_text.text.text = inventoryUI.overInventory.itemName;
-        }
-        if (itemActive != null)
-        {
-            ui_text.text.text = itemActive.itemName;
-            if (objetive.actualObject != null)
-                ui_text.text.text += " en " + objetive.actualObject.name;
-            else if(inventoryUI.overInventory != null && inventoryUI.overInventory != itemActive)
-                ui_text.text.text += " en " + inventoryUI.overInventory.itemName;
-        }
-        else if (!string.IsNullOrEmpty(verbsUI.actualVerb))
-        {
-            ui_text.text.text = verbsUI.actualVerb;
-            if (objetive.actualObject != null)
-                ui_text.text.text += " " + objetive.actualObject.name;
-        }
-        else if (!string.IsNullOrEmpty(verbsUI.overCursorVerb))
-        {
-            ui_text.text.text = verbsUI.overCursorVerb;
-            if (objetiveClicked)
-                ui_text.text.text += " " + objetiveClicked.name;
-        }
-        else if (objetiveClicked)
-        {
-            ui_text.text.text = objetiveClicked.name;
-        }
-        else if (objetive.actualObject)
-        {
-            ui_text.text.text = objetive.actualObject.name;
-        }
+        ui_text.text.text = GetPointerString();
         
         if (Input.GetMouseButtonDown(0))
         {
