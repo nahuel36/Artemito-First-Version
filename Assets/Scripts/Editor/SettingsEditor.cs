@@ -17,12 +17,52 @@ public class SettingsEditor : Editor
 
     ReorderableList verbsList;
     ReorderableList global_variables_list;
- 
+
+    public void CheckVerbsSameIndex() 
+    {
+     
+        for (int i = 0; i < serializedObject.FindProperty("verbs").arraySize; i++)
+        {
+            bool areSame = false;
+            int sameIndex = -1;
+            for (int j = 0; j < serializedObject.FindProperty("verbs").arraySize; j++)
+            {
+                if (i != j && 
+                    serializedObject.FindProperty("verbs").GetArrayElementAtIndex(i).FindPropertyRelative("index").intValue 
+                    == serializedObject.FindProperty("verbs").GetArrayElementAtIndex(j).FindPropertyRelative("index").intValue)
+                {
+                    areSame = true;
+                    sameIndex = j;
+                }
+            }
+            int newIndex = 0;
+
+            while (areSame)
+            {
+                areSame = false;
+                for (int j = 0; j < serializedObject.FindProperty("verbs").arraySize; j++)
+                {
+                    if (newIndex == serializedObject.FindProperty("verbs").GetArrayElementAtIndex(j).FindPropertyRelative("index").intValue)
+                        areSame = true;
+                }
+                if (areSame)
+                {
+                    newIndex++;
+                }
+                else
+                {
+                    serializedObject.FindProperty("verbs").GetArrayElementAtIndex(sameIndex).FindPropertyRelative("index").intValue = newIndex;
+                }
+            }
+        }
+
+    }
+
 
     private void OnEnable()
     {
-        Settings myTarget = (Settings)target;
-                
+        CheckVerbsSameIndex();           
+            
         verbsList = new ReorderableList(serializedObject, serializedObject.FindProperty("verbs"), true, true, true, true);
         verbsList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
         {
@@ -48,7 +88,8 @@ public class SettingsEditor : Editor
             list.serializedProperty.arraySize++;
             list.index = index;
             var element = list.serializedProperty.GetArrayElementAtIndex(index);
-            element.stringValue = "New Verb " + index;
+            element.FindPropertyRelative("name").stringValue = "New Verb " + index;
+            CheckVerbsSameIndex();
         };
         
         verbsList.onCanRemoveCallback = (ReorderableList list) =>

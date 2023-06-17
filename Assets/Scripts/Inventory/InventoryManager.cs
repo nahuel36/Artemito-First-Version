@@ -93,10 +93,10 @@ public class InventoryManager : MonoBehaviour
         InteractionUtils.RunAttempsInteraction(InteractionUtils.FindVerb(verb, item.verbs).attempsContainer);
     }
 
-    public void RunInventoryInteraction(InventoryItem item1, InventoryItem item2)
+    public void RunInventoryInteraction(InventoryItem item1, InventoryItem item2, Verb verb)
     {
-        int index1 = getInventoryActionsIndex(item1, item2.inventoryActions);
-        int index2 = getInventoryActionsIndex(item2, item1.inventoryActions);
+        int index1 = getInventoryActionsIndex(item1, item2.inventoryActions, verb);
+        int index2 = getInventoryActionsIndex(item2, item1.inventoryActions, verb);
         int index = -1;
         InventoryItem itemWithAction = null;
         if (index1 != -1)
@@ -115,11 +115,11 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public int getInventoryActionsIndex(InventoryItem item, List<InventoryItemAction> inventoryActions)
+    public int getInventoryActionsIndex(InventoryItem item, List<InventoryItemAction> inventoryActions, Verb verb)
     {
         for (int i = 0; i < inventoryActions.Count; i++)
         {
-            if(item.specialIndex == inventoryActions[i].specialIndex)
+            if(item.specialIndex == inventoryActions[i].specialIndex && inventoryActions[i].verb.index == verb.index)
                 return i;
         }
 

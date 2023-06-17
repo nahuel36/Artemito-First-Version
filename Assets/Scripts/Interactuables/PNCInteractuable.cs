@@ -8,6 +8,7 @@ public class Verb
     public string name = "";
     public bool isLikeGive;
     public bool isLikeUse;
+    public int index;
 }
 
 
@@ -23,6 +24,7 @@ public class VerbInteractions
 public class InventoryItemAction {
     public int specialIndex = -1;
     public string name;
+    public Verb verb;
     public AttempsContainer attempsContainer;
 }
 
@@ -195,9 +197,9 @@ public abstract class PNCInteractuable : PNCVariablesContainer
 
 
 
-    public void RunInventoryInteraction(InventoryItem item)
+    public void RunInventoryInteraction(InventoryItem item, Verb verb)
     {
-        int index = InventoryManager.Instance.getInventoryActionsIndex(item, inventoryActions);
+        int index = InventoryManager.Instance.getInventoryActionsIndex(item, inventoryActions, verb);
         if (index != -1)
         {
             InteractionUtils.RunAttempsInteraction(item.inventoryActions[index].attempsContainer);

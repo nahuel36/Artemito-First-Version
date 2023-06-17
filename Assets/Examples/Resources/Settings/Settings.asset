@@ -16,12 +16,15 @@ MonoBehaviour:
   - name: Use
     isLikeGive: 0
     isLikeUse: 1
+    index: 1
   - name: Look
     isLikeGive: 0
     isLikeUse: 0
+    index: 2
   - name: Talk
     isLikeGive: 0
     isLikeUse: 0
+    index: 3
   global_variables:
   - name: new variable25
     ID: -1114401280

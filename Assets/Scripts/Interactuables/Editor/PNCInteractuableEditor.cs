@@ -87,10 +87,34 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                 }
                 rect.height = EditorGUIUtility.singleLineHeight;
 
-                selected = EditorGUI.Popup(rect, "item", selected, content);
+                selected = EditorGUI.Popup(new Rect(rect.x + rect.width / 2.25f , rect.y, rect.width / 2, rect.height), "", selected, content);
 
                 myTarget.inventoryActions[indexInv].specialIndex = inventory.items[selected].specialIndex;
 
+
+                List<string> verbsContent = new List<string>();
+                for (int i = 0; i < settings.verbs.Length; i++)
+                {
+                    if (settings.verbs[i].isLikeGive || settings.verbs[i].isLikeUse)
+                        verbsContent.Add(settings.verbs[i].name);
+                }
+                int verbSelected = 0;
+                if (myTarget.inventoryActions[indexInv].verb.index >= 0)
+                {
+                    for (int i = 0; i < settings.verbs.Length; i++)
+                    {
+                        if (settings.verbs[i].index == myTarget.inventoryActions[indexInv].verb.index)
+                            verbSelected = i;
+                    }
+                }
+                verbSelected = EditorGUI.Popup(new Rect(rect.x + 7, rect.y, rect.width / 2.5f, EditorGUIUtility.singleLineHeight), "", verbSelected, verbsContent.ToArray());
+
+                myTarget.inventoryActions[indexInv].verb.index = settings.verbs[verbSelected].index;
+
+
+
+
+                //EditorGUI.PropertyField(new Rect(rect.x + 7, rect.y, rect.width / 2.5f, EditorGUIUtility.singleLineHeight), inv_serialized.GetArrayElementAtIndex(indexInv).FindPropertyRelative("verb").FindPropertyRelative("name"), GUIContent.none);
 
                 PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
             }
@@ -136,6 +160,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                     interactionsTempList.Add(myTarget.verbs[j]);
                     myTarget.verbs[j].verb.isLikeUse = settings.verbs[i].isLikeUse;
                     myTarget.verbs[j].verb.isLikeGive = settings.verbs[i].isLikeGive;
+                    myTarget.verbs[j].verb.index = settings.verbs[i].index;
                     founded = true;
                 }
             }
@@ -147,6 +172,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                 tempVerb.verb.name = settings.verbs[i].name;
                 tempVerb.verb.isLikeUse = settings.verbs[i].isLikeUse;
                 tempVerb.verb.isLikeGive = settings.verbs[i].isLikeGive;
+                tempVerb.verb.index = settings.verbs[i].index;
                 tempVerb.attempsContainer = new AttempsContainer();
                 tempVerb.attempsContainer.attemps = new List<InteractionsAttemp>();
                 interactionsTempList.Add(tempVerb);

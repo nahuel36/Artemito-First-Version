@@ -136,7 +136,11 @@ public class UI_PNC_Manager : MonoBehaviour
                     {
                         if (inventoryUI.overInventory != null && inventoryUI.overInventory != activeThing.GetInventoryActive())
                         {
-                            InventoryManager.Instance.RunInventoryInteraction(inventoryUI.overInventory, activeThing.GetInventoryActive());
+                            InventoryManager.Instance.RunInventoryInteraction(inventoryUI.overInventory, activeThing.GetInventoryActive(), verbsUI.selectedVerb);
+                        }
+                        else if (activeThing.GetInventoryActive() != null && inventoryUI.overInventory == null && objetive.overInteractuable != null)
+                        {
+                            objetive.overInteractuable.RunInventoryInteraction(activeThing.GetInventoryActive(), verbsUI.selectedVerb);
                         }
                         activeThing.Clear();
                     }

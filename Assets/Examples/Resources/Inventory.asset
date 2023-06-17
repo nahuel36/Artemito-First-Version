@@ -37,6 +37,11 @@ MonoBehaviour:
     inventoryActions:
     - specialIndex: 1
       name: 
+      verb:
+        name: 
+        isLikeGive: 0
+        isLikeUse: 0
+        index: 1
       attempsContainer:
         isCyclical: 0
         attemps: []
@@ -47,6 +52,7 @@ MonoBehaviour:
         name: Use
         isLikeGive: 0
         isLikeUse: 1
+        index: 1
       use: 1
       attempsContainer:
         isCyclical: 0
@@ -96,12 +102,13 @@ MonoBehaviour:
             SayScript: {fileID: 0}
             CanSkip: 0
           expandedInInspector: 1
-        expandedInInspector: 1
+        expandedInInspector: 0
         executedTimes: 0
     - verb:
         name: Look
         isLikeGive: 0
         isLikeUse: 0
+        index: 2
       use: 1
       attempsContainer:
         isCyclical: 0
@@ -112,6 +119,7 @@ MonoBehaviour:
         name: Talk
         isLikeGive: 0
         isLikeUse: 0
+        index: 3
       use: 1
       attempsContainer:
         isCyclical: 0
@@ -141,12 +149,37 @@ MonoBehaviour:
       integerDefault: 1
       booleanDefault: 1
       stringDefault: 1
-    inventoryActions: []
+    inventoryActions:
+    - specialIndex: 1
+      name: 
+      verb:
+        name: 
+        isLikeGive: 0
+        isLikeUse: 0
+        index: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    - specialIndex: 1
+      name: 
+      verb:
+        name: 
+        isLikeGive: 0
+        isLikeUse: 0
+        index: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
     verbs:
     - verb:
         name: Use
         isLikeGive: 0
         isLikeUse: 1
+        index: 1
       use: 1
       attempsContainer:
         isCyclical: 0
@@ -157,6 +190,7 @@ MonoBehaviour:
         name: Look
         isLikeGive: 0
         isLikeUse: 0
+        index: 2
       use: 1
       attempsContainer:
         isCyclical: 0
@@ -167,6 +201,7 @@ MonoBehaviour:
         name: Talk
         isLikeGive: 0
         isLikeUse: 0
+        index: 3
       use: 1
       attempsContainer:
         isCyclical: 0
@@ -197,8 +232,13 @@ MonoBehaviour:
       booleanDefault: 1
       stringDefault: 1
     inventoryActions:
-    - specialIndex: 0
+    - specialIndex: 3
       name: 
+      verb:
+        name: 
+        isLikeGive: 0
+        isLikeUse: 0
+        index: 1
       attempsContainer:
         isCyclical: 0
         attemps: []
@@ -209,6 +249,7 @@ MonoBehaviour:
         name: Use
         isLikeGive: 0
         isLikeUse: 1
+        index: 1
       use: 1
       attempsContainer:
         isCyclical: 0
@@ -219,6 +260,7 @@ MonoBehaviour:
         name: Look
         isLikeGive: 0
         isLikeUse: 0
+        index: 2
       use: 1
       attempsContainer:
         isCyclical: 0
@@ -229,6 +271,7 @@ MonoBehaviour:
         name: Talk
         isLikeGive: 0
         isLikeUse: 0
+        index: 3
       use: 1
       attempsContainer:
         isCyclical: 0
