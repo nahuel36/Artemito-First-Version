@@ -13,57 +13,9 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: 
   items:
-  - itemName: blister
+  - itemName: new item 1
     normalImage: {fileID: 21300000, guid: 884c8d9e17732594fb108349614cb726, type: 3}
-    selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b, type: 3}
-    startWithThisItem: 1
-    cuantity: 0
-    local_variables: []
-    global_variables:
-    - name: New Global Variable 8
-      integer: 0
-      boolean: 0
-      String: 
-      globalHashCode: -1312666112
-      properties:
-        name: New Global Variable 8
-        ID: -1312666112
-        object_type: 4
-        variable_type: 1
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
-    inventoryActions: []
-    expandedInInspector: 0
-    specialIndex: 1
-  - itemName: clavo
-    normalImage: {fileID: 21300000, guid: 923ef30b017f66d48bc529e9489a1f76, type: 3}
-    selectedImage: {fileID: 21300000, guid: 923ef30b017f66d48bc529e9489a1f76, type: 3}
-    startWithThisItem: 1
-    cuantity: 0
-    local_variables: []
-    global_variables:
-    - name: New Global Variable 8
-      integer: 0
-      boolean: 0
-      String: 
-      globalHashCode: -1312666112
-      properties:
-        name: New Global Variable 8
-        ID: -1312666112
-        object_type: 4
-        variable_type: 1
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
-    inventoryActions: []
-    expandedInInspector: 0
-    specialIndex: 2
-  - itemName: ganzua
-    normalImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd, type: 3}
-    selectedImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd, type: 3}
+    selectedImage: {fileID: 21300000, guid: 884c8d9e17732594fb108349614cb726, type: 3}
     startWithThisItem: 1
     cuantity: 0
     local_variables: []
@@ -83,13 +35,24 @@ MonoBehaviour:
       booleanDefault: 1
       stringDefault: 1
     inventoryActions:
-    - specialIndex: 2
+    - specialIndex: 1
       name: 
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    verbs:
+    - verb:
+        name: Use
+        isLikeGive: 0
+        isLikeUse: 1
+      use: 1
       attempsContainer:
         isCyclical: 0
         attemps:
         - interactions:
-          - type: 2
+          - type: 0
             expandedInInspector: 1
             character: {fileID: 0}
             characterAction: 0
@@ -105,20 +68,7 @@ MonoBehaviour:
             LineToGoOnFalseResult: 0
             action:
               m_PersistentCalls:
-                m_Calls:
-                - m_Target: {fileID: 6091360687955946689, guid: ec260d7f39d9606408466e04ffe4f126,
-                    type: 3}
-                  m_TargetAssemblyTypeName: SayForInventory, Assembly-CSharp
-                  m_MethodName: Say
-                  m_Mode: 5
-                  m_Arguments:
-                    m_ObjectArgument: {fileID: 0}
-                    m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                    m_IntArgument: 0
-                    m_FloatArgument: 0
-                    m_StringArgument: clavo con ganzua
-                    m_BoolArgument: 0
-                  m_CallState: 2
+                m_Calls: []
             global_changeBooleanValue: 0
             global_changeStringValue: 0
             global_changeIntegerValue: 0
@@ -148,33 +98,29 @@ MonoBehaviour:
           expandedInInspector: 1
         expandedInInspector: 1
         executedTimes: 0
+    - verb:
+        name: Look
+        isLikeGive: 0
+        isLikeUse: 0
+      use: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    - verb:
+        name: Talk
+        isLikeGive: 0
+        isLikeUse: 0
+      use: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
     expandedInInspector: 0
-    specialIndex: 3
-  - itemName: malla
-    normalImage: {fileID: 21300000, guid: 143f2f17dee481c4bb0fe34d2738962d, type: 3}
-    selectedImage: {fileID: 21300000, guid: 143f2f17dee481c4bb0fe34d2738962d, type: 3}
-    startWithThisItem: 1
-    cuantity: 0
-    local_variables: []
-    global_variables:
-    - name: New Global Variable 8
-      integer: 0
-      boolean: 0
-      String: 
-      globalHashCode: -1312666112
-      properties:
-        name: New Global Variable 8
-        ID: -1312666112
-        object_type: 4
-        variable_type: 1
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
-    inventoryActions: []
-    expandedInInspector: 0
-    specialIndex: 4
-  - itemName: resorte
+    specialIndex: 1
+  - itemName: new item 3
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     startWithThisItem: 1
@@ -196,6 +142,99 @@ MonoBehaviour:
       booleanDefault: 1
       stringDefault: 1
     inventoryActions: []
+    verbs:
+    - verb:
+        name: Use
+        isLikeGive: 0
+        isLikeUse: 1
+      use: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    - verb:
+        name: Look
+        isLikeGive: 0
+        isLikeUse: 0
+      use: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    - verb:
+        name: Talk
+        isLikeGive: 0
+        isLikeUse: 0
+      use: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
     expandedInInspector: 0
-    specialIndex: 7
-  specialIndex: 9
+    specialIndex: 3
+  - itemName: new item 4
+    normalImage: {fileID: 21300000, guid: 923ef30b017f66d48bc529e9489a1f76, type: 3}
+    selectedImage: {fileID: 21300000, guid: 725433d361f43da44a45fc59fc3f5dbd, type: 3}
+    startWithThisItem: 1
+    cuantity: 0
+    local_variables: []
+    global_variables:
+    - name: New Global Variable 8
+      integer: 0
+      boolean: 0
+      String: 
+      globalHashCode: -1312666112
+      properties:
+        name: New Global Variable 8
+        ID: -1312666112
+        object_type: 4
+        variable_type: 1
+      expandedInInspector: 0
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+    inventoryActions:
+    - specialIndex: 0
+      name: 
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    verbs:
+    - verb:
+        name: Use
+        isLikeGive: 0
+        isLikeUse: 1
+      use: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    - verb:
+        name: Look
+        isLikeGive: 0
+        isLikeUse: 0
+      use: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    - verb:
+        name: Talk
+        isLikeGive: 0
+        isLikeUse: 0
+      use: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    expandedInInspector: 0
+    specialIndex: 4
+  specialIndex: 4

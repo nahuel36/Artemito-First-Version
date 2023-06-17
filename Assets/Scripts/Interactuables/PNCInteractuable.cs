@@ -5,7 +5,16 @@ using UnityEngine.Events;
 [System.Serializable]
 public class Verb
 {
-    public string name;
+    public string name = "";
+    public bool isLikeGive;
+    public bool isLikeUse;
+}
+
+
+[System.Serializable]
+public class VerbInteractions
+{
+    public Verb verb = new Verb();
     public bool use = true;
     public AttempsContainer attempsContainer;
 }
@@ -155,7 +164,7 @@ public abstract class PNCInteractuable : PNCVariablesContainer
 
     public int priority = 0;
 
-    public List<Verb> verbs = new List<Verb>();
+    public List<VerbInteractions> verbs = new List<VerbInteractions>();
     public List<InventoryItemAction> inventoryActions = new List<InventoryItemAction>();
 
     private void Start()
@@ -171,28 +180,20 @@ public abstract class PNCInteractuable : PNCVariablesContainer
     }
 
 
-    public string[] getActiveVerbs() 
+    public Verb[] GetActiveVerbs() 
     {
-        List<string> activeVerbs = new List<string>();
+        List<Verb> activeVerbs = new List<Verb>();
         for (int i = 0; i < verbs.Count; i++)
         {
             if (verbs[i].use)
-                activeVerbs.Add(verbs[i].name);
+                activeVerbs.Add(verbs[i].verb);
         }
         return activeVerbs.ToArray();
     }
 
 
 
-    public Verb FindVerb(string verb)
-    {
-        for (int i = 0; i < verbs.Count; i++)
-        {
-            if (verbs[i].name == verb)
-                return verbs[i];
-        }
-        return null;
-    }
+
 
     public void RunInventoryInteraction(InventoryItem item)
     {
@@ -203,9 +204,9 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         }
     }
 
-    public void RunVerbInteraction(string verbToRunString)
+    public void RunVerbInteraction(Verb verbToRunString)
     {
-        Verb verbToRun = FindVerb(verbToRunString);
+        VerbInteractions verbToRun = InteractionUtils.FindVerb(verbToRunString, verbs);
 
         if (verbToRun != null)
             InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer);

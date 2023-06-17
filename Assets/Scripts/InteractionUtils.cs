@@ -4,6 +4,16 @@ using UnityEngine;
 using UnityEngine.Events;
 public static class InteractionUtils 
 {
+    public static VerbInteractions FindVerb(Verb verb, List<VerbInteractions> verbs)
+    {
+        for (int i = 0; i < verbs.Count; i++)
+        {
+            if (verbs[i].verb == verb)
+                return verbs[i];
+        }
+        return null;
+    }
+
     public static void RunAttempsInteraction(AttempsContainer attempsContainer)
     {
         for (int i = 0; i < attempsContainer.attemps[attempsContainer.executedTimes].interactions.Count; i++)

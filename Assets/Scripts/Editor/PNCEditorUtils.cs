@@ -485,7 +485,7 @@ public static class PNCEditorUtils
 
     }
 
-    public static void DrawElementAttempContainer(SerializedProperty containerProperty, int indexC, Rect rect, Dictionary<string, ReorderableList> attempsListDict, Dictionary<string, ReorderableList> interactionsListDict, List<InteractionsAttemp> noSerializedAttemps)
+    public static void DrawElementAttempContainer(SerializedProperty containerProperty, int indexC, Rect rect, Dictionary<string, ReorderableList> attempsListDict, Dictionary<string, ReorderableList> interactionsListDict, List<InteractionsAttemp> noSerializedAttemps, bool isInventoryItem)
     {
         var attempContainer = containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer");
         var attemps = attempContainer.FindPropertyRelative("attemps");
@@ -493,7 +493,10 @@ public static class PNCEditorUtils
         var verbExpanded = attempContainer.FindPropertyRelative("expandedInInspector");
         verbRect.x += 8;
 
-        verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("name").stringValue);
+        if(isInventoryItem)
+            verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("name").stringValue);
+        else
+            verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("verb").FindPropertyRelative("name").stringValue);
 
         verbRect.y += EditorGUIUtility.singleLineHeight;
 

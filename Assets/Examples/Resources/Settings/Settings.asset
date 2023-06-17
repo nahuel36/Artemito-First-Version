@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   verbs:
-  - Use
-  - Look
-  - Talk
+  - name: Use
+    isLikeGive: 0
+    isLikeUse: 1
+  - name: Look
+    isLikeGive: 0
+    isLikeUse: 0
+  - name: Talk
+    isLikeGive: 0
+    isLikeUse: 0
   global_variables:
   - name: new variable25
     ID: -1114401280
@@ -57,4 +63,3 @@ MonoBehaviour:
   speechStyle: 0
   interactionExecuteMethod: 1
   objetivePosition: 1
-  cursorPrioritys: 040000000100000005000000000000000200000003000000

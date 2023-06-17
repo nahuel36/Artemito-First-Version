@@ -6,13 +6,13 @@ using System.Collections.Generic;
 public class VerbsUI : MonoBehaviour
 {
     Settings settings;
-    [HideInInspector]public string actualVerb;
-    [HideInInspector] public string overCursorVerb;
+    [HideInInspector] public Verb selectedVerb;
+    [HideInInspector] public Verb overCursorVerb;
     UnityEngine.UI.GraphicRaycaster raycaster;
     EventSystem eventSystem;
     PNCCursor cursor;
     List<Button> activeButtons;
-    List<string> activeVerbs;
+    List<Verb> activeVerbs;
     RectTransform cursorRect;
     RectTransform verbsRect;
     // Start is called before the first frame update
@@ -45,29 +45,29 @@ public class VerbsUI : MonoBehaviour
     public void ShowAllVerbs()
     {
         activeButtons = new List<Button>();
-        activeVerbs = new List<string>();
+        activeVerbs = new List<Verb>();
         Button[] buttons = GetComponentsInChildren<Button>(true);
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].gameObject.SetActive(true);
             activeButtons.Add(buttons[i]);
-            string verb = settings.verbs[i];
+            Verb verb = settings.verbs[i];
             buttons[i].onClick.AddListener(() => ChangeActiveVerb(verb));
             activeVerbs.Add(settings.verbs[i]);
         }
     }
 
-    public void ChangeActiveVerb(string verb) 
+    public void ChangeActiveVerb(Verb verb) 
     {
-        actualVerb = verb;
+        selectedVerb = verb;
     }
 
     internal void ResetActualVerb()
     {
-        actualVerb = "";
+        selectedVerb = null;
     }
 
-    public void ShowVerbs(string[] verbs)
+    public void ShowVerbs(Verb[] verbs)
     {
         if(settings.interactionExecuteMethod == Settings.InteractionExecuteMethod.FirstObjectThenAction)
             verbsRect.anchoredPosition = cursorRect.anchoredPosition;
@@ -75,14 +75,14 @@ public class VerbsUI : MonoBehaviour
         gameObject.SetActive(true);
 
         activeButtons = new List<Button>();
-        activeVerbs = new List<string>();
+        activeVerbs = new List<Verb>();
 
         Button[] buttons = GetComponentsInChildren<Button>(true);
         for (int i = 0; i < verbs.Length; i++)
         {
             buttons[i].gameObject.SetActive(true);
             buttons[i].onClick.RemoveAllListeners();
-            string verb = verbs[i];
+            Verb verb = verbs[i];
             buttons[i].onClick.AddListener(() => ChangeActiveVerb(verb));
             activeButtons.Add(buttons[i]);
             activeVerbs.Add(verbs[i]);
@@ -91,7 +91,7 @@ public class VerbsUI : MonoBehaviour
     }
     private void Update()
     {
-        overCursorVerb = "";
+        overCursorVerb = null;
         PointerEventData pointerData = new PointerEventData(eventSystem);
         pointerData.position = cursor.GetPosition();
 

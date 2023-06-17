@@ -18,6 +18,12 @@ public class InventoryListEditor : Editor
     Dictionary<string, ReorderableList> invInteractionsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> invList = new Dictionary<string, ReorderableList>();
 
+
+    Dictionary<string, ReorderableList> verbAttempsListDict = new Dictionary<string, ReorderableList>();
+    Dictionary<string, ReorderableList> verbInteractionsListDict = new Dictionary<string, ReorderableList>();
+    Dictionary<string, ReorderableList> verbsList = new Dictionary<string, ReorderableList>();
+
+
     private void OnEnable()
     {
 
@@ -33,9 +39,14 @@ public class InventoryListEditor : Editor
             localVariablesLists[key] = list;
             
             invList.Add(key, null);
-            ReorderableList listInv = invList[key]; 
+            ReorderableList listInv = invList[key];
             InitializeInventoryInteractions(out listInv, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("inventoryActions"), myTarget.items[i]);
             invList[key] = listInv;
+
+            verbsList.Add(key, null);
+            ReorderableList listVerbs = verbsList[key];
+            InitializeVerbs(out listVerbs, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("verbs"), myTarget.items[i]);
+            verbsList[key] = listVerbs;
         }
 
     }
@@ -107,8 +118,14 @@ public class InventoryListEditor : Editor
                 InitializeInventoryInteractions(out listInv, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("inventoryActions"), myTarget.items[index]);
                 invList[key] = listInv;
             }
-   
-           
+
+            if (!verbsList.ContainsKey(key))
+            {
+                verbsList.Add(key, null);
+                ReorderableList listVerbs = verbsList[key];
+                InitializeVerbs(out listVerbs, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("verbs"), myTarget.items[index]);
+                verbsList[key] = listVerbs;
+            }
 
         }
         if (GUILayout.Button("-", GUILayout.MaxHeight(25), GUILayout.MinHeight(25), GUILayout.MaxWidth(25), GUILayout.MinWidth(25)))
@@ -165,7 +182,7 @@ public class InventoryListEditor : Editor
 
             PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);
 
-
+            ShowInteractionVerbs(key);
         }
 
         //base.OnInspectorGUI();
@@ -180,6 +197,89 @@ public class InventoryListEditor : Editor
 
 
     }
+
+
+
+    protected void ShowInteractionVerbs(string key)
+    {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUIStyle tittleStyle = new GUIStyle();
+        tittleStyle.normal.textColor = Color.white;
+        tittleStyle.fontSize = 14;
+        GUILayout.Label("<b>Interactions</b>", tittleStyle);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Edit verbs"))
+        {
+            Selection.objects = new UnityEngine.Object[] { settings };
+            EditorGUIUtility.PingObject(settings);
+        }
+        verbsList[key].DoLayoutList();
+    }
+
+
+    protected void InitializeVerbs(out ReorderableList verbsList, SerializedObject serializedInventory, SerializedProperty inventoryProperty, InventoryItem myTarget)
+    {
+        SerializedProperty verbs_serialized = serializedObject.FindProperty("verbs");
+
+        settings = Resources.Load<Settings>("Settings/Settings");
+
+        verbsList = new ReorderableList(serializedInventory, inventoryProperty, true, true, false, false)
+        {
+            drawHeaderCallback = (rect) =>
+            {
+                EditorGUI.LabelField(rect, "verbs");
+            },
+            elementHeightCallback = (int indexV) =>
+            {
+                return PNCEditorUtils.GetAttempsContainerHeight(inventoryProperty, myTarget.verbs[indexV].attempsContainer.attemps, indexV);
+            },
+            drawElementCallback = (rect, indexV, active, focus) =>
+            {
+                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
+            }
+        };
+
+
+
+        bool verbAdded = false;
+        List<VerbInteractions> interactionsTempList = new List<VerbInteractions>();
+        for (int i = 0; i < settings.verbs.Length; i++)
+        {
+            bool founded = false;
+            for (int j = 0; j < myTarget.verbs.Count; j++)
+            {
+                if (myTarget.verbs[j].verb.name == settings.verbs[i].name)
+                {
+                    interactionsTempList.Add((myTarget).verbs[j]);
+                    myTarget.verbs[j].verb.isLikeUse = settings.verbs[i].isLikeUse;
+                    myTarget.verbs[j].verb.isLikeGive = settings.verbs[i].isLikeGive;
+                    founded = true;
+                }
+            }
+            if (founded == false)
+            {
+                verbAdded = true;
+                VerbInteractions tempVerb = new VerbInteractions();
+                tempVerb.verb = new Verb();
+                tempVerb.verb.name = settings.verbs[i].name;
+                tempVerb.verb.isLikeUse = settings.verbs[i].isLikeUse;
+                tempVerb.verb.isLikeGive = settings.verbs[i].isLikeGive;
+                tempVerb.attempsContainer = new AttempsContainer();
+                tempVerb.attempsContainer.attemps = new List<InteractionsAttemp>();
+                interactionsTempList.Add(tempVerb);
+            }
+        }
+
+        if (verbAdded || settings.verbs.Length != myTarget.verbs.Count)
+            myTarget.verbs = interactionsTempList;
+
+        for (int i = 0; i < myTarget.verbs.Count; i++)
+            myTarget.verbs[i].verb = interactionsTempList[i].verb;
+    }
+
 
 
     protected void InitializeInventoryInteractions(out ReorderableList inventoryList, SerializedObject serializedInventory, SerializedProperty inventoryProperty, InventoryItem myTarget)
@@ -220,7 +320,7 @@ public class InventoryListEditor : Editor
 
                 inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = inventory.items[selected].specialIndex;
 
-                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps);
+                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
             }
         };
 

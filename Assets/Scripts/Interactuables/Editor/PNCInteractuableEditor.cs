@@ -92,7 +92,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                 myTarget.inventoryActions[indexInv].specialIndex = inventory.items[selected].specialIndex;
 
 
-                PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps);
+                PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
             }
         };
 
@@ -118,30 +118,36 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps);
+                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps,false);
             }
         };
 
 
 
         bool verbAdded = false;
-        List<Verb> interactionsTempList = new List<Verb>();
+        List<VerbInteractions> interactionsTempList = new List<VerbInteractions>();
         for (int i = 0; i < settings.verbs.Length; i++)
         {
             bool founded = false;
             for (int j = 0; j < myTarget.verbs.Count; j++)
             {
-                if (myTarget.verbs[j].name == settings.verbs[i])
+                if (myTarget.verbs[j].verb.name == settings.verbs[i].name)
                 {
-                    interactionsTempList.Add((myTarget).verbs[j]);
+                    interactionsTempList.Add(myTarget.verbs[j]);
+                    myTarget.verbs[j].verb.isLikeUse = settings.verbs[i].isLikeUse;
+                    myTarget.verbs[j].verb.isLikeGive = settings.verbs[i].isLikeGive;
                     founded = true;
                 }
             }
             if (founded == false)
             {
                 verbAdded = true;
-                Verb tempVerb = new Verb();
-                tempVerb.name = settings.verbs[i];
+                VerbInteractions tempVerb = new VerbInteractions();
+                tempVerb.verb = new Verb();
+                tempVerb.verb.name = settings.verbs[i].name;
+                tempVerb.verb.isLikeUse = settings.verbs[i].isLikeUse;
+                tempVerb.verb.isLikeGive = settings.verbs[i].isLikeGive;
+                tempVerb.attempsContainer = new AttempsContainer();
                 tempVerb.attempsContainer.attemps = new List<InteractionsAttemp>();
                 interactionsTempList.Add(tempVerb);
             }
@@ -150,6 +156,8 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
         if (verbAdded || settings.verbs.Length != myTarget.verbs.Count)
            myTarget.verbs = interactionsTempList;
 
+        for(int i= 0; i < myTarget.verbs.Count; i++)
+            myTarget.verbs[i].verb = interactionsTempList[i].verb;
     }
 
 

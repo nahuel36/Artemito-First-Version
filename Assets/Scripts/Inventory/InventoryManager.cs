@@ -50,6 +50,16 @@ public class InventoryManager : MonoBehaviour
         
     }
 
+    public bool HaveInteraction(InventoryItem item, Verb verb)
+    {
+        for (int i = 0; i < item.verbs.Count; i++)
+        {
+            if (item.verbs[i].verb == verb)
+                return true;
+        }
+        return false;
+    }
+
     public void AddItem(InventoryItem item)
     {
         int index = -1;
@@ -74,6 +84,13 @@ public class InventoryManager : MonoBehaviour
             return inventory.items[activeItems[index]];
         }
         return null;
+    }
+
+
+    public void RunInventoryVerb(InventoryItem item, Verb verb)
+    {
+
+        InteractionUtils.RunAttempsInteraction(InteractionUtils.FindVerb(verb, item.verbs).attempsContainer);
     }
 
     public void RunInventoryInteraction(InventoryItem item1, InventoryItem item2)
