@@ -226,7 +226,7 @@ public class UI_PNC_Manager : MonoBehaviour
             {
                 cursorTextString = activeThing.GetName();
             }
-            else if (activeThing.GetInventoryActive() != null && !showingVerbs)
+            else if (activeThing.GetInventoryActive() != null && !showingVerbs && !string.IsNullOrEmpty(verbsUI.selectedVerb.name))
             {
                 if (inventoryUI.overInventory != null && activeThing.GetInventoryActive() != null && inventoryUI.overInventory != activeThing.GetInventoryActive())
                     cursorTextString = verbsUI.selectedVerb.name + " " + activeThing.GetName() + " on " + inventoryUI.overInventory.itemName;
