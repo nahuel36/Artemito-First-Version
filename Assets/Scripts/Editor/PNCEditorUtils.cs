@@ -331,14 +331,12 @@ public static class PNCEditorUtils
 
     }
 
-    public static float GetAttempsContainerHeight(SerializedProperty serializedVerb, List<InteractionsAttemp> noSerializedAttemps, int indexC, bool IsSceneObject = false)
+    public static float GetAttempsContainerHeight(SerializedProperty serializedVerb, List<InteractionsAttemp> noSerializedAttemps, int indexC)
     {
 
         if (serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector").boolValue)
         {
             float heightM = 5 * EditorGUIUtility.singleLineHeight;
-            if(IsSceneObject)
-                heightM += EditorGUIUtility.singleLineHeight;
             var attemps = serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("attemps");
             for (int i = 0; i < attemps.arraySize; i++)
             {
@@ -379,6 +377,11 @@ public static class PNCEditorUtils
                 if (interactionNoSerialized.characterAction == Interaction.CharacterAction.say ||
                     interactionNoSerialized.characterAction == Interaction.CharacterAction.sayWithScript)
                     height++;
+                return EditorGUIUtility.singleLineHeight * height;
+            }
+            if (interactionNoSerialized.type == Interaction.InteractionType.inventory)
+            {
+                float height = 3.25f;
                 return EditorGUIUtility.singleLineHeight * height;
             }
             if (interactionNoSerialized.type == Interaction.InteractionType.variables)
@@ -487,7 +490,7 @@ public static class PNCEditorUtils
 
     }
 
-    public static void DrawElementAttempContainer(SerializedProperty containerProperty, int indexC, Rect rect, Dictionary<string, ReorderableList> attempsListDict, Dictionary<string, ReorderableList> interactionsListDict, List<InteractionsAttemp> noSerializedAttemps, bool isInventoryItem, bool isSceneObject = false)
+    public static void DrawElementAttempContainer(SerializedProperty containerProperty, int indexC, Rect rect, Dictionary<string, ReorderableList> attempsListDict, Dictionary<string, ReorderableList> interactionsListDict, List<InteractionsAttemp> noSerializedAttemps, bool isInventoryItem)
     {
         var attempContainer = containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer");
         var attemps = attempContainer.FindPropertyRelative("attemps");
@@ -507,13 +510,6 @@ public static class PNCEditorUtils
 
         if (verbExpanded.boolValue)
         {
-            if (isSceneObject)
-            {
-                EditorGUI.PropertyField(new Rect(rect.x + 7, verbRect.y , verbRect.width, EditorGUIUtility.singleLineHeight), containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("useAsInventory"), GUIContent.none);
-                EditorGUI.LabelField(new Rect(rect.x + 25, verbRect.y , verbRect.width, EditorGUIUtility.singleLineHeight), "Use as Inventory");
-                verbRect.y += EditorGUIUtility.singleLineHeight;
-            }
-
             var attempKey = attempContainer.propertyPath;
 
             if (!attempsListDict.ContainsKey(attempKey))
@@ -608,6 +604,10 @@ public static class PNCEditorUtils
                                                 }
                                                 else if (interactionNoSerialized.characterAction == Interaction.CharacterAction.walk)
                                                     EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhereToWalk"));
+                                            }
+                                            else if (interactionNoSerialized.type == Interaction.InteractionType.inventory)
+                                            {
+                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("inventoryAction"));                                                
                                             }
                                             else if (interactionNoSerialized.type == Interaction.InteractionType.variables)
                                             {

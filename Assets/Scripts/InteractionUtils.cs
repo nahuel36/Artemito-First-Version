@@ -96,6 +96,18 @@ public static class InteractionUtils
                                                         interaction.variableObject.global_variables[interaction.globalVariableSelected]));
                     }
                 }
+                else if (interaction.type == Interaction.InteractionType.inventory)
+                {
+                    if (interaction.inventoryAction == Interaction.InventoryAction.useAsInventory)
+                    {
+                        attemps[j].interactions[k].action.AddListener(() =>
+                        {
+                            CommandInventory command = new CommandInventory();
+                            command.Queue();
+                        });
+
+                    }
+                }
 
             }
         }

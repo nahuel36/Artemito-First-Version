@@ -17,7 +17,6 @@ public class VerbInteractions
 {
     public Verb verb = new Verb();
     public bool use = true;
-    public bool useAsInventory = false;
     public AttempsContainer attempsContainer;
 }
 
@@ -52,11 +51,17 @@ public class Interaction
     {
         character,
         variables,
+        inventory,
         custom
     }
     public InteractionType type;
 
     public bool expandedInInspector;
+
+    public enum InventoryAction { 
+        useAsInventory
+    }
+    public InventoryAction inventoryAction;
 
     //CHARACTER
     public enum CharacterAction
@@ -162,6 +167,7 @@ public class Interaction
     }
 }
 
+[System.Serializable]
 public abstract class PNCInteractuable : PNCVariablesContainer
 {
     public new string name;
@@ -196,17 +202,6 @@ public abstract class PNCInteractuable : PNCVariablesContainer
     }
 
 
-    public bool IsUseAsInventoryVerb(Verb verb)
-    {
-        for (int i = 0; i < verbs.Count; i++)
-        {
-            if (verbs[i].verb == verb && verbs[i].useAsInventory)
-                return true;
-        }
-        return false;
-    }
-
-
     public void RunInventoryInteraction(InventoryItem item, Verb verb)
     {
         int index = InventoryManager.Instance.getInventoryActionsIndex(item, inventoryActions, verb);
@@ -219,7 +214,10 @@ public abstract class PNCInteractuable : PNCVariablesContainer
     public void RunObjectAsInventoryInteraction(PNCInteractuable pncObject, Verb verb)
     {
         int index = InventoryManager.Instance.getInventoryActionsIndex(pncObject, inventoryActions, verb);
-
+        if (index != -1)
+        {
+            InteractionUtils.RunAttempsInteraction(pncObject.inventoryActions[index].attempsContainer);
+        }
     }
 
     public void RunVerbInteraction(Verb verbToRunString)

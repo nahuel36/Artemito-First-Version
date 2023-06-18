@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Threading.Tasks;
 
 
 
 public class UI_PNC_Manager : MonoBehaviour
 {
+    [System.Serializable]
     public class ActiveThing
     {
         private InventoryItem itemActive;
@@ -14,12 +16,20 @@ public class UI_PNC_Manager : MonoBehaviour
         private PNCInteractuable interactuableAsInventory;
         public bool IsActive()
         {
-            return itemActive != null || interactuableActive != null || interactuableAsInventory != null;
+            return isInventoryItemActive() || interactuableActive != null || interactuableAsInventory != null;
         }
+        public bool isInventoryItemActive()
+        {
+            return (itemActive != null && itemActive.specialIndex != -1);
+        }    
+
 
         public InventoryItem GetInventoryActive()
         {
-            return itemActive;
+            if (isInventoryItemActive())
+                return itemActive;
+            else
+                return null;
         }
 
         public PNCInteractuable GetInteractuable()
@@ -36,7 +46,7 @@ public class UI_PNC_Manager : MonoBehaviour
         {
             if (IsActive())
             {
-                if (itemActive != null)
+                if (isInventoryItemActive())
                     return itemActive.itemName;
                 if (interactuableActive != null)
                     return interactuableActive.name;
@@ -62,21 +72,21 @@ public class UI_PNC_Manager : MonoBehaviour
 
         public void SetInteractuableAsInventory(PNCInteractuable interactuable)
         {
+            interactuableAsInventory = interactuable;
             itemActive = null;
             interactuableActive = null;
-            interactuableAsInventory = interactuable;
         }
 
         public void RunVerbInteraction(Verb verb)
         {
-            if (itemActive != null)
+            if (isInventoryItemActive())
                 itemActive.RunVerbInteraction(verb);
             if (interactuableActive != null)
                 interactuableActive.RunVerbInteraction(verb);
         }
 
         public Verb[] GetActiveVerbs() {
-            if (itemActive != null)
+            if (isInventoryItemActive())
                 return itemActive.GetActiveVerbs();
             if (interactuableActive != null)
                 return interactuableActive.GetActiveVerbs();
@@ -88,6 +98,16 @@ public class UI_PNC_Manager : MonoBehaviour
             itemActive = null;
             interactuableActive = null;
             interactuableAsInventory = null;
+        }
+    }
+
+    private static UI_PNC_Manager instance;
+
+    public static UI_PNC_Manager Instance 
+    {
+        get
+        {
+            return instance;
         }
     }
 
@@ -104,6 +124,7 @@ public class UI_PNC_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         activeThing = new ActiveThing();
         cursorTextString = "";
         settings = Resources.Load<Settings>("Settings/Settings");
@@ -150,7 +171,7 @@ public class UI_PNC_Manager : MonoBehaviour
             {
                 if (!showingVerbs)
                 {
-                    if (activeThing.GetInventoryActive() != null)
+                    if (activeThing.GetInventoryActive() != null || activeThing.GetInteractuableAsInventory() != null)
                     {
                         if (inventoryUI.overInventory != null && inventoryUI.overInventory != activeThing.GetInventoryActive())
                         {
@@ -179,15 +200,14 @@ public class UI_PNC_Manager : MonoBehaviour
                             activeThing.SetInventoryItem(inventoryUI.overInventory);
                             verbsUI.selectedVerb = verbsUI.overCursorVerb;
                         }
-                        else if (objetive.overInteractuable != null && objetive.overInteractuable.IsUseAsInventoryVerb(verbsUI.overCursorVerb))
-                        {
-                            activeThing.SetInteractuableAsInventory(objetive.overInteractuable);
-                            verbsUI.selectedVerb = verbsUI.overCursorVerb;
-                        }
                         else
                         {
                             activeThing.RunVerbInteraction(verbsUI.overCursorVerb);
-                            activeThing.Clear();
+                            if (activeThing.GetInteractuableAsInventory() == null)
+                            { 
+                                activeThing.Clear();
+                            }
+                            verbsUI.selectedVerb = verbsUI.overCursorVerb;
                         }
                     }
                     holdingCounter = 0;
@@ -208,7 +228,14 @@ public class UI_PNC_Manager : MonoBehaviour
                     cursorTextString = verbsUI.selectedVerb.name + " " + activeThing.GetName() + " on " + inventoryUI.overInventory.itemName;
                 else if (objetive.overInteractuable != null && activeThing.GetInventoryActive() != null && inventoryUI.overInventory == null)
                     cursorTextString = verbsUI.selectedVerb.name + " " + activeThing.GetName() + " on " + objetive.overInteractuable.name;
-                else if(inventoryUI.overInventory == null)
+                else if (inventoryUI.overInventory == null)
+                    cursorTextString = verbsUI.selectedVerb.name + " " + activeThing.GetName() + " on ";
+            }
+            else if (activeThing.GetInteractuableAsInventory() != null && !showingVerbs)
+            {
+                if (objetive.overInteractuable != null && activeThing.GetInteractuableAsInventory() != null && inventoryUI.overInventory == null && objetive.overInteractuable != activeThing.GetInteractuableAsInventory())
+                    cursorTextString = verbsUI.selectedVerb.name + " " + activeThing.GetName() + " on " + objetive.overInteractuable.name;
+                else if (inventoryUI.overInventory == null)
                     cursorTextString = verbsUI.selectedVerb.name + " " + activeThing.GetName() + " on ";
             }
             else if (!showingVerbs && inventoryUI.overInventory != null)
@@ -220,6 +247,12 @@ public class UI_PNC_Manager : MonoBehaviour
 
         }
     }
+
+    public async Task SetInteractuableAsInventory() {
+        await Task.Delay(250);//TODO: Check in other platforms
+        activeThing.SetInteractuableAsInventory(activeThing.GetInteractuable());
+    }
+
 
     // Update is called once per frame
     void Update()
