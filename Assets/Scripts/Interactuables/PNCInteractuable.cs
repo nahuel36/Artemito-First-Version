@@ -216,7 +216,7 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         int index = InventoryManager.Instance.getInventoryActionsIndex(pncObject, inventoryActions, verb);
         if (index != -1)
         {
-            InteractionUtils.RunAttempsInteraction(pncObject.inventoryActions[index].attempsContainer);
+            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer);
         }
     }
 
