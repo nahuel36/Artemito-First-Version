@@ -182,11 +182,15 @@ public class UI_PNC_Manager : MonoBehaviour
                         {
                             objetive.overInteractuable.RunInventoryInteraction(activeThing.GetInventoryActive(), verbsUI.selectedVerb);
                         }
-                        else if(activeThing.GetInteractuableAsInventory() != null && inventoryUI.overInventory == null && objetive.overInteractuable != null)
+                        else if (activeThing.GetInteractuableAsInventory() != null && inventoryUI.overInventory == null && objetive.overInteractuable != null)
                         {
                             objetive.overInteractuable.RunObjectAsInventoryInteraction(activeThing.GetInteractuableAsInventory(), verbsUI.selectedVerb);
                         }
                         activeThing.Clear();
+                    }
+                    else
+                    {
+                        pointAndWalk.WalkCancelable();
                     }
                     
                     holdingCounter = 0;
