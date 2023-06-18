@@ -188,7 +188,7 @@ public class UI_PNC_Manager : MonoBehaviour
                         }
                         activeThing.Clear();
                     }
-                    else
+                    else if(inventoryUI.overInventory == null)
                     {
                         pointAndWalk.WalkCancelable();
                     }
