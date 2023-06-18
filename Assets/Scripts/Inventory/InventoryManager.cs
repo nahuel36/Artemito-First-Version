@@ -125,4 +125,16 @@ public class InventoryManager : MonoBehaviour
 
         return -1;
     }
+
+    public int getInventoryActionsIndex(PNCInteractuable item, List<InventoryItemAction> inventoryActions, Verb verb)
+    {
+        for (int i = 0; i < inventoryActions.Count; i++)
+        {
+            if (item == inventoryActions[i].sceneObject && inventoryActions[i].verb.index == verb.index)
+                return i;
+        }
+
+        return -1;
+    }
+
 }

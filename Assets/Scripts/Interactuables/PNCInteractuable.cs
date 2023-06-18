@@ -17,6 +17,7 @@ public class VerbInteractions
 {
     public Verb verb = new Verb();
     public bool use = true;
+    public bool useAsInventory = false;
     public AttempsContainer attempsContainer;
 }
 
@@ -25,6 +26,7 @@ public class InventoryItemAction {
     public int specialIndex = -1;
     public string name;
     public Verb verb;
+    public PNCInteractuable sceneObject;
     public AttempsContainer attempsContainer;
 }
 
@@ -194,7 +196,15 @@ public abstract class PNCInteractuable : PNCVariablesContainer
     }
 
 
-
+    public bool IsUseAsInventoryVerb(Verb verb)
+    {
+        for (int i = 0; i < verbs.Count; i++)
+        {
+            if (verbs[i].verb == verb && verbs[i].useAsInventory)
+                return true;
+        }
+        return false;
+    }
 
 
     public void RunInventoryInteraction(InventoryItem item, Verb verb)
@@ -204,6 +214,12 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         {
             InteractionUtils.RunAttempsInteraction(item.inventoryActions[index].attempsContainer);
         }
+    }
+
+    public void RunObjectAsInventoryInteraction(PNCInteractuable pncObject, Verb verb)
+    {
+        int index = InventoryManager.Instance.getInventoryActionsIndex(pncObject, inventoryActions, verb);
+
     }
 
     public void RunVerbInteraction(Verb verbToRunString)

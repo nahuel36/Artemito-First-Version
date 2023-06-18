@@ -331,12 +331,14 @@ public static class PNCEditorUtils
 
     }
 
-    public static float GetAttempsContainerHeight(SerializedProperty serializedVerb, List<InteractionsAttemp> noSerializedAttemps, int indexC)
+    public static float GetAttempsContainerHeight(SerializedProperty serializedVerb, List<InteractionsAttemp> noSerializedAttemps, int indexC, bool IsSceneObject = false)
     {
 
         if (serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector").boolValue)
         {
             float heightM = 5 * EditorGUIUtility.singleLineHeight;
+            if(IsSceneObject)
+                heightM += EditorGUIUtility.singleLineHeight;
             var attemps = serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("attemps");
             for (int i = 0; i < attemps.arraySize; i++)
             {
@@ -485,13 +487,15 @@ public static class PNCEditorUtils
 
     }
 
-    public static void DrawElementAttempContainer(SerializedProperty containerProperty, int indexC, Rect rect, Dictionary<string, ReorderableList> attempsListDict, Dictionary<string, ReorderableList> interactionsListDict, List<InteractionsAttemp> noSerializedAttemps, bool isInventoryItem)
+    public static void DrawElementAttempContainer(SerializedProperty containerProperty, int indexC, Rect rect, Dictionary<string, ReorderableList> attempsListDict, Dictionary<string, ReorderableList> interactionsListDict, List<InteractionsAttemp> noSerializedAttemps, bool isInventoryItem, bool isSceneObject = false)
     {
         var attempContainer = containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer");
         var attemps = attempContainer.FindPropertyRelative("attemps");
         var verbRect = new Rect(rect);
         var verbExpanded = attempContainer.FindPropertyRelative("expandedInInspector");
         verbRect.x += 8;
+
+
 
         //verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("name").stringValue);
         if(isInventoryItem)
@@ -503,6 +507,13 @@ public static class PNCEditorUtils
 
         if (verbExpanded.boolValue)
         {
+            if (isSceneObject)
+            {
+                EditorGUI.PropertyField(new Rect(rect.x + 7, verbRect.y , verbRect.width, EditorGUIUtility.singleLineHeight), containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("useAsInventory"), GUIContent.none);
+                EditorGUI.LabelField(new Rect(rect.x + 25, verbRect.y , verbRect.width, EditorGUIUtility.singleLineHeight), "Use as Inventory");
+                verbRect.y += EditorGUIUtility.singleLineHeight;
+            }
+
             var attempKey = attempContainer.propertyPath;
 
             if (!attempsListDict.ContainsKey(attempKey))

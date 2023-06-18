@@ -67,29 +67,41 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             },
             elementHeightCallback = (int indexInv) =>
             {
-                return PNCEditorUtils.GetAttempsContainerHeight(inv_serialized, myTarget.inventoryActions[indexInv].attempsContainer.attemps, indexInv);
+                float height = 0;
+                if (myTarget.inventoryActions[indexInv].specialIndex == 0)
+                    height += EditorGUIUtility.singleLineHeight;
+                height += PNCEditorUtils.GetAttempsContainerHeight(inv_serialized, myTarget.inventoryActions[indexInv].attempsContainer.attemps, indexInv);
+                return height;
             },
             drawElementCallback = (rect, indexInv, active, focus) =>
             {
-                string[] content = new string[inventory.items.Length];
-                for (int i = 0; i < inventory.items.Length; i++)
+                string[] content = new string[inventory.items.Length +1 ];
+                content[0] = "(Scene Object)";
+                for (int i = 0; i < inventory.items.Length; i++) 
                 {
-                    content[i] = inventory.items[i].itemName;
+                    content[i+1] = inventory.items[i].itemName;
                 }
+                
                 int selected = 0;
-                if (myTarget.inventoryActions[indexInv].specialIndex != -1)
+                if (myTarget.inventoryActions[indexInv].specialIndex != -1 && myTarget.inventoryActions[indexInv].specialIndex != 0)
                 {
                     for (int i = 0; i < inventory.items.Length; i++)
                     {
                         if (inventory.items[i].specialIndex == myTarget.inventoryActions[indexInv].specialIndex)
-                            selected = i;
+                            selected = i+1;
                     }
                 }
                 rect.height = EditorGUIUtility.singleLineHeight;
 
                 selected = EditorGUI.Popup(new Rect(rect.x + rect.width / 2.25f , rect.y, rect.width / 2, rect.height), "", selected, content);
 
-                myTarget.inventoryActions[indexInv].specialIndex = inventory.items[selected].specialIndex;
+                if (selected != 0)
+                    myTarget.inventoryActions[indexInv].specialIndex = inventory.items[selected - 1].specialIndex;
+                else
+                {
+                    myTarget.inventoryActions[indexInv].specialIndex = 0;
+                }
+
 
 
                 List<string> verbsContent = new List<string>();
@@ -111,10 +123,11 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
 
                 myTarget.inventoryActions[indexInv].verb.index = settings.verbs[verbSelected].index;
 
-
-
-
-                //EditorGUI.PropertyField(new Rect(rect.x + 7, rect.y, rect.width / 2.5f, EditorGUIUtility.singleLineHeight), inv_serialized.GetArrayElementAtIndex(indexInv).FindPropertyRelative("verb").FindPropertyRelative("name"), GUIContent.none);
+                if(selected == 0)
+                {
+                    EditorGUI.PropertyField(new Rect(rect.x + rect.width/2 - 20, rect.y + EditorGUIUtility.singleLineHeight, rect.width/2, rect.height), inv_serialized.GetArrayElementAtIndex(indexInv).FindPropertyRelative("sceneObject"), GUIContent.none);
+                    rect.y += EditorGUIUtility.singleLineHeight;
+                }
 
                 PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
             }
@@ -138,11 +151,11 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             },
             elementHeightCallback = (int indexV) =>
             {
-                return PNCEditorUtils.GetAttempsContainerHeight(verbs_serialized, myTarget.verbs[indexV].attempsContainer.attemps,indexV);
+                return PNCEditorUtils.GetAttempsContainerHeight(verbs_serialized, myTarget.verbs[indexV].attempsContainer.attemps,indexV, true);
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps,false);
+                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps,false, true);
             }
         };
 
