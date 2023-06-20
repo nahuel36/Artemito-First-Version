@@ -25,6 +25,7 @@ MonoBehaviour:
     isLikeGive: 0
     isLikeUse: 0
     index: 3
+  verbIndex: 3
   global_variables:
   - name: new variable25
     ID: -1114401280
