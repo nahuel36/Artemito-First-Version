@@ -45,7 +45,7 @@ public class InventoryListEditor : Editor
 
             verbsList.Add(key, null);
             ReorderableList listVerbs = verbsList[key];
-            InitializeVerbs(out listVerbs, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("verbs"), myTarget.items[i]);
+            InitializeVerbs(out listVerbs, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("verbs"), myTarget.items[i].verbs);
             verbsList[key] = listVerbs;
         }
 
@@ -123,7 +123,7 @@ public class InventoryListEditor : Editor
             {
                 verbsList.Add(key, null);
                 ReorderableList listVerbs = verbsList[key];
-                InitializeVerbs(out listVerbs, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("verbs"), myTarget.items[index]);
+                InitializeVerbs(out listVerbs, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("verbs"), myTarget.items[index].verbs);
                 verbsList[key] = listVerbs;
             }
 
@@ -220,7 +220,7 @@ public class InventoryListEditor : Editor
     }
 
 
-    protected void InitializeVerbs(out ReorderableList verbsList, SerializedObject serializedInventory, SerializedProperty inventoryProperty, InventoryItem myTarget)
+    protected void InitializeVerbs(out ReorderableList verbsList, SerializedObject serializedInventory, SerializedProperty inventoryProperty, List<VerbInteractions> verbs)
     {
         SerializedProperty verbs_serialized = serializedObject.FindProperty("verbs");
 
@@ -234,52 +234,39 @@ public class InventoryListEditor : Editor
             },
             elementHeightCallback = (int indexV) =>
             {
-                return PNCEditorUtils.GetAttempsContainerHeight(inventoryProperty, myTarget.verbs[indexV].attempsContainer.attemps, indexV);
+                return PNCEditorUtils.GetAttempsContainerHeight(inventoryProperty, verbs[indexV].attempsContainer.attemps, indexV);
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
+                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, verbs[indexV].attempsContainer.attemps, false);
             }
         };
 
 
 
-        bool verbAdded = false;
         List<VerbInteractions> interactionsTempList = new List<VerbInteractions>();
-        for (int i = 0; i < settings.verbs.Length; i++)
+        for (int i = 0; i < verbs.Count; i++)
         {
-            bool founded = false;
-            for (int j = 0; j < myTarget.verbs.Count; j++)
+            for (int j = 0; j < settings.verbs.Length; j++)
             {
-                if (myTarget.verbs[j].verb.name == settings.verbs[i].name)
+                if (verbs[i].verb.index == settings.verbs[j].index)
                 {
-                    interactionsTempList.Add((myTarget).verbs[j]);
-                    myTarget.verbs[j].verb.isLikeUse = settings.verbs[i].isLikeUse;
-                    myTarget.verbs[j].verb.isLikeGive = settings.verbs[i].isLikeGive;
-                    myTarget.verbs[j].verb.index = settings.verbs[i].index;
-                    founded = true;
+                    VerbInteractions tempVerb = new VerbInteractions();
+                    tempVerb.verb = new Verb();
+                    tempVerb.verb.name = settings.verbs[j].name;
+                    tempVerb.verb.isLikeUse = settings.verbs[j].isLikeUse;
+                    tempVerb.verb.isLikeGive = settings.verbs[j].isLikeGive;
+                    tempVerb.verb.index = settings.verbs[j].index;
+                    tempVerb.attempsContainer = verbs[i].attempsContainer;
+                    interactionsTempList.Add(tempVerb);
+                    break;
                 }
-            }
-            if (founded == false)
-            {
-                verbAdded = true;
-                VerbInteractions tempVerb = new VerbInteractions();
-                tempVerb.verb = new Verb();
-                tempVerb.verb.name = settings.verbs[i].name;
-                tempVerb.verb.isLikeUse = settings.verbs[i].isLikeUse;
-                tempVerb.verb.isLikeGive = settings.verbs[i].isLikeGive;
-                tempVerb.verb.index = settings.verbs[i].index;
-                tempVerb.attempsContainer = new AttempsContainer();
-                tempVerb.attempsContainer.attemps = new List<InteractionsAttemp>();
-                interactionsTempList.Add(tempVerb);
             }
         }
 
-        if (verbAdded || settings.verbs.Length != myTarget.verbs.Count)
-            myTarget.verbs = interactionsTempList;
-
-        for (int i = 0; i < myTarget.verbs.Count; i++)
-            myTarget.verbs[i].verb = interactionsTempList[i].verb;
+        //tempVerb.attempsContainer = new AttempsContainer();
+        //tempVerb.attempsContainer.attemps = new List<InteractionsAttemp>();
+        verbs = interactionsTempList;
     }
 
 
