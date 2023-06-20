@@ -55,6 +55,7 @@ public class Settings : ScriptableObject
         overCursor
     }
     public Verb[] verbs;
+    public int verbIndex;
     public GlobalVariableProperty[] global_variables;
     public PathFindingType pathFindingType;
     public SpeechStyle speechStyle;

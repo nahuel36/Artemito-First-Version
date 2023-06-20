@@ -20,7 +20,6 @@ public class SettingsEditor : Editor
 
     public void CheckVerbsSameIndex() 
     {
-     
         for (int i = 0; i < serializedObject.FindProperty("verbs").arraySize; i++)
         {
             bool areSame = false;
@@ -35,27 +34,15 @@ public class SettingsEditor : Editor
                     sameIndex = j;
                 }
             }
-            int newIndex = 0;
 
-            while (areSame)
-            {
-                areSame = false;
-                for (int j = 0; j < serializedObject.FindProperty("verbs").arraySize; j++)
-                {
-                    if (newIndex == serializedObject.FindProperty("verbs").GetArrayElementAtIndex(j).FindPropertyRelative("index").intValue)
-                        areSame = true;
-                }
-                if (areSame)
-                {
-                    newIndex++;
-                }
-                else
-                {
-                    serializedObject.FindProperty("verbs").GetArrayElementAtIndex(sameIndex).FindPropertyRelative("index").intValue = newIndex;
-                }
+            if (areSame)
+            { 
+                serializedObject.FindProperty("verbIndex").intValue++;
+                int newIndex = serializedObject.FindProperty("verbIndex").intValue;
+                serializedObject.FindProperty("verbs").GetArrayElementAtIndex(sameIndex).FindPropertyRelative("index").intValue = newIndex;
             }
-        }
 
+        }
     }
 
 
