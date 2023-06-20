@@ -921,6 +921,10 @@ public static class PNCEditorUtils
             {
                 texts[i] += " " + interactions[i].variablesAction;
             }
+            if (interactions[i].type == Interaction.InteractionType.inventory)
+            {
+                texts[i] += " " + interactions[i].inventoryAction;
+            }
         }
 
         return texts;
