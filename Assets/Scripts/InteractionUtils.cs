@@ -102,7 +102,7 @@ public static class InteractionUtils
                     {
                         attemps[j].interactions[k].action.AddListener(() =>
                         {
-                            CommandInventory command = new CommandInventory();
+                            CommandUseAsInventory command = new CommandUseAsInventory();
                             command.Queue();
                         });
 
