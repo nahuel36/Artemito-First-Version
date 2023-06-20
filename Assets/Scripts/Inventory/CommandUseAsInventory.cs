@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class CommandInventory : ICommand
+public class CommandUseAsInventory : ICommand
 {
     public async Task Execute()
     {
