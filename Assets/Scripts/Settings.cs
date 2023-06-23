@@ -17,14 +17,10 @@ public class GlobalVariableProperty
     }
     public object_types object_type;
 
-    [System.Flags]
-    public enum variable_types
-    {
-        integer = (1 << 0),
-        boolean = (1 << 1),
-        String = (1 << 2)
-    }
-    public variable_types variable_type;
+    public bool hasInteger;
+    public bool hasBoolean;
+    public bool hasString;
+    
 }
 
 
@@ -57,6 +53,7 @@ public class Settings : ScriptableObject
     public Verb[] verbs;
     public int verbIndex;
     public GlobalVariableProperty[] global_variables;
+    public int global_variableIndex;
     public PathFindingType pathFindingType;
     public SpeechStyle speechStyle;
     public InteractionExecuteMethod interactionExecuteMethod;

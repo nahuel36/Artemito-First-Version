@@ -18,18 +18,14 @@ public static class PNCEditorUtils
             for (int j = 0; j < globalVariables.Length; j++)
             {
                 if ((settings.global_variables[i].ID == -1 && globalVariables[j].name == settings.global_variables[i].name) ||
-                    (settings.global_variables[i].ID != -1 && globalVariables[j].globalHashCode == -1 && globalVariables[j].name == settings.global_variables[i].name) ||
-                    (settings.global_variables[i].ID != -1 && globalVariables[j].globalHashCode != -1 && globalVariables[j].globalHashCode == settings.global_variables[i].ID))
+                    (settings.global_variables[i].ID != -1 && globalVariables[j].globalID == -1 && globalVariables[j].name == settings.global_variables[i].name) ||
+                    (settings.global_variables[i].ID != -1 && globalVariables[j].globalID != -1 && globalVariables[j].globalID == settings.global_variables[i].ID))
                 {
                     globalVariables[j].name = settings.global_variables[i].name;
-                    if (settings.global_variables[i].ID == -1)
+                    
+                    if (globalVariables[j].globalID == -1)
                     {
-                        settings.global_variables[i].ID = globalVariables[j].GetHashCode();
-                        globalVariables[j].globalHashCode = globalVariables[j].GetHashCode();
-                    }
-                    else if (globalVariables[j].globalHashCode == -1)
-                    {
-                        globalVariables[j].globalHashCode = settings.global_variables[i].ID;
+                        globalVariables[j].globalID = settings.global_variables[i].ID;
                     }
 
                     globalVariables[j].properties = settings.global_variables[i];
@@ -43,15 +39,7 @@ public static class PNCEditorUtils
             {
                 InteractuableGlobalVariable tempVar = new InteractuableGlobalVariable();
                 tempVar.name = settings.global_variables[i].name;
-                if (settings.global_variables[i].ID == -1)
-                {
-                    settings.global_variables[i].ID = tempVar.GetHashCode();
-                    tempVar.globalHashCode = tempVar.GetHashCode();
-                }
-                else
-                {
-                    tempVar.globalHashCode = settings.global_variables[i].ID;
-                }
+                tempVar.globalID = settings.global_variables[i].ID;
                 tempVar.properties = settings.global_variables[i];
                 if (settings.global_variables[i].object_type.HasFlag(type))
                     tempGlobalVarList.Add(tempVar);
@@ -230,7 +218,7 @@ public static class PNCEditorUtils
 
             for (int j = 0; j < settings.global_variables.Length; j++)
             {
-                if (variables[i].globalHashCode != -1 && settings.global_variables[j].ID == variables[i].globalHashCode)
+                if (variables[i].globalID != -1 && settings.global_variables[j].ID == variables[i].globalID)
                 {
                     variables[i].name = settings.global_variables[j].name;
                     if (!settings.global_variables[j].object_type.HasFlag(type))
@@ -246,7 +234,7 @@ public static class PNCEditorUtils
             {
                 EditorGUILayout.BeginVertical("GroupBox");
 
-                if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.integer))
+                if (variables[i].properties.hasInteger)
                 {
                     if (!variables[i].integerDefault)
                     {
@@ -265,7 +253,7 @@ public static class PNCEditorUtils
                         }
                     }
                 }
-                if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.boolean))
+                if (variables[i].properties.hasBoolean)
                 {
                     if (!variables[i].booleanDefault)
                     {
@@ -282,7 +270,7 @@ public static class PNCEditorUtils
                         }
                     }
                 }
-                if (variables[i].properties.variable_type.HasFlag(GlobalVariableProperty.variable_types.String))
+                if (variables[i].properties.hasString)
                 {
                     if (!variables[i].stringDefault)
                     {

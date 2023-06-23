@@ -238,8 +238,8 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
         element.FindPropertyRelative("verb").FindPropertyRelative("name").stringValue = settings.verbs[settingsVerbIndex].name;
         element.FindPropertyRelative("verb").FindPropertyRelative("isLikeUse").boolValue = settings.verbs[settingsVerbIndex].isLikeUse;
         element.FindPropertyRelative("verb").FindPropertyRelative("isLikeGive").boolValue = settings.verbs[settingsVerbIndex].isLikeGive;
-        element.FindPropertyRelative("verb").FindPropertyRelative("index").intValue = specialIndex;
-
+        element.FindPropertyRelative("verb").FindPropertyRelative("index").intValue = settings.verbs[settingsVerbIndex].index;
+        
         serializedObject.ApplyModifiedProperties();
     }
 }

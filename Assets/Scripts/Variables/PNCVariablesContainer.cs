@@ -27,7 +27,7 @@ public class InteractuableGlobalVariable
     public int integer = 0;
     public bool boolean = false;
     public string String = "";
-    public int globalHashCode = -1;
+    public int globalID = -1;
     public GlobalVariableProperty properties;
     public bool expandedInInspector;
     public bool integerDefault = true;
