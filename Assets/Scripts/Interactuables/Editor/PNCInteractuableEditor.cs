@@ -238,4 +238,5 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
 internal class NewVerbVariableParam
 {
     public int index { get; set; }
+    public ReorderableList list;
 }

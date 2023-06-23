@@ -149,7 +149,7 @@ MonoBehaviour:
       attempsContainer:
         isCyclical: 0
         attemps: []
-        expandedInInspector: 0
+        expandedInInspector: 1
         executedTimes: 0
     - verb:
         name: Talk
@@ -159,8 +159,100 @@ MonoBehaviour:
       use: 1
       attempsContainer:
         isCyclical: 0
-        attemps: []
-        expandedInInspector: 0
+        attemps:
+        - interactions:
+          - type: 0
+            expandedInInspector: 1
+            inventoryAction: 0
+            character: {fileID: 0}
+            characterAction: 0
+            WhatToSay: 
+            WhereToWalk: {fileID: 0}
+            globalVariableSelected: 0
+            localVariableSelected: 0
+            variablesAction: 0
+            variableObject: {fileID: 0}
+            OnCompareResultTrueAction: 0
+            OnCompareResultFalseAction: 0
+            LineToGoOnTrueResult: 0
+            LineToGoOnFalseResult: 0
+            action:
+              m_PersistentCalls:
+                m_Calls: []
+            global_changeBooleanValue: 0
+            global_changeStringValue: 0
+            global_changeIntegerValue: 0
+            local_changeBooleanValue: 0
+            local_changeStringValue: 0
+            local_changeIntegerValue: 0
+            global_compareBooleanValue: 0
+            global_compareStringValue: 0
+            global_compareIntegerValue: 0
+            local_compareBooleanValue: 0
+            local_compareStringValue: 0
+            local_compareIntegerValue: 0
+            local_defaultBooleanValue: 0
+            local_defaultIntegerValue: 0
+            local_defaultStringValue: 
+            global_defaultBooleanValue: 0
+            global_defaultIntegerValue: 0
+            global_defaultStringValue: 
+            global_BooleanValue: 0
+            global_StringValue: 
+            global_IntegerValue: 0
+            local_BooleanValue: 0
+            local_StringValue: 
+            local_IntegerValue: 0
+            SayScript: {fileID: 0}
+            CanSkip: 0
+          - type: 0
+            expandedInInspector: 0
+            inventoryAction: 0
+            character: {fileID: 0}
+            characterAction: 0
+            WhatToSay: 
+            WhereToWalk: {fileID: 0}
+            globalVariableSelected: 0
+            localVariableSelected: 0
+            variablesAction: 0
+            variableObject: {fileID: 0}
+            OnCompareResultTrueAction: 0
+            OnCompareResultFalseAction: 0
+            LineToGoOnTrueResult: 0
+            LineToGoOnFalseResult: 0
+            action:
+              m_PersistentCalls:
+                m_Calls: []
+            global_changeBooleanValue: 0
+            global_changeStringValue: 0
+            global_changeIntegerValue: 0
+            local_changeBooleanValue: 0
+            local_changeStringValue: 0
+            local_changeIntegerValue: 0
+            global_compareBooleanValue: 0
+            global_compareStringValue: 0
+            global_compareIntegerValue: 0
+            local_compareBooleanValue: 0
+            local_compareStringValue: 0
+            local_compareIntegerValue: 0
+            local_defaultBooleanValue: 0
+            local_defaultIntegerValue: 0
+            local_defaultStringValue: 
+            global_defaultBooleanValue: 0
+            global_defaultIntegerValue: 0
+            global_defaultStringValue: 
+            global_BooleanValue: 0
+            global_StringValue: 
+            global_IntegerValue: 0
+            local_BooleanValue: 0
+            local_StringValue: 
+            local_IntegerValue: 0
+            SayScript: {fileID: 0}
+            CanSkip: 0
+          expandedInInspector: 1
+        - interactions: []
+          expandedInInspector: 0
+        expandedInInspector: 1
         executedTimes: 0
     expandedInInspector: 0
     specialIndex: 1
