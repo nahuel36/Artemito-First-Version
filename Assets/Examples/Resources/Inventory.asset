@@ -162,7 +162,7 @@ MonoBehaviour:
         attemps:
         - interactions:
           - type: 0
-            expandedInInspector: 1
+            expandedInInspector: 0
             inventoryAction: 0
             character: {fileID: 0}
             characterAction: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
             CanSkip: 0
           expandedInInspector: 1
         - interactions: []
-          expandedInInspector: 0
+          expandedInInspector: 1
         expandedInInspector: 1
         executedTimes: 0
     expandedInInspector: 0

@@ -244,79 +244,12 @@ public class InventoryListEditor : Editor
             },
             onAddDropdownCallback = (rect, list) =>
             {
-                var menu = new GenericMenu();
-
-                List<int> indexs = new List<int>();
-                for (int i = 0; i < settings.verbs.Length; i++)
-                {
-                    bool founded = false;
-                    for (int j = 0; j < myTarget.verbs.Count; j++)
-                    {
-                        if (settings.verbs[i].index == myTarget.verbs[j].verb.index)
-                        {
-                            founded = true;
-                            break;
-                        }
-                    }
-                    if (!founded)
-                        indexs.Add(i);
-                }
-
-                for (int i = 0; i < indexs.Count; i++)
-                {
-                    menu.AddItem(new GUIContent(settings.verbs[indexs[i]].name), false, OnAddNewVerb, new NewVerbVariableParam() { index = indexs[i], list = list });
-                }
-
-                menu.ShowAsContext();
+                PNCEditorUtils.OnAddVerbDropdown(list, myTarget.verbs, serializedObject);
             }
         };
 
 
-
-        List<VerbInteractions> interactionsTempList = new List<VerbInteractions>();
-        List<int> interactionsAdded = new List<int>();
-        for (int i = 0; i < myTarget.verbs.Count; i++)
-        {
-            for (int j = 0; j < settings.verbs.Length; j++)
-            {
-                if (myTarget.verbs[i].verb.index == settings.verbs[j].index)
-                {
-                    VerbInteractions tempVerb = new VerbInteractions();
-                    tempVerb.verb = new Verb();
-                    tempVerb.verb.name = settings.verbs[j].name;
-                    tempVerb.verb.isLikeUse = settings.verbs[j].isLikeUse;
-                    tempVerb.verb.isLikeGive = settings.verbs[j].isLikeGive;
-                    tempVerb.verb.index = settings.verbs[j].index;
-                    tempVerb.attempsContainer = myTarget.verbs[i].attempsContainer;
-                    if (!interactionsAdded.Contains(settings.verbs[j].index))
-                    {
-                        interactionsAdded.Add(settings.verbs[j].index);
-                        interactionsTempList.Add(tempVerb);
-                    }
-                    break;
-                }
-            }
-        }
-
-        myTarget.verbs = interactionsTempList;
-    }
-
-    private void OnAddNewVerb(object var)
-    {
-        NewVerbVariableParam variable = (NewVerbVariableParam)var;
-        ReorderableList verbsList = variable.list;
-        int elementIndex = verbsList.serializedProperty.arraySize;
-        int settingsVerbIndex = variable.index;
-        
-        verbsList.serializedProperty.arraySize++;
-        verbsList.index = elementIndex;
-        var element = verbsList.serializedProperty.GetArrayElementAtIndex(elementIndex);
-        element.FindPropertyRelative("verb").FindPropertyRelative("name").stringValue = settings.verbs[settingsVerbIndex].name;
-        element.FindPropertyRelative("verb").FindPropertyRelative("isLikeUse").boolValue = settings.verbs[settingsVerbIndex].isLikeUse;
-        element.FindPropertyRelative("verb").FindPropertyRelative("isLikeGive").boolValue = settings.verbs[settingsVerbIndex].isLikeGive;
-        element.FindPropertyRelative("verb").FindPropertyRelative("index").intValue = settings.verbs[settingsVerbIndex].index;
-
-        serializedObject.ApplyModifiedProperties();
+        PNCEditorUtils.CheckVerbs(ref myTarget.verbs);
     }
 
 

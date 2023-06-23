@@ -906,6 +906,89 @@ public static class PNCEditorUtils
         copiedInteraction.Copy(((InteractionData)interaction).attemps[((InteractionData)interaction).indexA].interactions[((InteractionData)interaction).list.index]);
     }
 
+    public static void CheckVerbs(ref List<VerbInteractions> verbs)
+    {
+        Settings settings = Resources.Load<Settings>("Settings/Settings");
+
+        List<VerbInteractions> interactionsTempList = new List<VerbInteractions>();
+        List<int> interactionsAdded = new List<int>();
+        for (int i = 0; i < verbs.Count; i++)
+        {
+            for (int j = 0; j < settings.verbs.Length; j++)
+            {
+                if (verbs[i].verb.index == settings.verbs[j].index)
+                {
+                    VerbInteractions tempVerb = new VerbInteractions();
+                    tempVerb.verb = new Verb();
+                    tempVerb.verb.name = settings.verbs[j].name;
+                    tempVerb.verb.isLikeUse = settings.verbs[j].isLikeUse;
+                    tempVerb.verb.isLikeGive = settings.verbs[j].isLikeGive;
+                    tempVerb.verb.index = settings.verbs[j].index;
+                    tempVerb.attempsContainer = verbs[i].attempsContainer;
+                    if (!interactionsAdded.Contains(settings.verbs[j].index))
+                    {
+                        interactionsAdded.Add(settings.verbs[j].index);
+                        interactionsTempList.Add(tempVerb);
+                    }
+                    break;
+                }
+            }
+        }
+
+        verbs = interactionsTempList;
+    }
+
+
+    public static void OnAddVerbDropdown(ReorderableList list, List<VerbInteractions> verbs, SerializedObject serializedObject) 
+    {
+        Settings settings = Resources.Load<Settings>("Settings/Settings");
+
+
+        var menu = new GenericMenu();
+
+        List<int> indexs = new List<int>();
+        for (int i = 0; i < settings.verbs.Length; i++)
+        {
+            bool founded = false;
+            for (int j = 0; j < verbs.Count; j++)
+            {
+                if (settings.verbs[i].index == verbs[j].verb.index)
+                {
+                    founded = true;
+                    break;
+                }
+            }
+            if (!founded)
+                indexs.Add(i);
+        }
+
+        for (int i = 0; i < indexs.Count; i++)
+        {
+            menu.AddItem(new GUIContent(settings.verbs[indexs[i]].name), false, OnAddNewVerb, new NewVerbVariableParam() { index = indexs[i], list = list, serializedObject = serializedObject});
+        }
+
+        menu.ShowAsContext();
+    }
+
+    private static void OnAddNewVerb(object var)
+    {
+        Settings settings = Resources.Load<Settings>("Settings/Settings");
+
+        NewVerbVariableParam variable = (NewVerbVariableParam)var;
+        ReorderableList verbsList = variable.list;
+        int elementIndex = verbsList.serializedProperty.arraySize;
+        int settingsVerbIndex = variable.index;
+
+        verbsList.serializedProperty.arraySize++;
+        verbsList.index = elementIndex;
+        var element = verbsList.serializedProperty.GetArrayElementAtIndex(elementIndex);
+        element.FindPropertyRelative("verb").FindPropertyRelative("name").stringValue = settings.verbs[settingsVerbIndex].name;
+        element.FindPropertyRelative("verb").FindPropertyRelative("isLikeUse").boolValue = settings.verbs[settingsVerbIndex].isLikeUse;
+        element.FindPropertyRelative("verb").FindPropertyRelative("isLikeGive").boolValue = settings.verbs[settingsVerbIndex].isLikeGive;
+        element.FindPropertyRelative("verb").FindPropertyRelative("index").intValue = settings.verbs[settingsVerbIndex].index;
+
+        variable.serializedObject.ApplyModifiedProperties();
+    }
 
     public static string[] GetInteractionsText(SerializedProperty interactions)
     {
