@@ -28,41 +28,78 @@ MonoBehaviour:
   verbIndex: 3
   global_variables:
   - name: new variable25
-    ID: -1114401280
+    ID: 1
     object_type: 0
-    variable_type: 0
+    hasInteger: 0
+    hasBoolean: 0
+    hasString: 0
   - name: IsADooro
-    ID: 784136192
+    ID: 2
     object_type: 0
-    variable_type: 0
+    hasInteger: 0
+    hasBoolean: 0
+    hasString: 0
   - name: isOpened
-    ID: -1077307904
+    ID: 3
     object_type: 1
-    variable_type: 3
+    hasInteger: 0
+    hasBoolean: 1
+    hasString: 0
   - name: isOpened2
-    ID: 1356215296
+    ID: 4
     object_type: 0
-    variable_type: 0
+    hasInteger: 0
+    hasBoolean: 0
+    hasString: 0
   - name: New Global Variable 5
-    ID: 365620736
+    ID: 5
     object_type: 0
-    variable_type: 0
+    hasInteger: 0
+    hasBoolean: 0
+    hasString: 0
   - name: 6
-    ID: 227535360
+    ID: 6
     object_type: 8
-    variable_type: 1
+    hasInteger: 1
+    hasBoolean: 0
+    hasString: 0
   - name: New Global Variable 14
-    ID: -1221975552
+    ID: 7
     object_type: 1
-    variable_type: 2
+    hasInteger: 0
+    hasBoolean: 0
+    hasString: 0
   - name: New Global Variable 7
-    ID: 548777984
+    ID: 8
     object_type: 2
-    variable_type: 4
+    hasInteger: 0
+    hasBoolean: 0
+    hasString: 0
   - name: New Global Variable 8
-    ID: -1312666112
+    ID: 9
     object_type: 4
-    variable_type: 1
+    hasInteger: 0
+    hasBoolean: 0
+    hasString: 0
+  - name: New Global Variable 9
+    ID: 10
+    object_type: 1
+    hasInteger: 1
+    hasBoolean: 1
+    hasString: 0
+  - name: New Global Variable 10
+    ID: 11
+    object_type: 4
+    hasInteger: 0
+    hasBoolean: 1
+    hasString: 0
+  - name: New Global Variable 11
+    ID: 12
+    object_type: 4
+    hasInteger: 0
+    hasBoolean: 1
+    hasString: 0
+  global_variableIndex: 12
   pathFindingType: 0
   speechStyle: 0
   interactionExecuteMethod: 1

@@ -72,7 +72,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                 float height = 0;
                 if (myTarget.inventoryActions[indexInv].specialIndex == 0)
                     height += EditorGUIUtility.singleLineHeight;
-                height += PNCEditorUtils.GetAttempsContainerHeight(inv_serialized, myTarget.inventoryActions[indexInv].attempsContainer.attemps, indexInv);
+                height += PNCEditorUtils.GetAttempsContainerHeight(inv_serialized, indexInv);
                 return height;
             },
             drawElementCallback = (rect, indexInv, active, focus) =>
@@ -137,15 +137,11 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
 
     }
 
-    protected void InitializeVerbs() 
+    protected void InitializeVerbs(out ReorderableList verbsList, SerializedObject serializedObjectVerb, SerializedProperty serializedProperty, PNCInteractuable myTarget) 
     {
-        PNCInteractuable myTarget = (PNCInteractuable)target;
-
-        SerializedProperty verbs_serialized = serializedObject.FindProperty("verbs");
-
         settings = Resources.Load<Settings>("Settings/Settings");
-
-        verbsList = new ReorderableList(serializedObject, verbs_serialized, true, true, true, true)
+       
+        verbsList = new ReorderableList(serializedObjectVerb, serializedProperty, true, true, true, true)
         {
             drawHeaderCallback = (rect) =>
             {
@@ -153,11 +149,11 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             },
             elementHeightCallback = (int indexV) =>
             {
-                return PNCEditorUtils.GetAttempsContainerHeight(verbs_serialized, myTarget.verbs[indexV].attempsContainer.attemps, indexV);
+                return PNCEditorUtils.GetAttempsContainerHeight(serializedProperty, indexV);
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(verbs_serialized, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
+                PNCEditorUtils.DrawElementAttempContainer(serializedProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
             },
             onCanAddCallback = (list) =>
             {
@@ -192,8 +188,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             }
         };
 
-
-
+        
         List<VerbInteractions> interactionsTempList = new List<VerbInteractions>();
         List<int> interactionsAdded = new List<int>();
         for (int i = 0; i < myTarget.verbs.Count; i++)
@@ -219,16 +214,12 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             }
         }
 
-        //tempVerb.attempsContainer = new AttempsContainer();
-        //tempVerb.attempsContainer.attemps = new List<InteractionsAttemp>();
         myTarget.verbs = interactionsTempList;
-                
     }
 
     private void OnAddNewVerb(object var)
     {
         NewVerbVariableParam variable = (NewVerbVariableParam)var;
-        int specialIndex = settings.verbIndex;
         int elementIndex = verbsList.serializedProperty.arraySize;
         int settingsVerbIndex = variable.index;
 

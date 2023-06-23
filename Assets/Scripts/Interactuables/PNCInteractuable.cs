@@ -17,7 +17,7 @@ public class VerbInteractions
 {
     public Verb verb = new Verb();
     public bool use = true;
-    public AttempsContainer attempsContainer;
+    public AttempsContainer attempsContainer = new AttempsContainer();
 }
 
 [System.Serializable]

@@ -14,7 +14,7 @@ public class PnCCharacterEditor : PNCInteractuableEditor
 
     public void OnEnable()
     {
-        InitializeVerbs();
+        InitializeVerbs(out verbsList, serializedObject , serializedObject.FindProperty("verbs"),((PNCCharacter)target));
 
         PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.characters, ref ((PNCCharacter)target).global_variables);
         PNCEditorUtils.InitializeLocalVariables(out localVariablesList, serializedObject, serializedObject.FindProperty("local_variables"));

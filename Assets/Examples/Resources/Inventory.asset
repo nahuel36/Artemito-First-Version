@@ -24,12 +24,46 @@ MonoBehaviour:
       integer: 0
       boolean: 0
       String: 
-      globalHashCode: -1312666112
+      globalID: 9
       properties:
         name: New Global Variable 8
-        ID: -1312666112
+        ID: 9
         object_type: 4
-        variable_type: 1
+        hasInteger: 0
+        hasBoolean: 0
+        hasString: 0
+      expandedInInspector: 0
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+    - name: New Global Variable 10
+      integer: 0
+      boolean: 0
+      String: 
+      globalID: 11
+      properties:
+        name: New Global Variable 10
+        ID: 11
+        object_type: 4
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
+      expandedInInspector: 0
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+    - name: New Global Variable 11
+      integer: 0
+      boolean: 0
+      String: 
+      globalID: 12
+      properties:
+        name: New Global Variable 11
+        ID: 12
+        object_type: 4
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
       expandedInInspector: 0
       integerDefault: 1
       booleanDefault: 1
@@ -141,12 +175,46 @@ MonoBehaviour:
       integer: 0
       boolean: 0
       String: 
-      globalHashCode: -1312666112
+      globalID: 9
       properties:
         name: New Global Variable 8
-        ID: -1312666112
+        ID: 9
         object_type: 4
-        variable_type: 1
+        hasInteger: 0
+        hasBoolean: 0
+        hasString: 0
+      expandedInInspector: 0
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+    - name: New Global Variable 10
+      integer: 0
+      boolean: 0
+      String: 
+      globalID: 11
+      properties:
+        name: New Global Variable 10
+        ID: 11
+        object_type: 4
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
+      expandedInInspector: 0
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+    - name: New Global Variable 11
+      integer: 0
+      boolean: 0
+      String: 
+      globalID: 12
+      properties:
+        name: New Global Variable 11
+        ID: 12
+        object_type: 4
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
       expandedInInspector: 0
       integerDefault: 1
       booleanDefault: 1
