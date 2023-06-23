@@ -137,12 +137,15 @@ public class SettingsEditor : Editor
             menu.AddItem(new GUIContent("characters/boolean"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.characters, hasBoolean = true});
             menu.AddItem(new GUIContent("inventory/boolean"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.inventory, hasBoolean = true});
             menu.AddItem(new GUIContent("object/boolean"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.objects, hasBoolean = true});
+            menu.AddItem(new GUIContent("variable container/boolean"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.variableContainer, hasBoolean = true });
             menu.AddItem(new GUIContent("characters/integer"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.characters, hasInteger = true});
             menu.AddItem(new GUIContent("inventory/integer"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.inventory, hasInteger = true });
             menu.AddItem(new GUIContent("object/integer"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.objects, hasInteger = true });
+            menu.AddItem(new GUIContent("variable container/integer"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.variableContainer, hasInteger = true });
             menu.AddItem(new GUIContent("characters/string"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.characters, hasString = true});
             menu.AddItem(new GUIContent("inventory/string"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.inventory, hasString = true });
             menu.AddItem(new GUIContent("object/string"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.objects, hasString = true });
+            menu.AddItem(new GUIContent("variable container/string"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.variableContainer, hasString = true });
             menu.ShowAsContext();
         };
     }
