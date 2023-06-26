@@ -17,18 +17,29 @@ public class Node
     public GUIStyle selectedNodeStyle;
 
     public Action<Node> OnRemoveNode;
+    public Action<ConnectionPoint> OnClickIn;
+    public Action<ConnectionPoint> OnClickOut;
 
     public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle, Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode)
     {
         rect = new Rect(position.x, position.y, width, height);
         style = nodeStyle;
-        inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, OnClickInPoint);
-        outPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, OnClickOutPoint);
+        OnClickIn = OnClickInPoint;
+        OnClickOut = OnClickOutPoint;
+        inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle);
+        outPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle);
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
         OnRemoveNode = OnClickRemoveNode;
     }
 
+    public void SetOnClickConnectionPoints(Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint) {
+        OnClickIn = OnClickInPoint;
+        OnClickOut = OnClickOutPoint;
+        inPoint.SetOnClick(OnClickIn);
+        outPoint.SetOnClick(OnClickOut);
+    }
+    
 
     public void Drag(Vector2 delta)
     {

@@ -15,13 +15,18 @@ public class ConnectionPoint
 
     public Action<ConnectionPoint> OnClickConnectionPoint;
 
-    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style, Action<ConnectionPoint> OnClickConnectionPoint)
+    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style)
     {
         this.node = node;
         this.type = type;
         this.style = style;
-        this.OnClickConnectionPoint = OnClickConnectionPoint;
+        
         rect = new Rect(0, 0, 10f, 20f);
+    }
+
+    public void SetOnClick(Action<ConnectionPoint> OnClickConnectionPoint)
+    {
+        this.OnClickConnectionPoint = OnClickConnectionPoint;
     }
 
     public void Draw()

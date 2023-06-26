@@ -32,8 +32,14 @@ public class DialogEditor : Editor
         optionsList.DoLayoutList();
 
         serializedObject.ApplyModifiedProperties();
-        if (GUI.changed)
+
+        if (GUILayout.Button("View nodes")) 
         {
+            NodeBasedEditor nodeBase = CreateInstance<NodeBasedEditor>();
+            nodeBase.OpenWindow((Dialog)target);
+        }
+        if (GUI.changed)
+        { 
             EditorUtility.SetDirty(target);
         }
 

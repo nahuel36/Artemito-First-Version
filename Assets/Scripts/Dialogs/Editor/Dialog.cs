@@ -14,6 +14,8 @@ public class DialogOption
 public class Dialog : ScriptableObject
 {
     public List<DialogOption> options;
-    
-    
+
+    public List<Node> nodes;
+    public List<Connection> connections;
+
 }

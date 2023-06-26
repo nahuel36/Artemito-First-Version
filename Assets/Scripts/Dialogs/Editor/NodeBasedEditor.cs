@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class NodeBasedEditor : EditorWindow
 {
-    private List<Node> nodes;
-    private List<Connection> connections;
 
     private GUIStyle nodeStyle;
     private GUIStyle selectedNodeStyle;
@@ -18,11 +16,18 @@ public class NodeBasedEditor : EditorWindow
     private Vector2 offset;
     private Vector2 drag;
 
-    [MenuItem("PnC/Node Based Editor")]
-    private static void OpenWindow()
+    private Dialog dialog;
+    public void OpenWindow(Dialog dialogparam)
     {
         NodeBasedEditor window = GetWindow<NodeBasedEditor>();
         window.titleContent = new GUIContent("Node Based Editor");
+        dialog = dialogparam;
+
+        if (dialog.nodes != null)
+            for (int i = 0; i < dialog.nodes.Count; i++)
+            {
+                dialog.nodes[i].SetOnClickConnectionPoints(OnClickInPoint, OnClickOutPoint);
+            }
     }
 
     private void OnEnable()
@@ -44,6 +49,8 @@ public class NodeBasedEditor : EditorWindow
         outPointStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn right.png") as Texture2D;
         outPointStyle.active.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn right on.png") as Texture2D;
         outPointStyle.border = new RectOffset(4, 4, 12, 12);
+
+
     }
 
     private void OnGUI()
@@ -59,7 +66,11 @@ public class NodeBasedEditor : EditorWindow
         ProcessNodeEvents(Event.current);
         ProcessEvents(Event.current);
 
-        if (GUI.changed) Repaint();
+        if (GUI.changed)
+        { 
+            EditorUtility.SetDirty(dialog);
+            Repaint();
+        }
     }
 
     private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
@@ -89,11 +100,11 @@ public class NodeBasedEditor : EditorWindow
 
     private void DrawNodes()
     {
-        if (nodes != null)
+        if (dialog.nodes != null)
         {
-            for (int i = 0; i < nodes.Count; i++)
+            for (int i = 0; i < dialog.nodes.Count; i++)
             {
-                nodes[i].Draw();
+                dialog.nodes[i].Draw();
             }
         }
 
@@ -102,11 +113,11 @@ public class NodeBasedEditor : EditorWindow
 
     private void DrawConnections()
     {
-        if (connections != null)
+        if (dialog.connections != null)
         {
-            for (int i = 0; i < connections.Count; i++)
+            for (int i = 0; i < dialog.connections.Count; i++)
             {
-                connections[i].Draw();
+                dialog.connections[i].Draw();
             }
         }
     }
@@ -144,11 +155,11 @@ public class NodeBasedEditor : EditorWindow
 
     private void Zoom(float delta) 
     {
-        if (nodes != null)
+        if (dialog.nodes != null)
         {
-            for (int i = 0; i < nodes.Count; i++)
+            for (int i = 0; i < dialog.nodes.Count; i++)
             {
-                nodes[i].Zoom(delta);
+                dialog.nodes[i].Zoom(delta);
             }
         }
 
@@ -160,11 +171,11 @@ public class NodeBasedEditor : EditorWindow
     {
         drag = delta;
 
-        if (nodes != null)
+        if (dialog.nodes != null)
         {
-            for (int i = 0; i < nodes.Count; i++)
+            for (int i = 0; i < dialog.nodes.Count; i++)
             {
-                nodes[i].Drag(delta);
+                dialog.nodes[i].Drag(delta);
             }
         }
 
@@ -207,11 +218,11 @@ public class NodeBasedEditor : EditorWindow
 
     private void ProcessNodeEvents(Event e)
     {
-        if (nodes != null)
+        if (dialog.nodes != null)
         {
-            for (int i = nodes.Count - 1; i >= 0; i--)
+            for (int i = dialog.nodes.Count - 1; i >= 0; i--)
             {
-                bool guiChanged = nodes[i].ProcessEvents(e);
+                bool guiChanged = dialog.nodes[i].ProcessEvents(e);
 
                 if (guiChanged)
                 {
@@ -231,12 +242,13 @@ public class NodeBasedEditor : EditorWindow
 
     private void OnClickAddNode(Vector2 mousePosition)
     {
-        if (nodes == null)
+        if (dialog.nodes == null)
         {
-            nodes = new List<Node>();
+            dialog.nodes = new List<Node>();
         }
 
-        nodes.Add(new Node(mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode));
+        dialog.nodes.Add(new Node(mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode));
+        dialog.nodes[dialog.nodes.Count - 1].SetOnClickConnectionPoints(OnClickInPoint, OnClickOutPoint);
     }
 
     private void OnClickInPoint(ConnectionPoint inPoint)
@@ -278,42 +290,42 @@ public class NodeBasedEditor : EditorWindow
 
     private void OnClickRemoveNode(Node node)
     {
-        if (connections != null)
+        if (dialog.connections != null)
         {
             List<Connection> connectionsToRemove = new List<Connection>();
 
-            for (int i = 0; i < connections.Count; i++)
+            for (int i = 0; i < dialog.connections.Count; i++)
             {
-                if (connections[i].inPoint == node.inPoint || connections[i].outPoint == node.outPoint)
+                if (dialog.connections[i].inPoint == node.inPoint || dialog.connections[i].outPoint == node.outPoint)
                 {
-                    connectionsToRemove.Add(connections[i]);
+                    connectionsToRemove.Add(dialog.connections[i]);
                 }
             }
 
             for (int i = 0; i < connectionsToRemove.Count; i++)
             {
-                connections.Remove(connectionsToRemove[i]);
+                dialog.connections.Remove(connectionsToRemove[i]);
             }
 
             connectionsToRemove = null;
         }
 
-        nodes.Remove(node);
+        dialog.nodes.Remove(node);
     }
 
     private void OnClickRemoveConnection(Connection connection)
     {
-        connections.Remove(connection);
+        dialog.connections.Remove(connection);
     }
 
     private void CreateConnection()
     {
-        if (connections == null)
+        if (dialog.connections == null)
         {
-            connections = new List<Connection>();
+            dialog.connections = new List<Connection>();
         }
 
-        connections.Add(new Connection(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
+        dialog.connections.Add(new Connection(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
     }
 
     private void ClearConnectionSelection()
