@@ -126,7 +126,7 @@ public class Interaction
         destiny.action = action;
         destiny.character = character;
         destiny.characterAction = characterAction;
-        destiny.expandedInInspector = false;
+        destiny.expandedInInspector = expandedInInspector;
         destiny.inventoryAction = inventoryAction;
         destiny.globalVariableSelected = globalVariableSelected;
         destiny.localVariableSelected = localVariableSelected;
