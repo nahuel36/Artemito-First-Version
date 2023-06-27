@@ -117,6 +117,6 @@ public class Node
 
     public void Zoom(float delta)
     {
-        rect = new Rect(rect.x + delta, rect.y - delta, rect.width + delta , rect.height + delta );
+        rect = new Rect(rect.x + delta * rect.x * 0.015f, rect.y - delta, rect.width + delta * 4, rect.height + delta );
     }
 }
