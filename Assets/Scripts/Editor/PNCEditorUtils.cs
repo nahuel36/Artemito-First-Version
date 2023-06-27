@@ -909,6 +909,7 @@ public static class PNCEditorUtils
         if (copiedInteraction == null) return;
 
         copiedInteraction.Copy(((InteractionData)interaction).attemps[((InteractionData)interaction).indexA].interactions[((InteractionData)interaction).list.index]);
+        ((InteractionData)interaction).list.serializedProperty.serializedObject.Update();
     }
 
     public static void CheckVerbs(ref List<VerbInteractions> verbs)
