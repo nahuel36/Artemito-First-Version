@@ -325,11 +325,11 @@ public static class PNCEditorUtils
 
         if (serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector").boolValue)
         {
-            float heightM = 5 * EditorGUIUtility.singleLineHeight;
+            float heightM = 6f * EditorGUIUtility.singleLineHeight;
             var attemps = serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("attemps");
             for (int i = 0; i < attemps.arraySize; i++)
             {
-                heightM += GetAttempHeight(attemps.GetArrayElementAtIndex(i));
+                heightM += GetAttempHeight(attemps.GetArrayElementAtIndex(i)) * 1.125f;
 
             }
             return heightM;
@@ -499,6 +499,11 @@ public static class PNCEditorUtils
 
         if (verbExpanded.boolValue)
         {
+
+            EditorGUI.PropertyField(new Rect(verbRect.x, verbRect.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight), attempContainer.FindPropertyRelative("isCyclical"));
+
+            verbRect.y += EditorGUIUtility.singleLineHeight;
+
             var attempKey = attempContainer.propertyPath;
 
             if (!attempsListDict.ContainsKey(attempKey))
