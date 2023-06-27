@@ -329,7 +329,7 @@ public static class PNCEditorUtils
             var attemps = serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("attemps");
             for (int i = 0; i < attemps.arraySize; i++)
             {
-                heightM += GetAttempHeight(attemps.GetArrayElementAtIndex(i)) * 1.125f;
+                heightM += GetAttempHeight(attemps.GetArrayElementAtIndex(i)) * 1.025f;
 
             }
             return heightM;
@@ -344,7 +344,7 @@ public static class PNCEditorUtils
             float height = 5 * EditorGUIUtility.singleLineHeight;
             for (int i = 0; i < attempSerialized.FindPropertyRelative("interactions").arraySize; i++)
             {
-                height += GetInteractionHeight(attempSerialized.FindPropertyRelative("interactions").GetArrayElementAtIndex(i));
+                height += GetInteractionHeight(attempSerialized.FindPropertyRelative("interactions").GetArrayElementAtIndex(i)) * 1.025f;
             }
             return height;
         }
