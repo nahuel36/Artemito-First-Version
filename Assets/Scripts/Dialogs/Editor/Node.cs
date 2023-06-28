@@ -2,6 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
+[System.Serializable]
 public class Node
 {
     public Rect rect;
@@ -19,7 +20,7 @@ public class Node
     public Action<Node> OnRemoveNode;
     public Action<ConnectionPoint> OnClickIn;
     public Action<ConnectionPoint> OnClickOut;
-
+    string text;
     public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle, Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode)
     {
         rect = new Rect(position.x, position.y, width, height);
@@ -31,6 +32,7 @@ public class Node
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
         OnRemoveNode = OnClickRemoveNode;
+        text = "new subdialog";
     }
 
     public void SetOnClickConnectionPoints(Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint) {
@@ -51,6 +53,7 @@ public class Node
         inPoint.Draw();
         outPoint.Draw();
         GUI.Box(rect, title, style);
+        text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + rect.width * 0.06f, rect.width *0.9f,EditorGUIUtility.singleLineHeight),text);
     }
 
     public bool ProcessEvents(Event e)

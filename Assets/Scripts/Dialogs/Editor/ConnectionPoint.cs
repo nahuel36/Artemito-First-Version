@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum ConnectionPointType { In, Out }
 
+[System.Serializable]
 public class ConnectionPoint
 {
     public Rect rect;
