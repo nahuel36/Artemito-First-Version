@@ -10,27 +10,24 @@ public class ConnectionPoint
 
     public ConnectionPointType type;
 
-    public Node node;
-
     public GUIStyle style;
 
-    public Action<ConnectionPoint> OnClickConnectionPoint;
+    public Action<ConnectionPoint, Node> OnClickConnectionPoint;
 
     public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style)
     {
-        this.node = node;
         this.type = type;
         this.style = style;
         
         rect = new Rect(0, 0, 10f, 20f);
     }
 
-    public void SetOnClick(Action<ConnectionPoint> OnClickConnectionPoint)
+    public void SetOnClick(Action<ConnectionPoint, Node> OnClickConnectionPoint)
     {
         this.OnClickConnectionPoint = OnClickConnectionPoint;
     }
 
-    public void Draw()
+    public void Draw(Node node)
     {
         rect.y = node.rect.y + (node.rect.height * 0.5f) - rect.height * 0.5f;
 
@@ -49,7 +46,7 @@ public class ConnectionPoint
         {
             if (OnClickConnectionPoint != null)
             {
-                OnClickConnectionPoint(this);
+                OnClickConnectionPoint(this, node);
             }
         }
     }

@@ -11,7 +11,9 @@ public class NodeBasedEditor : EditorWindow
     private GUIStyle outPointStyle;
 
     private ConnectionPoint selectedInPoint;
+    private Node selectedInPointNode;
     private ConnectionPoint selectedOutPoint;
+    private Node selectedOutPointNode;
 
     private Vector2 offset;
     private Vector2 drag;
@@ -251,13 +253,14 @@ public class NodeBasedEditor : EditorWindow
         dialog.nodes[dialog.nodes.Count - 1].SetOnClickConnectionPoints(OnClickInPoint, OnClickOutPoint);
     }
 
-    private void OnClickInPoint(ConnectionPoint inPoint)
+    private void OnClickInPoint(ConnectionPoint inPoint, Node node)
     {
         selectedInPoint = inPoint;
+        selectedInPointNode = node;
 
         if (selectedOutPoint != null)
         {
-            if (selectedOutPoint.node != selectedInPoint.node)
+            if (selectedOutPointNode != selectedInPointNode)
             {
                 CreateConnection();
                 ClearConnectionSelection();
@@ -270,13 +273,14 @@ public class NodeBasedEditor : EditorWindow
     }
 
 
-    private void OnClickOutPoint(ConnectionPoint outPoint)
+    private void OnClickOutPoint(ConnectionPoint outPoint, Node node)
     {
         selectedOutPoint = outPoint;
+        selectedOutPointNode = node;
 
         if (selectedInPoint != null)
         {
-            if (selectedOutPoint.node != selectedInPoint.node)
+            if (selectedOutPointNode != selectedInPointNode)
             {
                 CreateConnection();
                 ClearConnectionSelection();
@@ -331,6 +335,8 @@ public class NodeBasedEditor : EditorWindow
     private void ClearConnectionSelection()
     {
         selectedInPoint = null;
+        selectedOutPointNode = null;
         selectedOutPoint = null;
+        selectedInPointNode = null;
     }
 }

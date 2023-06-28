@@ -18,10 +18,10 @@ public class Node
     public GUIStyle selectedNodeStyle;
 
     public Action<Node> OnRemoveNode;
-    public Action<ConnectionPoint> OnClickIn;
-    public Action<ConnectionPoint> OnClickOut;
+    public Action<ConnectionPoint, Node> OnClickIn;
+    public Action<ConnectionPoint, Node> OnClickOut;
     string text;
-    public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle, Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode)
+    public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle, Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint, Action<Node> OnClickRemoveNode)
     {
         rect = new Rect(position.x, position.y, width, height);
         style = nodeStyle;
@@ -35,7 +35,7 @@ public class Node
         text = "new subdialog";
     }
 
-    public void SetOnClickConnectionPoints(Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint) {
+    public void SetOnClickConnectionPoints(Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint) {
         OnClickIn = OnClickInPoint;
         OnClickOut = OnClickOutPoint;
         inPoint.SetOnClick(OnClickIn);
@@ -50,8 +50,8 @@ public class Node
 
     public void Draw()
     {
-        inPoint.Draw();
-        outPoint.Draw();
+        inPoint.Draw(this);
+        outPoint.Draw(this);
         GUI.Box(rect, title, style);
         text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + rect.width * 0.06f, rect.width *0.9f,EditorGUIUtility.singleLineHeight),text);
     }
