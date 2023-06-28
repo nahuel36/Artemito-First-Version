@@ -20,7 +20,7 @@ public class Node
     public Action<Node> OnRemoveNode;
     public Action<ConnectionPoint, Node> OnClickIn;
     public Action<ConnectionPoint, Node> OnClickOut;
-    string text;
+    [SerializeField]string text;
     public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle, Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint, Action<Node> OnClickRemoveNode)
     {
         rect = new Rect(position.x, position.y, width, height);

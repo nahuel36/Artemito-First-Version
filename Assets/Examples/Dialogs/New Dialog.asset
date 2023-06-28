@@ -137,7 +137,7 @@ MonoBehaviour:
   - rect:
       serializedVersion: 2
       x: 315
-      y: 199
+      y: 196
       width: 200
       height: 50
     title: 
@@ -147,7 +147,7 @@ MonoBehaviour:
       rect:
         serializedVersion: 2
         x: 313
-        y: 214
+        y: 211
         width: 10
         height: 20
       type: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
       rect:
         serializedVersion: 2
         x: 507
-        y: 214
+        y: 211
         width: 10
         height: 20
       type: 1
@@ -501,6 +501,7 @@ MonoBehaviour:
       m_FixedHeight: 0
       m_StretchWidth: 1
       m_StretchHeight: 0
+    text: a
   - rect:
       serializedVersion: 2
       x: 603
@@ -868,6 +869,7 @@ MonoBehaviour:
       m_FixedHeight: 0
       m_StretchWidth: 1
       m_StretchHeight: 0
+    text: b
   - rect:
       serializedVersion: 2
       x: 551
@@ -876,7 +878,7 @@ MonoBehaviour:
       height: 50
     title: 
     isDragged: 0
-    isSelected: 0
+    isSelected: 1
     inPoint:
       rect:
         serializedVersion: 2
@@ -1034,7 +1036,7 @@ MonoBehaviour:
     style:
       m_Name: 
       m_Normal:
-        m_Background: {fileID: -3453378117783705200, guid: 0000000000000000d000000000000000,
+        m_Background: {fileID: 7126082630596479001, guid: 0000000000000000d000000000000000,
           type: 0}
         m_ScaledBackgrounds: []
         m_TextColor: {r: 0, g: 0, b: 0, a: 1}
@@ -1235,6 +1237,7 @@ MonoBehaviour:
       m_FixedHeight: 0
       m_StretchWidth: 1
       m_StretchHeight: 0
+    text: bb
   - rect:
       serializedVersion: 2
       x: 237
@@ -1602,6 +1605,7 @@ MonoBehaviour:
       m_FixedHeight: 0
       m_StretchWidth: 1
       m_StretchHeight: 0
+    text: aab
   connections:
   - inPoint:
       rect:
