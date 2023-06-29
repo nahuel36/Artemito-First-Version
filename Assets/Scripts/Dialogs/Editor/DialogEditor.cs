@@ -55,7 +55,7 @@ public class DialogEditor : Editor
             {
                 int key = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
 
-                float height = EditorGUIUtility.singleLineHeight * 3;
+                float height = EditorGUIUtility.singleLineHeight * 4;
 
                 if (subDialogDict.ContainsKey(key))
                 { 
@@ -64,6 +64,14 @@ public class DialogEditor : Editor
                 }
                                
                 return height;
+            }
+            ,
+            onAddCallback = (list)=>
+            {
+                ReorderableList.defaultBehaviours.DoAddButton(list);
+                int specialindex = serializedObject.FindProperty("nodeIndex").intValue;
+                serializedObject.FindProperty("nodes").GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialindex;
+                serializedObject.FindProperty("nodeIndex").intValue++;
             }
         };
     }
@@ -74,7 +82,7 @@ public class DialogEditor : Editor
     {
         Dialog myTarget = (Dialog)target;
 
-        if (subDialogDict.Keys.Count < myTarget.nodes.Count)
+        if (subDialogDict != null && myTarget.nodes != null && subDialogDict.Keys.Count < myTarget.nodes.Count)
         {
             EditorUtility.SetDirty(target);
             serializedObject.ApplyModifiedProperties();

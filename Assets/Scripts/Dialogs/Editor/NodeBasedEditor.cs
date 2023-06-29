@@ -30,21 +30,22 @@ public class NodeBasedEditor : EditorWindow
             {
                 dialog.nodes[i].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
             }
-        for (int i = 0; i < dialog.connections.Count; i++)
-        {
-            for (int j = 0; j < dialog.nodes.Count; j++)
+        if(dialog.connections != null)
+            for (int i = 0; i < dialog.connections.Count; i++)
             {
-                if (dialog.connections[i].nodeIn.index == dialog.nodes[j].index)
+                for (int j = 0; j < dialog.nodes.Count; j++)
                 {
-                    dialog.connections[i].nodeIn = dialog.nodes[j];
+                    if (dialog.connections[i].nodeIn.index == dialog.nodes[j].index)
+                    {
+                        dialog.connections[i].nodeIn = dialog.nodes[j];
+                    }
+                    if (dialog.connections[i].nodeOut.index == dialog.nodes[j].index)
+                    {
+                        dialog.connections[i].nodeOut = dialog.nodes[j];
+                    }
                 }
-                if (dialog.connections[i].nodeOut.index == dialog.nodes[j].index)
-                {
-                    dialog.connections[i].nodeOut = dialog.nodes[j];
-                }
+                dialog.connections[i].SetOnclick(OnClickRemoveConnection);
             }
-            dialog.connections[i].SetOnclick(OnClickRemoveConnection);
-        }
     }
 
     private void OnEnable()
