@@ -7,29 +7,84 @@ using UnityEditorInternal;
 [CustomEditor(typeof(Dialog))]
 public class DialogEditor : Editor
 {
-    ReorderableList optionsList;
+    ReorderableList allSubDialogsList;
+    Dictionary<int, ReorderableList> subDialogDict = new Dictionary<int, ReorderableList>();
     Dictionary<string, ReorderableList> optionAttempsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> optionInteractionListDict = new Dictionary<string, ReorderableList>();
 
     private void OnEnable()
     {
+        CheckNodes();
+    }
+
+    private void CheckNodes()
+    {
         Dialog myTarget = (Dialog)target;
-        optionsList = new ReorderableList(serializedObject, serializedObject.FindProperty("options"), true, true, true, true) { 
+
+        allSubDialogsList = new ReorderableList(serializedObject, serializedObject.FindProperty("nodes"), true, true, true, true)
+        {
             drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(serializedObject.FindProperty("options"), index, rect, optionAttempsListDict, optionInteractionListDict, myTarget.options[index].attempsContainer.attemps, true);
-            },
-            elementHeightCallback = (int indexInv) =>
+                int key = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
+                SerializedProperty options = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("options");
+                
+                    var optionList = new ReorderableList(options.serializedObject, options, true, true, true, true)
+                    {
+                        drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
+                        {
+                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.nodes[index].options[indexOpt].attempsContainer.attemps, true);
+
+                        },
+                        elementHeightCallback = (int indexOpt) =>
+                        {
+                            return PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
+                        }
+                    };
+
+                if (!subDialogDict.ContainsKey(key))
+                {
+                    subDialogDict.Add(key, optionList);
+                }
+                else
+                    subDialogDict[key] = optionList;
+               
+                subDialogDict[key].DoList(rect);
+            }
+            ,
+            elementHeightCallback = (int index) =>
             {
-                return PNCEditorUtils.GetAttempsContainerHeight(serializedObject.FindProperty("options"), indexInv);
+                int key = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
+
+                float height = EditorGUIUtility.singleLineHeight * 3;
+
+                if (subDialogDict.ContainsKey(key))
+                { 
+                    for(int i= 0;i<subDialogDict[key].count;i++)
+                        height += subDialogDict[key].elementHeightCallback(i);
+                }
+                               
+                return height;
             }
         };
-
     }
+
+    
 
     public override void OnInspectorGUI()
     {
-        optionsList.DoLayoutList();
+        Dialog myTarget = (Dialog)target;
+
+        if (subDialogDict.Keys.Count < myTarget.nodes.Count)
+        {
+            EditorUtility.SetDirty(target);
+            serializedObject.ApplyModifiedProperties();
+            serializedObject.Update();
+            CheckNodes();
+        }
+        
+
+        allSubDialogsList.DoLayoutList();
+        
 
         serializedObject.ApplyModifiedProperties();
 

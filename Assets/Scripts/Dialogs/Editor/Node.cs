@@ -1,6 +1,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Node
@@ -22,6 +23,7 @@ public class Node
     public Action<ConnectionPoint, Node> OnClickOut;
     [SerializeField]string text;
     public int index;
+    public List<DialogOption> options;
     public Node(int index, Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle) 
     {
         rect = new Rect(position.x, position.y, width, height);

@@ -13,8 +13,6 @@ public class DialogOption
 [CreateAssetMenu(fileName = "New Dialog", menuName = "Pnc/Dialog", order = 1)]
 public class Dialog : ScriptableObject
 {
-    public List<DialogOption> options;
-
     public List<Node> nodes;
     public List<Connection> connections;
     public int nodeIndex;
