@@ -21,27 +21,28 @@ public class Node
     public Action<ConnectionPoint, Node> OnClickIn;
     public Action<ConnectionPoint, Node> OnClickOut;
     [SerializeField]string text;
-    public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle, Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint, Action<Node> OnClickRemoveNode)
+    public int index;
+    public Node(int index, Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle) 
     {
         rect = new Rect(position.x, position.y, width, height);
         style = nodeStyle;
-        OnClickIn = OnClickInPoint;
-        OnClickOut = OnClickOutPoint;
         inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle);
         outPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle);
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
-        OnRemoveNode = OnClickRemoveNode;
         text = "new subdialog";
+        this.index = index;
     }
 
-    public void SetOnClickConnectionPoints(Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint) {
+    public void SetOnClick(Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint, Action<Node> OnClickRemoveNode)
+    {
         OnClickIn = OnClickInPoint;
         OnClickOut = OnClickOutPoint;
         inPoint.SetOnClick(OnClickIn);
         outPoint.SetOnClick(OnClickOut);
+        OnRemoveNode = OnClickRemoveNode;
     }
-    
+
 
     public void Drag(Vector2 delta)
     {

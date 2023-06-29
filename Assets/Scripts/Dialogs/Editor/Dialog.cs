@@ -17,5 +17,5 @@ public class Dialog : ScriptableObject
 
     public List<Node> nodes;
     public List<Connection> connections;
-
+    public int nodeIndex;
 }

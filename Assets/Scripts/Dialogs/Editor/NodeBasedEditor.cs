@@ -28,8 +28,23 @@ public class NodeBasedEditor : EditorWindow
         if (dialog.nodes != null)
             for (int i = 0; i < dialog.nodes.Count; i++)
             {
-                dialog.nodes[i].SetOnClickConnectionPoints(OnClickInPoint, OnClickOutPoint);
+                dialog.nodes[i].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
             }
+        for (int i = 0; i < dialog.connections.Count; i++)
+        {
+            for (int j = 0; j < dialog.nodes.Count; j++)
+            {
+                if (dialog.connections[i].nodeIn.index == dialog.nodes[j].index)
+                {
+                    dialog.connections[i].nodeIn = dialog.nodes[j];
+                }
+                if (dialog.connections[i].nodeOut.index == dialog.nodes[j].index)
+                {
+                    dialog.connections[i].nodeOut = dialog.nodes[j];
+                }
+            }
+            dialog.connections[i].SetOnclick(OnClickRemoveConnection);
+        }
     }
 
     private void OnEnable()
@@ -249,8 +264,9 @@ public class NodeBasedEditor : EditorWindow
             dialog.nodes = new List<Node>();
         }
 
-        dialog.nodes.Add(new Node(mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode));
-        dialog.nodes[dialog.nodes.Count - 1].SetOnClickConnectionPoints(OnClickInPoint, OnClickOutPoint);
+        dialog.nodes.Add(new Node(dialog.nodeIndex, mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
+        dialog.nodes[dialog.nodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
+        dialog.nodeIndex++;
     }
 
     private void OnClickInPoint(ConnectionPoint inPoint, Node node)
@@ -300,7 +316,7 @@ public class NodeBasedEditor : EditorWindow
 
             for (int i = 0; i < dialog.connections.Count; i++)
             {
-                if (dialog.connections[i].inPoint == node.inPoint || dialog.connections[i].outPoint == node.outPoint)
+                if (dialog.connections[i].nodeIn.inPoint == node.inPoint || dialog.connections[i].nodeOut.outPoint == node.outPoint)
                 {
                     connectionsToRemove.Add(dialog.connections[i]);
                 }
@@ -329,7 +345,8 @@ public class NodeBasedEditor : EditorWindow
             dialog.connections = new List<Connection>();
         }
 
-        dialog.connections.Add(new Connection(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
+        dialog.connections.Add(new Connection(selectedInPointNode, selectedOutPointNode));
+        dialog.connections[dialog.connections.Count - 1].SetOnclick(OnClickRemoveConnection);
     }
 
     private void ClearConnectionSelection()
