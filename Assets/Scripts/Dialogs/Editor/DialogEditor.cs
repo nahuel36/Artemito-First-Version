@@ -49,8 +49,6 @@ public class DialogEditor : Editor
                 {
                     subDialogDict.Add(key, optionList);
                 }
-                else
-                    subDialogDict[key] = optionList;
                
                 subDialogDict[key].DoList(rect);
             }
