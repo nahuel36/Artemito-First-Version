@@ -92,9 +92,13 @@ public class DialogEditor : Editor
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
         }
+        
         serializedObject.Update();
-        CheckNodes();
 
+        if (serializedObject.hasModifiedProperties)
+        {
+            CheckNodes();
+        }
 
         allSubDialogsList.DoLayoutList();
         
