@@ -57,7 +57,7 @@ public class DialogEditor : Editor
             {
                 int key = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
 
-                float height = EditorGUIUtility.singleLineHeight * 4;
+                float height = EditorGUIUtility.singleLineHeight * 5;
 
                 if (subDialogDict.ContainsKey(key))
                 { 
