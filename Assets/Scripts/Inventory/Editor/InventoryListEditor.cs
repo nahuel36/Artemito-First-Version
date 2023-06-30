@@ -126,7 +126,11 @@ public class InventoryListEditor : Editor
                 InitializeVerbs(out listVerbs, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("verbs"), myTarget.items[index]);
                 verbsList[key] = listVerbs;
             }
+            serializedObject.ApplyModifiedProperties();
 
+            selectedButton = buttons.Count;
+
+            serializedObject.Update();
         }
         if (GUILayout.Button("-", GUILayout.MaxHeight(25), GUILayout.MinHeight(25), GUILayout.MaxWidth(25), GUILayout.MinWidth(25)))
         {
@@ -256,8 +260,7 @@ public class InventoryListEditor : Editor
 protected void InitializeInventoryInteractions(out ReorderableList inventoryList, SerializedObject serializedInventory, SerializedProperty inventoryProperty, InventoryItem myTarget)
     {
         settings = Resources.Load<Settings>("Settings/Settings");
-
-        InventoryList inventory = Resources.Load<InventoryList>("Inventory");
+       
 
         inventoryList = new ReorderableList(serializedInventory, inventoryProperty, true, true, true, true)
         {
@@ -272,17 +275,21 @@ protected void InitializeInventoryInteractions(out ReorderableList inventoryList
             drawElementCallback = (rect, indexInv, active, focus) =>
             {
                 List<string> content = new List<string>();
-                for (int i = 0; i < inventory.items.Length; i++)
+                List<int> posibleItems = new List<int>();
+                for (int i = 0; i < serializedObject.FindProperty("items").arraySize; i++)
                 {
-                    if(inventory.items[i] != myTarget)
-                        content.Add(inventory.items[i].itemName);
+                    if (serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("specialIndex").intValue != myTarget.specialIndex)
+                    { 
+                        content.Add(serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("itemName").stringValue);
+                        posibleItems.Add(serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("specialIndex").intValue);
+                    }
                 }
                 int selected = 0;
-                if (myTarget.inventoryActions[indexInv].specialIndex != -1 && myTarget.inventoryActions[indexInv].specialIndex != 0)
+                if (inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue != -1 && inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue != 0)
                 {
-                    for (int i = 0; i < inventory.items.Length; i++)
+                    for (int i = 0; i < posibleItems.Count; i++)
                     {
-                        if (inventory.items[i].specialIndex == myTarget.inventoryActions[indexInv].specialIndex)
+                        if (posibleItems[i] == inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue)
                             selected = i;
                     }
                 }
@@ -290,7 +297,7 @@ protected void InitializeInventoryInteractions(out ReorderableList inventoryList
 
                 selected = EditorGUI.Popup(new Rect(rect.x + rect.width / 2.25f, rect.y, rect.width / 2, rect.height), "",selected, content.ToArray());
 
-                inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = inventory.items[selected].specialIndex;
+                inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = posibleItems[selected];
 
 
 
