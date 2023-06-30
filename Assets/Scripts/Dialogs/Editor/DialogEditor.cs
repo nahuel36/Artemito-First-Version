@@ -25,6 +25,10 @@ public class DialogEditor : Editor
         {
             drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("text"));
+
+                rect.y += EditorGUIUtility.singleLineHeight;
+
                 int key = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
                 SerializedProperty options = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("options");
                 
@@ -87,9 +91,10 @@ public class DialogEditor : Editor
             EditorUtility.SetDirty(target);
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
-            CheckNodes();
         }
-        
+        serializedObject.Update();
+        CheckNodes();
+
 
         allSubDialogsList.DoLayoutList();
         

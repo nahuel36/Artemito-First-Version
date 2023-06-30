@@ -21,7 +21,7 @@ public class Node
     public Action<Node> OnRemoveNode;
     public Action<ConnectionPoint, Node> OnClickIn;
     public Action<ConnectionPoint, Node> OnClickOut;
-    [SerializeField]string text;
+    public string text;
     public int index;
     public List<DialogOption> options;
     public Node(int index, Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle) 
