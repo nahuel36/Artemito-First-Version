@@ -11,6 +11,7 @@ public class DialogEditor : Editor
     Dictionary<int, ReorderableList> subDialogDict = new Dictionary<int, ReorderableList>();
     Dictionary<string, ReorderableList> optionAttempsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> optionInteractionListDict = new Dictionary<string, ReorderableList>();
+    NodeBasedEditor nodeBase;
 
     private void OnEnable()
     {
@@ -115,7 +116,8 @@ public class DialogEditor : Editor
 
         if (GUILayout.Button("View nodes")) 
         {
-            NodeBasedEditor nodeBase = CreateInstance<NodeBasedEditor>();
+            if(nodeBase == null)
+                nodeBase = CreateInstance<NodeBasedEditor>();
             nodeBase.OpenWindow((Dialog)target);
         }
         if (GUI.changed)
