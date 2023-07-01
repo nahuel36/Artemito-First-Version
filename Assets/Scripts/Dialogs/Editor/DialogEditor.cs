@@ -80,6 +80,10 @@ public class DialogEditor : Editor
                 int specialindex = serializedObject.FindProperty("subDialogIndex").intValue;
                 serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialindex;
                 serializedObject.FindProperty("subDialogIndex").intValue++;
+                if (nodeBase)
+                {
+                    nodeBase.InitializeNodes();
+                }
             },
             drawHeaderCallback = (rect) =>
             {
@@ -118,7 +122,7 @@ public class DialogEditor : Editor
         {
             if(nodeBase == null)
                 nodeBase = CreateInstance<NodeBasedEditor>();
-            nodeBase.OpenWindow((Dialog)target);
+            nodeBase.OpenWindow((Dialog)target, serializedObject);
         }
         if (GUI.changed)
         { 
