@@ -25,7 +25,7 @@ public class DialogEditor : Editor
         {
             drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("text"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("text"), new GUIContent { text = "sub-dialog " + (index+1)});
 
                 rect.y += EditorGUIUtility.singleLineHeight;
 
@@ -36,12 +36,17 @@ public class DialogEditor : Editor
                     {
                         drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
                         {
+                            EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("text"), new GUIContent { text= "option " + (indexOpt+1)});            
                             PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.nodes[index].options[indexOpt].attempsContainer.attemps, true);
 
                         },
                         elementHeightCallback = (int indexOpt) =>
                         {
                             return PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
+                        },
+                        drawHeaderCallback = (rect) => 
+                        {
+                            EditorGUI.LabelField(rect, "options");
                         }
                     };
 
@@ -74,7 +79,12 @@ public class DialogEditor : Editor
                 int specialindex = serializedObject.FindProperty("nodeIndex").intValue;
                 serializedObject.FindProperty("nodes").GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialindex;
                 serializedObject.FindProperty("nodeIndex").intValue++;
+            },
+            drawHeaderCallback = (rect) =>
+            {
+                EditorGUI.LabelField(rect, "sub-dialogs");
             }
+
         };
     }
 

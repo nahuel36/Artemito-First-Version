@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class DialogOption
 {
-    public string name;
+    public string text;
     public AttempsContainer attempsContainer;
 }
 
