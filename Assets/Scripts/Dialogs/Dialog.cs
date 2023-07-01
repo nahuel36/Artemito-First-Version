@@ -75,4 +75,14 @@ public class Dialog : ScriptableObject
             subDialogs.Remove(founded);
     }
 
+    public void ChangeDestiny(int index, int destiny)
+    {
+        for (int i = 0; i < subDialogs.Count; i++)
+        {
+            if (subDialogs[i].index == index)
+            {
+                subDialogs[i].options[0].subDialogDestinyIndex = destiny;
+            }
+        }
+    }
 }
