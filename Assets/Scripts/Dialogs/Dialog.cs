@@ -61,4 +61,18 @@ public class Dialog : ScriptableObject
         return "";
     }
 
+    public void Remove(int index)
+    {
+        SubDialog founded = null;
+        for (int i = 0; i < subDialogs.Count; i++)
+        {
+            if (subDialogs[i].index == index)
+            {
+                founded = subDialogs[i];
+            }
+        }
+        if(founded != null)
+            subDialogs.Remove(founded);
+    }
+
 }

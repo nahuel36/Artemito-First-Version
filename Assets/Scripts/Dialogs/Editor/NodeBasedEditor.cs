@@ -373,6 +373,7 @@ public class NodeBasedEditor : EditorWindow
         }
 
         nodes.Remove(node);
+        dialog.Remove(node.subDialogIndex);
     }
 
     private void OnClickRemoveConnection(Connection connection)

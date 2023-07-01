@@ -85,6 +85,15 @@ public class DialogEditor : Editor
                     nodeBase.InitializeNodes();
                 }
             },
+            onRemoveCallback = (list) =>
+            {
+                ReorderableList.defaultBehaviours.DoRemoveButton(list);
+                if (nodeBase)
+                {
+                    nodeBase.InitializeNodes();
+                }
+            }
+            ,
             drawHeaderCallback = (rect) =>
             {
                 EditorGUI.LabelField(rect, "sub-dialogs");
