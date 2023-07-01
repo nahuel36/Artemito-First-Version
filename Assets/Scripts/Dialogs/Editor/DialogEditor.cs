@@ -76,10 +76,10 @@ public class DialogEditor : Editor
             ,
             onAddCallback = (list)=>
             {
+                serializedObject.FindProperty("subDialogIndex").intValue++;
                 ReorderableList.defaultBehaviours.DoAddButton(list);
                 int specialindex = serializedObject.FindProperty("subDialogIndex").intValue;
                 serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialindex;
-                serializedObject.FindProperty("subDialogIndex").intValue++;
                 if (nodeBase)
                 {
                     nodeBase.InitializeNodes();

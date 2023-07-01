@@ -305,10 +305,10 @@ public class NodeBasedEditor : EditorWindow
             nodes = new List<Node>();
         }
 
+        dialog.subDialogIndex++;
         nodes.Add(new Node(dialog.subDialogIndex, mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
         nodes[nodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
         dialog.subDialogs.Add(new SubDialog() { text = "new subdialog", index = nodes[nodes.Count - 1].subDialogIndex , nodeRect = nodes[nodes.Count - 1].rect});
-        dialog.subDialogIndex++;
     }
 
     private void OnClickInPoint(ConnectionPoint inPoint, Node node)
