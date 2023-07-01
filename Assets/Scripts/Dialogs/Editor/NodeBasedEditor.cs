@@ -40,6 +40,7 @@ public class NodeBasedEditor : EditorWindow
             nodes.Add(new Node(dialog.subDialogs[i].index, new Vector2(dialog.subDialogs[i].nodeRect.x, dialog.subDialogs[i].nodeRect.y), dialog.subDialogs[i].nodeRect.width, dialog.subDialogs[i].nodeRect.height, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
             nodes[nodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
             nodes[nodes.Count - 1].dialog = dialog;
+            nodes[nodes.Count - 1].text = dialog.subDialogs[i].text;
         }
 
         if (nodes != null)
@@ -102,9 +103,17 @@ public class NodeBasedEditor : EditorWindow
         ProcessEvents(Event.current);
 
         if (GUI.changed)
-        { 
+        {
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                dialog.ChangeText(nodes[i].subDialogIndex, nodes[i].text);
+            }
             EditorUtility.SetDirty(dialog);
             Repaint();
+        }
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            nodes[i].text = dialog.GetText(nodes[i].subDialogIndex);
         }
     }
 
