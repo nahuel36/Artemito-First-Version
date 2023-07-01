@@ -21,23 +21,23 @@ public class DialogEditor : Editor
     {
         Dialog myTarget = (Dialog)target;
 
-        allSubDialogsList = new ReorderableList(serializedObject, serializedObject.FindProperty("nodes"), true, true, true, true)
+        allSubDialogsList = new ReorderableList(serializedObject, serializedObject.FindProperty("subDialogs"), true, true, true, true)
         {
             drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("text"), new GUIContent { text = "sub-dialog " + (index+1)});
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("text"), new GUIContent { text = "sub-dialog " + (index+1)});
 
                 rect.y += EditorGUIUtility.singleLineHeight;
 
-                int key = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
-                SerializedProperty options = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("options");
+                int key = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
+                SerializedProperty options = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("options");
                 
                     var optionList = new ReorderableList(options.serializedObject, options, true, true, true, true)
                     {
                         drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
                         {
                             EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("text"), new GUIContent { text= "option " + (indexOpt+1)});            
-                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.nodes[index].options[indexOpt].attempsContainer.attemps, true);
+                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, true);
 
                         },
                         elementHeightCallback = (int indexOpt) =>
@@ -60,7 +60,7 @@ public class DialogEditor : Editor
             ,
             elementHeightCallback = (int index) =>
             {
-                int key = serializedObject.FindProperty("nodes").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
+                int key = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
 
                 float height = EditorGUIUtility.singleLineHeight * 5;
 
@@ -76,9 +76,9 @@ public class DialogEditor : Editor
             onAddCallback = (list)=>
             {
                 ReorderableList.defaultBehaviours.DoAddButton(list);
-                int specialindex = serializedObject.FindProperty("nodeIndex").intValue;
-                serializedObject.FindProperty("nodes").GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialindex;
-                serializedObject.FindProperty("nodeIndex").intValue++;
+                int specialindex = serializedObject.FindProperty("subDialogIndex").intValue;
+                serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialindex;
+                serializedObject.FindProperty("subDialogIndex").intValue++;
             },
             drawHeaderCallback = (rect) =>
             {
@@ -94,7 +94,7 @@ public class DialogEditor : Editor
     {
         Dialog myTarget = (Dialog)target;
 
-        if (subDialogDict != null && myTarget.nodes != null && subDialogDict.Keys.Count < myTarget.nodes.Count)
+        if (subDialogDict != null && myTarget.subDialogs != null && subDialogDict.Keys.Count < myTarget.subDialogs.Count)
         {
             EditorUtility.SetDirty(target);
             serializedObject.ApplyModifiedProperties();
