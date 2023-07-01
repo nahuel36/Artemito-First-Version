@@ -304,6 +304,10 @@ public class NodeBasedEditor : EditorWindow
         {
             nodes = new List<Node>();
         }
+        if (dialog.subDialogs == null)
+        {
+            dialog.subDialogs = new List<SubDialog>();
+        }
 
         dialog.subDialogIndex++;
         nodes.Add(new Node(dialog.subDialogIndex, mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
