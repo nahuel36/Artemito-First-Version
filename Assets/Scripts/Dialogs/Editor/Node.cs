@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public class Node
 {
     public Rect rect;
-    public string title;
     public bool isDragged;
     public bool isSelected;
 
@@ -22,8 +21,8 @@ public class Node
     public Action<ConnectionPoint, Node> OnClickIn;
     public Action<ConnectionPoint, Node> OnClickOut;
     public string text;
-    public int index;
-    public List<DialogOption> options;
+    public int subDialogIndex;
+    public Dialog dialog;
     public Node(int index, Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle) 
     {
         rect = new Rect(position.x, position.y, width, height);
@@ -33,7 +32,7 @@ public class Node
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
         text = "new subdialog";
-        this.index = index;
+        this.subDialogIndex = index;
     }
 
     public void SetOnClick(Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint, Action<Node> OnClickRemoveNode)
@@ -49,13 +48,14 @@ public class Node
     public void Drag(Vector2 delta)
     {
         rect.position += delta;
+        dialog.ChangeRect(subDialogIndex, rect);
     }
 
     public void Draw()
     {
         inPoint.Draw(this);
         outPoint.Draw(this);
-        GUI.Box(rect, title, style);
+        GUI.Box(rect, "", style);
         text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + rect.width * 0.06f, rect.width *0.9f,EditorGUIUtility.singleLineHeight),text);
     }
 

@@ -27,6 +27,21 @@ public class NodeBasedEditor : EditorWindow
         window.titleContent = new GUIContent("Node Based Editor");
         dialog = dialogparam;
 
+
+        nodes = new List<Node>();
+
+        for (int i = 0; i < dialog.subDialogs.Count; i++)
+        {
+            if (dialog.subDialogs[i].nodeRect.width == 0)
+            {
+                dialog.subDialogs[i].nodeRect = new Rect(20, 20, 200, 50);
+            }
+
+            nodes.Add(new Node(dialog.subDialogs[i].index, new Vector2(dialog.subDialogs[i].nodeRect.x, dialog.subDialogs[i].nodeRect.y), dialog.subDialogs[i].nodeRect.width, dialog.subDialogs[i].nodeRect.height, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
+            nodes[nodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
+            nodes[nodes.Count - 1].dialog = dialog;
+        }
+
         if (nodes != null)
             for (int i = 0; i < nodes.Count; i++)
             {
@@ -37,11 +52,11 @@ public class NodeBasedEditor : EditorWindow
             {
                 for (int j = 0; j < nodes.Count; j++)
                 {
-                    if (connections[i].nodeIn.index == nodes[j].index)
+                    if (connections[i].nodeIn.subDialogIndex == nodes[j].subDialogIndex)
                     {
                         connections[i].nodeIn = nodes[j];
                     }
-                    if (connections[i].nodeOut.index == nodes[j].index)
+                    if (connections[i].nodeOut.subDialogIndex == nodes[j].subDialogIndex)
                     {
                         connections[i].nodeOut = nodes[j];
                     }
@@ -180,8 +195,11 @@ public class NodeBasedEditor : EditorWindow
             for (int i = 0; i < nodes.Count; i++)
             {
                 nodes[i].Zoom(delta);
+                dialog.ChangeRect(nodes[i].subDialogIndex, nodes[i].rect);
             }
         }
+
+        
 
         GUI.changed = true;
 
