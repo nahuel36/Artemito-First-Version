@@ -54,6 +54,17 @@ public class DialogEditor : Editor
                             drawHeaderCallback = (rect) => 
                             {
                                 EditorGUI.LabelField(rect, "options");
+                            },
+                            onAddCallback = (list) =>
+                            {
+                                serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue++;
+                                ReorderableList.defaultBehaviours.DoAddButton(list);
+                                int specialIndex = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue;
+                                options.GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialIndex;
+                                if (nodeBase)
+                                {
+                                    Debug.Log("agregar esto");
+                                }
                             }
                         };
 

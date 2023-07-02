@@ -11,7 +11,7 @@ public class Node
     public bool isSelected;
 
     public ConnectionPoint inPoint;
-    public ConnectionPoint outPoint;
+    public List<ConnectionPoint> outPoint;
 
     public GUIStyle style;
     public GUIStyle defaultNodeStyle;
@@ -23,12 +23,17 @@ public class Node
     public string text;
     public int subDialogIndex;
     public Dialog dialog;
-    public Node(int index, Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle) 
+    public Node(Dialog dialog, int index, Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle) 
     {
-        rect = new Rect(position.x, position.y, width, height);
+        this.dialog = dialog;
+        outPoint = new List<ConnectionPoint>();
+        for (int i = 0; i < dialog.GetOptionsCuantity(index); i++)
+        {
+            outPoint.Add(new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, i, dialog.GetOptionSpecialIndex(index, i)));
+        }
+        rect = new Rect(position.x, position.y, width, height + dialog.GetOptionsCuantity(index)* height * 0.75f);
         style = nodeStyle;
         inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle);
-        outPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle);
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
         text = "new subdialog";
@@ -40,7 +45,10 @@ public class Node
         OnClickIn = OnClickInPoint;
         OnClickOut = OnClickOutPoint;
         inPoint.SetOnClick(OnClickIn);
-        outPoint.SetOnClick(OnClickOut);
+        for (int i = 0; i < outPoint.Count; i++)
+        {
+            outPoint[i].SetOnClick(OnClickOut);
+        }
         OnRemoveNode = OnClickRemoveNode;
     }
 
@@ -54,7 +62,12 @@ public class Node
     public void Draw()
     {
         inPoint.Draw(this);
-        outPoint.Draw(this);
+
+        for (int i = 0; i < outPoint.Count; i++)
+        {
+            outPoint[i].Draw(this);
+
+        }
         GUI.Box(rect, "", style);
         text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + rect.width * 0.06f, rect.width *0.9f,EditorGUIUtility.singleLineHeight),text);
     }

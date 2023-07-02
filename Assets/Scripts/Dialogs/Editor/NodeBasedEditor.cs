@@ -38,18 +38,22 @@ public class NodeBasedEditor : EditorWindow
             connections = new List<Connection>();
         }
 
-        for (int i = 0; i < dialog.subDialogs.Count; i++)
+        if (dialog.subDialogs != null)
         {
-            for (int j = 0; j < dialog.subDialogs[i].options.Count; j++)
+            for (int i = 0; i < dialog.subDialogs.Count; i++)
             {
-                int destiny = dialog.subDialogs[i].options[j].subDialogDestinyIndex;
-                if (destiny > 0)
+                for (int j = 0; j < dialog.subDialogs[i].options.Count; j++)
                 {
-                    connections.Add(new Connection(findNodeBySubdialogIndex(dialog.subDialogs[i].index), findNodeBySubdialogIndex(dialog.subDialogs[i].options[j].subDialogDestinyIndex)));
-                    connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
+                    int destiny = dialog.subDialogs[i].options[j].subDialogDestinyIndex;
+                    if (destiny > 0)
+                    {
+                        connections.Add(new Connection(findNodeBySubdialogIndex(dialog.subDialogs[i].index), findNodeBySubdialogIndex(dialog.subDialogs[i].options[j].subDialogDestinyIndex)));
+                        connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
+                    }
                 }
             }
         }
+        
 
         
         if (connections != null)
@@ -97,10 +101,9 @@ public class NodeBasedEditor : EditorWindow
                 int index = subDialog.FindPropertyRelative("index").intValue;
                 Vector2 pos = new Vector2(subDialog.FindPropertyRelative("nodeRect").rectValue.x, subDialog.FindPropertyRelative("nodeRect").rectValue.y);
                 float width = subDialog.FindPropertyRelative("nodeRect").rectValue.width;
-                float height = subDialog.FindPropertyRelative("nodeRect").rectValue.height;
-                nodes.Add(new Node(index, pos, width, height, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
+                float height = 50;
+                nodes.Add(new Node(dialog, index, pos, width, height, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
                 nodes[nodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
-                nodes[nodes.Count - 1].dialog = dialog;
                 nodes[nodes.Count - 1].text = subDialog.FindPropertyRelative("text").stringValue;
             }
         }
@@ -339,7 +342,7 @@ public class NodeBasedEditor : EditorWindow
         }
 
         dialog.subDialogIndex++;
-        nodes.Add(new Node(dialog.subDialogIndex, mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
+        nodes.Add(new Node(dialog, dialog.subDialogIndex, mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
         nodes[nodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
         dialog.subDialogs.Add(new SubDialog() { text = "new subdialog", index = nodes[nodes.Count - 1].subDialogIndex , nodeRect = nodes[nodes.Count - 1].rect});
     }
@@ -423,7 +426,7 @@ public class NodeBasedEditor : EditorWindow
 
         connections.Add(new Connection(selectedInPointNode, selectedOutPointNode));
         connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
-        dialog.ChangeDestiny(selectedInPointNode.subDialogIndex, selectedOutPointNode.subDialogIndex);
+        dialog.ChangeDestiny(selectedInPointNode.subDialogIndex, selectedOutPointNode.subDialogIndex,0);
     }
 
     private void ClearConnectionSelection()

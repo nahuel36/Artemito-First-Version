@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogOption
 {
     public string text;
+    public int index;
     public AttempsContainer attempsContainer;
     public int subDialogDestinyIndex;
 }
@@ -18,6 +19,7 @@ public class SubDialog
     public List<DialogOption> options;
     public Rect nodeRect;
     public bool expandedInInspector;
+    public int optionSpecialIndex;
 }
 
 
@@ -76,14 +78,40 @@ public class Dialog : ScriptableObject
             subDialogs.Remove(founded);
     }
 
-    public void ChangeDestiny(int index, int destiny)
+    public void ChangeDestiny(int index, int destiny, int option)
     {
         for (int i = 0; i < subDialogs.Count; i++)
         {
             if (subDialogs[i].index == index)
             {
-                subDialogs[i].options[0].subDialogDestinyIndex = destiny;
+                subDialogs[i].options[option].subDialogDestinyIndex = destiny;
             }
         }
     }
+
+    public int GetOptionsCuantity(int index)
+    {
+        if(subDialogs != null)
+            for (int i = 0; i < subDialogs.Count; i++)
+            {
+                if (subDialogs[i].options != null && subDialogs[i].index == index)
+                {
+                    return subDialogs[i].options.Count;
+                }
+            }
+        return 0;
+    }
+
+    public int GetOptionSpecialIndex(int index, int optionindex)
+    {
+        for (int i = 0; i < subDialogs.Count; i++)
+        {
+            if (subDialogs[i].index == index)
+            {
+                return subDialogs[i].options[optionindex].index;
+            }
+        }
+        return 0;
+    }
+
 }

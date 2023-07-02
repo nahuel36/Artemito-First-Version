@@ -14,12 +14,19 @@ public class ConnectionPoint
 
     public Action<ConnectionPoint, Node> OnClickConnectionPoint;
 
-    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style)
+    public int optionIndex;
+
+    public int index;
+
+    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style, int optionSpecialIndex = -1, int index = -1)
     {
         this.type = type;
         this.style = style;
         
         rect = new Rect(0, 0, 10f, 20f);
+
+        this.optionIndex = optionSpecialIndex;
+        this.index = index;
     }
 
     public void SetOnClick(Action<ConnectionPoint, Node> OnClickConnectionPoint)
@@ -29,16 +36,17 @@ public class ConnectionPoint
 
     public void Draw(Node node)
     {
-        rect.y = node.rect.y + (node.rect.height * 0.5f) - rect.height * 0.5f;
-
         switch (type)
         {
             case ConnectionPointType.In:
                 rect.x = node.rect.x - rect.width + 8f;
+                rect.y = node.rect.y + (node.rect.height * 0.5f) - rect.height * 0.5f;
                 break;
 
             case ConnectionPointType.Out:
                 rect.x = node.rect.x + node.rect.width - 8f;
+                rect.y = node.rect.y + (node.rect.height * 0.5f) - rect.height * 0.5f;
+                rect.y += (optionIndex) * 30;
                 break;
         }
 
