@@ -29,7 +29,7 @@ public class Node
         outPoint = new List<ConnectionPoint>();
         for (int i = 0; i < dialog.GetOptionsCuantity(index); i++)
         {
-            outPoint.Add(new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, i, dialog.GetOptionSpecialIndex(index, i)));
+            outPoint.Add(new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, dialog.GetOptionSpecialIndex(index, i),i));
         }
         rect = new Rect(position.x, position.y, width, height + dialog.GetOptionsCuantity(index)* height * 0.75f);
         style = nodeStyle;

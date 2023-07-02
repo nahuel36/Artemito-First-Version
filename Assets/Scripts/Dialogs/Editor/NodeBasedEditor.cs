@@ -47,7 +47,7 @@ public class NodeBasedEditor : EditorWindow
                     int destiny = dialog.subDialogs[i].options[j].subDialogDestinyIndex;
                     if (destiny > 0)
                     {
-                        connections.Add(new Connection(findNodeBySubdialogIndex(dialog.subDialogs[i].index), findNodeBySubdialogIndex(dialog.subDialogs[i].options[j].subDialogDestinyIndex)));
+                        connections.Add(new Connection(findNodeBySubdialogIndex(dialog.subDialogs[i].options[j].subDialogDestinyIndex), findNodeBySubdialogIndex(dialog.subDialogs[i].index),j));
                         connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
                     }
                 }
@@ -72,6 +72,7 @@ public class NodeBasedEditor : EditorWindow
                 }
                 connections[i].SetOnclick(OnClickRemoveConnection);
             }
+       
     }
 
     public Node findNodeBySubdialogIndex(int index)
@@ -415,6 +416,7 @@ public class NodeBasedEditor : EditorWindow
     private void OnClickRemoveConnection(Connection connection)
     {
         connections.Remove(connection);
+        dialog.ChangeDestiny(connection.nodeOut.subDialogIndex, 0, connection.nodeOut.outPoint[connection.index].optionSpecialIndex);
     }
 
     private void CreateConnection()
@@ -424,9 +426,9 @@ public class NodeBasedEditor : EditorWindow
             connections = new List<Connection>();
         }
 
-        connections.Add(new Connection(selectedInPointNode, selectedOutPointNode));
+        connections.Add(new Connection(selectedInPointNode, selectedOutPointNode, selectedOutPoint.optionArrayIndex));
         connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
-        dialog.ChangeDestiny(selectedInPointNode.subDialogIndex, selectedOutPointNode.subDialogIndex,0);
+        dialog.ChangeDestiny(selectedOutPointNode.subDialogIndex, selectedInPointNode.subDialogIndex,selectedOutPoint.optionSpecialIndex);
     }
 
     private void ClearConnectionSelection()

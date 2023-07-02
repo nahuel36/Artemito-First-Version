@@ -13,6 +13,7 @@ public class Connection
     {
         this.nodeIn = nodeIn;
         this.nodeOut = nodeOut;
+        this.index = index;
     }
 
     public void SetOnclick(Action<Connection> OnClickRemoveConnection)

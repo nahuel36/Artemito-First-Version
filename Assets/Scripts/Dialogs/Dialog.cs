@@ -82,9 +82,12 @@ public class Dialog : ScriptableObject
     {
         for (int i = 0; i < subDialogs.Count; i++)
         {
-            if (subDialogs[i].index == index)
+            for (int j = 0; j < subDialogs[i].options.Count; j++)
             {
-                subDialogs[i].options[option].subDialogDestinyIndex = destiny;
+                if (subDialogs[i].index == index && subDialogs[i].options[j].index == option)
+                {
+                    subDialogs[i].options[j].subDialogDestinyIndex = destiny;
+                }
             }
         }
     }
