@@ -63,12 +63,14 @@ public class Node
     {
         inPoint.Draw(this);
 
+        GUI.Box(rect, "", style);
+
         for (int i = 0; i < outPoint.Count; i++)
         {
             outPoint[i].Draw(this);
-
+            dialog.GetSubDialogByIndex(subDialogIndex).options[i].text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + (i) * 30 + rect.height* 0.5f - 10, rect.width * 0.9f, EditorGUIUtility.singleLineHeight), dialog.GetSubDialogByIndex(subDialogIndex).options[i].text);
         }
-        GUI.Box(rect, "", style);
+        
         text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + rect.width * 0.06f, rect.width *0.9f,EditorGUIUtility.singleLineHeight),text);
     }
 

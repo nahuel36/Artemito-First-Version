@@ -117,4 +117,16 @@ public class Dialog : ScriptableObject
         return 0;
     }
 
+    public SubDialog GetSubDialogByIndex(int index)
+    {
+        for (int i = 0; i < subDialogs.Count; i++)
+        {
+            if (subDialogs[i].index == index)
+            {
+                return subDialogs[i];
+            }
+        }
+        return null;
+    }
+
 }
