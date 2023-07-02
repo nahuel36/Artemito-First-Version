@@ -26,49 +26,63 @@ public class DialogEditor : Editor
         {
             drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("text"), new GUIContent { text = "sub-dialog " + (index+1)});
+                EditorGUI.PropertyField(new Rect(rect.x+7, rect.y, rect.width-7, EditorGUIUtility.singleLineHeight), serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("text"), new GUIContent { text = "sub-dialog " + (index + 1) });
+
+                SerializedProperty expanded = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("expandedInInspector");
+
+                expanded.boolValue = EditorGUI.Foldout(new Rect(rect.x+7, rect.y, rect.width, EditorGUIUtility.singleLineHeight), expanded.boolValue, GUIContent.none);
 
                 rect.y += EditorGUIUtility.singleLineHeight;
 
-                int key = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
-                SerializedProperty options = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("options");
+                if (expanded.boolValue)
+                { 
+                    int key = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
+                    SerializedProperty options = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("options");
                 
-                    var optionList = new ReorderableList(options.serializedObject, options, true, true, true, true)
+                        var optionList = new ReorderableList(options.serializedObject, options, true, true, true, true)
+                        {
+                            drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
+                            {
+                                EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width -7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("text"), new GUIContent { text= "option " + (indexOpt+1)});            
+                                PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, true);
+
+                            },
+                            elementHeightCallback = (int indexOpt) =>
+                            {
+                                return PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
+                            },
+                            drawHeaderCallback = (rect) => 
+                            {
+                                EditorGUI.LabelField(rect, "options");
+                            }
+                        };
+
+                    if (!subDialogDict.ContainsKey(key))
                     {
-                        drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
-                        {
-                            EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("text"), new GUIContent { text= "option " + (indexOpt+1)});            
-                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, true);
-
-                        },
-                        elementHeightCallback = (int indexOpt) =>
-                        {
-                            return PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
-                        },
-                        drawHeaderCallback = (rect) => 
-                        {
-                            EditorGUI.LabelField(rect, "options");
-                        }
-                    };
-
-                if (!subDialogDict.ContainsKey(key))
-                {
-                    subDialogDict.Add(key, optionList);
-                }
+                        subDialogDict.Add(key, optionList);
+                    }
                
-                subDialogDict[key].DoList(rect);
+                    subDialogDict[key].DoList(rect);
+                }
             }
             ,
             elementHeightCallback = (int index) =>
             {
                 int key = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
 
-                float height = EditorGUIUtility.singleLineHeight * 5;
+                float height = EditorGUIUtility.singleLineHeight * 1;
 
-                if (subDialogDict.ContainsKey(key))
-                { 
-                    for(int i= 0;i<subDialogDict[key].count;i++)
-                        height += subDialogDict[key].elementHeightCallback(i);
+                SerializedProperty expanded = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("expandedInInspector");
+
+                if (expanded.boolValue) 
+                {
+                    height = EditorGUIUtility.singleLineHeight * 5;
+
+                    if (subDialogDict.ContainsKey(key))
+                    {
+                        for (int i = 0; i < subDialogDict[key].count; i++)
+                            height += subDialogDict[key].elementHeightCallback(i);
+                    }
                 }
                                
                 return height;

@@ -17,6 +17,7 @@ public class SubDialog
     public int index;
     public List<DialogOption> options;
     public Rect nodeRect;
+    public bool expandedInInspector;
 }
 
 
