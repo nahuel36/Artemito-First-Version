@@ -38,41 +38,52 @@ public class DialogEditor : Editor
                 { 
                     int key = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
                     SerializedProperty options = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("options");
-                
-                        var optionList = new ReorderableList(options.serializedObject, options, true, true, true, true)
-                        {
-                            drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
-                            {
-                                EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width -7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("text"), new GUIContent { text= "option " + (indexOpt+1)});            
-                                PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, true);
 
-                            },
-                            elementHeightCallback = (int indexOpt) =>
+                    var optionList = new ReorderableList(options.serializedObject, options, true, true, true, true)
+                    {
+                        drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
+                        {
+                            EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("text"), new GUIContent { text = "option " + (indexOpt + 1) });
+                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, true);
+
+                        },
+                        elementHeightCallback = (int indexOpt) =>
+                        {
+                            return PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
+                        },
+                        drawHeaderCallback = (rect) =>
+                        {
+                            EditorGUI.LabelField(rect, "options");
+                        },
+                        onAddCallback = (list) =>
+                        {
+                            serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue++;
+                            ReorderableList.defaultBehaviours.DoAddButton(list);
+                            int specialIndex = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue;
+                            options.GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialIndex;
+                            serializedObject.ApplyModifiedProperties();
+                            serializedObject.Update();
+                            if (nodeBase)
                             {
-                                return PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
-                            },
-                            drawHeaderCallback = (rect) => 
+                                nodeBase.InitializeNodes();
+                                nodeBase.InitializeConnections();
+                            }
+                        },
+                        onReorderCallback = (list) =>
+                        {
+                            if (nodeBase)
                             {
-                                EditorGUI.LabelField(rect, "options");
-                            },
-                            onAddCallback = (list) =>
+                                nodeBase.InitializeConnections();
+                            }
+                        },
+                        onRemoveCallback = (list) =>
                             {
-                                serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue++;
-                                ReorderableList.defaultBehaviours.DoAddButton(list);
-                                int specialIndex = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue;
-                                options.GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialIndex;
+                                ReorderableList.defaultBehaviours.DoRemoveButton(list);
                                 serializedObject.ApplyModifiedProperties();
                                 serializedObject.Update();
                                 if (nodeBase)
                                 {
                                     nodeBase.InitializeNodes();
-                                    nodeBase.InitializeConnections();
-                                }
-                            },
-                            onReorderCallback = (list) =>
-                            {
-                                if (nodeBase)
-                                {
                                     nodeBase.InitializeConnections();
                                 }
                             }
