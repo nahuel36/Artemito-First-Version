@@ -61,9 +61,12 @@ public class DialogEditor : Editor
                                 ReorderableList.defaultBehaviours.DoAddButton(list);
                                 int specialIndex = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue;
                                 options.GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialIndex;
+                                serializedObject.ApplyModifiedProperties();
+                                serializedObject.Update();
                                 if (nodeBase)
                                 {
-                                    Debug.Log("agregar esto");
+                                    nodeBase.InitializeNodes();
+                                    nodeBase.InitializeConnections();
                                 }
                             },
                             onReorderCallback = (list) =>
