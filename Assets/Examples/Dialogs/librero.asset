@@ -63,7 +63,7 @@ MonoBehaviour:
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
-      subDialogDestinyIndex: 0
+      subDialogDestinyIndex: 10
     nodeRect:
       serializedVersion: 2
       x: 110.17674
@@ -101,8 +101,8 @@ MonoBehaviour:
       subDialogDestinyIndex: 10
     nodeRect:
       serializedVersion: 2
-      x: 617.7305
-      y: 357
+      x: 618.7305
+      y: 390
       width: 212
       height: 162.5
     expandedInInspector: 1
@@ -238,8 +238,8 @@ MonoBehaviour:
       subDialogDestinyIndex: 1
     nodeRect:
       serializedVersion: 2
-      x: 379.7711
-      y: 419
+      x: 351.7711
+      y: 421
       width: 212
       height: 200
     expandedInInspector: 1
