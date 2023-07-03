@@ -128,16 +128,8 @@ public class NodeBasedEditor : EditorWindow
 
         if (GUI.changed)
         {
-            for (int i = 0; i < nodes.Count; i++)
-            {
-                dialog.ChangeText(nodes[i].subDialogIndex, nodes[i].text);
-            }
             EditorUtility.SetDirty(dialog);
             Repaint();
-        }
-        for (int i = 0; i < nodes.Count; i++)
-        {
-            nodes[i].text = dialog.GetText(nodes[i].subDialogIndex);
         }
     }
 
