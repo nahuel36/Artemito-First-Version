@@ -32,50 +32,30 @@ public class NodeBasedEditor : EditorWindow
 
         InitializeNodes();
 
+        InitializeConnections();
+        
+       
+    }
 
-        if (connections == null)
-        {
-            connections = new List<Connection>();
-        }
-
-        if (dialog.subDialogs != null)
-        {
-            for (int i = 0; i < dialog.subDialogs.Count; i++)
+    public void InitializeConnections() {
+        connections = new List<Connection>();
+        
+        for (int i = 0; i < dialogSerialized.FindProperty("subDialogs").arraySize; i++)
             {
-                for (int j = 0; j < dialog.subDialogs[i].options.Count; j++)
+                for (int j = 0; j < dialogSerialized.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").arraySize; j++)
                 {
-                    int destiny = dialog.subDialogs[i].options[j].subDialogDestinyIndex;
+                    int destiny = dialogSerialized.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("subDialogDestinyIndex").intValue;
                     if (destiny > 0)
                     {
-                        connections.Add(new Connection(findNodeBySubdialogIndex(dialog.subDialogs[i].options[j].subDialogDestinyIndex), findNodeBySubdialogIndex(dialog.subDialogs[i].index),j));
+                        connections.Add(new Connection(FindNodeBySubdialogIndex(destiny), FindNodeBySubdialogIndex(dialog.subDialogs[i].index), j));
                         connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
                     }
                 }
             }
-        }
-        
-
-        
-        if (connections != null)
-            for (int i = 0; i < connections.Count; i++)
-            {
-                for (int j = 0; j < nodes.Count; j++)
-                {
-                    if (connections[i].nodeIn.subDialogIndex == nodes[j].subDialogIndex)
-                    {
-                        connections[i].nodeIn = nodes[j];
-                    }
-                    if (connections[i].nodeOut.subDialogIndex == nodes[j].subDialogIndex)
-                    {
-                        connections[i].nodeOut = nodes[j];
-                    }
-                }
-                connections[i].SetOnclick(OnClickRemoveConnection);
-            }
-       
     }
 
-    public Node findNodeBySubdialogIndex(int index)
+
+    public Node FindNodeBySubdialogIndex(int index)
     {
         for (int i = 0; i < nodes.Count; i++)
         {

@@ -65,6 +65,13 @@ public class DialogEditor : Editor
                                 {
                                     Debug.Log("agregar esto");
                                 }
+                            },
+                            onReorderCallback = (list) =>
+                            {
+                                if (nodeBase)
+                                {
+                                    nodeBase.InitializeConnections();
+                                }
                             }
                         };
 
