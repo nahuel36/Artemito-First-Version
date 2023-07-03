@@ -1,0 +1,301 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deeb2e6c64acac84b968ea22f0ccff33, type: 3}
+  m_Name: librero
+  m_EditorClassIdentifier: 
+  subDialogs:
+  - text: hola
+    index: 1
+    options:
+    - text: "\xBFC\xF3mo est\xE1 usted?"
+      index: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 2
+    - text: "\xBFC\xF3mo va el negocio?"
+      index: 2
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 5
+    - text: "\xBFQuisiera comprar un libro?"
+      index: 3
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Bonito sombrero.
+      index: 4
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Estoy vendiendo estas chaquetas de cuero.
+      index: 5
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: "Adi\xF3s."
+      index: 6
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    nodeRect:
+      serializedVersion: 2
+      x: 110.17674
+      y: 189
+      width: 212
+      height: 275
+    expandedInInspector: 1
+    optionSpecialIndex: 6
+  - text: librero
+    index: 2
+    options:
+    - text: "\xBFPor que lo dice?"
+      index: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Uh, que mal.
+      index: 2
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 9
+    - text: "No me interesa, adi\xF3s."
+      index: 3
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 10
+    nodeRect:
+      serializedVersion: 2
+      x: 617.7305
+      y: 357
+      width: 212
+      height: 162.5
+    expandedInInspector: 1
+    optionSpecialIndex: 4
+  - text: negocio
+    index: 5
+    options:
+    - text: "Y... usted, \xBFc\xF3mo est\xE1?"
+      index: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 2
+    - text: "\xBFCu\xE1l mafia?"
+      index: 2
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 7
+    - text: "\xBFDebe mucha plata?"
+      index: 3
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Mejor hablemos de otra cosa.
+      index: 4
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 1
+    nodeRect:
+      serializedVersion: 2
+      x: 366.95004
+      y: 66
+      width: 212
+      height: 200
+    expandedInInspector: 1
+    optionSpecialIndex: 4
+  - text: mafia
+    index: 7
+    options:
+    - text: "\xBFQui\xE9n es el l\xEDder?"
+      index: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: "\xBFEn d\xF3nde esta su cuartel?"
+      index: 2
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: "\xBFLes debe mucha plata?"
+      index: 3
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Volvamos a hablar de su negocio.
+      index: 4
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 5
+    - text: Esto me esta dando mucho miedo, mejor me voy.
+      index: 5
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 10
+    nodeRect:
+      serializedVersion: 2
+      x: 656.4461
+      y: 56
+      width: 212
+      height: 237.5
+    expandedInInspector: 1
+    optionSpecialIndex: 5
+  - text: plata
+    index: 8
+    options:
+    - text: "\xBFCuanto exactamente?"
+      index: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 2
+    - text: Ah, entonces puedo fiarle.
+      index: 2
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Uh, que mal.
+      index: 3
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Mejor hablemos de otra cosa.
+      index: 4
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 1
+    nodeRect:
+      serializedVersion: 2
+      x: 379.7711
+      y: 419
+      width: 212
+      height: 200
+    expandedInInspector: 1
+    optionSpecialIndex: 4
+  - text: que mal
+    index: 9
+    options:
+    - text: Muy mal
+      index: 1
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 2
+    - text: Muy muy mal
+      index: 2
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Demasiado mal
+      index: 3
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+    - text: Tanto que me voy
+      index: 4
+      attempsContainer:
+        isCyclical: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 10
+    nodeRect:
+      serializedVersion: 2
+      x: 864.62885
+      y: 423
+      width: 212
+      height: 200
+    expandedInInspector: 1
+    optionSpecialIndex: 5
+  - text: fin
+    index: 10
+    options: []
+    nodeRect:
+      serializedVersion: 2
+      x: 982.0133
+      y: 335
+      width: 176
+      height: 50
+    expandedInInspector: 0
+    optionSpecialIndex: 0
+  subDialogIndex: 11
