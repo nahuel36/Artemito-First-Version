@@ -28,9 +28,9 @@ public class Connection
             nodeOut.outPoint[index].rect.center,
             nodeIn.inPoint.rect.center + Vector2.left * 50f,
             nodeOut.outPoint[index].rect.center - Vector2.left * 50f,
-            Color.white,
+            new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f)),
             null,
-            2f
+            2.5f
         );
 
         if (Handles.Button((nodeIn.inPoint.rect.center + nodeOut.outPoint[index].rect.center) * 0.5f, Quaternion.identity, 4, 8, Handles.RectangleHandleCap))
