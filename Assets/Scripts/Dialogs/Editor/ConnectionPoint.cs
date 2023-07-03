@@ -45,7 +45,7 @@ public class ConnectionPoint
 
             case ConnectionPointType.Out:
                 rect.x = node.rect.x + node.rect.width - 8f;
-                rect.y = node.rect.y + (node.rect.height * 0.5f) - rect.height * 0.5f;
+                rect.y = node.rect.y + 50;
                 rect.y += (optionArrayIndex) * 30;
                 break;
         }
