@@ -227,7 +227,7 @@ MonoBehaviour:
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
-      subDialogDestinyIndex: 0
+      subDialogDestinyIndex: 9
     - text: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
@@ -254,7 +254,7 @@ MonoBehaviour:
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
-      subDialogDestinyIndex: 2
+      subDialogDestinyIndex: 0
     - text: Muy muy mal
       index: 2
       attempsContainer:
