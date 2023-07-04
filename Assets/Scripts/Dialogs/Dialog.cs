@@ -28,7 +28,7 @@ public class Dialog : ScriptableObject
 {
     public List<SubDialog> subDialogs;
     public int subDialogIndex;
-
+    public int entryDialogIndex;
     public void ChangeRect(int index, Rect rect)
     {
         for (int i = 0; i < subDialogs.Count; i++)
