@@ -14,13 +14,15 @@ public class DialogsUI : MonoBehaviour
     [SerializeField] PNCCursor cursor;
     List<GameObject> options = new List<GameObject>();
     TMPro.TextMeshProUGUI lastOption;
-
+    [SerializeField] Transform dialogsContainer;
+    ScrollRect scrollRect;
     private void Start()
     {
         StartDialog(dialog);
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
 
         eventSystem = FindObjectOfType<EventSystem>();
+        scrollRect = GetComponentInChildren<ScrollRect>();
     }
 
     // Start is called before the first frame update
@@ -32,11 +34,21 @@ public class DialogsUI : MonoBehaviour
         option.GetComponent<TMPro.TextMeshProUGUI>().text = dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options[0].text;
         for (int i = 1; i < dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options.Count; i++)
         {
-            GameObject optionGO = Instantiate(option, this.transform);
+            GameObject optionGO = Instantiate(option, dialogsContainer);
             optionGO.GetComponent<TMPro.TextMeshProUGUI>().text = dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options[i].text;
             options.Add(optionGO);
         }
-        this.GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, 50 * dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options.Count);
+        dialogsContainer.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, 50 * dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options.Count);
+    }
+
+    public void MoveUp()
+    {
+        scrollRect.verticalNormalizedPosition += 0.25f;
+    }
+
+    public void MoveDown() 
+    {
+        scrollRect.verticalNormalizedPosition -= 0.25f;
     }
 
     private void Update()
