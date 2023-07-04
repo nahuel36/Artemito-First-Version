@@ -43,12 +43,12 @@ public class DialogsUI : MonoBehaviour
 
     public void MoveUp()
     {
-        scrollRect.verticalNormalizedPosition += 0.25f;
+        scrollRect.verticalNormalizedPosition += (1 / (float)options.Count) * dialogsContainer.transform.localScale.y * 2 ;
     }
 
     public void MoveDown() 
     {
-        scrollRect.verticalNormalizedPosition -= 0.25f;
+        scrollRect.verticalNormalizedPosition -= (1 / (float)options.Count) * dialogsContainer.transform.localScale.y * 2;
     }
 
     private void Update()
