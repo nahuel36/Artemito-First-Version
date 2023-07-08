@@ -18,20 +18,20 @@ public class DialogsUI : MonoBehaviour
     [SerializeField] Transform dialogsContainer;
     ScrollRect scrollRect;
     [SerializeField] int visibleOptions = 3;
+    private float initializedCounter;
     private void Start()
     {
-        StartDialog(dialog, dialog.entryDialogIndex);
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
-
         eventSystem = FindObjectOfType<EventSystem>();
         scrollRect = GetComponentInChildren<ScrollRect>();
+        DialogsManager.Instance.Initialize();
     }
 
     // Start is called before the first frame update
-    void StartDialog(Dialog dialog, int subDialogIndex)
+    public void StartDialog(Dialog dialog, int subDialogIndex)
     {
         //InteractionUtils.InitializeInteractions(ref dialog.GetSubDialogByIndex(subDialogIndex).options[0].attempsContainer.attemps);
-
+        initializedCounter = 0.5f;
         inActiveDialog = true;
         options.Clear();
         options.Add(first_option);
@@ -74,7 +74,10 @@ public class DialogsUI : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerData, results);
 
-        
+        if (initializedCounter > 0)
+        {
+            initializedCounter -= Time.deltaTime;
+        }
 
         DialogOptionUI actualOption = null;
 
@@ -92,12 +95,12 @@ public class DialogsUI : MonoBehaviour
         if (actualOption != null)
         { 
             actualOption.textContainer.color = Color.gray;
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && initializedCounter < 0)
             {
                 //InteractionUtils.RunAttempsInteraction(dialog.subDialogs[0].options[0].attempsContainer);
                 int destiny = actualOption.dialogOption.subDialogDestinyIndex;
                 if(destiny > 0)
-                    StartDialog(dialog, destiny);//queue
+                    DialogsManager.Instance.StartDialog(dialog, destiny);//queue
             }
         }
 

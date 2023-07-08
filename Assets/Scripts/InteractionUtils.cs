@@ -68,6 +68,13 @@ public static class InteractionUtils
                         attemps[j].interactions[k].action.AddListener(() => charact.Walk(interaction.WhereToWalk.position));
                     }
                 }
+                else if (interaction.type == Interaction.InteractionType.dialog)
+                {
+                    if (interaction.dialogAction == Interaction.DialogAction.startDialog)
+                    {
+                        attemps[j].interactions[k].action.AddListener(() => DialogsManager.Instance.StartDialog(interaction.dialogSelected, interaction.dialogSelected.entryDialogIndex));
+                    }
+                }
                 else if (interaction.type == Interaction.InteractionType.variables)
                 {
                     PNCVariablesContainer varContainer = interaction.variableObject;

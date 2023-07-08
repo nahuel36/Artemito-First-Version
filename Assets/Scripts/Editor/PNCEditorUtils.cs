@@ -373,6 +373,11 @@ public static class PNCEditorUtils
                 float height = 3.25f;
                 return EditorGUIUtility.singleLineHeight * height;
             }
+            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
+            {
+                float height = 4.25f;
+                return EditorGUIUtility.singleLineHeight * height;
+            }
             if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.variables)
             {
                 float height = 4.25f;
@@ -595,6 +600,12 @@ public static class PNCEditorUtils
                                                 }
                                                 else if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.walk)
                                                     EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhereToWalk"));
+                                            }
+                                            else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
+                                            {
+                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("dialogAction"));
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("dialogSelected"));
                                             }
                                             else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
                                             {

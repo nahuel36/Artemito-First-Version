@@ -52,6 +52,7 @@ public class Interaction
         character,
         variables,
         inventory,
+        dialog,
         custom
     }
     public InteractionType type;
@@ -87,6 +88,12 @@ public class Interaction
     public VariablesAction variablesAction;
     public PNCVariablesContainer variableObject;
 
+    public enum DialogAction
+    { 
+        startDialog
+    }
+    public DialogAction dialogAction;
+    public Dialog dialogSelected;
 
     public Conditional.GetVariableAction OnCompareResultTrueAction;
     public Conditional.GetVariableAction OnCompareResultFalseAction;
@@ -128,6 +135,8 @@ public class Interaction
         destiny.characterAction = characterAction;
         destiny.expandedInInspector = expandedInInspector;
         destiny.inventoryAction = inventoryAction;
+        destiny.dialogAction = dialogAction;
+        destiny.dialogSelected = dialogSelected;
         destiny.globalVariableSelected = globalVariableSelected;
         destiny.localVariableSelected = localVariableSelected;
         destiny.type = type;

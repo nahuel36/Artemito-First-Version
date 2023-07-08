@@ -33,6 +33,8 @@ MonoBehaviour:
             localVariableSelected: 0
             variablesAction: 0
             variableObject: {fileID: 0}
+            dialogAction: 0
+            dialogSelected: {fileID: 0}
             OnCompareResultTrueAction: 0
             OnCompareResultFalseAction: 0
             LineToGoOnTrueResult: 0
