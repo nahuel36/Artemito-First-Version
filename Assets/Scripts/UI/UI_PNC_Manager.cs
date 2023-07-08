@@ -118,6 +118,7 @@ public class UI_PNC_Manager : MonoBehaviour
     ActiveThing activeThing;
     UI_Text ui_text;
     InventoryUI inventoryUI;
+    DialogsUI dialogsUI;
     float holdingCounter;
     bool showingVerbs;
     string cursorTextString;
@@ -133,6 +134,7 @@ public class UI_PNC_Manager : MonoBehaviour
         pointAndWalk = FindObjectOfType<PointAndWalk>();
         ui_text = FindObjectOfType<UI_Text>();
         inventoryUI = FindObjectOfType<InventoryUI>();
+        dialogsUI = FindObjectOfType<DialogsUI>();
     }
     void ProcessPointer(ref UnityAction onClickDown,ref UnityAction onClickUp, ref UnityAction onClickHold) 
     {
@@ -188,7 +190,7 @@ public class UI_PNC_Manager : MonoBehaviour
                         }
                         activeThing.Clear();
                     }
-                    else if(inventoryUI.overInventory == null && objetive.overInteractuable == null)
+                    else if(inventoryUI.overInventory == null && objetive.overInteractuable == null && !dialogsUI.inActiveDialog)
                     {
                         pointAndWalk.WalkCancelable();
                     }

@@ -6,19 +6,21 @@ using UnityEngine.EventSystems;
 
 public class DialogsUI : MonoBehaviour
 {
-    public GameObject option;
+    public DialogOptionUI first_option;
     public Dialog dialog;
+    public bool inActiveDialog;
 
     UnityEngine.UI.GraphicRaycaster raycaster;
     EventSystem eventSystem;
     [SerializeField] PNCCursor cursor;
-    List<GameObject> options = new List<GameObject>();
-    TMPro.TextMeshProUGUI lastOption;
+    List<DialogOptionUI> options = new List<DialogOptionUI>();
+    DialogOptionUI lastOption;
     [SerializeField] Transform dialogsContainer;
     ScrollRect scrollRect;
+    [SerializeField] int visibleOptions = 3;
     private void Start()
     {
-        StartDialog(dialog);
+        StartDialog(dialog, dialog.entryDialogIndex);
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
 
         eventSystem = FindObjectOfType<EventSystem>();
@@ -26,29 +28,41 @@ public class DialogsUI : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void StartDialog(Dialog dialog)
+    void StartDialog(Dialog dialog, int subDialogIndex)
     {
+        //InteractionUtils.InitializeInteractions(ref dialog.GetSubDialogByIndex(subDialogIndex).options[0].attempsContainer.attemps);
+
+        inActiveDialog = true;
         options.Clear();
-        options.Add(option);
-        option.SetActive(true);
-        option.GetComponent<TMPro.TextMeshProUGUI>().text = dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options[0].text;
-        for (int i = 1; i < dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options.Count; i++)
+        options.Add(first_option);
+        first_option.container.SetActive(true);
+        first_option.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[0].text;
+        first_option.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[0];
+        for (int i = dialogsContainer.childCount - 1; i > 0; i--)
         {
-            GameObject optionGO = Instantiate(option, dialogsContainer);
-            optionGO.GetComponent<TMPro.TextMeshProUGUI>().text = dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options[i].text;
-            options.Add(optionGO);
+            Destroy(dialogsContainer.GetChild(i).gameObject);
         }
-        dialogsContainer.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, 50 * dialog.GetSubDialogByIndex(dialog.entryDialogIndex).options.Count);
+        for (int i = 1; i < dialog.GetSubDialogByIndex(subDialogIndex).options.Count; i++)
+        {
+            GameObject optionGO = Instantiate(first_option.container, dialogsContainer);
+            DialogOptionUI dialogOptionUI = optionGO.GetComponent<DialogOptionUI>();
+            dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[i].text;
+            dialogOptionUI.container = optionGO;
+            dialogOptionUI.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[i];
+            options.Add(dialogOptionUI);
+        }
     }
 
     public void MoveUp()
     {
-        scrollRect.verticalNormalizedPosition += (1 / (float)options.Count) * dialogsContainer.transform.localScale.y * 2 ;
+        if(options.Count - visibleOptions > 0)
+            scrollRect.verticalNormalizedPosition += ((float)1 / ((float)options.Count-visibleOptions));
     }
 
     public void MoveDown() 
     {
-        scrollRect.verticalNormalizedPosition -= (1 / (float)options.Count) * dialogsContainer.transform.localScale.y * 2;
+        if (options.Count - visibleOptions > 0)
+            scrollRect.verticalNormalizedPosition -= ((float)1 / ((float)options.Count-visibleOptions));
     }
 
     private void Update()
@@ -58,25 +72,36 @@ public class DialogsUI : MonoBehaviour
 
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerData, results);
-        bool founded = false;
 
         if (lastOption != null)
         { 
-            lastOption.color = Color.white;
+            lastOption.textContainer.color = Color.white;
         }
 
-        TMPro.TextMeshProUGUI actualOption = null;
+        DialogOptionUI actualOption = null;
 
         foreach (RaycastResult result in results)
         {
-            if (options.Contains(result.gameObject))
+            DialogOptionUI overOption = result.gameObject.GetComponent<DialogOptionUI>();
+            if (overOption != null && options.Contains(overOption))
             { 
-                actualOption = result.gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+                actualOption = overOption;
                 lastOption = actualOption;
             }
         }
-        if(actualOption != null)
-            actualOption.color = Color.gray;
+        if (actualOption != null)
+        { 
+            actualOption.textContainer.color = Color.gray;
+            if (Input.GetMouseButtonUp(0))
+            {
+                //InteractionUtils.RunAttempsInteraction(dialog.subDialogs[0].options[0].attempsContainer);
+                int destiny = actualOption.dialogOption.subDialogDestinyIndex;
+                if(destiny > 0)
+                    StartDialog(dialog, destiny);//queue
+            }
+        }
+
+
     }
 
 
