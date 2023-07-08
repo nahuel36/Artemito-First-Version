@@ -30,7 +30,6 @@ public class DialogsUI : MonoBehaviour
     // Start is called before the first frame update
     public void StartDialog(Dialog dialog, int subDialogIndex)
     {
-        //InteractionUtils.InitializeInteractions(ref dialog.GetSubDialogByIndex(subDialogIndex).options[0].attempsContainer.attemps);
         initializedCounter = 0.5f;
         inActiveDialog = true;
         options.Clear();
@@ -44,6 +43,7 @@ public class DialogsUI : MonoBehaviour
         }
         for (int i = 1; i < dialog.GetSubDialogByIndex(subDialogIndex).options.Count; i++)
         {
+            InteractionUtils.InitializeInteractions(ref dialog.GetSubDialogByIndex(subDialogIndex).options[i].attempsContainer.attemps);
             GameObject optionGO = Instantiate(first_option.container, dialogsContainer);
             DialogOptionUI dialogOptionUI = optionGO.GetComponent<DialogOptionUI>();
             dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[i].text;
@@ -97,7 +97,7 @@ public class DialogsUI : MonoBehaviour
             actualOption.textContainer.color = Color.gray;
             if (Input.GetMouseButtonUp(0) && initializedCounter < 0)
             {
-                //InteractionUtils.RunAttempsInteraction(dialog.subDialogs[0].options[0].attempsContainer);
+                InteractionUtils.RunAttempsInteraction(actualOption.dialogOption.attempsContainer);
                 int destiny = actualOption.dialogOption.subDialogDestinyIndex;
                 if(destiny > 0)
                     DialogsManager.Instance.StartDialog(dialog, destiny);//queue
