@@ -47,6 +47,7 @@ public class DialogsUI : MonoBehaviour
             GameObject optionGO = Instantiate(first_option.container, dialogsContainer);
             DialogOptionUI dialogOptionUI = optionGO.GetComponent<DialogOptionUI>();
             dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[i].text;
+            dialogOptionUI.textContainer.color = Color.white;
             dialogOptionUI.container = optionGO;
             dialogOptionUI.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[i];
             options.Add(dialogOptionUI);
@@ -73,10 +74,7 @@ public class DialogsUI : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerData, results);
 
-        if (lastOption != null)
-        { 
-            lastOption.textContainer.color = Color.white;
-        }
+        
 
         DialogOptionUI actualOption = null;
 
@@ -84,7 +82,9 @@ public class DialogsUI : MonoBehaviour
         {
             DialogOptionUI overOption = result.gameObject.GetComponent<DialogOptionUI>();
             if (overOption != null && options.Contains(overOption))
-            { 
+            {
+                if(lastOption != null)
+                    lastOption.textContainer.color = Color.white;
                 actualOption = overOption;
                 lastOption = actualOption;
             }
@@ -100,7 +100,6 @@ public class DialogsUI : MonoBehaviour
                     StartDialog(dialog, destiny);//queue
             }
         }
-
 
     }
 
