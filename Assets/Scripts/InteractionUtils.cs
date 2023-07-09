@@ -16,11 +16,18 @@ public static class InteractionUtils
 
     public static void RunAttempsInteraction(AttempsContainer attempsContainer)
     {
-        for (int i = 0; i < attempsContainer.attemps[attempsContainer.executedTimes].interactions.Count; i++)
-        {
-            attempsContainer.attemps[attempsContainer.executedTimes].interactions[i].action.Invoke();
+        if(attempsContainer.attemps.Count > 0)
+        { 
+            for (int i = 0; i < attempsContainer.attemps[attempsContainer.executedTimes].interactions.Count; i++)
+            {
+                attempsContainer.attemps[attempsContainer.executedTimes].interactions[i].action.Invoke();
+            }
+            InteractionUtils.increaseExecutedTimes(ref attempsContainer.executedTimes, attempsContainer.attemps.Count, attempsContainer.isCyclical);
         }
-        InteractionUtils.increaseExecutedTimes(ref attempsContainer.executedTimes, attempsContainer.attemps.Count, attempsContainer.isCyclical);
+        else
+        {
+            //unhandled event
+        }
     }
 
     public static void increaseExecutedTimes(ref int executedTimes, int count, bool isCyclical)
