@@ -22,12 +22,12 @@ MonoBehaviour:
         isCyclical: 0
         attemps:
         - interactions:
-          - type: 0
+          - type: 4
             expandedInInspector: 1
             inventoryAction: 0
             character: {fileID: 0}
             characterAction: 0
-            WhatToSay: 
+            WhatToSay: 1
             WhereToWalk: {fileID: 0}
             globalVariableSelected: 0
             localVariableSelected: 0
@@ -41,7 +41,20 @@ MonoBehaviour:
             LineToGoOnFalseResult: 0
             action:
               m_PersistentCalls:
-                m_Calls: []
+                m_Calls:
+                - m_Target: {fileID: 6091360687955946689, guid: ec260d7f39d9606408466e04ffe4f126,
+                    type: 3}
+                  m_TargetAssemblyTypeName: SayForInventory, Assembly-CSharp
+                  m_MethodName: Say
+                  m_Mode: 5
+                  m_Arguments:
+                    m_ObjectArgument: {fileID: 0}
+                    m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                    m_IntArgument: 0
+                    m_FloatArgument: 0
+                    m_StringArgument: 2
+                    m_BoolArgument: 0
+                  m_CallState: 2
             global_changeBooleanValue: 0
             global_changeStringValue: 0
             global_changeIntegerValue: 0

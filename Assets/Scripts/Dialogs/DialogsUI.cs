@@ -33,18 +33,19 @@ public class DialogsUI : MonoBehaviour
         initializedCounter = 0.5f;
         inActiveDialog = true;
         options.Clear();
-        options.Add(first_option);
-        first_option.container.SetActive(true);
-        first_option.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[0].text;
-        first_option.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[0];
         for (int i = dialogsContainer.childCount - 1; i > 0; i--)
         {
             Destroy(dialogsContainer.GetChild(i).gameObject);
         }
-        for (int i = 1; i < dialog.GetSubDialogByIndex(subDialogIndex).options.Count; i++)
+        for (int i = 0; i < dialog.GetSubDialogByIndex(subDialogIndex).options.Count; i++)
         {
             InteractionUtils.InitializeInteractions(ref dialog.GetSubDialogByIndex(subDialogIndex).options[i].attempsContainer.attemps);
-            GameObject optionGO = Instantiate(first_option.container, dialogsContainer);
+            GameObject optionGO;
+            if (i == 0)
+                optionGO = first_option.container;
+            else
+                optionGO = Instantiate(first_option.container, dialogsContainer);
+            optionGO.SetActive(true);
             DialogOptionUI dialogOptionUI = optionGO.GetComponent<DialogOptionUI>();
             dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[i].text;
             dialogOptionUI.textContainer.color = Color.white;
@@ -95,7 +96,7 @@ public class DialogsUI : MonoBehaviour
         if (actualOption != null)
         { 
             actualOption.textContainer.color = Color.gray;
-            if (Input.GetMouseButtonUp(0) && initializedCounter < 0)
+            if (Input.GetMouseButtonUp(0) && initializedCounter <= 0)
             {
                 InteractionUtils.RunAttempsInteraction(actualOption.dialogOption.attempsContainer);
                 int destiny = actualOption.dialogOption.subDialogDestinyIndex;
