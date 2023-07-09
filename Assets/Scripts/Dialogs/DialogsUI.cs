@@ -43,8 +43,7 @@ public class DialogsUI : MonoBehaviour
         {
             if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentState == DialogOption.current_state.initial)
             {
-                if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].initialState == DialogOption.state.disabled || 
-                    dialog.GetSubDialogByIndex(subDialogIndex).options[j].initialState == DialogOption.state.disabled_forever)
+                if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].initialState == DialogOption.state.disabled)
                 { 
                     j++;
                 continue;

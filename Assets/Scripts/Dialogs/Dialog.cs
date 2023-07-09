@@ -12,7 +12,6 @@ public class DialogOption
     public enum state{ 
         enabled = 0, 
         disabled = 1, 
-        disabled_forever = 2
     }
     public state initialState = state.enabled;
     public enum current_state
