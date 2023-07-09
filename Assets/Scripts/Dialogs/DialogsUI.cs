@@ -37,21 +37,41 @@ public class DialogsUI : MonoBehaviour
         {
             Destroy(dialogsContainer.GetChild(i).gameObject);
         }
-        for (int i = 0; i < dialog.GetSubDialogByIndex(subDialogIndex).options.Count; i++)
+        int j = 0;
+        int k = 0;
+        while(j < dialog.GetSubDialogByIndex(subDialogIndex).options.Count)
         {
-            InteractionUtils.InitializeInteractions(ref dialog.GetSubDialogByIndex(subDialogIndex).options[i].attempsContainer.attemps);
+            if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentState == DialogOption.current_state.initial)
+            {
+                if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].initialState == DialogOption.state.disabled || 
+                    dialog.GetSubDialogByIndex(subDialogIndex).options[j].initialState == DialogOption.state.disabled_forever)
+                { 
+                    j++;
+                continue;
+                }
+            }
+            else if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentState == DialogOption.current_state.disabled || 
+                dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentState == DialogOption.current_state.disabled_forever)
+            {
+                j++;
+                continue;
+            }
+
             GameObject optionGO;
-            if (i == 0)
+            if (k == 0)
                 optionGO = first_option.container;
             else
                 optionGO = Instantiate(first_option.container, dialogsContainer);
             optionGO.SetActive(true);
             DialogOptionUI dialogOptionUI = optionGO.GetComponent<DialogOptionUI>();
-            dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[i].text;
+            dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[j].text;
             dialogOptionUI.textContainer.color = Color.white;
             dialogOptionUI.container = optionGO;
-            dialogOptionUI.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[i];
+            dialogOptionUI.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[j];
             options.Add(dialogOptionUI);
+            InteractionUtils.InitializeInteractions(ref dialog.GetSubDialogByIndex(subDialogIndex).options[j].attempsContainer.attemps);
+            j++;
+            k++;
         }
     }
 

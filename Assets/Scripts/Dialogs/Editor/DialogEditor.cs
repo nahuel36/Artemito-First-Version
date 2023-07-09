@@ -44,8 +44,13 @@ public class DialogEditor : Editor
                         drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
                         {
                             EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("text"), new GUIContent { text = "option " + (indexOpt + 1) });
-                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, true);
-
+                            var verbExpanded = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector");
+                            if (verbExpanded.boolValue)
+                            {
+                                recOpt.y += EditorGUIUtility.singleLineHeight;
+                                EditorGUI.PropertyField(new Rect(recOpt.x +7,recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("initialState"));
+                            }
+                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, false, true);
                         },
                         elementHeightCallback = (int indexOpt) =>
                         {

@@ -9,6 +9,20 @@ public class DialogOption
     public int index;
     public AttempsContainer attempsContainer;
     public int subDialogDestinyIndex;
+    public enum state{ 
+        enabled = 0, 
+        disabled = 1, 
+        disabled_forever = 2
+    }
+    public state initialState = state.enabled;
+    public enum current_state
+    {
+        initial = -1,
+        enabled = 0,
+        disabled = 1,
+        disabled_forever = 2
+    }
+    public current_state currentState = current_state.initial;
 }
 
 [System.Serializable]
