@@ -376,6 +376,7 @@ public class NodeBasedEditor : EditorWindow
             for (int i = 0; i < connectionsToRemove.Count; i++)
             {
                 connections.Remove(connectionsToRemove[i]);
+                dialog.ChangeDestiny(connectionsToRemove[i].nodeOut.subDialogIndex, 0, connectionsToRemove[i].nodeOut.outPoint[connectionsToRemove[i].index].optionSpecialIndex);
             }
 
             connectionsToRemove = null;
