@@ -74,6 +74,17 @@ public class DialogsUI : MonoBehaviour
         }
     }
 
+    public void EndDialog()
+    {
+        inActiveDialog = false;
+        options.Clear();
+        for (int i = dialogsContainer.childCount - 1; i > 0; i--)
+        {
+            Destroy(dialogsContainer.GetChild(i).gameObject);
+        }
+        first_option.container.SetActive(false);
+    }
+
     public void MoveUp()
     {
         if(options.Count - visibleOptions > 0)
@@ -119,8 +130,10 @@ public class DialogsUI : MonoBehaviour
             {
                 InteractionUtils.RunAttempsInteraction(actualOption.dialogOption.attempsContainer);
                 int destiny = actualOption.dialogOption.subDialogDestinyIndex;
-                if(destiny > 0)
+                if (destiny > 0)
                     DialogsManager.Instance.StartDialog(dialog, destiny);//queue
+                else if (destiny == -2)
+                    DialogsManager.Instance.EndDialog();
             }
         }
 

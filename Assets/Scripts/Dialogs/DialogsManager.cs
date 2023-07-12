@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,5 +33,12 @@ public class DialogsManager : MonoBehaviour
     {
         StartDialogCommand command = new StartDialogCommand();
         command.Queue(dialogsUI, dialog, subDialogIndex);
+    }
+
+    public void EndDialog()
+    {
+        EndDialogCommand command = new EndDialogCommand();
+        command.Queue(dialogsUI);
+        
     }
 }
