@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 public class NodeBasedEditor : EditorWindow
 {
-
+    private GUIStyle entryNodeStyle;
+    private GUIStyle exitNodeStyle;
     private GUIStyle nodeStyle;
     private GUIStyle selectedNodeStyle;
+    private GUIStyle selectedEntryNodeStyle;
+    private GUIStyle selectedExitNodeStyle;
     private GUIStyle inPointStyle;
     private GUIStyle outPointStyle;
 
@@ -20,11 +23,14 @@ public class NodeBasedEditor : EditorWindow
 
     private Dialog dialog;
     private SerializedObject dialogSerialized;
-    private List<Node> nodes;
+    private List<SubDialogNode> subDialogNodes;
     private List<Connection> connections;
+
+    private EntryNode entryNode;
+    private ExitNode exitNode;
     public void OpenWindow(Dialog dialogparam, SerializedObject dialogSerializedParam)
     {
-        
+
         NodeBasedEditor window = GetWindow<NodeBasedEditor>();
         window.titleContent = new GUIContent("Node Based Editor");
         dialog = dialogparam;
@@ -33,41 +39,68 @@ public class NodeBasedEditor : EditorWindow
         InitializeNodes();
 
         InitializeConnections();
-        
-       
+
+
     }
 
     public void InitializeConnections() {
         connections = new List<Connection>();
-        
+
         for (int i = 0; i < dialogSerialized.FindProperty("subDialogs").arraySize; i++)
+        {
+            for (int j = 0; j < dialogSerialized.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").arraySize; j++)
             {
-                for (int j = 0; j < dialogSerialized.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").arraySize; j++)
+                int destiny = dialogSerialized.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("subDialogDestinyIndex").intValue;
+                if (destiny > 0)
                 {
-                    int destiny = dialogSerialized.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("subDialogDestinyIndex").intValue;
-                    if (destiny > 0)
-                    {
-                        connections.Add(new Connection(FindNodeBySubdialogIndex(destiny), FindNodeBySubdialogIndex(dialog.subDialogs[i].index), j));
-                        connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
-                    }
+                    connections.Add(new Connection(FindNodeBySubdialogIndex(destiny), FindNodeBySubdialogIndex(dialog.subDialogs[i].index), 0, j));
+                    connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
+                }
+                if (destiny == -2)
+                {
+                    connections.Add(new Connection(exitNode, FindNodeBySubdialogIndex(dialog.subDialogs[i].index), 0, j));
                 }
             }
+        }
+
+        connections.Add(new Connection(FindNodeBySubdialogIndex(dialog.entryDialogIndex), entryNode));
+        connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
     }
 
 
-    public Node FindNodeBySubdialogIndex(int index)
+    public SubDialogNode FindNodeBySubdialogIndex(int index)
     {
-        for (int i = 0; i < nodes.Count; i++)
+        for (int i = 0; i < subDialogNodes.Count; i++)
         {
-            if (nodes[i].subDialogIndex == index)
-                return nodes[i];
+            if (subDialogNodes[i].subDialogIndex == index)
+                return subDialogNodes[i];
         }
         return null;
     }
 
     public void InitializeNodes()
     {
-        nodes = new List<Node>();
+        if (dialogSerialized.FindProperty("enterNodeRect").rectValue.width == 0)
+        {
+            dialogSerialized.FindProperty("enterNodeRect").rectValue = new Rect(20, 20, 200, 50);
+        }
+        Vector2 entryPos = new Vector2(dialogSerialized.FindProperty("enterNodeRect").rectValue.x, dialogSerialized.FindProperty("enterNodeRect").rectValue.y);
+        float entryWidth = dialogSerialized.FindProperty("enterNodeRect").rectValue.width;
+        float entryHeight = dialogSerialized.FindProperty("enterNodeRect").rectValue.height;
+        entryNode = new EntryNode(ref dialog, 0, entryPos, entryWidth, entryHeight, entryNodeStyle, selectedEntryNodeStyle, inPointStyle, outPointStyle);
+        entryNode.SetOnClick(OnClickOutPoint, OnChangeRect);
+
+        if (dialogSerialized.FindProperty("exitNodeRect").rectValue.width == 0)
+        {
+            dialogSerialized.FindProperty("exitNodeRect").rectValue = new Rect(20, 20, 200, 50);
+        }
+        Vector2 exitPos = new Vector2(dialogSerialized.FindProperty("exitNodeRect").rectValue.x, dialogSerialized.FindProperty("exitNodeRect").rectValue.y);
+        float exitWidth = dialogSerialized.FindProperty("exitNodeRect").rectValue.width;
+        float exitHeight = dialogSerialized.FindProperty("exitNodeRect").rectValue.height;
+        exitNode = new ExitNode(ref dialog, 0, exitPos, exitWidth, exitHeight, exitNodeStyle, selectedExitNodeStyle, inPointStyle, outPointStyle);
+        exitNode.SetOnClick(OnClickInPoint, OnChangeRect);
+
+        subDialogNodes = new List<SubDialogNode>();
 
         if (dialogSerialized.FindProperty("subDialogs").arraySize > 0)
         {
@@ -83,22 +116,37 @@ public class NodeBasedEditor : EditorWindow
                 Vector2 pos = new Vector2(subDialog.FindPropertyRelative("nodeRect").rectValue.x, subDialog.FindPropertyRelative("nodeRect").rectValue.y);
                 float width = subDialog.FindPropertyRelative("nodeRect").rectValue.width;
                 float height = 50;
-                nodes.Add(new Node(dialog, index, pos, width, height, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
-                nodes[nodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
-                nodes[nodes.Count - 1].text = subDialog.FindPropertyRelative("text").stringValue;
+                subDialogNodes.Add(new SubDialogNode(ref dialog, index, pos, width, height, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
+                subDialogNodes[subDialogNodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode, OnChangeRect);
             }
         }
     }
 
     private void OnEnable()
     {
+        entryNodeStyle = new GUIStyle();
+        entryNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node3.png") as Texture2D;
+        entryNodeStyle.border = new RectOffset(12, 12, 12, 12);
+
         nodeStyle = new GUIStyle();
         nodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
         nodeStyle.border = new RectOffset(12, 12, 12, 12);
 
+        exitNodeStyle = new GUIStyle();
+        exitNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node6.png") as Texture2D;
+        exitNodeStyle.border = new RectOffset(12, 12, 12, 12);
+
+        selectedEntryNodeStyle = new GUIStyle();
+        selectedEntryNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node3 on.png") as Texture2D;
+        selectedEntryNodeStyle.border = new RectOffset(12, 12, 12, 12);
+
         selectedNodeStyle = new GUIStyle();
         selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
         selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
+
+        selectedExitNodeStyle = new GUIStyle();
+        selectedExitNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node6 on.png") as Texture2D;
+        selectedExitNodeStyle.border = new RectOffset(12, 12, 12, 12);
 
         inPointStyle = new GUIStyle();
         inPointStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn left.png") as Texture2D;
@@ -160,15 +208,16 @@ public class NodeBasedEditor : EditorWindow
 
     private void DrawNodes()
     {
-        if (nodes != null)
+        if (subDialogNodes != null)
         {
-            for (int i = 0; i < nodes.Count; i++)
+            for (int i = 0; i < subDialogNodes.Count; i++)
             {
-                nodes[i].Draw();
+                subDialogNodes[i].Draw();
             }
         }
 
-
+        entryNode.Draw();
+        exitNode.Draw();
     }
 
     private void DrawConnections()
@@ -207,24 +256,24 @@ public class NodeBasedEditor : EditorWindow
 
             case EventType.ScrollWheel:
                 Zoom(e.delta.y);
-                
+
                 break;
         }
     }
 
 
-    private void Zoom(float delta) 
+    private void Zoom(float delta)
     {
-        if (nodes != null)
+        if (subDialogNodes != null)
         {
-            for (int i = 0; i < nodes.Count; i++)
+            for (int i = 0; i < subDialogNodes.Count; i++)
             {
-                nodes[i].Zoom(delta);
-                dialog.ChangeRect(nodes[i].subDialogIndex, nodes[i].rect);
+                subDialogNodes[i].Zoom(delta);
             }
         }
 
-        
+        entryNode.Zoom(delta);
+        exitNode.Zoom(delta);
 
         GUI.changed = true;
 
@@ -234,15 +283,40 @@ public class NodeBasedEditor : EditorWindow
     {
         drag = delta;
 
-        if (nodes != null)
+        if (subDialogNodes != null)
         {
-            for (int i = 0; i < nodes.Count; i++)
+            for (int i = 0; i < subDialogNodes.Count; i++)
             {
-                nodes[i].Drag(delta);
+                subDialogNodes[i].Drag(delta);
             }
         }
 
+        entryNode.Drag(delta);
+        dialog.ChangeEntryRect(entryNode.rect);
+        exitNode.Drag(delta);
+        dialog.ChangeExitRect(exitNode.rect);
+
+        EditorUtility.SetDirty(dialog);
+
         GUI.changed = true;
+    }
+
+    private void OnChangeRect(Node node)
+    {
+        if (node is SubDialogNode)
+        {
+            dialog.ChangeSubDialogRect(node.subDialogIndex, node.rect);
+        }
+
+        if (node is EntryNode)
+        {
+            dialog.ChangeEntryRect(node.rect);
+        }
+
+        if (node is ExitNode)
+        {
+            dialog.ChangeExitRect(node.rect);
+        }
     }
 
 
@@ -281,11 +355,11 @@ public class NodeBasedEditor : EditorWindow
 
     private void ProcessNodeEvents(Event e)
     {
-        if (nodes != null)
+        if (subDialogNodes != null)
         {
-            for (int i = nodes.Count - 1; i >= 0; i--)
+            for (int i = subDialogNodes.Count - 1; i >= 0; i--)
             {
-                bool guiChanged = nodes[i].ProcessEvents(e);
+                bool guiChanged = subDialogNodes[i].ProcessEvents(e) || entryNode.ProcessEvents(e) || exitNode.ProcessEvents(e);
 
                 if (guiChanged)
                 {
@@ -305,9 +379,9 @@ public class NodeBasedEditor : EditorWindow
 
     private void OnClickAddNode(Vector2 mousePosition)
     {
-        if (nodes == null)
+        if (subDialogNodes == null)
         {
-            nodes = new List<Node>();
+            subDialogNodes = new List<SubDialogNode>();
         }
         if (dialog.subDialogs == null)
         {
@@ -315,13 +389,15 @@ public class NodeBasedEditor : EditorWindow
         }
 
         dialog.subDialogIndex++;
-        nodes.Add(new Node(dialog, dialog.subDialogIndex, mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
-        nodes[nodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode);
-        dialog.subDialogs.Add(new SubDialog() { text = "new subdialog", index = nodes[nodes.Count - 1].subDialogIndex , nodeRect = nodes[nodes.Count - 1].rect});
+        subDialogNodes.Add(new SubDialogNode(ref dialog, dialog.subDialogIndex, mousePosition, 200, 50, nodeStyle, selectedNodeStyle, inPointStyle, outPointStyle));
+        subDialogNodes[subDialogNodes.Count - 1].SetOnClick(OnClickInPoint, OnClickOutPoint, OnClickRemoveNode, OnChangeRect);
+        dialog.subDialogs.Add(new SubDialog() { text = "new subdialog", index = subDialogNodes[subDialogNodes.Count - 1].subDialogIndex , nodeRect = subDialogNodes[subDialogNodes.Count - 1].rect});
     }
 
     private void OnClickInPoint(ConnectionPoint inPoint, Node node)
     {
+        Debug.Log("in");
+
         selectedInPoint = inPoint;
         selectedInPointNode = node;
 
@@ -342,6 +418,8 @@ public class NodeBasedEditor : EditorWindow
 
     private void OnClickOutPoint(ConnectionPoint outPoint, Node node)
     {
+        Debug.Log("out");
+
         selectedOutPoint = outPoint;
         selectedOutPointNode = node;
 
@@ -359,7 +437,7 @@ public class NodeBasedEditor : EditorWindow
         }
     }
 
-    private void OnClickRemoveNode(Node node)
+    private void OnClickRemoveNode(SubDialogNode node)
     {
         if (connections != null)
         {
@@ -376,32 +454,65 @@ public class NodeBasedEditor : EditorWindow
             for (int i = 0; i < connectionsToRemove.Count; i++)
             {
                 connections.Remove(connectionsToRemove[i]);
-                dialog.ChangeDestiny(connectionsToRemove[i].nodeOut.subDialogIndex, 0, connectionsToRemove[i].nodeOut.outPoint[connectionsToRemove[i].index].optionSpecialIndex);
+                if(connectionsToRemove[i].nodeIn is SubDialogNode && connectionsToRemove[i].nodeOut is SubDialogNode)
+                    dialog.ChangeDestiny(connectionsToRemove[i].nodeOut.subDialogIndex, 0, connectionsToRemove[i].nodeOut.outPoint[connectionsToRemove[i].indexOut].optionSpecialIndex);
             }
 
             connectionsToRemove = null;
         }
 
-        nodes.Remove(node);
+        subDialogNodes.Remove(node);
         dialog.Remove(node.subDialogIndex);
     }
 
     private void OnClickRemoveConnection(Connection connection)
     {
         connections.Remove(connection);
-        dialog.ChangeDestiny(connection.nodeOut.subDialogIndex, 0, connection.nodeOut.outPoint[connection.index].optionSpecialIndex);
+        dialog.ChangeDestiny(connection.nodeOut.subDialogIndex, 0, connection.nodeOut.outPoint[connection.indexOut].optionSpecialIndex);
     }
 
     private void CreateConnection()
     {
+        List<Connection> connectionsToRemove = new List<Connection>();
+
+        for (int i = 0; i < connections.Count; i++)
+        {
+            if (selectedOutPointNode == connections[i].nodeOut)
+            {
+                connectionsToRemove.Add(connections[i]);
+            }
+
+        }
+        for (int i = 0; i < connectionsToRemove.Count; i++)
+        {
+            connections.Remove(connectionsToRemove[i]);
+        }
+
+
+        if (selectedInPointNode is ExitNode)
+        {
+            Debug.Log("exit");
+            dialog.ChangeDestiny(selectedOutPointNode.subDialogIndex,-2, selectedOutPoint.optionSpecialIndex);
+        }
+        else if (selectedOutPointNode is EntryNode)
+        {
+            Debug.Log("enter");
+
+            dialog.ChangeEntry(selectedInPointNode.subDialogIndex);
+        }
+        else
+        {
+            Debug.Log("none");
+            dialog.ChangeDestiny(selectedOutPointNode.subDialogIndex, selectedInPointNode.subDialogIndex, selectedOutPoint.optionSpecialIndex);
+        }
+
         if (connections == null)
         {
             connections = new List<Connection>();
         }
 
-        connections.Add(new Connection(selectedInPointNode, selectedOutPointNode, selectedOutPoint.optionArrayIndex));
+        connections.Add(new Connection(selectedInPointNode, selectedOutPointNode, 0, selectedOutPoint.outArrayIndex));
         connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
-        dialog.ChangeDestiny(selectedOutPointNode.subDialogIndex, selectedInPointNode.subDialogIndex,selectedOutPoint.optionSpecialIndex);
     }
 
     private void ClearConnectionSelection()

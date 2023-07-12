@@ -85,6 +85,8 @@ MonoBehaviour:
         expandedInInspector: 1
         executedTimes: 0
       subDialogDestinyIndex: 2
+      initialState: 0
+      currentState: -1
     - text: "\xBFC\xF3mo va el negocio?"
       index: 2
       attempsContainer:
@@ -93,6 +95,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 5
+      initialState: 0
+      currentState: -1
     - text: "\xBFQuisiera comprar un libro?"
       index: 3
       attempsContainer:
@@ -101,6 +105,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: Bonito sombrero.
       index: 4
       attempsContainer:
@@ -109,6 +115,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: Estoy vendiendo estas chaquetas de cuero.
       index: 5
       attempsContainer:
@@ -117,6 +125,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: "Adi\xF3s."
       index: 6
       attempsContainer:
@@ -124,7 +134,9 @@ MonoBehaviour:
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
-      subDialogDestinyIndex: 10
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: -1
     nodeRect:
       serializedVersion: 2
       x: 110.17674
@@ -144,6 +156,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: Uh, que mal.
       index: 2
       attempsContainer:
@@ -152,6 +166,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 9
+      initialState: 0
+      currentState: -1
     - text: "No me interesa, adi\xF3s."
       index: 3
       attempsContainer:
@@ -159,7 +175,9 @@ MonoBehaviour:
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
-      subDialogDestinyIndex: 10
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: -1
     nodeRect:
       serializedVersion: 2
       x: 618.7305
@@ -179,6 +197,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 2
+      initialState: 0
+      currentState: -1
     - text: "\xBFCu\xE1l mafia?"
       index: 2
       attempsContainer:
@@ -187,6 +207,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 7
+      initialState: 0
+      currentState: -1
     - text: "\xBFDebe mucha plata?"
       index: 3
       attempsContainer:
@@ -194,7 +216,9 @@ MonoBehaviour:
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
-      subDialogDestinyIndex: 0
+      subDialogDestinyIndex: 8
+      initialState: 0
+      currentState: -1
     - text: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
@@ -203,6 +227,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 1
+      initialState: 0
+      currentState: -1
     nodeRect:
       serializedVersion: 2
       x: 366.95004
@@ -222,6 +248,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: "\xBFEn d\xF3nde esta su cuartel?"
       index: 2
       attempsContainer:
@@ -230,6 +258,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: "\xBFLes debe mucha plata?"
       index: 3
       attempsContainer:
@@ -238,6 +268,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: Volvamos a hablar de su negocio.
       index: 4
       attempsContainer:
@@ -246,6 +278,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 5
+      initialState: 0
+      currentState: -1
     - text: Esto me esta dando mucho miedo, mejor me voy.
       index: 5
       attempsContainer:
@@ -253,7 +287,9 @@ MonoBehaviour:
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
-      subDialogDestinyIndex: 10
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: -1
     nodeRect:
       serializedVersion: 2
       x: 656.4461
@@ -273,6 +309,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 2
+      initialState: 0
+      currentState: -1
     - text: Ah, entonces puedo fiarle.
       index: 2
       attempsContainer:
@@ -281,6 +319,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: Uh, que mal.
       index: 3
       attempsContainer:
@@ -289,6 +329,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 9
+      initialState: 0
+      currentState: -1
     - text: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
@@ -297,6 +339,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 1
+      initialState: 0
+      currentState: -1
     nodeRect:
       serializedVersion: 2
       x: 351.7711
@@ -316,6 +360,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: Muy muy mal
       index: 2
       attempsContainer:
@@ -324,6 +370,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: Demasiado mal
       index: 3
       attempsContainer:
@@ -332,6 +380,8 @@ MonoBehaviour:
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: -1
     - text: Tanto que me voy
       index: 4
       attempsContainer:
@@ -339,7 +389,9 @@ MonoBehaviour:
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
-      subDialogDestinyIndex: 10
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: -1
     nodeRect:
       serializedVersion: 2
       x: 864.62885
@@ -348,16 +400,17 @@ MonoBehaviour:
       height: 200
     expandedInInspector: 1
     optionSpecialIndex: 5
-  - text: fin
-    index: 10
-    options: []
-    nodeRect:
-      serializedVersion: 2
-      x: 982.0133
-      y: 335
-      width: 176
-      height: 50
-    expandedInInspector: 0
-    optionSpecialIndex: 0
   subDialogIndex: 11
   entryDialogIndex: 1
+  enterNodeRect:
+    serializedVersion: 2
+    x: 42.285004
+    y: 89
+    width: 212
+    height: 53
+  exitNodeRect:
+    serializedVersion: 2
+    x: 1082.9
+    y: 268
+    width: 212
+    height: 53

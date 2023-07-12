@@ -42,7 +42,9 @@ public class Dialog : ScriptableObject
     public List<SubDialog> subDialogs;
     public int subDialogIndex;
     public int entryDialogIndex;
-    public void ChangeRect(int index, Rect rect)
+    public Rect enterNodeRect;
+    public Rect exitNodeRect;
+    public void ChangeSubDialogRect(int index, Rect rect)
     {
         for (int i = 0; i < subDialogs.Count; i++)
         {
@@ -51,6 +53,16 @@ public class Dialog : ScriptableObject
                 subDialogs[i].nodeRect = rect;
             }
         }
+    }
+
+    public void ChangeEntryRect(Rect rect)
+    {
+        enterNodeRect = rect;
+    }
+
+    public void ChangeExitRect(Rect rect)
+    {
+        exitNodeRect = rect;
     }
 
 
@@ -103,6 +115,11 @@ public class Dialog : ScriptableObject
                 }
             }
         }
+    }
+
+    public void ChangeEntry(int index)
+    {
+        entryDialogIndex = index;
     }
 
     public int GetOptionsCuantity(int index)

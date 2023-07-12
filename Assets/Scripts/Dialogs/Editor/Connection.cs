@@ -8,12 +8,15 @@ public class Connection
     public Action<Connection> OnClickRemoveConnection;
     public Node nodeIn;
     public Node nodeOut;
-    public int index;
-    public Connection(Node nodeIn, Node nodeOut, int index = 0)
+    public int indexIn;
+    public int indexOut;
+
+    public Connection(Node nodeIn, Node nodeOut, int indexIn = 0, int indexOut = 0)
     {
         this.nodeIn = nodeIn;
         this.nodeOut = nodeOut;
-        this.index = index;
+        this.indexIn = indexIn;
+        this.indexOut = indexOut;
     }
 
     public void SetOnclick(Action<Connection> OnClickRemoveConnection)
@@ -24,16 +27,16 @@ public class Connection
     public void Draw()
     {
         Handles.DrawBezier(
-            nodeIn.inPoint.rect.center,
-            nodeOut.outPoint[index].rect.center,
-            nodeIn.inPoint.rect.center + Vector2.left * 50f,
-            nodeOut.outPoint[index].rect.center - Vector2.left * 50f,
+            nodeIn.inPoint[indexIn].rect.center,
+            nodeOut.outPoint[indexOut].rect.center,
+            nodeIn.inPoint[indexIn].rect.center + Vector2.left * 50f,
+            nodeOut.outPoint[indexOut].rect.center - Vector2.left * 50f,
             new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f)),
             null,
             2.5f
         );
 
-        if (Handles.Button((nodeIn.inPoint.rect.center + nodeOut.outPoint[index].rect.center) * 0.5f, Quaternion.identity, 4, 8, Handles.RectangleHandleCap))
+        if (Handles.Button((nodeIn.inPoint[indexIn].rect.center + nodeOut.outPoint[indexOut].rect.center) * 0.5f, Quaternion.identity, 4, 8, Handles.RectangleHandleCap))
         {
             if (OnClickRemoveConnection != null)
             {

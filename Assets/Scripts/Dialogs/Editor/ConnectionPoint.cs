@@ -14,19 +14,22 @@ public class ConnectionPoint
 
     public Action<ConnectionPoint, Node> OnClickConnectionPoint;
 
+    public int inArrayIndex;
+
+    public int outArrayIndex;
+
     public int optionSpecialIndex;
 
-    public int optionArrayIndex;
-
-    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style, int optionSpecialIndex = -1, int index = -1)
+    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style, int indexIn = 0, int indexOut = 0, int optionSpecialIndex = -1)
     {
         this.type = type;
         this.style = style;
         
         rect = new Rect(0, 0, 10f, 20f);
 
+        this.inArrayIndex = indexIn;
+        this.outArrayIndex = indexOut;
         this.optionSpecialIndex = optionSpecialIndex;
-        this.optionArrayIndex = index;
     }
 
     public void SetOnClick(Action<ConnectionPoint, Node> OnClickConnectionPoint)
@@ -41,12 +44,16 @@ public class ConnectionPoint
             case ConnectionPointType.In:
                 rect.x = node.rect.x - rect.width + 8f;
                 rect.y = node.rect.y + (node.rect.height * 0.5f) - rect.height * 0.5f;
+                rect.y += (inArrayIndex) * 30;
                 break;
 
             case ConnectionPointType.Out:
                 rect.x = node.rect.x + node.rect.width - 8f;
-                rect.y = node.rect.y + 50;
-                rect.y += (optionArrayIndex) * 30;
+                if(optionSpecialIndex == -1)
+                    rect.y = node.rect.y + (node.rect.height * 0.5f) - rect.height * 0.5f;
+                else
+                    rect.y = node.rect.y + 50;
+                rect.y += (outArrayIndex) * 30;
                 break;
         }
 

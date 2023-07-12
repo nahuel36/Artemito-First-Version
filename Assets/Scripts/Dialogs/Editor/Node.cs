@@ -1,77 +1,90 @@
-using System;
-using UnityEditor;
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+using System;
 
-[System.Serializable]
-public class Node
+public class Node 
 {
     public Rect rect;
+
     public bool isDragged;
     public bool isSelected;
 
-    public ConnectionPoint inPoint;
+    public List<ConnectionPoint> inPoint;
     public List<ConnectionPoint> outPoint;
+
+    public Dialog dialog;
+    public int subDialogIndex;
 
     public GUIStyle style;
     public GUIStyle defaultNodeStyle;
     public GUIStyle selectedNodeStyle;
 
-    public Action<Node> OnRemoveNode;
     public Action<ConnectionPoint, Node> OnClickIn;
     public Action<ConnectionPoint, Node> OnClickOut;
-    public string text;
-    public int subDialogIndex;
-    public Dialog dialog;
-    public Node(Dialog dialog, int index, Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle) 
+    public Action<Node> OnChangeRect;
+    public Node(ref Dialog dialog, int index, Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle, bool isEntry = false)
     {
         this.dialog = dialog;
         outPoint = new List<ConnectionPoint>();
         for (int i = 0; i < dialog.GetOptionsCuantity(index); i++)
         {
-            outPoint.Add(new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, dialog.GetOptionSpecialIndex(index, i),i));
+            outPoint.Add(new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, 0, i, dialog.GetOptionSpecialIndex(index, i)));
         }
-        rect = new Rect(position.x, position.y, width, height + dialog.GetOptionsCuantity(index)* height * 0.75f);
+        rect = new Rect(position.x, position.y, width, height + dialog.GetOptionsCuantity(index) * height * 0.75f);
         style = nodeStyle;
-        inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle);
+        inPoint = new List<ConnectionPoint>();
+
+        if (!isEntry)
+        {
+            inPoint.Add(new ConnectionPoint(this, ConnectionPointType.In, inPointStyle));
+        }
+        else
+        {
+            outPoint.Add(new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle));
+
+        }
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
-        text = "new subdialog";
         this.subDialogIndex = index;
     }
 
-    public void SetOnClick(Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint, Action<Node> OnClickRemoveNode)
+
+    public void SetOnClick(Action<ConnectionPoint, Node> OnClickInPoint, Action<ConnectionPoint, Node> OnClickOutPoint, Action<Node> OnChangeRect)
     {
         OnClickIn = OnClickInPoint;
         OnClickOut = OnClickOutPoint;
-        inPoint.SetOnClick(OnClickIn);
+        for (int i = 0; i < inPoint.Count; i++)
+        {
+            inPoint[i].SetOnClick(OnClickIn);
+        }
         for (int i = 0; i < outPoint.Count; i++)
         {
             outPoint[i].SetOnClick(OnClickOut);
         }
-        OnRemoveNode = OnClickRemoveNode;
+        this.OnChangeRect = OnChangeRect;
     }
-
 
     public void Drag(Vector2 delta)
     {
         rect.position += delta;
-        dialog.ChangeRect(subDialogIndex, rect);
+        OnChangeRect(this);
     }
 
     public void Draw()
     {
-        inPoint.Draw(this);
-
         GUI.Box(rect, "", style);
 
         for (int i = 0; i < outPoint.Count; i++)
         {
             outPoint[i].Draw(this);
-            dialog.GetSubDialogByIndex(subDialogIndex).options[i].text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + (i) * 30 + 50, rect.width * 0.9f, EditorGUIUtility.singleLineHeight), dialog.GetSubDialogByIndex(subDialogIndex).options[i].text);
         }
-        
-        text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + rect.width * 0.06f, rect.width *0.9f,EditorGUIUtility.singleLineHeight),text);
+
+        for (int i = 0; i < inPoint.Count; i++)
+        {
+            inPoint[i].Draw(this);
+        }
     }
 
     public bool ProcessEvents(Event e)
@@ -95,13 +108,6 @@ public class Node
                         style = defaultNodeStyle;
                     }
                 }
-
-                if (e.button == 1 && isSelected && rect.Contains(e.mousePosition))
-                {
-                    ProcessContextMenu();
-                    e.Use();
-                }
-
                 break;
 
             case EventType.MouseUp:
@@ -121,23 +127,8 @@ public class Node
         return false;
     }
 
-    private void ProcessContextMenu()
-    {
-        GenericMenu genericMenu = new GenericMenu();
-        genericMenu.AddItem(new GUIContent("Remove node"), false, OnClickRemoveNode);
-        genericMenu.ShowAsContext();
-    }
-
-    private void OnClickRemoveNode()
-    {
-        if (OnRemoveNode != null)
-        {
-            OnRemoveNode(this);
-        }
-    }
-
     public void Zoom(float delta)
     {
-        rect = new Rect(rect.x + delta * rect.x * 0.015f, rect.y - delta, rect.width + delta * 4, rect.height + delta );
+        rect = new Rect(rect.x + delta * rect.x * 0.015f, rect.y - delta, rect.width + delta * 4, rect.height + delta);
     }
 }
