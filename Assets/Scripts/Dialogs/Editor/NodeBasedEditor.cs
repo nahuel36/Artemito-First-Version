@@ -396,8 +396,6 @@ public class NodeBasedEditor : EditorWindow
 
     private void OnClickInPoint(ConnectionPoint inPoint, Node node)
     {
-        Debug.Log("in");
-
         selectedInPoint = inPoint;
         selectedInPointNode = node;
 
@@ -418,8 +416,6 @@ public class NodeBasedEditor : EditorWindow
 
     private void OnClickOutPoint(ConnectionPoint outPoint, Node node)
     {
-        Debug.Log("out");
-
         selectedOutPoint = outPoint;
         selectedOutPointNode = node;
 
@@ -491,18 +487,14 @@ public class NodeBasedEditor : EditorWindow
 
         if (selectedInPointNode is ExitNode)
         {
-            Debug.Log("exit");
             dialog.ChangeDestiny(selectedOutPointNode.subDialogIndex,-2, selectedOutPoint.optionSpecialIndex);
         }
         else if (selectedOutPointNode is EntryNode)
         {
-            Debug.Log("enter");
-
             dialog.ChangeEntry(selectedInPointNode.subDialogIndex);
         }
         else
         {
-            Debug.Log("none");
             dialog.ChangeDestiny(selectedOutPointNode.subDialogIndex, selectedInPointNode.subDialogIndex, selectedOutPoint.optionSpecialIndex);
         }
 
