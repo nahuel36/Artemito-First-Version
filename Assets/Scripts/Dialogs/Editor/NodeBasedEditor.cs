@@ -64,8 +64,11 @@ public class NodeBasedEditor : EditorWindow
             }
         }
 
-        connections.Add(new Connection(FindNodeBySubdialogIndex(dialog.entryDialogIndex), entryNode));
-        connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
+        if (dialog.entryDialogIndex > 0)
+        { 
+            connections.Add(new Connection(FindNodeBySubdialogIndex(dialog.entryDialogIndex), entryNode));
+            connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
+        }
     }
 
 
