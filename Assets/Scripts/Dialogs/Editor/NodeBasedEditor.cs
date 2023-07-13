@@ -454,7 +454,9 @@ public class NodeBasedEditor : EditorWindow
             for (int i = 0; i < connectionsToRemove.Count; i++)
             {
                 connections.Remove(connectionsToRemove[i]);
-                if(connectionsToRemove[i].nodeIn is SubDialogNode && connectionsToRemove[i].nodeOut is SubDialogNode)
+                if (connectionsToRemove[i].nodeOut is EntryNode)
+                    dialog.ChangeEntry(0);
+                else if (connectionsToRemove[i].nodeIn is SubDialogNode && connectionsToRemove[i].nodeOut is SubDialogNode)
                     dialog.ChangeDestiny(connectionsToRemove[i].nodeOut.subDialogIndex, 0, connectionsToRemove[i].nodeOut.outPoint[connectionsToRemove[i].indexOut].optionSpecialIndex);
             }
 
@@ -468,7 +470,10 @@ public class NodeBasedEditor : EditorWindow
     private void OnClickRemoveConnection(Connection connection)
     {
         connections.Remove(connection);
-        dialog.ChangeDestiny(connection.nodeOut.subDialogIndex, 0, connection.nodeOut.outPoint[connection.indexOut].optionSpecialIndex);
+        if (connection.nodeOut is EntryNode)
+            dialog.ChangeEntry(0);
+        else
+            dialog.ChangeDestiny(connection.nodeOut.subDialogIndex, 0, connection.nodeOut.outPoint[connection.indexOut].optionSpecialIndex);
     }
 
     private void CreateConnection()
