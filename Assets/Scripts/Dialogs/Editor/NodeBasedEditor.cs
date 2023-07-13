@@ -59,6 +59,7 @@ public class NodeBasedEditor : EditorWindow
                 if (destiny == -2)
                 {
                     connections.Add(new Connection(exitNode, FindNodeBySubdialogIndex(dialog.subDialogs[i].index), 0, j));
+                    connections[connections.Count - 1].SetOnclick(OnClickRemoveConnection);
                 }
             }
         }
