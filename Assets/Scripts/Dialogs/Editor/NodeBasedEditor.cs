@@ -474,10 +474,16 @@ public class NodeBasedEditor : EditorWindow
         for (int i = 0; i < connections.Count; i++)
         {
             if (selectedOutPointNode == connections[i].nodeOut)
-            {
-                connectionsToRemove.Add(connections[i]);
+            { 
+                for (int j = 0; j < connections[i].nodeOut.outPoint.Count; j++)
+                {
+                    if (connections[i].indexOut == connections[i].nodeOut.outPoint[j].outArrayIndex &&
+                        selectedOutPoint == connections[i].nodeOut.outPoint[j]) 
+                    {
+                        connectionsToRemove.Add(connections[i]);
+                    }
+                }
             }
-
         }
         for (int i = 0; i < connectionsToRemove.Count; i++)
         {
