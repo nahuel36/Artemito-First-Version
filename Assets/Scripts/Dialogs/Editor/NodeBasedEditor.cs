@@ -478,6 +478,9 @@ public class NodeBasedEditor : EditorWindow
 
     private void CreateConnection()
     {
+        if (selectedInPointNode is ExitNode && selectedOutPointNode is EntryNode)
+            return;
+
         List<Connection> connectionsToRemove = new List<Connection>();
 
         for (int i = 0; i < connections.Count; i++)
