@@ -86,7 +86,7 @@ public class NodeBasedEditor : EditorWindow
     {
         if (dialogSerialized.FindProperty("enterNodeRect").rectValue.width == 0)
         {
-            dialogSerialized.FindProperty("enterNodeRect").rectValue = new Rect(20, 20, 200, 50);
+            dialogSerialized.FindProperty("enterNodeRect").rectValue = new Rect(120, 120, 200, 50);
         }
         Vector2 entryPos = new Vector2(dialogSerialized.FindProperty("enterNodeRect").rectValue.x, dialogSerialized.FindProperty("enterNodeRect").rectValue.y);
         float entryWidth = dialogSerialized.FindProperty("enterNodeRect").rectValue.width;
@@ -96,7 +96,7 @@ public class NodeBasedEditor : EditorWindow
 
         if (dialogSerialized.FindProperty("exitNodeRect").rectValue.width == 0)
         {
-            dialogSerialized.FindProperty("exitNodeRect").rectValue = new Rect(20, 20, 200, 50);
+            dialogSerialized.FindProperty("exitNodeRect").rectValue = new Rect(120, 160, 200, 50);
         }
         Vector2 exitPos = new Vector2(dialogSerialized.FindProperty("exitNodeRect").rectValue.x, dialogSerialized.FindProperty("exitNodeRect").rectValue.y);
         float exitWidth = dialogSerialized.FindProperty("exitNodeRect").rectValue.width;
