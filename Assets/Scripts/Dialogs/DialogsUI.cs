@@ -15,13 +15,15 @@ public class DialogsUI : MonoBehaviour
     [SerializeField] PNCCursor cursor;
     List<DialogOptionUI> options = new List<DialogOptionUI>();
     DialogOptionUI lastOption;
-    [SerializeField] Transform dialogsContainer;
+    [SerializeField] Transform dialogContainer;
+    [SerializeField] Transform optionsContainer;
     ScrollRect scrollRect;
     [SerializeField] int visibleOptions = 3;
     private float initializedCounter;
     private int currentSubDialog;
     private void Start()
     {
+        dialogContainer.gameObject.SetActive(false);
         currentSubDialog = 0;
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
         eventSystem = FindObjectOfType<EventSystem>();
@@ -32,13 +34,14 @@ public class DialogsUI : MonoBehaviour
     // Start is called before the first frame update
     public void StartDialog(Dialog dialog, int subDialogIndex)
     {
+        dialogContainer.gameObject.SetActive(true);
         currentSubDialog = subDialogIndex;
         initializedCounter = 0.5f;
         inActiveDialog = true;
         options.Clear();
-        for (int i = dialogsContainer.childCount - 1; i > 0; i--)
+        for (int i = optionsContainer.childCount - 1; i > 0; i--)
         {
-            Destroy(dialogsContainer.GetChild(i).gameObject);
+            Destroy(optionsContainer.GetChild(i).gameObject);
         }
         int j = 0;
         int k = 0;
@@ -63,7 +66,7 @@ public class DialogsUI : MonoBehaviour
             if (k == 0)
                 optionGO = first_option.container;
             else
-                optionGO = Instantiate(first_option.container, dialogsContainer);
+                optionGO = Instantiate(first_option.container, optionsContainer);
             optionGO.SetActive(true);
             DialogOptionUI dialogOptionUI = optionGO.GetComponent<DialogOptionUI>();
             dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[j].text;
@@ -81,11 +84,12 @@ public class DialogsUI : MonoBehaviour
     {
         inActiveDialog = false;
         options.Clear();
-        for (int i = dialogsContainer.childCount - 1; i > 0; i--)
+        for (int i = optionsContainer.childCount - 1; i > 0; i--)
         {
-            Destroy(dialogsContainer.GetChild(i).gameObject);
+            Destroy(optionsContainer.GetChild(i).gameObject);
         }
         first_option.container.SetActive(false);
+        dialogContainer.gameObject.SetActive(false);
     }
 
     public void MoveUp()
