@@ -498,7 +498,7 @@ public static class PNCEditorUtils
         if(isInventoryItem)
             verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, GUIContent.none);
         else if(isDialogOption)
-            verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbExpanded.boolValue?verbRect.y-EditorGUIUtility.singleLineHeight: verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, GUIContent.none);
+            verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbExpanded.boolValue?verbRect.y-EditorGUIUtility.singleLineHeight *2 : verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, GUIContent.none);
         else
             verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("verb").FindPropertyRelative("name").stringValue);
                 

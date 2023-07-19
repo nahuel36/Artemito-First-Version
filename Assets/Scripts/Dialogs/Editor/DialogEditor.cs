@@ -49,12 +49,17 @@ public class DialogEditor : Editor
                             {
                                 recOpt.y += EditorGUIUtility.singleLineHeight;
                                 EditorGUI.PropertyField(new Rect(recOpt.x +7,recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("initialState"));
+                                recOpt.y += EditorGUIUtility.singleLineHeight;
+                                EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("say"));
                             }
                             PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, false, true);
                         },
                         elementHeightCallback = (int indexOpt) =>
                         {
-                            return PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
+                            var verbExpanded = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector");
+                            if (verbExpanded.boolValue)
+                                return EditorGUIUtility.singleLineHeight * 2 + PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
+                            return EditorGUIUtility.singleLineHeight;
                         },
                         drawHeaderCallback = (rect) =>
                         {
@@ -65,6 +70,7 @@ public class DialogEditor : Editor
                             serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue++;
                             ReorderableList.defaultBehaviours.DoAddButton(list);
                             int specialIndex = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("optionSpecialIndex").intValue;
+                            options.GetArrayElementAtIndex(list.index).FindPropertyRelative("say").boolValue = true;
                             options.GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue = specialIndex;
                             serializedObject.ApplyModifiedProperties();
                             serializedObject.Update();

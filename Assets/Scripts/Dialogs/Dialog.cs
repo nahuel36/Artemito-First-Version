@@ -22,6 +22,8 @@ public class DialogOption
         disabled_forever = 2
     }
     public current_state currentState = current_state.initial;
+
+    public bool say = true;
 }
 
 [System.Serializable]
