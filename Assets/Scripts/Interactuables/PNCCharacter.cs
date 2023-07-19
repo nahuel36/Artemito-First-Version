@@ -21,6 +21,9 @@ public class PNCCharacter : PNCInteractuable
 
     public Sprite SierraTextFace;
 
+    public bool isPlayerCharacter = false;
+
+
     Animator anim;
     CharacterAnimator characterAnimator;
     [HideInInspector]
