@@ -136,6 +136,13 @@ public class DialogsUI : MonoBehaviour
             if (Input.GetMouseButtonUp(0) && initializedCounter <= 0)
             {
                 DialogsManager.Instance.EndDialog();
+                foreach (PNCCharacter character in GameObject.FindObjectsOfType<PNCCharacter>())
+                {
+                    if (character.isPlayerCharacter)
+                    {
+                        character.Talk(actualOption.dialogOption.text);
+                    }
+                }
                 InteractionUtils.RunAttempsInteraction(actualOption.dialogOption.attempsContainer);
                 int destiny = actualOption.dialogOption.subDialogDestinyIndex;
                 if (destiny > 0)
