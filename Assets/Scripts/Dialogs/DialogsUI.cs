@@ -19,8 +19,10 @@ public class DialogsUI : MonoBehaviour
     ScrollRect scrollRect;
     [SerializeField] int visibleOptions = 3;
     private float initializedCounter;
+    private int currentSubDialog;
     private void Start()
     {
+        currentSubDialog = 0;
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
         eventSystem = FindObjectOfType<EventSystem>();
         scrollRect = GetComponentInChildren<ScrollRect>();
@@ -30,6 +32,7 @@ public class DialogsUI : MonoBehaviour
     // Start is called before the first frame update
     public void StartDialog(Dialog dialog, int subDialogIndex)
     {
+        currentSubDialog = subDialogIndex;
         initializedCounter = 0.5f;
         inActiveDialog = true;
         options.Clear();
@@ -128,12 +131,17 @@ public class DialogsUI : MonoBehaviour
             actualOption.textContainer.color = Color.gray;
             if (Input.GetMouseButtonUp(0) && initializedCounter <= 0)
             {
+                DialogsManager.Instance.EndDialog();
                 InteractionUtils.RunAttempsInteraction(actualOption.dialogOption.attempsContainer);
                 int destiny = actualOption.dialogOption.subDialogDestinyIndex;
                 if (destiny > 0)
                     DialogsManager.Instance.StartDialog(dialog, destiny);//queue
                 else if (destiny == -2)
-                    DialogsManager.Instance.EndDialog();
+                { 
+                    //end dialog
+                }
+                else
+                    DialogsManager.Instance.StartDialog(dialog, currentSubDialog);
             }
         }
 
