@@ -20,6 +20,12 @@ public class DialogEditor : Editor
 
     private void CheckNodes()
     {
+        subDialogDict = new Dictionary<int, ReorderableList>();
+
+        optionAttempsListDict = new Dictionary<string, ReorderableList>();
+
+        optionInteractionListDict = new Dictionary<string, ReorderableList>();
+
         Dialog myTarget = (Dialog)target;
 
         allSubDialogsList = new ReorderableList(serializedObject, serializedObject.FindProperty("subDialogs"), true, true, true, true)
@@ -109,6 +115,32 @@ public class DialogEditor : Editor
                 }
             }
             ,
+            onRemoveCallback = (list) =>
+            {
+                int index = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(list.index).FindPropertyRelative("index").intValue;
+
+                for (int i = 0; i < serializedObject.FindProperty("subDialogs").arraySize; i++)
+                {
+                    for (int j = 0; j < serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").arraySize; j++)
+                    {
+                        if (serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("subDialogDestinyIndex").intValue == index)
+                        {
+                            serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("subDialogDestinyIndex").intValue = 0;
+                        }
+                    }
+                }
+
+                ReorderableList.defaultBehaviours.DoRemoveButton(list);
+                serializedObject.ApplyModifiedProperties();
+                CheckNodes();
+                OnInspectorGUI();
+
+                if (nodeBase)
+                {
+                    nodeBase.InitializeNodes();
+                }
+            }
+            ,
             elementHeightCallback = (int index) =>
             {
                 int key = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("index").intValue;
@@ -121,7 +153,7 @@ public class DialogEditor : Editor
                 {
                     height = EditorGUIUtility.singleLineHeight * 5;
 
-                    if (subDialogDict.ContainsKey(key))
+                    if (subDialogDict.ContainsKey(key) && subDialogDict[key] != null && subDialogDict[key].count > 0)
                     {
                         for (int i = 0; i < subDialogDict[key].count; i++)
                             height += subDialogDict[key].elementHeightCallback(i);
@@ -142,15 +174,6 @@ public class DialogEditor : Editor
                     nodeBase.InitializeNodes();
                 }
             },
-            onRemoveCallback = (list) =>
-            {
-                ReorderableList.defaultBehaviours.DoRemoveButton(list);
-                if (nodeBase)
-                {
-                    nodeBase.InitializeNodes();
-                }
-            }
-            ,
             drawHeaderCallback = (rect) =>
             {
                 EditorGUI.LabelField(rect, "sub-dialogs");
