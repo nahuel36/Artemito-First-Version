@@ -26,6 +26,7 @@ public class AStarPathFinderAdapter : IPathFinder
         aipath.orientation = OrientationMode.YAxisForward;
         aipath.enableRotation = false;
         aipath.maxSpeed = velocity;
+        aipath.pickNextWaypointDist = GameObject.FindObjectOfType<WalkableArea2D>().node_size;
         aipath.FindComponents();
 
         setter = transform.gameObject.AddComponent<AIDestinationSetter>();
