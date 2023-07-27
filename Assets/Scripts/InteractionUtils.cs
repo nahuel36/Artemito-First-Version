@@ -17,12 +17,26 @@ public static class InteractionUtils
     public static void RunAttempsInteraction(AttempsContainer attempsContainer)
     {
         if(attempsContainer.attemps.Count > 0)
-        { 
+        {
+            int index = 0;
+
+            if (!attempsContainer.isRandom)
+            {
+                index = attempsContainer.executedTimes;
+            }
+            else
+            {
+                index = Random.Range(0,attempsContainer.attemps.Count);
+            }
+
             for (int i = 0; i < attempsContainer.attemps[attempsContainer.executedTimes].interactions.Count; i++)
             {
-                attempsContainer.attemps[attempsContainer.executedTimes].interactions[i].action.Invoke();
+                attempsContainer.attemps[index].interactions[i].action.Invoke();
             }
-            InteractionUtils.increaseExecutedTimes(ref attempsContainer.executedTimes, attempsContainer.attemps.Count, attempsContainer.isCyclical);
+
+            if(!attempsContainer.isRandom)
+                InteractionUtils.increaseExecutedTimes(ref attempsContainer.executedTimes, attempsContainer.attemps.Count, attempsContainer.isCyclical, attempsContainer.isRandom);
+
         }
         else
         {
@@ -30,7 +44,7 @@ public static class InteractionUtils
         }
     }
 
-    public static void increaseExecutedTimes(ref int executedTimes, int count, bool isCyclical)
+    public static void increaseExecutedTimes(ref int executedTimes, int count, bool isCyclical, bool isRandom)
     {
         if (executedTimes + 1 == count)
         {

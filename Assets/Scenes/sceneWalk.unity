@@ -335,6 +335,7 @@ MonoBehaviour:
     index: 0
     attempsContainer:
       isCyclical: 0
+      isRandom: 0
       attemps: []
       expandedInInspector: 0
       executedTimes: 0
@@ -11167,6 +11168,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.isRandom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_variables.Array.data[2].properties.name
       value: New Global Variable 9
       objectReference: {fileID: 0}
@@ -11208,7 +11214,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11258,7 +11264,17 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].expandedInInspector
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[1].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[2].expandedInInspector
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11274,6 +11290,21 @@ PrefabInstance:
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[1].expandedInInspector
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[1].interactions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[2].interactions.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11342,6 +11373,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].WhatToSay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].character
+      value: 
+      objectReference: {fileID: 1810703246}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[1].interactions.Array.data[0].WhatToSay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[1].interactions.Array.data[0].character
+      value: 
+      objectReference: {fileID: 1810703246}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[2].interactions.Array.data[0].WhatToSay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[2].interactions.Array.data[0].character
+      value: 
+      objectReference: {fileID: 1810703246}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].dialogSelected
       value: 
       objectReference: {fileID: 11400000, guid: d8ee816760d8513418cfd20bb981c74d,
@@ -11375,6 +11436,21 @@ PrefabInstance:
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].local_BooleanValue
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[1].interactions.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[2].interactions.Array.data[0].expandedInInspector
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12043,7 +12119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b22785c17c16504aaa02da1e91cd7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  node_size: 0.1
+  node_size: 0.2
 --- !u!61 &531574999
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12672,8 +12748,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.isRandom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.isRandom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_variables.Array.data[2].properties.name
       value: New Global Variable 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.isCyclical
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.isCyclical
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12738,7 +12834,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}

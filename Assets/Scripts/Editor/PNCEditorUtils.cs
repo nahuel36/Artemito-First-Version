@@ -325,7 +325,7 @@ public static class PNCEditorUtils
 
         if (serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector").boolValue)
         {
-            float heightM = 6f * EditorGUIUtility.singleLineHeight;
+            float heightM = 7f * EditorGUIUtility.singleLineHeight;
             var attemps = serializedVerb.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer").FindPropertyRelative("attemps");
             for (int i = 0; i < attemps.arraySize; i++)
             {
@@ -506,10 +506,22 @@ public static class PNCEditorUtils
 
         if (verbExpanded.boolValue)
         {
-
+            
             EditorGUI.PropertyField(new Rect(verbRect.x, verbRect.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight), attempContainer.FindPropertyRelative("isCyclical"));
 
             verbRect.y += EditorGUIUtility.singleLineHeight;
+
+            if (attempContainer.FindPropertyRelative("isCyclical").boolValue)
+                attempContainer.FindPropertyRelative("isRandom").boolValue = false;
+
+            EditorGUI.PropertyField(new Rect(verbRect.x, verbRect.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight), attempContainer.FindPropertyRelative("isRandom"));
+
+            verbRect.y += EditorGUIUtility.singleLineHeight;
+
+            if (attempContainer.FindPropertyRelative("isRandom").boolValue)
+                attempContainer.FindPropertyRelative("isCyclical").boolValue = false;
+
+            
 
             var attempKey = attempContainer.propertyPath;
 
