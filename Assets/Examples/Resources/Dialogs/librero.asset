@@ -20,6 +20,7 @@ MonoBehaviour:
       index: 1
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps:
         - interactions:
           - type: 4
@@ -35,6 +36,7 @@ MonoBehaviour:
             variableObject: {fileID: 0}
             dialogAction: 0
             dialogSelected: {fileID: 0}
+            newDialogEntry: 0
             OnCompareResultTrueAction: 0
             OnCompareResultFalseAction: 0
             LineToGoOnTrueResult: 0
@@ -86,62 +88,67 @@ MonoBehaviour:
         executedTimes: 0
       subDialogDestinyIndex: 2
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: "\xBFC\xF3mo va el negocio?"
       index: 2
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 5
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: "\xBFQuisiera comprar un libro?"
       index: 3
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Bonito sombrero.
       index: 4
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Estoy vendiendo estas chaquetas de cuero.
       index: 5
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: "Adi\xF3s."
       index: 6
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: -2
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     nodeRect:
       serializedVersion: 2
@@ -149,7 +156,7 @@ MonoBehaviour:
       y: 189
       width: 212
       height: 275
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 7
   - text: librero
     index: 2
@@ -158,34 +165,37 @@ MonoBehaviour:
       index: 1
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Uh, que mal.
       index: 2
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 9
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: "No me interesa, adi\xF3s."
       index: 3
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: -2
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     nodeRect:
       serializedVersion: 2
@@ -193,7 +203,7 @@ MonoBehaviour:
       y: 390
       width: 212
       height: 162.5
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 6
   - text: negocio
     index: 5
@@ -202,45 +212,49 @@ MonoBehaviour:
       index: 1
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 2
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: "\xBFCu\xE1l mafia?"
       index: 2
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 7
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: "\xBFDebe mucha plata?"
       index: 3
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 8
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 1
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     nodeRect:
       serializedVersion: 2
@@ -248,7 +262,7 @@ MonoBehaviour:
       y: 66
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: mafia
     index: 7
@@ -257,56 +271,61 @@ MonoBehaviour:
       index: 1
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: "\xBFEn d\xF3nde esta su cuartel?"
       index: 2
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: "\xBFLes debe mucha plata?"
       index: 3
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Volvamos a hablar de su negocio.
       index: 4
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 5
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Esto me esta dando mucho miedo, mejor me voy.
       index: 5
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: -2
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     nodeRect:
       serializedVersion: 2
@@ -314,7 +333,7 @@ MonoBehaviour:
       y: 56
       width: 212
       height: 237.5
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: plata
     index: 8
@@ -323,45 +342,49 @@ MonoBehaviour:
       index: 1
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 2
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Ah, entonces puedo fiarle.
       index: 2
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Uh, que mal.
       index: 3
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 9
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 1
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     nodeRect:
       serializedVersion: 2
@@ -369,7 +392,7 @@ MonoBehaviour:
       y: 421
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 4
   - text: que mal
     index: 9
@@ -378,45 +401,49 @@ MonoBehaviour:
       index: 1
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Muy muy mal
       index: 2
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Demasiado mal
       index: 3
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     - text: Tanto que me voy
       index: 4
       attempsContainer:
         isCyclical: 0
+        isRandom: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: -2
       initialState: 0
-      currentState: -1
+      currentState: 0
       say: 1
     nodeRect:
       serializedVersion: 2
@@ -424,14 +451,15 @@ MonoBehaviour:
       y: 423
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   subDialogIndex: 11
-  entryDialogIndex: 1
+  initial_entryDialogIndex: 1
+  current_entryDialogIndex: 3
   enterNodeRect:
     serializedVersion: 2
-    x: 42.285004
-    y: 89
+    x: -9.714996
+    y: 92
     width: 212
     height: 53
   exitNodeRect:

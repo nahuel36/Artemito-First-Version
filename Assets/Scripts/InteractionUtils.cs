@@ -93,7 +93,11 @@ public static class InteractionUtils
                 {
                     if (interaction.dialogAction == Interaction.DialogAction.startDialog)
                     {
-                        attemps[j].interactions[k].action.AddListener(() => DialogsManager.Instance.StartDialog(interaction.dialogSelected, interaction.dialogSelected.entryDialogIndex));
+                        attemps[j].interactions[k].action.AddListener(() => DialogsManager.Instance.StartDialog(interaction.dialogSelected, interaction.dialogSelected.current_entryDialogIndex));
+                    }
+                    else if (interaction.dialogAction == Interaction.DialogAction.changeEntry)
+                    {
+                        attemps[j].interactions[k].action.AddListener(() => DialogsManager.Instance.ChangeEntry(interaction.dialogSelected, interaction.newDialogEntry));
                     }
                 }
                 else if (interaction.type == Interaction.InteractionType.variables)

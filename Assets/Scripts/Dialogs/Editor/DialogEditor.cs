@@ -130,9 +130,9 @@ public class DialogEditor : Editor
                     }
                 }
 
-                if (serializedObject.FindProperty("entryDialogIndex").intValue == index)
+                if (serializedObject.FindProperty("initial_entryDialogIndex").intValue == index)
                 {
-                    serializedObject.FindProperty("entryDialogIndex").intValue = 0;
+                    serializedObject.FindProperty("initial_entryDialogIndex").intValue = 0;
                 }
 
                 ReorderableList.defaultBehaviours.DoRemoveButton(list);

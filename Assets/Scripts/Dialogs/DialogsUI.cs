@@ -27,13 +27,15 @@ public class DialogsUI : MonoBehaviour
         currentSubDialog = 0;
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
         eventSystem = FindObjectOfType<EventSystem>();
-        scrollRect = GetComponentInChildren<ScrollRect>();
+        scrollRect = dialogContainer.GetComponentInChildren<ScrollRect>();
         DialogsManager.Instance.Initialize();
     }
 
     // Start is called before the first frame update
     public void StartDialog(Dialog dialog, int subDialogIndex)
     {
+        Debug.Log(subDialogIndex + " " + dialog.current_entryDialogIndex);
+
         dialogContainer.gameObject.SetActive(true);
         currentSubDialog = subDialogIndex;
         initializedCounter = 0.5f;
@@ -47,15 +49,7 @@ public class DialogsUI : MonoBehaviour
         int k = 0;
         while(j < dialog.GetSubDialogByIndex(subDialogIndex).options.Count)
         {
-            if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentState == DialogOption.current_state.initial)
-            {
-                if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].initialState == DialogOption.state.disabled)
-                { 
-                    j++;
-                continue;
-                }
-            }
-            else if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentState == DialogOption.current_state.disabled || 
+            if (dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentState == DialogOption.current_state.disabled || 
                 dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentState == DialogOption.current_state.disabled_forever)
             {
                 j++;
@@ -119,16 +113,30 @@ public class DialogsUI : MonoBehaviour
 
         DialogOptionUI actualOption = null;
 
+        bool founded = false;
+        bool buttonFounded = false;
         foreach (RaycastResult result in results)
         {
             DialogOptionUI overOption = result.gameObject.GetComponent<DialogOptionUI>();
             if (overOption != null && options.Contains(overOption))
             {
-                if(lastOption != null)
+                if (lastOption != null)
                     lastOption.textContainer.color = Color.white;
                 actualOption = overOption;
                 lastOption = actualOption;
+                founded = true;
             }
+            if (result.gameObject.GetComponent<Button>())
+            {
+                buttonFounded = true;
+            }
+        }
+        if (buttonFounded && actualOption != null)
+        {
+            actualOption.textContainer.color = Color.white;
+            actualOption = null;
+            if (lastOption != null)
+                lastOption.textContainer.color = Color.white;
         }
         if (actualOption != null)
         { 

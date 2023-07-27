@@ -27,6 +27,17 @@ public class DialogsManager : MonoBehaviour
     public void Initialize()
     {
         dialogsUI = FindObjectOfType<DialogsUI>();
+        foreach (Dialog dialog in Resources.LoadAll<Dialog>("Dialogs/"))
+        {
+            dialog.current_entryDialogIndex = dialog.initial_entryDialogIndex;
+            for (int i = 0; i < dialog.subDialogs.Count; i++)
+            {
+                for (int j = 0; j < dialog.subDialogs[i].options.Count; j++)
+                {
+                    dialog.subDialogs[i].options[j].currentState = (DialogOption.current_state)dialog.subDialogs[i].options[j].initialState;
+                }
+            }
+        }
     }
 
     public void StartDialog(Dialog dialog, int subDialogIndex)
@@ -40,5 +51,11 @@ public class DialogsManager : MonoBehaviour
         EndDialogCommand command = new EndDialogCommand();
         command.Queue(dialogsUI);
         
+    }
+
+    public void ChangeEntry(Dialog dialogSelected, int newEntry)
+    {
+        ChangeEntryDialogCommand command = new ChangeEntryDialogCommand();
+        command.Queue(dialogSelected, newEntry);
     }
 }

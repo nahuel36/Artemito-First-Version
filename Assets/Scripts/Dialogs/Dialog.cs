@@ -16,12 +16,11 @@ public class DialogOption
     public state initialState = state.enabled;
     public enum current_state
     {
-        initial = -1,
         enabled = 0,
         disabled = 1,
         disabled_forever = 2
     }
-    public current_state currentState = current_state.initial;
+    public current_state currentState;
 
     public bool say = true;
 }
@@ -43,9 +42,13 @@ public class Dialog : ScriptableObject
 {
     public List<SubDialog> subDialogs;
     public int subDialogIndex;
-    public int entryDialogIndex;
+    public int initial_entryDialogIndex;
+    public int current_entryDialogIndex;
     public Rect enterNodeRect;
     public Rect exitNodeRect;
+
+        
+
     public void ChangeSubDialogRect(int index, Rect rect)
     {
         for (int i = 0; i < subDialogs.Count; i++)
@@ -121,7 +124,7 @@ public class Dialog : ScriptableObject
 
     public void ChangeEntry(int index)
     {
-        entryDialogIndex = index;
+        initial_entryDialogIndex = index;
     }
 
     public int GetOptionsCuantity(int index)

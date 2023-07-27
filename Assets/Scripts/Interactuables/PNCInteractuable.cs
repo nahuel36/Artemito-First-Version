@@ -91,10 +91,12 @@ public class Interaction
 
     public enum DialogAction
     { 
-        startDialog
+        startDialog,
+        changeEntry
     }
     public DialogAction dialogAction;
     public Dialog dialogSelected;
+    public int newDialogEntry;
 
     public Conditional.GetVariableAction OnCompareResultTrueAction;
     public Conditional.GetVariableAction OnCompareResultFalseAction;
