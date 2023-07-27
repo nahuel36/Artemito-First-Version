@@ -39,6 +39,10 @@ public class InventoryManager : MonoBehaviour
                 InteractionUtils.InitializeInteractions(ref inventory.items[i].inventoryActions[j].attempsContainer.attemps);
 
             }
+            for (int j = 0; j < inventory.items[i].verbs.Count; j++)
+            {
+                InteractionUtils.InitializeInteractions(ref inventory.items[i].verbs[j].attempsContainer.attemps);
+            }
 
         }
 
