@@ -52,16 +52,4 @@ public class PNCVariablesContainer : MonoBehaviour
         command.Queue(interactuableGlobalVariable, interaction);
     }
 
-    public void GetLocalVariable(Interaction interaction, InteractuableLocalVariable variable)
-    {
-        CommandGetLocalVariable command = new CommandGetLocalVariable();
-        command.Queue(variable, interaction);
-    }
-
-    public void GetGlobalVariable(Interaction interaction, InteractuableGlobalVariable variable)
-    {
-        CommandGetGlobalVariable command = new CommandGetGlobalVariable();
-        command.Queue(variable, interaction);
-    }
-
 }
