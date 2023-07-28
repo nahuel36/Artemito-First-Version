@@ -626,16 +626,18 @@ public static class PNCEditorUtils
                                                 if(interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeEntry)
                                                 {
                                                     Dialog currentDialog = ((Dialog)interactionSerialized.FindPropertyRelative("dialogSelected").objectReferenceValue);
-                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                    string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
-                                                    int[] subdialogsIndexs = new int[currentDialog.subDialogs.Count];
-                                                    for (int i = 0; i < currentDialog.subDialogs.Count; i++)
-                                                    {
-                                                        subdialogsTexts[i] = currentDialog.subDialogs[i].text;
-                                                        subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
+                                                    if (currentDialog != null)
+                                                    { 
+                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                        string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
+                                                        int[] subdialogsIndexs = new int[currentDialog.subDialogs.Count];
+                                                        for (int i = 0; i < currentDialog.subDialogs.Count; i++)
+                                                        {
+                                                            subdialogsTexts[i] = currentDialog.subDialogs[i].text;
+                                                            subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
+                                                        }
+                                                        interactionSerialized.FindPropertyRelative("newDialogEntry").intValue = EditorGUI.IntPopup(interactRect, interactionSerialized.FindPropertyRelative("newDialogEntry").intValue, subdialogsTexts, subdialogsIndexs);
                                                     }
-                                                    interactionSerialized.FindPropertyRelative("newDialogEntry").intValue = EditorGUI.IntPopup(interactRect, interactionSerialized.FindPropertyRelative("newDialogEntry").intValue, subdialogsTexts, subdialogsIndexs);
-                                                    
                                                 }
                                                     
                                             }
