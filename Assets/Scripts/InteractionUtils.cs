@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Threading.Tasks;
 public static class InteractionUtils 
 {
     public static VerbInteractions FindVerb(Verb verb, List<VerbInteractions> verbs)
@@ -14,29 +15,35 @@ public static class InteractionUtils
         return null;
     }
 
-    public static void RunAttempsInteraction(AttempsContainer attempsContainer)
+    public async static void RunAttempsInteraction(AttempsContainer attempsContainer)
     {
         if(attempsContainer.attemps.Count > 0)
         {
-            int index = 0;
+            int index;
 
-            if (!attempsContainer.isRandom)
-            {
-                index = attempsContainer.executedTimes;
-            }
-            else
-            {
+            if (!attempsContainer.isRandom && !attempsContainer.isCyclical)
+                index = Mathf.Clamp(attempsContainer.executedTimes, 0, attempsContainer.attemps.Count - 1);
+            else if(!attempsContainer.isCyclical && !attempsContainer.isRandom)
+                index = attempsContainer.executedTimes % attempsContainer.attemps.Count;
+            else 
                 index = Random.Range(0,attempsContainer.attemps.Count);
-            }
 
-            for (int i = 0; i < attempsContainer.attemps[attempsContainer.executedTimes].interactions.Count; i++)
+            int i = 0;
+            while (i < attempsContainer.attemps[index].interactions.Count)
             {
-                attempsContainer.attemps[index].interactions[i].action.Invoke();
+                InitializeInteractionCommand command = new InitializeInteractionCommand();
+                command.Queue(attempsContainer.attemps[index].interactions[i]);
+
+                while (command.action == null)
+                    await Task.Yield();
+                
+                command.action.Invoke();
+                //InitializeInteraction(attempsContainer.attemps[index].interactions[i]).Invoke();
+
+                i++;
             }
 
-            if(!attempsContainer.isRandom)
-                InteractionUtils.increaseExecutedTimes(ref attempsContainer.executedTimes, attempsContainer.attemps.Count, attempsContainer.isCyclical, attempsContainer.isRandom);
-
+            attempsContainer.executedTimes++;
         }
         else
         {
@@ -44,106 +51,86 @@ public static class InteractionUtils
         }
     }
 
-    public static void increaseExecutedTimes(ref int executedTimes, int count, bool isCyclical, bool isRandom)
+
+    public static UnityEvent InitializeInteraction(Interaction interaction)
     {
-        if (executedTimes + 1 == count)
+        UnityEvent action = new UnityEvent();
+        if (interaction.type == Interaction.InteractionType.custom)
+            action = interaction.action;
+        else if (interaction.type == Interaction.InteractionType.character)
         {
-            if (isCyclical) executedTimes = 0;
-            else executedTimes = count - 1;
-        }
-        else
-            executedTimes++;
-    }
-
-
-
-    public static void InitializeInteractions(ref List<InteractionsAttemp> attemps)
-    {
-        for (int j = 0; j < attemps.Count; j++)
-        {
-            for (int k = 0; k < attemps[j].interactions.Count; k++)
+            PNCCharacter charact = interaction.character;
+            if (interaction.characterAction == Interaction.CharacterAction.say)
             {
-                Interaction interaction = attemps[j].interactions[k];
-                if (interaction.type != Interaction.InteractionType.custom)
-                    attemps[j].interactions[k].action = new UnityEvent();
-                if (interaction.type == Interaction.InteractionType.character)
-                {
-                    PNCCharacter charact = interaction.character;
-                    if (interaction.characterAction == Interaction.CharacterAction.say)
-                    {
-                        string whattosay = interaction.WhatToSay;
-                        if (interaction.CanSkip)
-                            attemps[j].interactions[k].action.AddListener(() => charact.Talk(whattosay));
-                        else
-                            attemps[j].interactions[k].action.AddListener(() => charact.UnskippableTalk(whattosay));
-                    }
-                    else if (interaction.characterAction == Interaction.CharacterAction.sayWithScript)
-                    {
-                        if (interaction.CanSkip)
-                            attemps[j].interactions[k].action.AddListener(() => charact.Talk(((SayScript)interaction.SayScript).SayWithScript()));
-                        else
-                            attemps[j].interactions[k].action.AddListener(() => charact.UnskippableTalk(((SayScript)interaction.SayScript).SayWithScript()));
-                    }
-                    else if (interaction.characterAction == Interaction.CharacterAction.walk)
-                    {
-                        attemps[j].interactions[k].action.AddListener(() => charact.Walk(interaction.WhereToWalk.position));
-                    }
-                }
-                else if (interaction.type == Interaction.InteractionType.dialog)
-                {
-                    if (interaction.dialogAction == Interaction.DialogAction.startDialog)
-                    {
-                        attemps[j].interactions[k].action.AddListener(() => DialogsManager.Instance.StartDialog(interaction.dialogSelected, interaction.dialogSelected.current_entryDialogIndex));
-                    }
-                    else if (interaction.dialogAction == Interaction.DialogAction.changeEntry)
-                    {
-                        attemps[j].interactions[k].action.AddListener(() => DialogsManager.Instance.ChangeEntry(interaction.dialogSelected, interaction.newDialogEntry));
-                    }
-                }
-                else if (interaction.type == Interaction.InteractionType.variables)
-                {
-                    PNCVariablesContainer varContainer = interaction.variableObject;
-                    if (interaction.variablesAction == Interaction.VariablesAction.setLocalVariable)
-                    {
-                        attemps[j].interactions[k].action.AddListener(() =>
-                        varContainer.SetLocalVariable(interaction,
-                                                        interaction.variableObject.local_variables[interaction.localVariableSelected]));
-                    }
-                    else if (interaction.variablesAction == Interaction.VariablesAction.setGlobalVariable)
-                    {
-                        attemps[j].interactions[k].action.AddListener(() =>
-                        varContainer.SetGlobalVariable(interaction,
-                                                        interaction.variableObject.global_variables[interaction.globalVariableSelected]));
-                    }
-                    else if (interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
-                    {
-                        attemps[j].interactions[k].action.AddListener(() =>
-                        varContainer.GetLocalVariable(interaction,
-                                                        interaction.variableObject.local_variables[interaction.localVariableSelected]));
-                    }
-                    else if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable)
-                    {
-                        attemps[j].interactions[k].action.AddListener(() =>
-                        varContainer.GetGlobalVariable(interaction,
-                                                        interaction.variableObject.global_variables[interaction.globalVariableSelected]));
-                    }
-                }
-                else if (interaction.type == Interaction.InteractionType.inventory)
-                {
-                    if (interaction.inventoryAction == Interaction.InventoryAction.useAsInventory)
-                    {
-                        attemps[j].interactions[k].action.AddListener(() =>
-                        {
-                            CommandUseAsInventory command = new CommandUseAsInventory();
-                            command.Queue();
-                        });
-
-                    }
-                }
-
+                string whattosay = interaction.WhatToSay;
+                if (interaction.CanSkip)
+                    action.AddListener(() => charact.Talk(whattosay));
+                else
+                    action.AddListener(() => charact.UnskippableTalk(whattosay));
+            }
+            else if (interaction.characterAction == Interaction.CharacterAction.sayWithScript)
+            {
+                if (interaction.CanSkip)
+                    action.AddListener(() => charact.Talk(((SayScript)interaction.SayScript).SayWithScript()));
+                else
+                    action.AddListener(() => charact.UnskippableTalk(((SayScript)interaction.SayScript).SayWithScript()));
+            }
+            else if (interaction.characterAction == Interaction.CharacterAction.walk)
+            {
+                action.AddListener(() => charact.Walk(interaction.WhereToWalk.position));
             }
         }
+        else if (interaction.type == Interaction.InteractionType.dialog)
+        {
+            if (interaction.dialogAction == Interaction.DialogAction.startDialog)
+            {
+                action.AddListener(() => DialogsManager.Instance.StartDialog(interaction.dialogSelected, interaction.dialogSelected.current_entryDialogIndex));
+            }
+            else if (interaction.dialogAction == Interaction.DialogAction.changeEntry)
+            {
+                action.AddListener(() => DialogsManager.Instance.ChangeEntry(interaction.dialogSelected, interaction.newDialogEntry));
+            }
+        }
+        else if (interaction.type == Interaction.InteractionType.variables)
+        {
+            PNCVariablesContainer varContainer = interaction.variableObject;
+            if (interaction.variablesAction == Interaction.VariablesAction.setLocalVariable)
+            {
+                action.AddListener(() =>
+                varContainer.SetLocalVariable(interaction,
+                                                interaction.variableObject.local_variables[interaction.localVariableSelected]));
+            }
+            else if (interaction.variablesAction == Interaction.VariablesAction.setGlobalVariable)
+            {
+                action.AddListener(() =>
+                varContainer.SetGlobalVariable(interaction,
+                                                interaction.variableObject.global_variables[interaction.globalVariableSelected]));
+            }
+            else if (interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
+            {
+                action.AddListener(() =>
+                varContainer.GetLocalVariable(interaction,
+                                                interaction.variableObject.local_variables[interaction.localVariableSelected]));
+            }
+            else if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable)
+            {
+                action.AddListener(() =>
+                varContainer.GetGlobalVariable(interaction,
+                                                interaction.variableObject.global_variables[interaction.globalVariableSelected]));
+            }
+        }
+        else if (interaction.type == Interaction.InteractionType.inventory)
+        {
+            if (interaction.inventoryAction == Interaction.InventoryAction.useAsInventory)
+            {
+                action.AddListener(() =>
+                {
+                    CommandUseAsInventory command = new CommandUseAsInventory();
+                    command.Queue();
+                });
+            }
+        }
+        return action;
     }
-
-
 }
+

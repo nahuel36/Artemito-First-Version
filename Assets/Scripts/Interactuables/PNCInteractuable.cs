@@ -192,14 +192,6 @@ public abstract class PNCInteractuable : PNCVariablesContainer
 
     private void Start()
     {
-        for (int i = 0; i < verbs.Count; i++)
-        {
-            InteractionUtils.InitializeInteractions(ref verbs[i].attempsContainer.attemps);
-        }
-        for (int i = 0; i < inventoryActions.Count; i++)
-        {
-            InteractionUtils.InitializeInteractions(ref inventoryActions[i].attempsContainer.attemps);
-        }
     }
 
 

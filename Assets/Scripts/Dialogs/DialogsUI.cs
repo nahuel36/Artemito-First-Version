@@ -34,8 +34,6 @@ public class DialogsUI : MonoBehaviour
     // Start is called before the first frame update
     public void StartDialog(Dialog dialog, int subDialogIndex)
     {
-        Debug.Log(subDialogIndex + " " + dialog.current_entryDialogIndex);
-
         dialogContainer.gameObject.SetActive(true);
         currentSubDialog = subDialogIndex;
         initializedCounter = 0.5f;
@@ -68,7 +66,6 @@ public class DialogsUI : MonoBehaviour
             dialogOptionUI.container = optionGO;
             dialogOptionUI.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[j];
             options.Add(dialogOptionUI);
-            InteractionUtils.InitializeInteractions(ref dialog.GetSubDialogByIndex(subDialogIndex).options[j].attempsContainer.attemps);
             j++;
             k++;
         }
