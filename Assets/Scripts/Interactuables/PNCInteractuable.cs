@@ -140,6 +140,7 @@ public class Interaction
         destiny.inventoryAction = inventoryAction;
         destiny.dialogAction = dialogAction;
         destiny.dialogSelected = dialogSelected;
+        destiny.newDialogEntry = newDialogEntry;
         destiny.globalVariableSelected = globalVariableSelected;
         destiny.localVariableSelected = localVariableSelected;
         destiny.type = type;
