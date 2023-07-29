@@ -58,4 +58,10 @@ public class DialogsManager : MonoBehaviour
         ChangeEntryDialogCommand command = new ChangeEntryDialogCommand();
         command.Queue(dialogSelected, newEntry);
     }
+
+    public void ChangeOptionState(Dialog dialogSelected, int subDialogIndex, int optionIndex, DialogOption.current_state newOptionState)
+    {
+        ChangeOptionStateCommand command = new ChangeOptionStateCommand();
+        command.Queue(dialogSelected, subDialogIndex, optionIndex, newOptionState);
+    }
 }

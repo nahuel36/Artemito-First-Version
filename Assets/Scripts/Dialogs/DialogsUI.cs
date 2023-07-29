@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Threading.Tasks;
 
 public class DialogsUI : MonoBehaviour
 {
@@ -21,8 +22,12 @@ public class DialogsUI : MonoBehaviour
     [SerializeField] int visibleOptions = 3;
     private float initializedCounter;
     private int currentSubDialog;
+    private Task currentOptionTask;
+    bool waitingForTask;
+    DialogOptionUI waitingOption;
     private void Start()
     {
+        waitingForTask = false;
         dialogContainer.gameObject.SetActive(false);
         currentSubDialog = 0;
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
@@ -34,6 +39,7 @@ public class DialogsUI : MonoBehaviour
     // Start is called before the first frame update
     public void StartDialog(Dialog dialog, int subDialogIndex)
     {
+        waitingForTask = false;
         dialogContainer.gameObject.SetActive(true);
         currentSubDialog = subDialogIndex;
         initializedCounter = 0.5f;
@@ -151,19 +157,24 @@ public class DialogsUI : MonoBehaviour
                         }
                     }
                 }
-                InteractionUtils.RunAttempsInteraction(actualOption.dialogOption.attempsContainer);
-                int destiny = actualOption.dialogOption.subDialogDestinyIndex;
-                if (destiny > 0)
-                    DialogsManager.Instance.StartDialog(dialog, destiny);//queue
-                else if (destiny == -2)
-                { 
-                    //end dialog
-                }
-                else
-                    DialogsManager.Instance.StartDialog(dialog, currentSubDialog);
+                currentOptionTask = InteractionUtils.RunAttempsInteraction(actualOption.dialogOption.attempsContainer);
+                waitingForTask = true;
+                waitingOption = actualOption;
             }
         }
-
+        if (waitingForTask && currentOptionTask.IsCompleted)
+        {
+            waitingForTask = false;
+            int destiny = waitingOption.dialogOption.subDialogDestinyIndex;
+            if (destiny > 0)
+                DialogsManager.Instance.StartDialog(dialog, destiny);//queue
+            else if (destiny == -2)
+            {
+                //end dialog
+            }
+            else
+                DialogsManager.Instance.StartDialog(dialog, currentSubDialog);
+        }
     }
 
 

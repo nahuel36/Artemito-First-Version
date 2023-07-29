@@ -92,11 +92,17 @@ public class Interaction
     public enum DialogAction
     { 
         startDialog,
-        changeEntry
+        changeEntry,
+        changeOptionState,
+        changeOptionText
     }
     public DialogAction dialogAction;
     public Dialog dialogSelected;
     public int newDialogEntry;
+    public DialogOption.current_state newOptionState;
+    public string newOptionText;
+    public int subDialogIndex;
+    public int optionIndex;
 
     public Conditional.GetVariableAction OnCompareResultTrueAction;
     public Conditional.GetVariableAction OnCompareResultFalseAction;
@@ -141,6 +147,10 @@ public class Interaction
         destiny.dialogAction = dialogAction;
         destiny.dialogSelected = dialogSelected;
         destiny.newDialogEntry = newDialogEntry;
+        destiny.newOptionState = newOptionState;
+        destiny.newOptionText = newOptionText;
+        destiny.subDialogIndex = subDialogIndex;
+        destiny.optionIndex = optionIndex;
         destiny.globalVariableSelected = globalVariableSelected;
         destiny.localVariableSelected = localVariableSelected;
         destiny.type = type;

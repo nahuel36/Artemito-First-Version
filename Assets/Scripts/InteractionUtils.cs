@@ -15,7 +15,7 @@ public static class InteractionUtils
         return null;
     }
 
-    public async static void RunAttempsInteraction(AttempsContainer attempsContainer)
+    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer)
     {
         if(attempsContainer.attemps.Count > 0)
         {
@@ -177,6 +177,11 @@ public static class InteractionUtils
             {
                 action.AddListener(() => DialogsManager.Instance.ChangeEntry(interaction.dialogSelected, interaction.newDialogEntry));
             }
+            else if (interaction.dialogAction == Interaction.DialogAction.changeOptionState)
+            {
+                action.AddListener(() => DialogsManager.Instance.ChangeOptionState(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionState));
+            }
+
         }
         else if (interaction.type == Interaction.InteractionType.variables)
         {

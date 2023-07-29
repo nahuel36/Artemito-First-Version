@@ -37,6 +37,10 @@ MonoBehaviour:
             dialogAction: 0
             dialogSelected: {fileID: 0}
             newDialogEntry: 0
+            newOptionState: 0
+            newOptionText: 
+            subDialogIndex: 0
+            optionIndex: 0
             OnCompareResultTrueAction: 0
             OnCompareResultFalseAction: 0
             LineToGoOnTrueResult: 0
@@ -119,12 +123,65 @@ MonoBehaviour:
       attempsContainer:
         isCyclical: 0
         isRandom: 0
-        attemps: []
+        attemps:
+        - interactions:
+          - type: 3
+            expandedInInspector: 1
+            inventoryAction: 0
+            character: {fileID: 0}
+            characterAction: 0
+            WhatToSay: 
+            WhereToWalk: {fileID: 0}
+            globalVariableSelected: 0
+            localVariableSelected: 0
+            variablesAction: 0
+            variableObject: {fileID: 0}
+            dialogAction: 2
+            dialogSelected: {fileID: 11400000}
+            newDialogEntry: 0
+            newOptionState: 1
+            newOptionText: 
+            subDialogIndex: 1
+            optionIndex: 4
+            OnCompareResultTrueAction: 0
+            OnCompareResultFalseAction: 0
+            LineToGoOnTrueResult: 0
+            LineToGoOnFalseResult: 0
+            action:
+              m_PersistentCalls:
+                m_Calls: []
+            global_changeBooleanValue: 0
+            global_changeStringValue: 0
+            global_changeIntegerValue: 0
+            local_changeBooleanValue: 0
+            local_changeStringValue: 0
+            local_changeIntegerValue: 0
+            global_compareBooleanValue: 0
+            global_compareStringValue: 0
+            global_compareIntegerValue: 0
+            local_compareBooleanValue: 0
+            local_compareStringValue: 0
+            local_compareIntegerValue: 0
+            local_defaultBooleanValue: 0
+            local_defaultIntegerValue: 0
+            local_defaultStringValue: 
+            global_defaultBooleanValue: 0
+            global_defaultIntegerValue: 0
+            global_defaultStringValue: 
+            global_BooleanValue: 0
+            global_StringValue: 
+            global_IntegerValue: 0
+            local_BooleanValue: 0
+            local_StringValue: 
+            local_IntegerValue: 0
+            SayScript: {fileID: 0}
+            CanSkip: 0
+          expandedInInspector: 1
         expandedInInspector: 0
-        executedTimes: 0
+        executedTimes: 14
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: 0
+      currentState: 1
       say: 1
     - text: Estoy vendiendo estas chaquetas de cuero.
       index: 5
@@ -156,7 +213,7 @@ MonoBehaviour:
       y: 189
       width: 212
       height: 275
-    expandedInInspector: 0
+    expandedInInspector: 1
     optionSpecialIndex: 7
   - text: librero
     index: 2
@@ -203,7 +260,7 @@ MonoBehaviour:
       y: 390
       width: 212
       height: 162.5
-    expandedInInspector: 0
+    expandedInInspector: 1
     optionSpecialIndex: 6
   - text: negocio
     index: 5
@@ -455,7 +512,7 @@ MonoBehaviour:
     optionSpecialIndex: 5
   subDialogIndex: 11
   initial_entryDialogIndex: 1
-  current_entryDialogIndex: 3
+  current_entryDialogIndex: 1
   enterNodeRect:
     serializedVersion: 2
     x: -9.714996
