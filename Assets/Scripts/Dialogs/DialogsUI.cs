@@ -75,6 +75,7 @@ public class DialogsUI : MonoBehaviour
             j++;
             k++;
         }
+        scrollRect.verticalNormalizedPosition = 1;
     }
 
     public void EndDialog()
