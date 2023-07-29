@@ -628,7 +628,7 @@ public static class PNCEditorUtils
                                                             subdialogsTexts[i] = currentDialog.subDialogs[i].text;
                                                             subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
                                                         }
-                                                        interactionSerialized.FindPropertyRelative("newDialogEntry").intValue = EditorGUI.IntPopup(interactRect, interactionSerialized.FindPropertyRelative("newDialogEntry").intValue, subdialogsTexts, subdialogsIndexs);
+                                                        interactionSerialized.FindPropertyRelative("newDialogEntry").intValue = EditorGUI.IntPopup(interactRect, "new subdialog entry" , interactionSerialized.FindPropertyRelative("newDialogEntry").intValue, subdialogsTexts, subdialogsIndexs);
                                                     }
                                                 }
                                                 else if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionState)
@@ -646,10 +646,10 @@ public static class PNCEditorUtils
                                                             subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
                                                             subDialogIndexAndArrayIndex.Add(currentDialog.subDialogs[i].index, i);
                                                         }
-                                                        interactionSerialized.FindPropertyRelative("subDialogIndex").intValue = EditorGUI.IntPopup(interactRect, interactionSerialized.FindPropertyRelative("subDialogIndex").intValue, subdialogsTexts, subdialogsIndexs);
-                                                        int currentSubDialogArrayIndex = subDialogIndexAndArrayIndex[interactionSerialized.FindPropertyRelative("subDialogIndex").intValue]; 
+                                                        interactionSerialized.FindPropertyRelative("subDialogIndex").intValue = EditorGUI.IntPopup(interactRect, "subdialog" , interactionSerialized.FindPropertyRelative("subDialogIndex").intValue, subdialogsTexts, subdialogsIndexs);
                                                         if (interactionSerialized.FindPropertyRelative("subDialogIndex").intValue > 0)
                                                         {
+                                                            int currentSubDialogArrayIndex = subDialogIndexAndArrayIndex[interactionSerialized.FindPropertyRelative("subDialogIndex").intValue];
                                                             interactRect.y += EditorGUIUtility.singleLineHeight;
                                                             string[] optionsTexts = new string[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
                                                             int[] optionsIndexs = new int[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
@@ -658,7 +658,7 @@ public static class PNCEditorUtils
                                                                 optionsTexts[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].initialText;
                                                                 optionsIndexs[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].index;
                                                             }
-                                                            interactionSerialized.FindPropertyRelative("optionIndex").intValue = EditorGUI.IntPopup(interactRect, interactionSerialized.FindPropertyRelative("optionIndex").intValue, optionsTexts, optionsIndexs);
+                                                            interactionSerialized.FindPropertyRelative("optionIndex").intValue = EditorGUI.IntPopup(interactRect, "option", interactionSerialized.FindPropertyRelative("optionIndex").intValue, optionsTexts, optionsIndexs);
                                                             if (interactionSerialized.FindPropertyRelative("optionIndex").intValue > 0)
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
@@ -682,7 +682,7 @@ public static class PNCEditorUtils
                                                             subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
                                                             subDialogIndexAndArrayIndex.Add(currentDialog.subDialogs[i].index, i);
                                                         }
-                                                        interactionSerialized.FindPropertyRelative("subDialogIndex").intValue = EditorGUI.IntPopup(interactRect, interactionSerialized.FindPropertyRelative("subDialogIndex").intValue, subdialogsTexts, subdialogsIndexs);
+                                                        interactionSerialized.FindPropertyRelative("subDialogIndex").intValue = EditorGUI.IntPopup(interactRect, "subdialog", interactionSerialized.FindPropertyRelative("subDialogIndex").intValue, subdialogsTexts, subdialogsIndexs);
                                                         int currentSubDialogArrayIndex = subDialogIndexAndArrayIndex[interactionSerialized.FindPropertyRelative("subDialogIndex").intValue];
                                                         if (interactionSerialized.FindPropertyRelative("subDialogIndex").intValue > 0)
                                                         {
@@ -694,7 +694,7 @@ public static class PNCEditorUtils
                                                                 optionsTexts[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].initialText;
                                                                 optionsIndexs[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].index;
                                                             }
-                                                            interactionSerialized.FindPropertyRelative("optionIndex").intValue = EditorGUI.IntPopup(interactRect, interactionSerialized.FindPropertyRelative("optionIndex").intValue, optionsTexts, optionsIndexs);
+                                                            interactionSerialized.FindPropertyRelative("optionIndex").intValue = EditorGUI.IntPopup(interactRect, "option", interactionSerialized.FindPropertyRelative("optionIndex").intValue, optionsTexts, optionsIndexs);
                                                             if (interactionSerialized.FindPropertyRelative("optionIndex").intValue > 0)
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
@@ -812,14 +812,14 @@ public static class PNCEditorUtils
                                                                     interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue))
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex = EditorGUI.Popup(interactRect, interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex,interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumDisplayNames);
+                                                                interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex = EditorGUI.Popup(interactRect, "action if result is true", interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex,interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumDisplayNames);
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 if (interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
                                                                 {
                                                                     interactionSerialized.FindPropertyRelative("LineToGoOnTrueResult").intValue = EditorGUI.Popup(interactRect, "line to go", interactionSerialized.FindPropertyRelative("LineToGoOnTrueResult").intValue, PNCEditorUtils.GetInteractionsText(attemps.GetArrayElementAtIndex(indexA).FindPropertyRelative("interactions")));
                                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 }
-                                                                interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex = EditorGUI.Popup(interactRect, interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex, interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumDisplayNames);
+                                                                interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex = EditorGUI.Popup(interactRect, "action if result is false", interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex, interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumDisplayNames);
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 if (interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
                                                                 {
@@ -928,14 +928,14 @@ public static class PNCEditorUtils
                                                                     interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue))
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex = EditorGUI.Popup(interactRect, interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex, interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumDisplayNames);
+                                                                interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex = EditorGUI.Popup(interactRect, "action if result is true", interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex, interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumDisplayNames);
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 if (interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
                                                                 {
                                                                     interactionSerialized.FindPropertyRelative("LineToGoOnTrueResult").intValue = EditorGUI.Popup(interactRect, "line to go", interactionSerialized.FindPropertyRelative("LineToGoOnTrueResult").intValue, PNCEditorUtils.GetInteractionsText(attemps.GetArrayElementAtIndex(indexA).FindPropertyRelative("interactions")));
                                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 }
-                                                                interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex = EditorGUI.Popup(interactRect, interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex, interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumDisplayNames);
+                                                                interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex = EditorGUI.Popup(interactRect, "action if result is false", interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex, interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumDisplayNames);
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 if (interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
                                                                 {
