@@ -35,8 +35,15 @@ public static class InteractionUtils
                 command.Queue(attempsContainer.attemps[index].interactions[i]);
 
                 while (command.action == null)
+                {
                     await Task.Yield();
-                
+                }
+
+                if (attempsContainer.attemps[index].interactions[i].type == Interaction.InteractionType.custom)
+                {
+                    attempsContainer.attemps[index].interactions[i].customActionObject.interaction = attempsContainer.attemps[index].interactions[i];
+                }
+
                 command.action.Invoke();
 
                 i++;
@@ -45,7 +52,9 @@ public static class InteractionUtils
                 { 
                     i = CheckConditionals(i, attempsContainer.attemps[index].interactions[i-1]);
                     if (i == -1)
+                    {
                         break;
+                    }
                 }
             }
 
@@ -59,80 +68,83 @@ public static class InteractionUtils
 
     private static int CheckConditionals(int actualindex, Interaction interaction)
     {
-        if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable || interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
-        {
+        if (interaction.type == Interaction.InteractionType.variables)
+        { 
+            if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable || interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
+            {
             
-            var variable = interaction.variableObject.global_variables[interaction.globalVariableSelected];
-            bool result = true;
+                var variable = interaction.variableObject.global_variables[interaction.globalVariableSelected];
+                bool result = true;
 
-            if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable)
-            { 
-                if (interaction.global_compareBooleanValue)
-                {
-                    if (variable.booleanDefault && interaction.global_BooleanValue != interaction.global_defaultBooleanValue)
-                        result = false;
-                    if (!variable.booleanDefault && interaction.global_BooleanValue != variable.boolean)
-                        result = false;
+                if (interaction.variablesAction == Interaction.VariablesAction.getGlobalVariable)
+                { 
+                    if (interaction.global_compareBooleanValue)
+                    {
+                        if (variable.booleanDefault && interaction.global_BooleanValue != interaction.global_defaultBooleanValue)
+                            result = false;
+                        if (!variable.booleanDefault && interaction.global_BooleanValue != variable.boolean)
+                            result = false;
+                    }
+                    if (interaction.global_compareIntegerValue)
+                    {
+                        if (variable.integerDefault && interaction.global_IntegerValue != interaction.global_defaultIntegerValue)
+                            result = false;
+                        if (!variable.integerDefault && interaction.global_IntegerValue != variable.integer)
+                            result = false;
+                    }
+                    if (interaction.global_compareStringValue)
+                    {
+                        if (variable.stringDefault && interaction.global_StringValue != interaction.global_defaultStringValue)
+                            result = false;
+                        if (!variable.stringDefault && interaction.global_StringValue != variable.String)
+                            result = false;
+                    }
                 }
-                if (interaction.global_compareIntegerValue)
-                {
-                    if (variable.integerDefault && interaction.global_IntegerValue != interaction.global_defaultIntegerValue)
-                        result = false;
-                    if (!variable.integerDefault && interaction.global_IntegerValue != variable.integer)
-                        result = false;
-                }
-                if (interaction.global_compareStringValue)
-                {
-                    if (variable.stringDefault && interaction.global_StringValue != interaction.global_defaultStringValue)
-                        result = false;
-                    if (!variable.stringDefault && interaction.global_StringValue != variable.String)
-                        result = false;
-                }
-            }
 
-            if (interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
-            {
-                if (interaction.local_compareBooleanValue)
+                if (interaction.variablesAction == Interaction.VariablesAction.getLocalVariable)
                 {
-                    if (variable.booleanDefault && interaction.local_BooleanValue != interaction.local_defaultBooleanValue)
-                        result = false;
-                    if (!variable.booleanDefault && interaction.local_BooleanValue != variable.boolean)
-                        result = false;
+                    if (interaction.local_compareBooleanValue)
+                    {
+                        if (variable.booleanDefault && interaction.local_BooleanValue != interaction.local_defaultBooleanValue)
+                            result = false;
+                        if (!variable.booleanDefault && interaction.local_BooleanValue != variable.boolean)
+                            result = false;
+                    }
+                    if (interaction.local_compareIntegerValue)
+                    {
+                        if (variable.integerDefault && interaction.local_IntegerValue != interaction.local_defaultIntegerValue)
+                            result = false;
+                        if (!variable.integerDefault && interaction.local_IntegerValue != variable.integer)
+                            result = false;
+                    }
+                    if (interaction.local_compareStringValue)
+                    {
+                        if (variable.stringDefault && interaction.local_StringValue != interaction.local_defaultStringValue)
+                            result = false;
+                        if (!variable.stringDefault && interaction.local_StringValue != variable.String)
+                            result = false;
+                    }
                 }
-                if (interaction.local_compareIntegerValue)
-                {
-                    if (variable.integerDefault && interaction.local_IntegerValue != interaction.local_defaultIntegerValue)
-                        result = false;
-                    if (!variable.integerDefault && interaction.local_IntegerValue != variable.integer)
-                        result = false;
-                }
-                if (interaction.local_compareStringValue)
-                {
-                    if (variable.stringDefault && interaction.local_StringValue != interaction.local_defaultStringValue)
-                        result = false;
-                    if (!variable.stringDefault && interaction.local_StringValue != variable.String)
-                        result = false;
-                }
-            }
 
 
-            if (result == true)
-            {
-                if (interaction.OnCompareResultTrueAction == Conditional.GetVariableAction.Stop)
-                    return -1;
-                else if (interaction.OnCompareResultTrueAction == Conditional.GetVariableAction.Continue)
-                    return actualindex;
+                if (result == true)
+                {
+                    if (interaction.OnCompareResultTrueAction == Conditional.GetVariableAction.Stop)
+                        return -1;
+                    else if (interaction.OnCompareResultTrueAction == Conditional.GetVariableAction.Continue)
+                        return actualindex;
+                    else
+                        return interaction.LineToGoOnTrueResult;
+                }
                 else
-                    return interaction.LineToGoOnTrueResult;
-            }
-            else
-            {
-                if (interaction.OnCompareResultFalseAction == Conditional.GetVariableAction.Stop)
-                    return -1;
-                else if (interaction.OnCompareResultFalseAction == Conditional.GetVariableAction.Continue)
-                    return actualindex;
-                else
-                    return interaction.LineToGoOnFalseResult;
+                {
+                    if (interaction.OnCompareResultFalseAction == Conditional.GetVariableAction.Stop)
+                        return -1;
+                    else if (interaction.OnCompareResultFalseAction == Conditional.GetVariableAction.Continue)
+                        return actualindex;
+                    else
+                        return interaction.LineToGoOnFalseResult;
+                }
             }
         }
 

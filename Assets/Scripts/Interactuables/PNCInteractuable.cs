@@ -50,6 +50,19 @@ public class InteractionsAttemp
 }
 
 [System.Serializable]
+public class CustomArgument
+{
+    public enum ArgumentType
+    { 
+        String, Boolean, Integer, GameObject
+    }
+    public string stringArgument;
+    public bool boolArgument;
+    public int intArgument;
+    public Object objectArgument;
+}
+
+[System.Serializable]
 public class Interaction
 {
     public enum InteractionType
@@ -146,6 +159,8 @@ public class Interaction
     public int local_IntegerValue;
     public MonoBehaviour SayScript;
     public bool CanSkip;
+    public List<CustomArgument> customActionArguments = new List<CustomArgument>();
+    public MultipleParametersScript customActionObject;
     //averiguar sobre deep copy / clone
     public void Copy(Interaction destiny)
     {
@@ -198,6 +213,8 @@ public class Interaction
         destiny.OnCompareResultTrueAction = OnCompareResultTrueAction;
         destiny.SayScript = SayScript;
         destiny.CanSkip = CanSkip;
+        destiny.customActionArguments = customActionArguments;
+        destiny.customActionObject = customActionObject;
     }
 }
 
