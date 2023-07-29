@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class DialogsManager : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class DialogsManager : MonoBehaviour
     
     private static DialogsManager instance;
 
+    public Dialog activeDialog;
+    public int activeSubDialog;
+
+    private Task currentOptionTask;
+    public bool waitingForTask;
+    public DialogOption waitingOption;
+
+    public bool InActiveDialog { get { return activeDialog != null; } }
     public static DialogsManager Instance
     {
         get {
@@ -26,6 +35,9 @@ public class DialogsManager : MonoBehaviour
 
     public void Initialize()
     {
+        waitingForTask = false;
+        activeDialog = null;
+        activeSubDialog = 0;
         dialogsUI = FindObjectOfType<DialogsUI>();
         foreach (Dialog dialog in Resources.LoadAll<Dialog>("Dialogs/"))
         {
@@ -70,5 +82,40 @@ public class DialogsManager : MonoBehaviour
     {
         ChangeOptionTextCommand command = new ChangeOptionTextCommand();
         command.Queue(dialogSelected, subDialogIndex, optionIndex, newOptionText);
+    }
+
+    public void OnClickOnOption(DialogOption actualOption)
+    {
+        dialogsUI.HideDialog();
+        if (actualOption.say)
+        {
+            foreach (PNCCharacter character in FindObjectsOfType<PNCCharacter>())
+            {
+                if (character.isPlayerCharacter)
+                {
+                    character.Talk(actualOption.currentText);
+                }
+            }
+        }
+        currentOptionTask = InteractionUtils.RunAttempsInteraction(actualOption.attempsContainer);
+        waitingForTask = true;
+        waitingOption = actualOption;
+    }
+
+    private void Update()
+    {
+        if (waitingForTask && currentOptionTask.IsCompleted)
+        {
+            waitingForTask = false;
+            int destiny = waitingOption.subDialogDestinyIndex;
+            if (destiny > 0)
+                StartDialog(activeDialog, destiny);//queue
+            else if (destiny == -2)
+            {
+                EndDialog();
+            }
+            else
+                StartDialog(activeDialog, activeSubDialog);
+        }
     }
 }

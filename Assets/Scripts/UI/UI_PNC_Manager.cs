@@ -190,7 +190,7 @@ public class UI_PNC_Manager : MonoBehaviour
                         }
                         activeThing.Clear();
                     }
-                    else if(inventoryUI.overInventory == null && objetive.overInteractuable == null && !dialogsUI.inActiveDialog)
+                    else if(inventoryUI.overInventory == null && objetive.overInteractuable == null && !DialogsManager.Instance.InActiveDialog)
                     {
                         pointAndWalk.WalkCancelable();
                     }

@@ -14,7 +14,6 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         InventoryManager.OnAddItem += OnAddItem;
-        InventoryManager.Instance.Initialize();
 
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
         eventSystem = FindObjectOfType<EventSystem>();

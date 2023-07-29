@@ -9,7 +9,8 @@ public class EndDialogCommand : ICommand
     public async Task Execute()
     {
         await Task.Yield();
-        dialogsUI.EndDialog();
+        DialogsManager.Instance.activeDialog = null;
+        dialogsUI.HideDialog();
     }
 
     public void Skip()

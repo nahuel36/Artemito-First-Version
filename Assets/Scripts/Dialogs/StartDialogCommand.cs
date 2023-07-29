@@ -12,6 +12,9 @@ public class StartDialogCommand : ICommand
     public async Task Execute()
     {
         await Task.Yield();
+        DialogsManager.Instance.activeDialog = dialog;
+        DialogsManager.Instance.activeSubDialog = subDialogIndex;
+        DialogsManager.Instance.waitingForTask = false;
         dialogsUI.StartDialog(dialog, subDialogIndex);
     }
 

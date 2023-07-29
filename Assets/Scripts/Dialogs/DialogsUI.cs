@@ -3,48 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Threading.Tasks;
 
 public class DialogsUI : MonoBehaviour
 {
     public DialogOptionUI first_option;
-    public Dialog dialog;
-    public bool inActiveDialog;
-
     UnityEngine.UI.GraphicRaycaster raycaster;
     EventSystem eventSystem;
     [SerializeField] PNCCursor cursor;
-    List<DialogOptionUI> options = new List<DialogOptionUI>();
+    List<DialogOptionUI> active_ui_options = new List<DialogOptionUI>();
     DialogOptionUI lastOption;
     [SerializeField] Transform dialogContainer;
     [SerializeField] Transform optionsContainer;
     ScrollRect scrollRect;
     [SerializeField] int visibleOptions = 3;
-    private float initializedCounter;
-    private int currentSubDialog;
-    private Task currentOptionTask;
-    bool waitingForTask;
-    DialogOptionUI waitingOption;
+    private float clickInOptionDelayCounter;
+
     private void Start()
     {
-        waitingForTask = false;
         dialogContainer.gameObject.SetActive(false);
-        currentSubDialog = 0;
         raycaster = GetComponentInParent<UnityEngine.UI.GraphicRaycaster>();
         eventSystem = FindObjectOfType<EventSystem>();
         scrollRect = dialogContainer.GetComponentInChildren<ScrollRect>();
-        DialogsManager.Instance.Initialize();
     }
 
     // Start is called before the first frame update
     public void StartDialog(Dialog dialog, int subDialogIndex)
     {
-        waitingForTask = false;
         dialogContainer.gameObject.SetActive(true);
-        currentSubDialog = subDialogIndex;
-        initializedCounter = 0.5f;
-        inActiveDialog = true;
-        options.Clear();
+        clickInOptionDelayCounter = 0.5f;
+        active_ui_options.Clear();
         for (int i = optionsContainer.childCount - 1; i > 0; i--)
         {
             Destroy(optionsContainer.GetChild(i).gameObject);
@@ -71,17 +58,16 @@ public class DialogsUI : MonoBehaviour
             dialogOptionUI.textContainer.color = Color.white;
             dialogOptionUI.container = optionGO;
             dialogOptionUI.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[j];
-            options.Add(dialogOptionUI);
+            active_ui_options.Add(dialogOptionUI);
             j++;
             k++;
         }
         scrollRect.verticalNormalizedPosition = 1;
     }
 
-    public void EndDialog()
+    public void HideDialog()
     {
-        inActiveDialog = false;
-        options.Clear();
+        active_ui_options.Clear();
         for (int i = optionsContainer.childCount - 1; i > 0; i--)
         {
             Destroy(optionsContainer.GetChild(i).gameObject);
@@ -92,14 +78,14 @@ public class DialogsUI : MonoBehaviour
 
     public void MoveUp()
     {
-        if(options.Count - visibleOptions > 0)
-            scrollRect.verticalNormalizedPosition += ((float)1 / ((float)options.Count-visibleOptions));
+        if(active_ui_options.Count - visibleOptions > 0)
+            scrollRect.verticalNormalizedPosition += ((float)1 / ((float)active_ui_options.Count-visibleOptions));
     }
 
     public void MoveDown() 
     {
-        if (options.Count - visibleOptions > 0)
-            scrollRect.verticalNormalizedPosition -= ((float)1 / ((float)options.Count-visibleOptions));
+        if (active_ui_options.Count - visibleOptions > 0)
+            scrollRect.verticalNormalizedPosition -= ((float)1 / ((float)active_ui_options.Count-visibleOptions));
     }
 
     private void Update()
@@ -110,25 +96,23 @@ public class DialogsUI : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerData, results);
 
-        if (initializedCounter > 0)
+        if (clickInOptionDelayCounter > 0)
         {
-            initializedCounter -= Time.deltaTime;
+            clickInOptionDelayCounter -= Time.deltaTime;
         }
 
         DialogOptionUI actualOption = null;
 
-        bool founded = false;
         bool buttonFounded = false;
         foreach (RaycastResult result in results)
         {
             DialogOptionUI overOption = result.gameObject.GetComponent<DialogOptionUI>();
-            if (overOption != null && options.Contains(overOption))
+            if (overOption != null && active_ui_options.Contains(overOption))
             {
                 if (lastOption != null)
                     lastOption.textContainer.color = Color.white;
                 actualOption = overOption;
                 lastOption = actualOption;
-                founded = true;
             }
             if (result.gameObject.GetComponent<Button>())
             {
@@ -145,37 +129,13 @@ public class DialogsUI : MonoBehaviour
         if (actualOption != null)
         { 
             actualOption.textContainer.color = Color.gray;
-            if (Input.GetMouseButtonUp(0) && initializedCounter <= 0)
+            if (Input.GetMouseButtonUp(0) && clickInOptionDelayCounter <= 0)
             {
-                DialogsManager.Instance.EndDialog();
-                if (actualOption.dialogOption.say)
-                { 
-                    foreach (PNCCharacter character in GameObject.FindObjectsOfType<PNCCharacter>())
-                    {
-                        if (character.isPlayerCharacter)
-                        {
-                            character.Talk(actualOption.dialogOption.currentText);
-                        }
-                    }
-                }
-                currentOptionTask = InteractionUtils.RunAttempsInteraction(actualOption.dialogOption.attempsContainer);
-                waitingForTask = true;
-                waitingOption = actualOption;
+                DialogsManager.Instance.OnClickOnOption(actualOption.dialogOption);
+                
             }
         }
-        if (waitingForTask && currentOptionTask.IsCompleted)
-        {
-            waitingForTask = false;
-            int destiny = waitingOption.dialogOption.subDialogDestinyIndex;
-            if (destiny > 0)
-                DialogsManager.Instance.StartDialog(dialog, destiny);//queue
-            else if (destiny == -2)
-            {
-                //end dialog
-            }
-            else
-                DialogsManager.Instance.StartDialog(dialog, currentSubDialog);
-        }
+       
     }
 
 
