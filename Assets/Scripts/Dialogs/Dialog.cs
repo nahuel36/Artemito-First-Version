@@ -5,7 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class DialogOption
 {
-    public string text;
+    public string initialText;
+    public string currentText;
     public int index;
     public AttempsContainer attempsContainer;
     public int subDialogDestinyIndex;

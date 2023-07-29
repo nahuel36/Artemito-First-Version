@@ -35,6 +35,7 @@ public class DialogsManager : MonoBehaviour
                 for (int j = 0; j < dialog.subDialogs[i].options.Count; j++)
                 {
                     dialog.subDialogs[i].options[j].currentState = (DialogOption.current_state)dialog.subDialogs[i].options[j].initialState;
+                    dialog.subDialogs[i].options[j].currentText = dialog.subDialogs[i].options[j].initialText;
                 }
             }
         }
@@ -63,5 +64,11 @@ public class DialogsManager : MonoBehaviour
     {
         ChangeOptionStateCommand command = new ChangeOptionStateCommand();
         command.Queue(dialogSelected, subDialogIndex, optionIndex, newOptionState);
+    }
+
+    public void ChangeOptionText(Dialog dialogSelected, int subDialogIndex, int optionIndex, string newOptionText)
+    {
+        ChangeOptionTextCommand command = new ChangeOptionTextCommand();
+        command.Queue(dialogSelected, subDialogIndex, optionIndex, newOptionText);
     }
 }

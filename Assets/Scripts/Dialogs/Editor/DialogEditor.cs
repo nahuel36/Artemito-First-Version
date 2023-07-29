@@ -49,7 +49,7 @@ public class DialogEditor : Editor
                     {
                         drawElementCallback = (Rect recOpt, int indexOpt, bool isActiveOpt, bool isFocusedOpt) =>
                         {
-                            EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("text"), new GUIContent { text = "option " + (indexOpt + 1) });
+                            EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("initialText"), new GUIContent { text = "option " + (indexOpt + 1) });
                             var verbExpanded = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector");
                             if (verbExpanded.boolValue)
                             {

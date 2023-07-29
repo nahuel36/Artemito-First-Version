@@ -33,7 +33,7 @@ public class SubDialogNode : Node
 
         for (int i = 0; i < outPoint.Count; i++)
         {
-            dialog.GetSubDialogByIndex(subDialogIndex).options[i].text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + (i) * 30 + 50, rect.width * 0.9f, EditorGUIUtility.singleLineHeight), dialog.GetSubDialogByIndex(subDialogIndex).options[i].text);
+            dialog.GetSubDialogByIndex(subDialogIndex).options[i].initialText = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + (i) * 30 + 50, rect.width * 0.9f, EditorGUIUtility.singleLineHeight), dialog.GetSubDialogByIndex(subDialogIndex).options[i].initialText);
         }
 
         dialog.GetSubDialogByIndex(subDialogIndex).text = GUI.TextField(new Rect(rect.x + rect.width * 0.06f, rect.y + rect.width * 0.06f, rect.width *0.9f,EditorGUIUtility.singleLineHeight), dialog.GetSubDialogByIndex(subDialogIndex).text);

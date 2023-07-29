@@ -16,7 +16,8 @@ MonoBehaviour:
   - text: hola
     index: 1
     options:
-    - text: "\xBFC\xF3mo est\xE1 usted?"
+    - initialText: "\xBFC\xF3mo est\xE1 usted?"
+      currentText: "\xBFC\xF3mo est\xE1 usted?"
       index: 1
       attempsContainer:
         isCyclical: 0
@@ -94,7 +95,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: "\xBFC\xF3mo va el negocio?"
+    - initialText: "\xBFComo est\xE1 el negocio?"
+      currentText: "\xBFComo est\xE1 el negocio?"
       index: 2
       attempsContainer:
         isCyclical: 0
@@ -106,7 +108,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: "\xBFQuisiera comprar un libro?"
+    - initialText: Quisiera comprar un libro.
+      currentText: Quisiera comprar un libro.
       index: 3
       attempsContainer:
         isCyclical: 0
@@ -118,7 +121,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Bonito sombrero.
+    - initialText: Bonito sombrero.
+      currentText: He dicho, bonito sombrero.
       index: 4
       attempsContainer:
         isCyclical: 0
@@ -136,11 +140,11 @@ MonoBehaviour:
             localVariableSelected: 0
             variablesAction: 0
             variableObject: {fileID: 0}
-            dialogAction: 2
+            dialogAction: 3
             dialogSelected: {fileID: 11400000}
             newDialogEntry: 0
             newOptionState: 1
-            newOptionText: 
+            newOptionText: He dicho, bonito sombrero.
             subDialogIndex: 1
             optionIndex: 4
             OnCompareResultTrueAction: 0
@@ -177,13 +181,14 @@ MonoBehaviour:
             SayScript: {fileID: 0}
             CanSkip: 0
           expandedInInspector: 1
-        expandedInInspector: 0
-        executedTimes: 14
+        expandedInInspector: 1
+        executedTimes: 19
       subDialogDestinyIndex: 0
       initialState: 0
-      currentState: 1
+      currentState: 0
       say: 1
-    - text: Estoy vendiendo estas chaquetas de cuero.
+    - initialText: Estoy vendiendo estas chaquetas de cuero.
+      currentText: Estoy vendiendo estas chaquetas de cuero.
       index: 5
       attempsContainer:
         isCyclical: 0
@@ -195,7 +200,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: "Adi\xF3s."
+    - initialText: "Adi\xF3s."
+      currentText: "Adi\xF3s."
       index: 6
       attempsContainer:
         isCyclical: 0
@@ -218,7 +224,8 @@ MonoBehaviour:
   - text: librero
     index: 2
     options:
-    - text: "\xBFPor que lo dice?"
+    - initialText: "\xBFPor qu\xE9 lo dice?"
+      currentText: "\xBFPor qu\xE9 lo dice?"
       index: 1
       attempsContainer:
         isCyclical: 0
@@ -230,7 +237,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Uh, que mal.
+    - initialText: Uh, que mal.
+      currentText: Uh, que mal.
       index: 2
       attempsContainer:
         isCyclical: 0
@@ -242,7 +250,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: "No me interesa, adi\xF3s."
+    - initialText: "No me interesa, adi\xF3s."
+      currentText: "No me interesa, adi\xF3s."
       index: 3
       attempsContainer:
         isCyclical: 0
@@ -265,7 +274,8 @@ MonoBehaviour:
   - text: negocio
     index: 5
     options:
-    - text: "Y... usted, \xBFc\xF3mo est\xE1?"
+    - initialText: "Y usted... \xBFc\xF3mo est\xE1?"
+      currentText: "Y usted... \xBFc\xF3mo est\xE1?"
       index: 1
       attempsContainer:
         isCyclical: 0
@@ -277,7 +287,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: "\xBFCu\xE1l mafia?"
+    - initialText: "\xBFCu\xE1l mafia?"
+      currentText: "\xBFCu\xE1l mafia?"
       index: 2
       attempsContainer:
         isCyclical: 0
@@ -289,7 +300,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: "\xBFDebe mucha plata?"
+    - initialText: "\xBFDebe mucha plata?"
+      currentText: "\xBFDebe mucha plata?"
       index: 3
       attempsContainer:
         isCyclical: 0
@@ -301,7 +313,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Mejor hablemos de otra cosa.
+    - initialText: Mejor hablemos de otra cosa.
+      currentText: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
         isCyclical: 0
@@ -319,12 +332,13 @@ MonoBehaviour:
       y: 66
       width: 212
       height: 200
-    expandedInInspector: 0
+    expandedInInspector: 1
     optionSpecialIndex: 5
   - text: mafia
     index: 7
     options:
-    - text: "\xBFQui\xE9n es el l\xEDder?"
+    - initialText: "\xBFQui\xE9n es el lider?"
+      currentText: "\xBFQui\xE9n es el lider?"
       index: 1
       attempsContainer:
         isCyclical: 0
@@ -336,7 +350,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: "\xBFEn d\xF3nde esta su cuartel?"
+    - initialText: "\xBFD\xF3nde est\xE1 su cuartel?"
+      currentText: "\xBFD\xF3nde est\xE1 su cuartel?"
       index: 2
       attempsContainer:
         isCyclical: 0
@@ -348,7 +363,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: "\xBFLes debe mucha plata?"
+    - initialText: "\xBFLes debe mucha plata?"
+      currentText: "\xBFLes debe mucha plata?"
       index: 3
       attempsContainer:
         isCyclical: 0
@@ -360,7 +376,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Volvamos a hablar de su negocio.
+    - initialText: Volvamos a hablar de su negocio.
+      currentText: Volvamos a hablar de su negocio.
       index: 4
       attempsContainer:
         isCyclical: 0
@@ -372,7 +389,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Esto me esta dando mucho miedo, mejor me voy.
+    - initialText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
+      currentText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
       index: 5
       attempsContainer:
         isCyclical: 0
@@ -390,12 +408,13 @@ MonoBehaviour:
       y: 56
       width: 212
       height: 237.5
-    expandedInInspector: 0
+    expandedInInspector: 1
     optionSpecialIndex: 5
   - text: plata
     index: 8
     options:
-    - text: "\xBFCuanto exactamente?"
+    - initialText: "\xBFCu\xE1nto exactamente?"
+      currentText: "\xBFCu\xE1nto exactamente?"
       index: 1
       attempsContainer:
         isCyclical: 0
@@ -407,7 +426,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Ah, entonces puedo fiarle.
+    - initialText: Ah, entonces puedo fiarle.
+      currentText: Ah, entonces puedo fiarle.
       index: 2
       attempsContainer:
         isCyclical: 0
@@ -419,7 +439,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Uh, que mal.
+    - initialText: Uh, que mal.
+      currentText: Uh, que mal.
       index: 3
       attempsContainer:
         isCyclical: 0
@@ -431,7 +452,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Mejor hablemos de otra cosa.
+    - initialText: Mejor hablemos de otra cosa.
+      currentText: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
         isCyclical: 0
@@ -449,12 +471,13 @@ MonoBehaviour:
       y: 421
       width: 212
       height: 200
-    expandedInInspector: 0
+    expandedInInspector: 1
     optionSpecialIndex: 4
   - text: que mal
     index: 9
     options:
-    - text: Muy mal
+    - initialText: Muy mal.
+      currentText: Muy mal.
       index: 1
       attempsContainer:
         isCyclical: 0
@@ -466,7 +489,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Muy muy mal
+    - initialText: Muy muy mal.
+      currentText: Muy muy mal.
       index: 2
       attempsContainer:
         isCyclical: 0
@@ -478,7 +502,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Demasiado mal
+    - initialText: Demasiado mal.
+      currentText: Demasiado mal.
       index: 3
       attempsContainer:
         isCyclical: 0
@@ -490,7 +515,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
-    - text: Tanto que me voy
+    - initialText: Tanto que me voy.
+      currentText: Tanto que me voy.
       index: 4
       attempsContainer:
         isCyclical: 0
@@ -508,7 +534,7 @@ MonoBehaviour:
       y: 423
       width: 212
       height: 200
-    expandedInInspector: 0
+    expandedInInspector: 1
     optionSpecialIndex: 5
   subDialogIndex: 11
   initial_entryDialogIndex: 1

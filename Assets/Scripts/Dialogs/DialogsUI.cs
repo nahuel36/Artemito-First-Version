@@ -67,7 +67,7 @@ public class DialogsUI : MonoBehaviour
                 optionGO = Instantiate(first_option.container, optionsContainer);
             optionGO.SetActive(true);
             DialogOptionUI dialogOptionUI = optionGO.GetComponent<DialogOptionUI>();
-            dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[j].text;
+            dialogOptionUI.textContainer.text = dialog.GetSubDialogByIndex(subDialogIndex).options[j].currentText;
             dialogOptionUI.textContainer.color = Color.white;
             dialogOptionUI.container = optionGO;
             dialogOptionUI.dialogOption = dialog.GetSubDialogByIndex(subDialogIndex).options[j];
@@ -153,7 +153,7 @@ public class DialogsUI : MonoBehaviour
                     {
                         if (character.isPlayerCharacter)
                         {
-                            character.Talk(actualOption.dialogOption.text);
+                            character.Talk(actualOption.dialogOption.currentText);
                         }
                     }
                 }

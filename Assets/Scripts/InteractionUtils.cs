@@ -181,7 +181,10 @@ public static class InteractionUtils
             {
                 action.AddListener(() => DialogsManager.Instance.ChangeOptionState(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionState));
             }
-
+            else if (interaction.dialogAction == Interaction.DialogAction.changeOptionText)
+            {
+                action.AddListener(() => DialogsManager.Instance.ChangeOptionText(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionText));
+            }
         }
         else if (interaction.type == Interaction.InteractionType.variables)
         {
