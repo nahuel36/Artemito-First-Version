@@ -208,6 +208,9 @@ public class SettingsEditor : Editor
         GUILayout.Label("Objetive position");
         ((Settings)target).objetivePosition = (Settings.ObjetivePosition)EditorGUILayout.EnumPopup(((Settings)target).objetivePosition);
 
+        GUILayout.Label("Show numbers on dialog options");
+        ((Settings)target).showNumbersInDialogOptions = EditorGUILayout.Toggle(((Settings)target).showNumbersInDialogOptions);
+
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed)
         {

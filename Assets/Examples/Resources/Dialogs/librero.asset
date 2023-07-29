@@ -20,8 +20,7 @@ MonoBehaviour:
       currentText: "\xBFC\xF3mo est\xE1 usted?"
       index: 1
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps:
         - interactions:
           - type: 4
@@ -99,8 +98,7 @@ MonoBehaviour:
       currentText: "\xBFComo est\xE1 el negocio?"
       index: 2
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -112,8 +110,7 @@ MonoBehaviour:
       currentText: Quisiera comprar un libro.
       index: 3
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -125,8 +122,7 @@ MonoBehaviour:
       currentText: He dicho, bonito sombrero.
       index: 4
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps:
         - interactions:
           - type: 3
@@ -181,8 +177,8 @@ MonoBehaviour:
             SayScript: {fileID: 0}
             CanSkip: 0
           expandedInInspector: 1
-        expandedInInspector: 1
-        executedTimes: 19
+        expandedInInspector: 0
+        executedTimes: 23
       subDialogDestinyIndex: 0
       initialState: 0
       currentState: 0
@@ -191,8 +187,7 @@ MonoBehaviour:
       currentText: Estoy vendiendo estas chaquetas de cuero.
       index: 5
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -204,8 +199,7 @@ MonoBehaviour:
       currentText: "Adi\xF3s."
       index: 6
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -228,8 +222,7 @@ MonoBehaviour:
       currentText: "\xBFPor qu\xE9 lo dice?"
       index: 1
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -241,8 +234,7 @@ MonoBehaviour:
       currentText: Uh, que mal.
       index: 2
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -254,8 +246,7 @@ MonoBehaviour:
       currentText: "No me interesa, adi\xF3s."
       index: 3
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -278,8 +269,7 @@ MonoBehaviour:
       currentText: "Y usted... \xBFc\xF3mo est\xE1?"
       index: 1
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -291,8 +281,7 @@ MonoBehaviour:
       currentText: "\xBFCu\xE1l mafia?"
       index: 2
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -304,8 +293,7 @@ MonoBehaviour:
       currentText: "\xBFDebe mucha plata?"
       index: 3
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -317,8 +305,7 @@ MonoBehaviour:
       currentText: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -341,8 +328,7 @@ MonoBehaviour:
       currentText: "\xBFQui\xE9n es el lider?"
       index: 1
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -354,8 +340,7 @@ MonoBehaviour:
       currentText: "\xBFD\xF3nde est\xE1 su cuartel?"
       index: 2
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -367,8 +352,7 @@ MonoBehaviour:
       currentText: "\xBFLes debe mucha plata?"
       index: 3
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -380,8 +364,7 @@ MonoBehaviour:
       currentText: Volvamos a hablar de su negocio.
       index: 4
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -393,8 +376,7 @@ MonoBehaviour:
       currentText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
       index: 5
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -417,8 +399,7 @@ MonoBehaviour:
       currentText: "\xBFCu\xE1nto exactamente?"
       index: 1
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -430,8 +411,7 @@ MonoBehaviour:
       currentText: Ah, entonces puedo fiarle.
       index: 2
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -443,8 +423,7 @@ MonoBehaviour:
       currentText: Uh, que mal.
       index: 3
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -456,8 +435,7 @@ MonoBehaviour:
       currentText: Mejor hablemos de otra cosa.
       index: 4
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -480,8 +458,7 @@ MonoBehaviour:
       currentText: Muy mal.
       index: 1
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -493,8 +470,7 @@ MonoBehaviour:
       currentText: Muy muy mal.
       index: 2
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -506,8 +482,7 @@ MonoBehaviour:
       currentText: Demasiado mal.
       index: 3
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0
@@ -519,8 +494,7 @@ MonoBehaviour:
       currentText: Tanto que me voy.
       index: 4
       attempsContainer:
-        isCyclical: 0
-        isRandom: 0
+        attempsIteration: 0
         attemps: []
         expandedInInspector: 0
         executedTimes: 0

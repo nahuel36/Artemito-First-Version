@@ -104,3 +104,4 @@ MonoBehaviour:
   speechStyle: 0
   interactionExecuteMethod: 1
   objetivePosition: 1
+  showNumbersInDialogOptions: 1

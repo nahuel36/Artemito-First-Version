@@ -58,4 +58,5 @@ public class Settings : ScriptableObject
     public SpeechStyle speechStyle;
     public InteractionExecuteMethod interactionExecuteMethod;
     public ObjetivePosition objetivePosition;
+    public bool showNumbersInDialogOptions = false;
 }
