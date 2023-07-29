@@ -513,21 +513,9 @@ public static class PNCEditorUtils
         if (verbExpanded.boolValue)
         {
             
-            EditorGUI.PropertyField(new Rect(verbRect.x, verbRect.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight), attempContainer.FindPropertyRelative("isCyclical"));
+            EditorGUI.PropertyField(new Rect(verbRect.x, verbRect.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight), attempContainer.FindPropertyRelative("attempsIteration"));
 
             verbRect.y += EditorGUIUtility.singleLineHeight;
-
-            if (attempContainer.FindPropertyRelative("isCyclical").boolValue)
-                attempContainer.FindPropertyRelative("isRandom").boolValue = false;
-
-            EditorGUI.PropertyField(new Rect(verbRect.x, verbRect.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight), attempContainer.FindPropertyRelative("isRandom"));
-
-            verbRect.y += EditorGUIUtility.singleLineHeight;
-
-            if (attempContainer.FindPropertyRelative("isRandom").boolValue)
-                attempContainer.FindPropertyRelative("isCyclical").boolValue = false;
-
-            
 
             var attempKey = attempContainer.propertyPath;
 

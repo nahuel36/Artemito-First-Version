@@ -31,8 +31,12 @@ public class InventoryItemAction {
 
 [System.Serializable]
 public class AttempsContainer{
-    public bool isCyclical = false;
-    public bool isRandom = false;
+    public enum Iteration { 
+        inOrderAndRepeatLastOne,
+        inOrderAndRestartAgain,
+        random
+    }
+    public Iteration attempsIteration;
     public List<InteractionsAttemp> attemps = new List<InteractionsAttemp>();
     public bool expandedInInspector;
     public int executedTimes = 0;

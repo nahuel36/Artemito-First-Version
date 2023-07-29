@@ -333,8 +333,7 @@ MonoBehaviour:
     currentText: 
     index: 0
     attempsContainer:
-      isCyclical: 0
-      isRandom: 0
+      attempsIteration: 0
       attemps: []
       expandedInInspector: 0
       executedTimes: 0
@@ -11217,6 +11216,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attempsIteration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -11268,17 +11272,17 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[1].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[2].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}

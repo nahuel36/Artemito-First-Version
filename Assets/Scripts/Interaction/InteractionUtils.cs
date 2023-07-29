@@ -21,9 +21,9 @@ public static class InteractionUtils
         {
             int index;
 
-            if (!attempsContainer.isRandom && !attempsContainer.isCyclical)
+            if (attempsContainer.attempsIteration == AttempsContainer.Iteration.inOrderAndRepeatLastOne)
                 index = Mathf.Clamp(attempsContainer.executedTimes, 0, attempsContainer.attemps.Count - 1);
-            else if(!attempsContainer.isCyclical && !attempsContainer.isRandom)
+            else if(attempsContainer.attempsIteration == AttempsContainer.Iteration.inOrderAndRestartAgain)
                 index = attempsContainer.executedTimes % attempsContainer.attemps.Count;
             else 
                 index = Random.Range(0,attempsContainer.attemps.Count);
