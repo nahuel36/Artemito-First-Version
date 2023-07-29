@@ -6,7 +6,10 @@ public class MultipleParametersTest : MultipleParametersScript
 {
     
     public void MultiplesTest()
-    { 
+    {
+        interaction.customScriptBool = false;
+
+
         foreach (PNCCharacter charact in FindObjectsOfType<PNCCharacter>())
         {
             if (charact.isPlayerCharacter)
@@ -14,7 +17,6 @@ public class MultipleParametersTest : MultipleParametersScript
                 charact.Talk(interaction.customActionArguments[0].stringArgument);
                 charact.Talk(interaction.customActionArguments[1].stringArgument);
             }
-        
         }
     }
 }

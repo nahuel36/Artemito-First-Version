@@ -15,6 +15,8 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
     Dictionary<string, ReorderableList> invInteractionsListDict = new Dictionary<string, ReorderableList>();
     protected ReorderableList invList;
 
+    Dictionary<string, ReorderableList> customScriptInteractionDict = new Dictionary<string, ReorderableList>();
+
     protected void ShowInteractionVerbs()
     {
         GUILayout.BeginHorizontal();
@@ -131,7 +133,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
                     rect.y += EditorGUIUtility.singleLineHeight;
                 }
 
-                PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
+                PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, customScriptInteractionDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
             }
         };
 
@@ -153,7 +155,7 @@ public class PNCInteractuableEditor : PNCVariablesContainerEditor
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(serializedProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
+                PNCEditorUtils.DrawElementAttempContainer(serializedProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, customScriptInteractionDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
             },
             onCanAddCallback = (list) =>
             {

@@ -5,6 +5,6 @@ using UnityEngine;
 public class MultipleParametersScript : MonoBehaviour
 {
 
-    public Interaction interaction;
+    [HideInInspector]public Interaction interaction;
     
 }

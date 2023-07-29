@@ -11,6 +11,7 @@ public class DialogEditor : Editor
     Dictionary<int, ReorderableList> subDialogDict = new Dictionary<int, ReorderableList>();
     Dictionary<string, ReorderableList> optionAttempsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> optionInteractionListDict = new Dictionary<string, ReorderableList>();
+    Dictionary<string, ReorderableList> customScriptInteractionDict = new Dictionary<string, ReorderableList>();
     NodeBasedEditor nodeBase;
 
     private void OnEnable()
@@ -58,7 +59,7 @@ public class DialogEditor : Editor
                                 recOpt.y += EditorGUIUtility.singleLineHeight;
                                 EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("say"));
                             }
-                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, false, true);
+                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict,customScriptInteractionDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, false, true);
                         },
                         elementHeightCallback = (int indexOpt) =>
                         {

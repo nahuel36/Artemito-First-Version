@@ -23,7 +23,7 @@ public class InventoryListEditor : Editor
     Dictionary<string, ReorderableList> verbInteractionsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> verbsList = new Dictionary<string, ReorderableList>();
 
-
+    Dictionary<string, ReorderableList> customScriptInteractionDict = new Dictionary<string, ReorderableList>();
     private void OnEnable()
     {
 
@@ -240,7 +240,7 @@ public class InventoryListEditor : Editor
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
+                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, customScriptInteractionDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
             },
             onCanAddCallback = (list) =>
             {
@@ -322,7 +322,7 @@ protected void InitializeInventoryInteractions(out ReorderableList inventoryList
 
                 //EditorGUI.PropertyField(new Rect(rect.x + 7, rect.y, rect.width / 2.5f, EditorGUIUtility.singleLineHeight), inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("verb").FindPropertyRelative("name"), GUIContent.none);
 
-                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
+                PNCEditorUtils.DrawElementAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, customScriptInteractionDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
             }
         };
 
