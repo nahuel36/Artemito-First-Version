@@ -65,7 +65,10 @@ public class Interaction
     public bool expandedInInspector;
 
     public enum InventoryAction { 
-        useAsInventory
+        useAsInventory,
+        addInventory,
+        quitInventory,
+        haveInventory
     }
     public InventoryAction inventoryAction;
 
@@ -98,7 +101,10 @@ public class Interaction
         startDialog,
         changeEntry,
         changeOptionState,
-        changeOptionText
+        changeOptionText,
+        getOptionState,
+        getNumberOfAttemps,
+        areAllSubdialogOptionsDisabled
     }
     public DialogAction dialogAction;
     public Dialog dialogSelected;
