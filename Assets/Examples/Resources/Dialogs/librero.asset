@@ -87,6 +87,10 @@ MonoBehaviour:
             local_IntegerValue: 0
             SayScript: {fileID: 0}
             CanSkip: 0
+            customScriptAction: 0
+            customActionArguments: []
+            customActionObject: {fileID: 0}
+            customScriptBool: 0
           expandedInInspector: 1
         expandedInInspector: 0
         executedTimes: 0
@@ -176,6 +180,10 @@ MonoBehaviour:
             local_IntegerValue: 0
             SayScript: {fileID: 0}
             CanSkip: 0
+            customScriptAction: 0
+            customActionArguments: []
+            customActionObject: {fileID: 0}
+            customScriptBool: 0
           expandedInInspector: 1
         expandedInInspector: 0
         executedTimes: 23

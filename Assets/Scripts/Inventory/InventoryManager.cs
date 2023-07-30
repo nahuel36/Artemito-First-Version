@@ -80,12 +80,7 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
-
-    public void RunInventoryVerb(InventoryItem item, Verb verb)
-    {
-        InteractionUtils.RunAttempsInteraction(InteractionUtils.FindVerb(verb, item.verbs).attempsContainer, InteractionObjectsType.verbInInventory ,item.namePrefix + item.itemName + item.namePostfix, verb.index, item.specialIndex);
-    }
-
+    
     public void RunInventoryInteraction(InventoryItem item1, InventoryItem item2, Verb verb)
     {
         int index1 = getInventoryActionsIndex(item1, item2.inventoryActions, verb);
@@ -104,7 +99,11 @@ public class InventoryManager : MonoBehaviour
         }
         if (index != -1)
         {
-            InteractionUtils.RunAttempsInteraction(itemWithAction.inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryIninventory, item1.namePrefix + item1.itemName + item1.namePostfix ,verb.index, item2.specialIndex);
+            InteractionUtils.RunAttempsInteraction(itemWithAction.inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryIninventory, item1.namePrefix + item1.itemName + item1.namePostfix, verb.index, item2.specialIndex);
+        }
+        else
+        {
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryIninventory, item1.namePrefix + item1.itemName + item1.namePostfix, verb.index, item2.specialIndex);
         }
     }
 

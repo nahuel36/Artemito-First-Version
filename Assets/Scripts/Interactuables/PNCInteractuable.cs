@@ -278,6 +278,10 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         {
             InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryInObject, namePrefix + name + namePostfix, verb.index, item.specialIndex);
         }
+        else
+        {
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryInObject, namePrefix + name + namePostfix, verb.index, item.specialIndex);
+        }
     }
 
     public void RunObjectAsInventoryInteraction(PNCInteractuable pncObject, Verb verb)
@@ -287,6 +291,10 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         {
             InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer, InteractionObjectsType.objectInObject, namePrefix + name + namePostfix, verb.index, -1);
         }
+        else
+        {
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.objectInObject, namePrefix + name + namePostfix, verb.index, -1);
+        }
     }
 
     public void RunVerbInteraction(Verb verb)
@@ -295,5 +303,7 @@ public abstract class PNCInteractuable : PNCVariablesContainer
 
         if (verbToRun != null)
             InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInObject, namePrefix + name + namePostfix, verb.index, -1);
+        else
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInObject, namePrefix + name + namePostfix, verb.index, -1);
     }
 }

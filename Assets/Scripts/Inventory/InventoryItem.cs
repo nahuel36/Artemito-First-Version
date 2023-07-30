@@ -25,6 +25,8 @@ public class InventoryItem
 
         if (verbToRun != null)
             InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInInventory, namePrefix + itemName + namePostfix, verbToRunString.index, -1);
+        else
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInInventory, namePrefix + itemName + namePostfix, verbToRunString.index, -1);
     }
 
     public Verb[] GetActiveVerbs()

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 public static class InteractionUtils 
 {
     static UnhandledEvents unhandledEvents;
+    static InventoryList inventory;
     public static VerbInteractions FindVerb(Verb verb, List<VerbInteractions> verbs)
     {
         for (int i = 0; i < verbs.Count; i++)
@@ -84,14 +85,30 @@ public static class InteractionUtils
         {
             unhandledEvents = Resources.Load<UnhandledEvents>("UnhandledEvents");
         }
-        for (int i = 0; i < unhandledEvents.verbs.Count; i++)
+        if (!inventory)
         {
-            if (verbIndex == unhandledEvents.verbs[i].verb.index)
+            inventory = Resources.Load<InventoryList>("Inventory");
+        }
+        if (interactionType == InteractionObjectsType.verbInObject || interactionType == InteractionObjectsType.verbInInventory)
+        {
+            for (int i = 0; i < unhandledEvents.verbs.Count; i++)
             {
-                RunAttempsInteraction(unhandledEvents.verbs[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex);
+                if (verbIndex == unhandledEvents.verbs[i].verb.index)
+                {
+                    RunAttempsInteraction(unhandledEvents.verbs[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex);
+                }
             }
         }
-
+        else if (interactionType == InteractionObjectsType.inventoryInObject)
+        {
+            for (int i = 0; i < unhandledEvents.inventoryActions.Count; i++)
+            {
+                if (itemIndex == unhandledEvents.inventoryActions[i].specialIndex && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
+                {
+                    RunAttempsInteraction(unhandledEvents.inventoryActions[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex);
+                }
+            }
+        }
     }
 
     private static int CheckConditionals(int actualindex, Interaction interaction)
