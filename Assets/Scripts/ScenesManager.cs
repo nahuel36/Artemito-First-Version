@@ -36,9 +36,5 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadScene(Path.GetFileName(scenes.canvas).Replace(".unity", ""), LoadSceneMode.Additive);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
