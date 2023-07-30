@@ -231,10 +231,23 @@ public class Interaction
     }
 }
 
+public enum InteractionObjectsType
+{
+    inventoryIninventory,
+    inventoryInObject,
+    objectInObject,
+    verbInObject,
+    verbInInventory,
+    dialogOption,
+    unhandledEvent
+}
+
 [System.Serializable]
 public abstract class PNCInteractuable : PNCVariablesContainer
 {
     public new string name;
+    public string namePostfix;
+    public string namePrefix;
 
     public int priority = 0;
 
@@ -263,7 +276,7 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         int index = InventoryManager.Instance.getInventoryActionsIndex(item, inventoryActions, verb);
         if (index != -1)
         {
-            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer);
+            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryInObject, namePrefix + name + namePostfix, verb.index, item.specialIndex);
         }
     }
 
@@ -272,15 +285,15 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         int index = InventoryManager.Instance.getInventoryActionsIndex(pncObject, inventoryActions, verb);
         if (index != -1)
         {
-            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer);
+            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer, InteractionObjectsType.objectInObject, namePrefix + name + namePostfix, verb.index, -1);
         }
     }
 
-    public void RunVerbInteraction(Verb verbToRunString)
+    public void RunVerbInteraction(Verb verb)
     {
-        VerbInteractions verbToRun = InteractionUtils.FindVerb(verbToRunString, verbs);
+        VerbInteractions verbToRun = InteractionUtils.FindVerb(verb, verbs);
 
         if (verbToRun != null)
-            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer);
+            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInObject, namePrefix + name + namePostfix, verb.index, -1);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using System.Threading.Tasks;
 public static class InteractionUtils 
 {
+    static UnhandledEvents unhandledEvents;
     public static VerbInteractions FindVerb(Verb verb, List<VerbInteractions> verbs)
     {
         for (int i = 0; i < verbs.Count; i++)
@@ -15,9 +16,12 @@ public static class InteractionUtils
         return null;
     }
 
-    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer)
+    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer, InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex)
     {
-        if(attempsContainer.attemps.Count > 0)
+        bool runUnhandledEvents = false;
+        if (attempsContainer.attemps.Count == 0)
+            runUnhandledEvents = true;
+        else 
         {
             int index;
 
@@ -28,42 +32,66 @@ public static class InteractionUtils
             else 
                 index = Random.Range(0,attempsContainer.attemps.Count);
 
-            int i = 0;
-            while (i < attempsContainer.attemps[index].interactions.Count)
+            if (attempsContainer.attemps[index].interactions.Count == 0)
+            { 
+                runUnhandledEvents = true;
+            }
+            else 
             {
-                InitializeInteractionCommand command = new InitializeInteractionCommand();
-                command.Queue(attempsContainer.attemps[index].interactions[i]);
-
-                while (command.action == null)
+                int i = 0;
+                while (i < attempsContainer.attemps[index].interactions.Count)
                 {
-                    await Task.Yield();
-                }
+                    InitializeInteractionCommand command = new InitializeInteractionCommand();
+                    command.Queue(attempsContainer.attemps[index].interactions[i]);
 
-                if (attempsContainer.attemps[index].interactions[i].type == Interaction.InteractionType.custom)
-                {
-                    attempsContainer.attemps[index].interactions[i].customActionObject.interaction = attempsContainer.attemps[index].interactions[i];
-                }
-
-                command.action.Invoke();
-
-                i++;
-
-                if (i < attempsContainer.attemps[index].interactions.Count)
-                { 
-                    i = CheckConditionals(i, attempsContainer.attemps[index].interactions[i-1]);
-                    if (i == -1)
+                    while (command.action == null)
                     {
-                        break;
+                        await Task.Yield();
+                    }
+
+                    if (attempsContainer.attemps[index].interactions[i].type == Interaction.InteractionType.custom)
+                    {
+                        attempsContainer.attemps[index].interactions[i].customActionObject.interaction = attempsContainer.attemps[index].interactions[i];
+                    }
+
+                    command.action.Invoke();
+
+                    i++;
+
+                    if (i < attempsContainer.attemps[index].interactions.Count)
+                    {
+                        i = CheckConditionals(i, attempsContainer.attemps[index].interactions[i - 1]);
+                        if (i == -1)
+                        {
+                            break;
+                        }
                     }
                 }
             }
+        }
 
-            attempsContainer.executedTimes++;
-        }
-        else
+        if (runUnhandledEvents && interactionType != InteractionObjectsType.unhandledEvent)
         {
-            //unhandled event
+            RunHunhandledEvents(interactionType, prefixNameAndPostfix, verbIndex, itemIndex);
         }
+        
+        attempsContainer.executedTimes++;
+    }
+
+    public static void RunHunhandledEvents(InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex)
+    {
+        if (!unhandledEvents)
+        {
+            unhandledEvents = Resources.Load<UnhandledEvents>("UnhandledEvents");
+        }
+        for (int i = 0; i < unhandledEvents.verbs.Count; i++)
+        {
+            if (verbIndex == unhandledEvents.verbs[i].verb.index)
+            {
+                RunAttempsInteraction(unhandledEvents.verbs[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex);
+            }
+        }
+
     }
 
     private static int CheckConditionals(int actualindex, Interaction interaction)

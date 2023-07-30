@@ -97,7 +97,7 @@ public class DialogsManager : MonoBehaviour
                 }
             }
         }
-        currentOptionTask = InteractionUtils.RunAttempsInteraction(actualOption.attempsContainer);
+        currentOptionTask = InteractionUtils.RunAttempsInteraction(actualOption.attempsContainer, InteractionObjectsType.dialogOption, "", -1, -1);
         waitingForTask = true;
         waitingOption = actualOption;
     }

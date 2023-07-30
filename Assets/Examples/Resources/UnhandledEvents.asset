@@ -1,0 +1,198 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99931b26ffa65174bbfc7368cb178ac1, type: 3}
+  m_Name: UnhandledEvents
+  m_EditorClassIdentifier: 
+  verbs:
+  - verb:
+      name: Use
+      isLikeGive: 0
+      isLikeUse: 1
+      index: 1
+    use: 1
+    attempsContainer:
+      attempsIteration: 0
+      attemps: []
+      expandedInInspector: 1
+      executedTimes: 0
+  - verb:
+      name: Look
+      isLikeGive: 0
+      isLikeUse: 0
+      index: 2
+    use: 1
+    attempsContainer:
+      attempsIteration: 0
+      attemps:
+      - interactions:
+        - type: 4
+          expandedInInspector: 1
+          inventoryAction: 0
+          character: {fileID: 0}
+          characterAction: 0
+          WhatToSay: 
+          WhereToWalk: {fileID: 0}
+          globalVariableSelected: 0
+          localVariableSelected: 0
+          variablesAction: 0
+          variableObject: {fileID: 0}
+          dialogAction: 0
+          dialogSelected: {fileID: 0}
+          newDialogEntry: 0
+          newOptionState: 0
+          newOptionText: 
+          subDialogIndex: 0
+          optionIndex: 0
+          OnCompareResultTrueAction: 0
+          OnCompareResultFalseAction: 0
+          LineToGoOnTrueResult: 0
+          LineToGoOnFalseResult: 0
+          action:
+            m_PersistentCalls:
+              m_Calls:
+              - m_Target: {fileID: 6091360687955946689, guid: ec260d7f39d9606408466e04ffe4f126,
+                  type: 3}
+                m_TargetAssemblyTypeName: SayForInventory, Assembly-CSharp
+                m_MethodName: Say
+                m_Mode: 5
+                m_Arguments:
+                  m_ObjectArgument: {fileID: 0}
+                  m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                  m_IntArgument: 0
+                  m_FloatArgument: 0
+                  m_StringArgument: look
+                  m_BoolArgument: 0
+                m_CallState: 2
+          global_changeBooleanValue: 0
+          global_changeStringValue: 0
+          global_changeIntegerValue: 0
+          local_changeBooleanValue: 0
+          local_changeStringValue: 0
+          local_changeIntegerValue: 0
+          global_compareBooleanValue: 0
+          global_compareStringValue: 0
+          global_compareIntegerValue: 0
+          local_compareBooleanValue: 0
+          local_compareStringValue: 0
+          local_compareIntegerValue: 0
+          local_defaultBooleanValue: 0
+          local_defaultIntegerValue: 0
+          local_defaultStringValue: 
+          global_defaultBooleanValue: 0
+          global_defaultIntegerValue: 0
+          global_defaultStringValue: 
+          global_BooleanValue: 0
+          global_StringValue: 
+          global_IntegerValue: 0
+          local_BooleanValue: 0
+          local_StringValue: 
+          local_IntegerValue: 0
+          SayScript: {fileID: 0}
+          CanSkip: 0
+          customScriptAction: 0
+          customActionArguments:
+          - name: 
+            type: 3
+            stringArgument: 
+            boolArgument: 0
+            intArgument: 0
+            objectArgument: {fileID: 11500000, guid: fb481a931ae804c4d8d0e3d5c8ee2f4a,
+              type: 3}
+            expandedInInspector: 1
+          customActionObject: {fileID: 6091360687955946689, guid: ec260d7f39d9606408466e04ffe4f126,
+            type: 3}
+          customScriptBool: 0
+        expandedInInspector: 1
+      expandedInInspector: 1
+      executedTimes: 1
+  - verb:
+      name: Talk
+      isLikeGive: 0
+      isLikeUse: 0
+      index: 3
+    use: 1
+    attempsContainer:
+      attempsIteration: 0
+      attemps: []
+      expandedInInspector: 1
+      executedTimes: 0
+  inventoryActions:
+  - specialIndex: 1
+    name: 
+    verb:
+      name: 
+      isLikeGive: 0
+      isLikeUse: 0
+      index: 1
+    sceneObject: {fileID: 0}
+    attempsContainer:
+      attempsIteration: 0
+      attemps:
+      - interactions:
+        - type: 0
+          expandedInInspector: 1
+          inventoryAction: 0
+          character: {fileID: 0}
+          characterAction: 0
+          WhatToSay: 
+          WhereToWalk: {fileID: 0}
+          globalVariableSelected: 0
+          localVariableSelected: 0
+          variablesAction: 0
+          variableObject: {fileID: 0}
+          dialogAction: 0
+          dialogSelected: {fileID: 0}
+          newDialogEntry: 0
+          newOptionState: 0
+          newOptionText: 
+          subDialogIndex: 0
+          optionIndex: 0
+          OnCompareResultTrueAction: 0
+          OnCompareResultFalseAction: 0
+          LineToGoOnTrueResult: 0
+          LineToGoOnFalseResult: 0
+          action:
+            m_PersistentCalls:
+              m_Calls: []
+          global_changeBooleanValue: 0
+          global_changeStringValue: 0
+          global_changeIntegerValue: 0
+          local_changeBooleanValue: 0
+          local_changeStringValue: 0
+          local_changeIntegerValue: 0
+          global_compareBooleanValue: 0
+          global_compareStringValue: 0
+          global_compareIntegerValue: 0
+          local_compareBooleanValue: 0
+          local_compareStringValue: 0
+          local_compareIntegerValue: 0
+          local_defaultBooleanValue: 0
+          local_defaultIntegerValue: 0
+          local_defaultStringValue: 
+          global_defaultBooleanValue: 0
+          global_defaultIntegerValue: 0
+          global_defaultStringValue: 
+          global_BooleanValue: 0
+          global_StringValue: 
+          global_IntegerValue: 0
+          local_BooleanValue: 0
+          local_StringValue: 
+          local_IntegerValue: 0
+          SayScript: {fileID: 0}
+          CanSkip: 0
+          customScriptAction: 0
+          customActionArguments: []
+          customActionObject: {fileID: 0}
+          customScriptBool: 0
+        expandedInInspector: 1
+      expandedInInspector: 1
+      executedTimes: 0

@@ -10957,7 +10957,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -10997,7 +10997,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].verb.name
-      value: Talk
+      value: Look
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11027,7 +11027,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].verb.index
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11292,7 +11292,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].expandedInInspector
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11387,17 +11387,17 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].type
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].type
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].type
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11548,6 +11548,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].dialogAction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].dialogSelected
       value: 
       objectReference: {fileID: 11400000, guid: d8ee816760d8513418cfd20bb981c74d,
@@ -11650,9 +11655,32 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].dialogSelected
+      value: 
+      objectReference: {fileID: 11400000, guid: d8ee816760d8513418cfd20bb981c74d,
+        type: 2}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].variableObject
       value: 
+      objectReference: {fileID: 178948272}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].dialogSelected
+      value: 
+      objectReference: {fileID: 11400000, guid: d8ee816760d8513418cfd20bb981c74d,
+        type: 2}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].newDialogEntry
+      value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].dialogSelected
+      value: 
+      objectReference: {fileID: 11400000, guid: d8ee816760d8513418cfd20bb981c74d,
+        type: 2}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].type
@@ -11710,8 +11738,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].characterAction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].variablesAction
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11770,6 +11803,17 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customScriptAction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customActionObject
+      value: 
+      objectReference: {fileID: 1107150572605239138, guid: 28422ebcebb81b34bb150c8dd55bdc5c,
+        type: 3}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customScriptAction
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -11849,13 +11893,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].global_BooleanValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].expandedInInspector
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].expandedInInspector
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11904,7 +11953,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].LineToGoOnTrueResult
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].LineToGoOnFalseResult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].LineToGoOnFalseResult
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -12015,17 +12074,22 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].OnCompareResultFalseAction
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].global_compareBooleanValue
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].global_compareIntegerValue
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].global_defaultBooleanValue
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12060,6 +12124,11 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customActionArguments.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customActionArguments.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -12120,6 +12189,11 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -12214,6 +12288,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customActionArguments.Array.data[0].stringArgument
+      value: hola1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customActionArguments.Array.data[1].stringArgument
+      value: hola2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -12230,6 +12314,11 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -12354,6 +12443,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1107150572605239138, guid: 28422ebcebb81b34bb150c8dd55bdc5c,
+        type: 3}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customActionArguments.Array.data[0].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].customActionArguments.Array.data[1].expandedInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -12374,6 +12479,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MultiplesTest
       objectReference: {fileID: 0}
@@ -12390,6 +12500,11 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MultiplesTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MultiplesTest
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -12444,6 +12559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MultipleParametersTest, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -12460,6 +12580,11 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12569,6 +12694,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overInventory:
     itemName: 
+    namePrefix: 
+    namePostfix: 
     normalImage: {fileID: 0}
     selectedImage: {fileID: 0}
     startWithThisItem: 0
