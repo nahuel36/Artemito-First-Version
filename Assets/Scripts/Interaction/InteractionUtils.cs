@@ -17,7 +17,7 @@ public static class InteractionUtils
         return null;
     }
 
-    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer, InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex)
+    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer, InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex, PNCInteractuable sceneObject = null)
     {
         bool runUnhandledEvents = false;
         if (attempsContainer.attemps.Count == 0)
@@ -92,7 +92,7 @@ public static class InteractionUtils
         attempsContainer.executedTimes++;
     }
 
-    public static void RunHunhandledEvents(InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex)
+    public static void RunHunhandledEvents(InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex, PNCInteractuable sceneObject = null)
     {
         if (!unhandledEvents)
         {
@@ -119,6 +119,26 @@ public static class InteractionUtils
                 if (itemIndex == unhandledEvents.inventoryActions[i].specialIndex && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
                 {
                     RunAttempsInteraction(unhandledEvents.inventoryActions[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex);
+                }
+            }
+        }
+        else if (interactionType == InteractionObjectsType.inventoryIninventory)
+        {
+            for (int i = 0; i < unhandledEvents.inventoryActions.Count; i++)
+            {
+                if (itemIndex == unhandledEvents.inventoryActions[i].specialIndex && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
+                {
+                    RunAttempsInteraction(unhandledEvents.inventoryActions[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex);
+                }
+            }
+        }
+        else if (interactionType == InteractionObjectsType.objectInObject)
+        { 
+            for (int i = 0; i < unhandledEvents.inventoryActions.Count; i++)
+            {
+                if (unhandledEvents.inventoryActions[i].sceneObject == sceneObject && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
+                {
+                    RunAttempsInteraction(unhandledEvents.inventoryActions[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex, sceneObject);
                 }
             }
         }
