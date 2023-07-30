@@ -10700,7 +10700,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}

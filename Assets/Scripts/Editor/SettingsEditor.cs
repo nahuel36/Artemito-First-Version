@@ -211,6 +211,10 @@ public class SettingsEditor : Editor
         GUILayout.Label("Show numbers on dialog options");
         ((Settings)target).showNumbersInDialogOptions = EditorGUILayout.Toggle(((Settings)target).showNumbersInDialogOptions);
 
+        GUILayout.Label("Always show all verbs");
+        ((Settings)target).alwaysShowAllVerbs = EditorGUILayout.Toggle(((Settings)target).alwaysShowAllVerbs);
+        
+
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed)
         {

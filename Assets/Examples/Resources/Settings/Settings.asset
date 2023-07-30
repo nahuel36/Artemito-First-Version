@@ -105,3 +105,4 @@ MonoBehaviour:
   interactionExecuteMethod: 1
   objetivePosition: 1
   showNumbersInDialogOptions: 1
+  alwaysShowAllVerbs: 1

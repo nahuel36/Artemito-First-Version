@@ -59,4 +59,5 @@ public class Settings : ScriptableObject
     public InteractionExecuteMethod interactionExecuteMethod;
     public ObjetivePosition objetivePosition;
     public bool showNumbersInDialogOptions = false;
+    public bool alwaysShowAllVerbs = false;
 }

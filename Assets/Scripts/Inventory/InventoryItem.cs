@@ -18,7 +18,7 @@ public class InventoryItem
     public List<VerbInteractions> verbs;
     public bool expandedInInspector = false;
     public int specialIndex = -1;
-
+    private Settings settings;
     public void RunVerbInteraction(Verb verbToRunString)
     {
         VerbInteractions verbToRun = InteractionUtils.FindVerb(verbToRunString, verbs);
@@ -32,10 +32,22 @@ public class InventoryItem
     public Verb[] GetActiveVerbs()
     {
         List<Verb> activeVerbs = new List<Verb>();
-        for (int i = 0; i < verbs.Count; i++)
+        for (int i = 0; i < settings.verbs.Length; i++)
         {
-            if (verbs[i].use)
-                activeVerbs.Add(verbs[i].verb);
+            bool founded = false;
+            for (int j = 0; j < verbs.Count; j++)
+            {
+                if (settings.verbs[i].index == verbs[j].verb.index)
+                {
+                    if (verbs[j].use || settings.alwaysShowAllVerbs)
+                    {
+                        activeVerbs.Add(verbs[i].verb);
+                        founded = true;
+                    }
+                }
+            }
+            if (!founded && settings.alwaysShowAllVerbs)
+                activeVerbs.Add(settings.verbs[i]);
         }
         return activeVerbs.ToArray();
     }

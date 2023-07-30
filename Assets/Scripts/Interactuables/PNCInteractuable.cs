@@ -259,18 +259,32 @@ public abstract class PNCInteractuable : PNCVariablesContainer
     public List<VerbInteractions> verbs = new List<VerbInteractions>();
     public List<InventoryItemAction> inventoryActions = new List<InventoryItemAction>();
 
+    public Settings settings;
     private void Start()
     {
+        settings = Resources.Load<Settings>("Settings/Settings");
     }
 
 
     public Verb[] GetActiveVerbs() 
     {
         List<Verb> activeVerbs = new List<Verb>();
-        for (int i = 0; i < verbs.Count; i++)
+        for (int i = 0; i < settings.verbs.Length; i++)
         {
-            if (verbs[i].use)
-                activeVerbs.Add(verbs[i].verb);
+            bool founded = false;
+            for (int j = 0; j < verbs.Count; j++)
+            {
+                if (settings.verbs[i].index == verbs[j].verb.index)
+                {
+                    if (verbs[j].use || settings.alwaysShowAllVerbs)
+                    {
+                        activeVerbs.Add(verbs[j].verb);
+                        founded = true;
+                    }
+                }
+            }
+            if(!founded && settings.alwaysShowAllVerbs)
+                activeVerbs.Add(settings.verbs[i]);
         }
         return activeVerbs.ToArray();
     }
