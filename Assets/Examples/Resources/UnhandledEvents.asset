@@ -217,7 +217,7 @@ MonoBehaviour:
             prefixNameAndPostfix: Lucio
             verbIndex: 1
             itemIndex: 2
-            expandedInInspector: 1
+            expandedInInspector: 0
         expandedInInspector: 1
       expandedInInspector: 1
       executedTimes: 2

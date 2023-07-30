@@ -25,7 +25,7 @@ public class DialogsManager : MonoBehaviour
 
             if (instance == null)
             {
-                GameObject GO = new GameObject();
+                GameObject GO = new GameObject("DialogsManager");
                 DontDestroyOnLoad(GO);
                 instance = GO.AddComponent<DialogsManager>();
             }

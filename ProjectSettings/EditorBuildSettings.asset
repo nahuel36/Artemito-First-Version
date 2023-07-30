@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/sceneWalk.unity
     guid: df694018d5f932c4fa0dfe91e65ed315
+  - enabled: 1
+    path: Assets/Scenes/CanvasScene.unity
+    guid: 5c1ac72f725ac32449464bd9529491d5
   m_configObjects: {}
