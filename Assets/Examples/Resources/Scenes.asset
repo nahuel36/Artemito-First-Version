@@ -19,3 +19,4 @@ MonoBehaviour:
   zones:
   - zoneScenes:
     - Assets/Scenes/sceneWalk.unity
+    - Assets/Scenes/scenePantano.unity

@@ -8,8 +8,10 @@ public class WalkableArea2D : MonoBehaviour
 
     public float node_size = 1;
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return new WaitUntil(() => MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized);
+
         for (int i = transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(transform.GetChild(i).gameObject);
 

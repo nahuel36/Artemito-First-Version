@@ -32,8 +32,10 @@ public class PNCCharacter : PNCInteractuable
     public bool forceTalkerLucasArts = false;
     [HideInInspector]
     public bool dontConfigureAnimator = false;
-    public void Initialize()
+    public IEnumerator Initialize()
     {
+        yield return new WaitUntil(() => MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized);
+
         anim = GetComponentInChildren<Animator>();
         ConfigurePathFinder(1, forceAronPathFinder);
         ConfigureTalker(forceTalkerLucasArts);

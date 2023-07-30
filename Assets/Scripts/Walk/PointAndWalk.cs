@@ -11,7 +11,7 @@ public class PointAndWalk : MonoBehaviour
         PNCCharacter[] characters = FindObjectsOfType<PNCCharacter>();
         foreach (PNCCharacter character in characters)
         {
-            character.Initialize();
+            StartCoroutine(character.Initialize());
         }
         
     }
