@@ -50,12 +50,25 @@ public static class InteractionUtils
                         await Task.Yield();
                     }
 
-                    if (attempsContainer.attemps[index].interactions[i].type == Interaction.InteractionType.custom)
+                    CustomArgument argument;
+                    if (attempsContainer.attemps[index].interactions[i].customActionArguments.Count <= 0)
                     {
-                        attempsContainer.attemps[index].interactions[i].customActionObject.interaction = attempsContainer.attemps[index].interactions[i];
+                        attempsContainer.attemps[index].interactions[i].customActionArguments = new List<CustomArgument>();
+                        argument = new CustomArgument();
+                        attempsContainer.attemps[index].interactions[i].customActionArguments.Add(argument);
                     }
+                    else
+                    {
+                        argument = attempsContainer.attemps[index].interactions[i].customActionArguments[0];
+                    }
+                    argument.interactionType = interactionType;
+                    argument.prefixNameAndPostfix = prefixNameAndPostfix;
+                    argument.verbIndex = verbIndex;
+                    argument.itemIndex = itemIndex;
+                    attempsContainer.attemps[index].interactions[i].customActionArguments[0] = argument;
 
-                    command.action.Invoke();
+
+                    command.action.Invoke(attempsContainer.attemps[index].interactions[i].customActionArguments);
 
                     i++;
 
@@ -168,7 +181,7 @@ public static class InteractionUtils
                 }
             }
             else if (interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean)
-                result = interaction.customScriptBool;
+                result = interaction.customActionArguments[0].resultBool;
 
             if (result == true)
             {
@@ -192,9 +205,9 @@ public static class InteractionUtils
         return actualindex;
     }
 
-    public static UnityEvent InitializeInteraction(Interaction interaction)
+    public static UnityEvent<List<CustomArgument>> InitializeInteraction(Interaction interaction)
     {
-        UnityEvent action = new UnityEvent();
+        UnityEvent<List<CustomArgument>> action = new UnityEvent<List<CustomArgument>>();
         if (interaction.type == Interaction.InteractionType.custom)
             action = interaction.action;
         else if (interaction.type == Interaction.InteractionType.character)
@@ -204,39 +217,39 @@ public static class InteractionUtils
             {
                 string whattosay = interaction.WhatToSay;
                 if (interaction.CanSkip)
-                    action.AddListener(() => charact.Talk(whattosay));
+                    action.AddListener((arguments) => charact.Talk(whattosay));
                 else
-                    action.AddListener(() => charact.UnskippableTalk(whattosay));
+                    action.AddListener((arguments) => charact.UnskippableTalk(whattosay));
             }
             else if (interaction.characterAction == Interaction.CharacterAction.sayWithScript)
             {
                 if (interaction.CanSkip)
-                    action.AddListener(() => charact.Talk(((SayScript)interaction.SayScript).SayWithScript()));
+                    action.AddListener((arguments) => charact.Talk(((SayScript)interaction.SayScript).SayWithScript(arguments)));
                 else
-                    action.AddListener(() => charact.UnskippableTalk(((SayScript)interaction.SayScript).SayWithScript()));
+                    action.AddListener((arguments) => charact.UnskippableTalk(((SayScript)interaction.SayScript).SayWithScript(arguments)));
             }
             else if (interaction.characterAction == Interaction.CharacterAction.walk)
             {
-                action.AddListener(() => charact.Walk(interaction.WhereToWalk.position));
+                action.AddListener((arguments) => charact.Walk(interaction.WhereToWalk.position));
             }
         }
         else if (interaction.type == Interaction.InteractionType.dialog)
         {
             if (interaction.dialogAction == Interaction.DialogAction.startDialog)
             {
-                action.AddListener(() => DialogsManager.Instance.StartDialog(interaction.dialogSelected, interaction.dialogSelected.current_entryDialogIndex));
+                action.AddListener((arguments) => DialogsManager.Instance.StartDialog(interaction.dialogSelected, interaction.dialogSelected.current_entryDialogIndex));
             }
             else if (interaction.dialogAction == Interaction.DialogAction.changeEntry)
             {
-                action.AddListener(() => DialogsManager.Instance.ChangeEntry(interaction.dialogSelected, interaction.newDialogEntry));
+                action.AddListener((arguments) => DialogsManager.Instance.ChangeEntry(interaction.dialogSelected, interaction.newDialogEntry));
             }
             else if (interaction.dialogAction == Interaction.DialogAction.changeOptionState)
             {
-                action.AddListener(() => DialogsManager.Instance.ChangeOptionState(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionState));
+                action.AddListener((arguments) => DialogsManager.Instance.ChangeOptionState(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionState));
             }
             else if (interaction.dialogAction == Interaction.DialogAction.changeOptionText)
             {
-                action.AddListener(() => DialogsManager.Instance.ChangeOptionText(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionText));
+                action.AddListener((arguments) => DialogsManager.Instance.ChangeOptionText(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionText));
             }
         }
         else if (interaction.type == Interaction.InteractionType.variables)
@@ -244,13 +257,13 @@ public static class InteractionUtils
             PNCVariablesContainer varContainer = interaction.variableObject;
             if (interaction.variablesAction == Interaction.VariablesAction.setLocalVariable)
             {
-                action.AddListener(() =>
+                action.AddListener((arguments) =>
                 varContainer.SetLocalVariable(interaction,
                                                 interaction.variableObject.local_variables[interaction.localVariableSelected]));
             }
             else if (interaction.variablesAction == Interaction.VariablesAction.setGlobalVariable)
             {
-                action.AddListener(() =>
+                action.AddListener((arguments) =>
                 varContainer.SetGlobalVariable(interaction,
                                                 interaction.variableObject.global_variables[interaction.globalVariableSelected]));
             }
@@ -259,7 +272,7 @@ public static class InteractionUtils
         {
             if (interaction.inventoryAction == Interaction.InventoryAction.useAsInventory)
             {
-                action.AddListener(() =>
+                action.AddListener((arguments) =>
                 {
                     CommandUseAsInventory command = new CommandUseAsInventory();
                     command.Queue();

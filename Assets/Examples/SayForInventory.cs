@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SayForInventory : MultipleParametersScript
+public class SayForInventory : MonoBehaviour
 {
-    public void Say(string text)
+    public void Say(List<CustomArgument> arguments)
     {
         foreach (PNCCharacter charact in FindObjectsOfType<PNCCharacter>())
         {
             if (charact.isPlayerCharacter)
             {
-                charact.Talk(text);
+                charact.Talk(arguments[0].stringArgument + arguments[0].prefixNameAndPostfix);
             }
         }
     }

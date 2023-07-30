@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InitializeInteractionCommand : ICommand
 {
-    public UnityEngine.Events.UnityEvent action;
+    public UnityEngine.Events.UnityEvent<List<CustomArgument>> action;
     private Interaction interaction;
     public async Task Execute()
     {

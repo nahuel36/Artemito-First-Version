@@ -58,10 +58,19 @@ public class CustomArgument
         String, Boolean, Integer, Object
     }
     public ArgumentType type;
+
     public string stringArgument;
     public bool boolArgument;
     public int intArgument;
     public Object objectArgument;
+
+    public bool resultBool;
+
+    public InteractionObjectsType interactionType;
+    public string prefixNameAndPostfix;
+    public int verbIndex;
+    public int itemIndex;
+
     public bool expandedInInspector;
 }
 
@@ -135,7 +144,7 @@ public class Interaction
     public int LineToGoOnTrueResult;
     public int LineToGoOnFalseResult;
     //CUSTOM
-    public UnityEvent action;
+    public UnityEvent<List<CustomArgument>> action;
     public bool global_changeBooleanValue;
     public bool global_changeStringValue;
     public bool global_changeIntegerValue;
@@ -169,9 +178,7 @@ public class Interaction
     }
 
     public CustomScriptAction customScriptAction;
-    public List<CustomArgument> customActionArguments = new List<CustomArgument>();
-    public MultipleParametersScript customActionObject;
-    public bool customScriptBool;//53
+    public List<CustomArgument> customActionArguments = new List<CustomArgument>();//51
     //averiguar sobre deep copy / clone
     public void Copy(Interaction destiny)
     {
@@ -225,9 +232,7 @@ public class Interaction
         destiny.SayScript = SayScript;
         destiny.CanSkip = CanSkip;
         destiny.customScriptAction = customScriptAction;
-        destiny.customActionArguments = customActionArguments;
-        destiny.customActionObject = customActionObject;
-        destiny.customScriptBool = customScriptBool;//53
+        destiny.customActionArguments = customActionArguments;//51
     }
 }
 

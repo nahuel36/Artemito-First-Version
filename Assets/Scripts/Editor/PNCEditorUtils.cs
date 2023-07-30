@@ -977,9 +977,6 @@ public static class PNCEditorUtils
 
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
 
-                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("customActionObject"));
-                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-
                                                 string customScriptArgumentsKey = interactionSerialized.propertyPath;
 
                                                 if (!customScriptArgumentsDict.ContainsKey(customScriptArgumentsKey))

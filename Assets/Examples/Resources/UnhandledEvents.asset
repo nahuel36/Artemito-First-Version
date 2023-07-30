@@ -63,7 +63,7 @@ MonoBehaviour:
                   type: 3}
                 m_TargetAssemblyTypeName: SayForInventory, Assembly-CSharp
                 m_MethodName: Say
-                m_Mode: 5
+                m_Mode: 0
                 m_Arguments:
                   m_ObjectArgument: {fileID: 0}
                   m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -100,20 +100,22 @@ MonoBehaviour:
           CanSkip: 0
           customScriptAction: 0
           customActionArguments:
-          - name: 
-            type: 3
-            stringArgument: 
+          - name: look with scene interactuable
+            type: 0
+            stringArgument: "S\xF3lo es "
             boolArgument: 0
             intArgument: 0
             objectArgument: {fileID: 11500000, guid: fb481a931ae804c4d8d0e3d5c8ee2f4a,
               type: 3}
+            resultBool: 0
+            interactionType: 6
+            prefixNameAndPostfix: Lucio
+            verbIndex: 2
+            itemIndex: -1
             expandedInInspector: 1
-          customActionObject: {fileID: 6091360687955946689, guid: ec260d7f39d9606408466e04ffe4f126,
-            type: 3}
-          customScriptBool: 0
         expandedInInspector: 1
       expandedInInspector: 1
-      executedTimes: 1
+      executedTimes: 4
   - verb:
       name: Talk
       isLikeGive: 0
@@ -204,9 +206,6 @@ MonoBehaviour:
           CanSkip: 0
           customScriptAction: 0
           customActionArguments: []
-          customActionObject: {fileID: 6091360687955946689, guid: ec260d7f39d9606408466e04ffe4f126,
-            type: 3}
-          customScriptBool: 0
         expandedInInspector: 1
       expandedInInspector: 1
       executedTimes: 0

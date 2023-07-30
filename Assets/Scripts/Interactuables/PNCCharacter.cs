@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public interface SayScript
 {
-    string SayWithScript();
+    string SayWithScript(List<CustomArgument> arguments);
 }
 
 

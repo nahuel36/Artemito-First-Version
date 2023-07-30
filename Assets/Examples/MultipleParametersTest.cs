@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultipleParametersTest : MultipleParametersScript
+public class MultipleParametersTest : MonoBehaviour
 {
     
-    public void MultiplesTest()
+    public void MultiplesTest(List<CustomArgument> arguments)
     {
-        interaction.customScriptBool = false;
-
+        arguments[0].resultBool = false;
 
         foreach (PNCCharacter charact in FindObjectsOfType<PNCCharacter>())
         {
             if (charact.isPlayerCharacter)
             {
-                charact.Talk(interaction.customActionArguments[0].stringArgument);
-                charact.Talk(interaction.customActionArguments[1].stringArgument);
+                charact.Talk(arguments[0].stringArgument);
+                charact.Talk(arguments[1].stringArgument);
             }
         }
     }
