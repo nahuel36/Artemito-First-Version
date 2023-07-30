@@ -18,7 +18,7 @@ public class MultipleScenesManager : MonoBehaviour
         get { return instance; }
     }
 
-    public bool allZoneScenesInitialized = false;
+   [HideInInspector]public bool allZoneScenesInitialized = false;
     private List<ZoneScene> zone_scenes;
     // Start is called before the first frame update
     void Start()
