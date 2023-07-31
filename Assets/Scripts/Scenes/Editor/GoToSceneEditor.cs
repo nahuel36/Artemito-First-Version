@@ -47,14 +47,18 @@ public class GoToSceneEditor : Editor
     {
         scenesConfiguration = Resources.Load<ScenesConfiguration>("Scenes");
 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("cursorName"));
+
         int zone = CheckZone(scenesConfiguration);
 
         if (zone > -1)
             ShowPopupForScenePath(new Rect(), serializedObject.FindProperty("scenePath"), "Scene to go", false, scenesConfiguration, zone);
         else
             EditorGUILayout.LabelField("You must add this scene to Build Settings and in a Zone in Scenes Configuration");
-
+                
         EditorGUILayout.PropertyField(serializedObject.FindProperty("entryPointName"));
+
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("goToPoint"));
 
         serializedObject.ApplyModifiedProperties();
 
