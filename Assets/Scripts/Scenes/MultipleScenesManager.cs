@@ -10,19 +10,20 @@ public class MultipleScenesManager : MonoBehaviour
         public Scene scene;
         public bool isInitialized = false;
     }
-
+    Scene actualScene;
     ScenesConfiguration scenes;
-    private int actualZone = 0;
     static MultipleScenesManager instance;
     public static MultipleScenesManager Instance {
         get { return instance; }
     }
 
-   [HideInInspector]public bool allZoneScenesInitialized = false;
+    [HideInInspector]public bool allZoneScenesInitialized = false;
     private List<ZoneScene> zone_scenes;
+
     // Start is called before the first frame update
     void Start()
     {
+    
         if (instance != null)
         {
             if (this != instance)
@@ -39,15 +40,23 @@ public class MultipleScenesManager : MonoBehaviour
 
         scenes = Resources.Load<ScenesConfiguration>("Scenes");
 
+
+        int actualZone = CheckZone(scenes);
+        if (actualZone < 0)
+        {
+            actualZone = 0;
+            Debug.Log("Add this scene to Build Settings and Scenes Configuration");
+        }
+
+
         allZoneScenesInitialized = false;
 
-        string actualScenePath = SceneManager.GetActiveScene().path;
+        actualScene = SceneManager.GetActiveScene();
 
-        if (!scenes.zones[actualZone].zoneScenes.Contains(actualScenePath))
+        if (!scenes.zones[actualZone].zoneScenes.Contains(actualScene.path))
         {
             allZoneScenesInitialized = true;
             Debug.Log("Add this scene to build settings and pnc scene settings");
-            return;
         }
         else
         {
@@ -55,7 +64,7 @@ public class MultipleScenesManager : MonoBehaviour
             zone_scenes = new List<ZoneScene>();
             for (int i = 0; i < scenes.zones[actualZone].zoneScenes.Count; i++)
             {
-                if (actualScenePath != scenes.zones[actualZone].zoneScenes[i])
+                if (actualScene.path != scenes.zones[actualZone].zoneScenes[i])
                 {
                     LoadSceneParameters parameters = new LoadSceneParameters();
                     parameters.loadSceneMode = LoadSceneMode.Additive;
@@ -63,6 +72,13 @@ public class MultipleScenesManager : MonoBehaviour
                     ZoneScene zoneScene = new ZoneScene();
                     zoneScene.scene = scene;
                     zoneScene.isInitialized = false;
+                    zone_scenes.Add(zoneScene);
+                }
+                else
+                {
+                    ZoneScene zoneScene = new ZoneScene();
+                    zoneScene.scene = actualScene;
+                    zoneScene.isInitialized = true;
                     zone_scenes.Add(zoneScene);
                 }
             }
@@ -92,5 +108,21 @@ public class MultipleScenesManager : MonoBehaviour
         }
     }
 
+    private int CheckZone(ScenesConfiguration scenesConfig)
+    {
+        for (int i = 0; i < scenesConfig.zones.Count; i++)
+        {
+            if (scenesConfig.zones[i].zoneScenes.Contains(SceneManager.GetActiveScene().path))
+                return i;
+        }
+        return -1;
+    }
+
+
+    public void LoadZoneScene(string playerSpawnPoint)
+    {
+        allZoneScenesInitialized = false;    
+        //actualScene.GetRootGameObjects()
+    }
 
 }

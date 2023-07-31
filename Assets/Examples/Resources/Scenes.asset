@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Scenes
   m_EditorClassIdentifier: 
   canvas: Assets/Scenes/CanvasScene.unity
-  mainMenu: Assets/Scenes/sceneWalk.unity
-  options: Assets/Scenes/sceneWalk.unity
-  saveAndLoad: Assets/Scenes/sceneWalk.unity
+  mainMenu: Assets/Scenes/Zone 1/sceneWalk.unity
+  options: Assets/Scenes/Zone 1/sceneWalk.unity
+  saveAndLoad: Assets/Scenes/Zone 1/sceneWalk.unity
   zones:
   - zoneScenes:
-    - Assets/Scenes/sceneWalk.unity
-    - Assets/Scenes/scenePantano.unity
+    - Assets/Scenes/Zone 1/sceneWalk.unity
+    - Assets/Scenes/Zone 1/scenePantano.unity
+  - zoneScenes:
+    - Assets/Scenes/Zone 2/sceneWalk2.unity
+    - Assets/Scenes/Zone 2/scenePantano2.unity
