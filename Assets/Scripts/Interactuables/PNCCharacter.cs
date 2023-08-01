@@ -79,6 +79,12 @@ public class PNCCharacter : PNCInteractuable
         cancelableWalk.Queue(pathFinder, destiny, true);
     }
 
+    public void WalkStraight(Vector3 destiny)
+    {
+        CommandWalkStraight characterWalk = new CommandWalkStraight();
+        characterWalk.Queue(this, destiny, pathFinder);
+    }
+
     public void CancelWalkAndTasks()
     {
         CommandsQueue.Instance.ClearAll();

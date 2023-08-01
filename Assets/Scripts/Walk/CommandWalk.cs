@@ -11,6 +11,7 @@ public class CommandWalk : ICommand
     // Start is called before the first frame update
     public async Task Execute()
     {
+        pathfinder.Enable();
         pathfinder.WalkTo(destiny, isCancelable);
 
         await Task.Delay(1000);

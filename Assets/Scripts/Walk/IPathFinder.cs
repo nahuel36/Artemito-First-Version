@@ -11,4 +11,8 @@ public interface IPathFinder
     void Cancel();
 
     bool Canceled { get; }
+
+    void Disable();
+
+    void Enable();
 }

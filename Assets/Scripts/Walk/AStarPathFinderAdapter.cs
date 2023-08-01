@@ -80,4 +80,19 @@ public class AStarPathFinderAdapter : IPathFinder
         }
 #endif        
     }
+
+    public void Enable() 
+    {
+#if ASTAR_ARONGRANBERG_PATHFINDING
+        target.transform.position = aipath.transform.position;
+        aipath.enabled = true;
+#endif
+    }
+
+    public void Disable()
+    {
+#if ASTAR_ARONGRANBERG_PATHFINDING
+        aipath.enabled = false;
+#endif    
+    }
 }

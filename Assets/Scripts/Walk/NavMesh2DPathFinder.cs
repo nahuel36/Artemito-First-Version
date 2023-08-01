@@ -56,4 +56,18 @@ public class NavMesh2DPathFinder : IPathFinder
 #endif
     }
 
+    public void Enable()
+    {
+#if NAVMESH_PLUS
+        walker.enabled = true;
+#endif
+    }
+
+    public void Disable()
+    {
+#if NAVMESH_PLUS
+        walker.enabled = false;
+#endif
+    }
+
 }
