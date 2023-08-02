@@ -98,6 +98,11 @@ public class AStarPathFinderAdapter : IPathFinder
 
     public void Erase()
     {
-        throw new System.NotImplementedException();
+#if ASTAR_ARONGRANBERG_PATHFINDING
+        GameObject.Destroy(aipath.gameObject.GetComponent<Seeker>());
+        GameObject.Destroy(target);
+        GameObject.Destroy(aipath);
+        GameObject.Destroy(setter);
+#endif
     }
 }
