@@ -366,6 +366,14 @@ public static class PNCEditorUtils
                 if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.say ||
                     interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.sayWithScript)
                     height++;
+                if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.sayWithScript)
+                {
+                    height += 3;
+                    for (int i = 0; i < interactionSerialized.FindPropertyRelative("customActionArguments").arraySize; i++)
+                    {
+                        height += GetCustomScriptHeight(interactionSerialized, i) / EditorGUIUtility.singleLineHeight;
+                    }
+                }
                 return EditorGUIUtility.singleLineHeight * height;
             }
             if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
@@ -629,6 +637,8 @@ public static class PNCEditorUtils
                                                     }
                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                     EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("CanSkip"));
+
+                                                    ShowCustomArguments(interactRect, interactionSerialized, customScriptArgumentsDict);
                                                 }
                                                 else if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.walk)
                                                     EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhereToWalk"));
@@ -977,65 +987,8 @@ public static class PNCEditorUtils
 
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
 
-                                                string customScriptArgumentsKey = interactionSerialized.propertyPath;
-
-                                                if (!customScriptArgumentsDict.ContainsKey(customScriptArgumentsKey))
-                                                {
-                                                    ReorderableList customScriptArgumentsList = new ReorderableList(interactionSerialized.FindPropertyRelative("customActionArguments").serializedObject, interactionSerialized.FindPropertyRelative("customActionArguments"), true, true, true, true)
-                                                    {
-                                                        drawHeaderCallback = (rectCS) =>
-                                                        {
-                                                            EditorGUI.LabelField(rectCS, "arguments");
-                                                        },
-                                                        drawElementCallback = (rectCS, indexCS, activeCS, focusCS) =>
-                                                        {
-                                                            rectCS.height = EditorGUIUtility.singleLineHeight;
-                                                            SerializedProperty expandedProperty = interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("expandedInInspector");
-                                                            expandedProperty.boolValue = EditorGUI.Foldout(new Rect(rectCS.x + 7, rectCS.y, rectCS.width, rectCS.height), expandedProperty.boolValue, GUIContent.none);
-                                                            EditorGUI.PropertyField(new Rect(rectCS.x + 7, rectCS.y, rectCS.width, rectCS.height), interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("name"), GUIContent.none);
-                                                            if (expandedProperty.boolValue)
-                                                            {
-                                                                rectCS.y += EditorGUIUtility.singleLineHeight;
-                                                                EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("type"));
-                                                                rectCS.y += EditorGUIUtility.singleLineHeight;
-                                                                int type = interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("type").enumValueIndex;
-                                                                if (type == (int)CustomArgument.ArgumentType.String)
-                                                                {
-                                                                    EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("stringArgument"));
-                                                                }
-                                                                else if (type == (int)CustomArgument.ArgumentType.Boolean)
-                                                                {
-                                                                    EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("boolArgument"));
-                                                                }
-                                                                else if (type == (int)CustomArgument.ArgumentType.Integer)
-                                                                {
-                                                                    EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("intArgument"));
-                                                                }
-                                                                else if (type == (int)CustomArgument.ArgumentType.Object)
-                                                                {
-                                                                    EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("objectArgument"));
-                                                                }
-                                                            }
-                                                        },
-                                                        elementHeightCallback = (indexCS) =>
-                                                        {
-                                                            return GetCustomScriptHeight(interactionSerialized, indexCS);
-                                                        }
-
-
-                                                    };
-
-                                                    customScriptArgumentsDict.Add(customScriptArgumentsKey, customScriptArgumentsList);
-                                                }
-
-                                                customScriptArgumentsDict[customScriptArgumentsKey].DoList(interactRect);
-
-                                                interactRect.y += EditorGUIUtility.singleLineHeight * 4;
-
-                                                for (int i = 0; i < interactionSerialized.FindPropertyRelative("customActionArguments").arraySize; i++)
-                                                {
-                                                    interactRect.y += GetCustomScriptHeight(interactionSerialized, i);
-                                                }
+                                                ShowCustomArguments(interactRect, interactionSerialized, customScriptArgumentsDict);
+                                                
 
                                                 if (interactionSerialized.FindPropertyRelative("customScriptAction").enumValueIndex == (int)Interaction.CustomScriptAction.customBoolean)
                                                 { 
@@ -1079,7 +1032,68 @@ public static class PNCEditorUtils
         }
     }
 
+    private static void ShowCustomArguments(Rect interactRect, SerializedProperty interactionSerialized, Dictionary<string, ReorderableList> customScriptArgumentsDict)
+    {
+        string customScriptArgumentsKey = interactionSerialized.propertyPath;
 
+        if (!customScriptArgumentsDict.ContainsKey(customScriptArgumentsKey))
+        {
+            ReorderableList customScriptArgumentsList = new ReorderableList(interactionSerialized.FindPropertyRelative("customActionArguments").serializedObject, interactionSerialized.FindPropertyRelative("customActionArguments"), true, true, true, true)
+            {
+                drawHeaderCallback = (rectCS) =>
+                {
+                    EditorGUI.LabelField(rectCS, "arguments");
+                },
+                drawElementCallback = (rectCS, indexCS, activeCS, focusCS) =>
+                {
+                    rectCS.height = EditorGUIUtility.singleLineHeight;
+                    SerializedProperty expandedProperty = interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("expandedInInspector");
+                    expandedProperty.boolValue = EditorGUI.Foldout(new Rect(rectCS.x + 7, rectCS.y, rectCS.width, rectCS.height), expandedProperty.boolValue, GUIContent.none);
+                    EditorGUI.PropertyField(new Rect(rectCS.x + 7, rectCS.y, rectCS.width, rectCS.height), interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("name"), GUIContent.none);
+                    if (expandedProperty.boolValue)
+                    {
+                        rectCS.y += EditorGUIUtility.singleLineHeight;
+                        EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("type"));
+                        rectCS.y += EditorGUIUtility.singleLineHeight;
+                        int type = interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("type").enumValueIndex;
+                        if (type == (int)CustomArgument.ArgumentType.String)
+                        {
+                            EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("stringArgument"));
+                        }
+                        else if (type == (int)CustomArgument.ArgumentType.Boolean)
+                        {
+                            EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("boolArgument"));
+                        }
+                        else if (type == (int)CustomArgument.ArgumentType.Integer)
+                        {
+                            EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("intArgument"));
+                        }
+                        else if (type == (int)CustomArgument.ArgumentType.Object)
+                        {
+                            EditorGUI.PropertyField(rectCS, interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("objectArgument"));
+                        }
+                    }
+                },
+                elementHeightCallback = (indexCS) =>
+                {
+                    return GetCustomScriptHeight(interactionSerialized, indexCS);
+                }
+
+
+            };
+
+            customScriptArgumentsDict.Add(customScriptArgumentsKey, customScriptArgumentsList);
+        }
+
+        customScriptArgumentsDict[customScriptArgumentsKey].DoList(interactRect);
+
+        interactRect.y += EditorGUIUtility.singleLineHeight * 4;
+
+        for (int i = 0; i < interactionSerialized.FindPropertyRelative("customActionArguments").arraySize; i++)
+        {
+            interactRect.y += GetCustomScriptHeight(interactionSerialized, i);
+        }
+    }
 
     [System.Serializable]
     public class InteractionData
