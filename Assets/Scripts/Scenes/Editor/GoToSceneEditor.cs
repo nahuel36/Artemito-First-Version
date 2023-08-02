@@ -17,14 +17,11 @@ public class GoToSceneEditor : Editor
         string[] paths = new string[scenesConfig.zones[zoneIndex].zoneScenes.Count];
         for (int i = 0; i < scenesConfig.zones[zoneIndex].zoneScenes.Count; i++)
         {
-            if (activeScenePath != scenesConfig.zones[zoneIndex].zoneScenes[i])
-            {  
                 paths[i] = scenesConfig.zones[zoneIndex].zoneScenes[i];
                 if (paths[i] == property.stringValue)
                 {
                     selected = i;
                 }
-            }
         }
         if (useRect)
             selected = EditorGUI.Popup(rect, description, selected, paths);
