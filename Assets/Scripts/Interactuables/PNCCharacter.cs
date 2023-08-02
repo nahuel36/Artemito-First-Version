@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -132,5 +133,10 @@ public class PNCCharacter : PNCInteractuable
     public bool isTalking()
     {
         return (backgroundTalk != null && backgroundTalk.IsTalking()) || (normalTalk != null && normalTalk.IsTalking());
+    }
+
+    internal void ErasePathFinder()
+    {
+        pathFinder.Erase();
     }
 }

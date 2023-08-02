@@ -15,7 +15,10 @@ public class NavMesh2DPathFinder : IPathFinder
         
         get {
 #if NAVMESH_PLUS
-            return walker.remainingDistance == 0; 
+            if (walker)
+                return walker.remainingDistance == 0;
+            else
+                return true;
 #else
             return true;
 #endif
@@ -70,4 +73,10 @@ public class NavMesh2DPathFinder : IPathFinder
 #endif
     }
 
+    public void Erase()
+    {
+        GameObject.Destroy(walker.gameObject.GetComponent<NavMeshPlus.Extensions.AgentOverride2d>());
+        GameObject.Destroy(walker);
+        
+    }
 }

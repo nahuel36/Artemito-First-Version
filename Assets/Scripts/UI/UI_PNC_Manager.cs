@@ -136,6 +136,11 @@ public class UI_PNC_Manager : MonoBehaviour
         inventoryUI = FindObjectOfType<InventoryUI>();
         dialogsUI = FindObjectOfType<DialogsUI>();
     }
+
+    public void ReInitialize() {
+        pointAndWalk = FindObjectOfType<PointAndWalk>();
+    }
+
     void ProcessPointer(ref UnityAction onClickDown,ref UnityAction onClickUp, ref UnityAction onClickHold) 
     {
 
@@ -144,7 +149,7 @@ public class UI_PNC_Manager : MonoBehaviour
 
             onClickHold = () =>
             {
-                if (!showingVerbs)
+                if (!showingVerbs && objetive.overGoToScene == null)
                 {
                     if (inventoryUI.overInventory != null && (!activeThing.IsActive() || activeThing.GetInventoryActive() != inventoryUI.overInventory))
                     {
@@ -173,7 +178,12 @@ public class UI_PNC_Manager : MonoBehaviour
             {
                 if (!showingVerbs)
                 {
-                    if (activeThing.GetInventoryActive() != null || activeThing.GetInteractuableAsInventory() != null)
+                    if (objetive.overGoToScene != null)
+                    {
+                        objetive.overGoToScene.Go();
+                        objetive.overGoToScene = null;
+                    }
+                    else if (activeThing.GetInventoryActive() != null || activeThing.GetInteractuableAsInventory() != null)
                     {
                         if (inventoryUI.overInventory != null && inventoryUI.overInventory != activeThing.GetInventoryActive())
                         {
@@ -222,8 +232,15 @@ public class UI_PNC_Manager : MonoBehaviour
                 }
             };
 
-            if (verbsUI.overCursorVerb != null && activeThing.IsActive())
+
+            if (objetive.overGoToScene)
+            {
+                cursorTextString = objetive.overGoToScene.cursorName;
+            }
+            else if (verbsUI.overCursorVerb != null && activeThing.IsActive())
+            { 
                 cursorTextString = verbsUI.overCursorVerb.name + " " + activeThing.GetName();
+            }
             else if (activeThing.GetInteractuable() != null && showingVerbs)
             {
                 cursorTextString = activeThing.GetName();

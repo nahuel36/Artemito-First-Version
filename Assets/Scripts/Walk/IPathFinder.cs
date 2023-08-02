@@ -15,4 +15,6 @@ public interface IPathFinder
     void Disable();
 
     void Enable();
+
+    void Erase();
 }

@@ -8,12 +8,25 @@ public class WalkableArea2D : MonoBehaviour
 
     public float node_size = 1;
 
-    private IEnumerator Start()
+    public void Disable()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+            Destroy(transform.GetChild(i).gameObject);
+
+        for (int i = GetComponents<NavMeshPlus.Components.NavMeshModifier>().Length - 1; i >= 0; i--)
+        {
+            Destroy(GetComponents<NavMeshPlus.Components.NavMeshModifier>()[i]);
+        }
+        if (FindObjectOfType<NavMeshPlus.Components.NavMeshSurface>())
+            Destroy(FindObjectOfType<NavMeshPlus.Components.NavMeshSurface>().gameObject);
+    }
+
+    public IEnumerator Start()
     {
         yield return new WaitUntil(() => MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized);
 
         for (int i = transform.childCount - 1; i >= 0; i--)
-            DestroyImmediate(transform.GetChild(i).gameObject);
+            Destroy(transform.GetChild(i).gameObject);
 
 
         Collider2D collider = GetComponent<Collider2D>();
@@ -22,14 +35,14 @@ public class WalkableArea2D : MonoBehaviour
 #if NAVMESH_PLUS
         for (int i = GetComponents<NavMeshPlus.Components.NavMeshModifier>().Length - 1; i >= 0; i--)
         {
-            DestroyImmediate(GetComponents<NavMeshPlus.Components.NavMeshModifier>()[i]);
+            Destroy(GetComponents<NavMeshPlus.Components.NavMeshModifier>()[i]);
         }
         if (FindObjectOfType<NavMeshPlus.Components.NavMeshSurface>())
-            DestroyImmediate(FindObjectOfType<NavMeshPlus.Components.NavMeshSurface>().gameObject);
+            Destroy(FindObjectOfType<NavMeshPlus.Components.NavMeshSurface>().gameObject);
 #endif
 #if ASTAR_ARONGRANBERG_PATHFINDING
         if (AstarPath.active)
-            DestroyImmediate(AstarPath.active.gameObject);
+            Destroy(AstarPath.active.gameObject);
 #endif
         WalkObstacle[] obstacles = FindObjectsOfType<WalkObstacle>();
         for (int i = 0; i < obstacles.Length; i++)

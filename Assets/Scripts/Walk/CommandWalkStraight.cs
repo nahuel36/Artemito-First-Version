@@ -10,7 +10,7 @@ public class CommandWalkStraight : ICommand
     Vector3 goToPoint;
     float stopDistance = 0.1f;
     int walkDelay = 10;
-    float moveDistance = 0.01f;
+    float moveDistance = 0.05f;
     public async Task Execute()
     {
         Settings settings = Resources.Load<Settings>("Settings/Settings");
@@ -19,7 +19,7 @@ public class CommandWalkStraight : ICommand
 
         while (Vector3.Distance(character.transform.position, goToPoint) > stopDistance)
         {
-            character.transform.position = Vector3.Lerp(character.transform.position, goToPoint, moveDistance);
+            character.transform.position = Vector3.MoveTowards(character.transform.position, goToPoint, moveDistance);
             await Task.Delay(walkDelay);
         }
     }

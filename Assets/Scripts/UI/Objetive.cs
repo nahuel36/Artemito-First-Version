@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class Objetive : MonoBehaviour
 {
     [HideInInspector]public PNCInteractuable overInteractuable;
+    [HideInInspector] public GoToScene overGoToScene;
     PNCCursor cursor;
 
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class Objetive : MonoBehaviour
     void Update()
     {
         overInteractuable = null;
+        overGoToScene = null;
         RaycastHit2D[] hits = Physics2D.RaycastAll(cursor.transform.position,Vector2.zero);
         int bestpriority = -1;
         foreach(RaycastHit2D hit in hits)
@@ -31,6 +33,11 @@ public class Objetive : MonoBehaviour
                 { 
                     overInteractuable = pncInteractuable;
                     bestpriority = pncInteractuable.priority;
+                }
+                GoToScene goToScene = hit.collider.GetComponent<GoToScene>();
+                if (goToScene)
+                {
+                    overGoToScene = goToScene;   
                 }
             }
         }

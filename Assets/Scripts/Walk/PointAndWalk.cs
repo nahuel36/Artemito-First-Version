@@ -5,26 +5,23 @@ using UnityEngine;
 public class PointAndWalk : MonoBehaviour
 {
     [SerializeField] PNCCharacter pNCCharacter;
+    [SerializeField] Camera camera;
 
     public void Start()
     {
-        PNCCharacter[] characters = FindObjectsOfType<PNCCharacter>();
-        foreach (PNCCharacter character in characters)
-        {
-            StartCoroutine(character.Initialize());
-        }
+
         
     }
 
     public void WalkUnCancelable(){
-        Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 point = camera.ScreenToWorldPoint(Input.mousePosition);
         pNCCharacter.Walk(point.x * Vector3.right + point.y * Vector3.up);
 
     }
 
     public void WalkCancelable()
     {
-        Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 point = camera.ScreenToWorldPoint(Input.mousePosition);
         pNCCharacter.SkipWalk();
         pNCCharacter.CancelableWalk(point.x * Vector3.right + point.y * Vector3.up);
     }

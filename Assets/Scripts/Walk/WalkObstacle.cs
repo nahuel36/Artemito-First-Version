@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class WalkObstacle : MonoBehaviour
 #if NAVMESH_PLUS
         for (int i = GetComponents<NavMeshPlus.Components.NavMeshModifier>().Length - 1; i >= 0; i--)
         {
-            DestroyImmediate(GetComponents<NavMeshPlus.Components.NavMeshModifier>()[i]);
+            Destroy(GetComponents<NavMeshPlus.Components.NavMeshModifier>()[i]);
         }
 #endif
 
@@ -34,4 +35,8 @@ public class WalkObstacle : MonoBehaviour
 
     }
 
+    internal void ErasePathFinder()
+    {
+        Destroy(this.gameObject.GetComponent<NavMeshPlus.Components.NavMeshModifier>());
+    }
 }

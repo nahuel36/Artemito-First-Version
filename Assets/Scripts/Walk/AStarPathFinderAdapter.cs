@@ -95,4 +95,9 @@ public class AStarPathFinderAdapter : IPathFinder
         aipath.enabled = false;
 #endif    
     }
+
+    public void Erase()
+    {
+        throw new System.NotImplementedException();
+    }
 }

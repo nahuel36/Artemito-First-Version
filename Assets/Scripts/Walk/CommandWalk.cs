@@ -31,6 +31,7 @@ public class CommandWalk : ICommand
 
     public void Skip()
     {
-        pathfinder.Cancel();
+        if(pathfinder.Reached == false)
+            pathfinder.Cancel();
     }
 }
