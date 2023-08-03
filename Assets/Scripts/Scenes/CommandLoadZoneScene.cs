@@ -10,7 +10,7 @@ public class CommandLoadZoneScene : ICommand
     public async Task Execute()
     {
         await Task.Yield();
-        MultipleScenesManager.Instance.LoadZoneSceneInmediate(scenePath, entryPoint);
+        await MultipleScenesManager.Instance.LoadZoneSceneInmediate(scenePath, entryPoint);
     }
 
     public void Skip()

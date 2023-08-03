@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Threading.Tasks;
 [RequireComponent(typeof(Collider2D))]
 public class WalkableArea2D : MonoBehaviour
 {
@@ -21,9 +21,13 @@ public class WalkableArea2D : MonoBehaviour
             Destroy(FindObjectOfType<NavMeshPlus.Components.NavMeshSurface>().gameObject);
     }
 
-    public IEnumerator Start()
+    public async void Start()
     {
-        yield return new WaitUntil(() => MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized);
+        while (!(MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized))
+        {
+            await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
+        }
+
 
         for (int i = transform.childCount - 1; i >= 0; i--)
             Destroy(transform.GetChild(i).gameObject);

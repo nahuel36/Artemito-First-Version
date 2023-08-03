@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Threading.Tasks;
 public class MultipleScenesManager : MonoBehaviour
 {
     public class ZoneScene
@@ -18,16 +19,10 @@ public class MultipleScenesManager : MonoBehaviour
 
     [HideInInspector]public bool allZoneScenesInitialized = false;
     private List<ZoneScene> zone_scenes;
-
+    bool charactersInitialized = false;
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
-        PNCCharacter[] characters = FindObjectsOfType<PNCCharacter>();
-        foreach (PNCCharacter character in characters)
-        {
-            StartCoroutine(character.Initialize());
-        }
-
         if (instance != null)
         {
             if (this != instance)
@@ -41,6 +36,9 @@ public class MultipleScenesManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(instance.gameObject);
         }
+
+        charactersInitialized = false;
+
 
         scenesConfiguration = Resources.Load<ScenesConfiguration>("Scenes");
 
@@ -88,6 +86,13 @@ public class MultipleScenesManager : MonoBehaviour
             }
         }
         SceneManager.LoadScene(Path.GetFileName(scenesConfiguration.canvas).Replace(".unity", ""), LoadSceneMode.Additive);
+
+        PNCCharacter[] characters = FindObjectsOfType<PNCCharacter>();
+        foreach (PNCCharacter character in characters)
+        {
+            await character.Initialize();
+        }
+        charactersInitialized = true;
     }
 
     private void Update()
@@ -127,7 +132,7 @@ public class MultipleScenesManager : MonoBehaviour
         CommandLoadZoneScene command = new CommandLoadZoneScene();
         command.Queue(scenePath, playerSpawnPoint);
     }
-    public void LoadZoneSceneInmediate(string scenePath, string playerSpawnPoint)
+    public async Task LoadZoneSceneInmediate(string scenePath, string playerSpawnPoint)
     {
         PNCCharacter player = null;
         foreach (GameObject actualGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
@@ -195,14 +200,14 @@ public class MultipleScenesManager : MonoBehaviour
         if(player != null && point != null)
             player.transform.position = point.transform.position;
 
-        StartCoroutine(InitializeScene(player, walkableArea));
+        await InitializeScene(player, walkableArea);
     }
 
-    private IEnumerator InitializeScene(PNCCharacter player, WalkableArea2D walkableArea)
+    private async Task InitializeScene(PNCCharacter player, WalkableArea2D walkableArea)
     {
-        yield return new WaitForEndOfFrame();
-        yield return StartCoroutine(walkableArea.Start());
-        yield return StartCoroutine(player.Initialize());
+        await Task.Yield();
+        walkableArea.Start();
+        await player.Initialize();
         FindObjectOfType<UI_PNC_Manager>().ReInitialize();
     }
 

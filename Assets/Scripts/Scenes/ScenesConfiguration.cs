@@ -16,5 +16,6 @@ public class ScenesConfiguration : ScriptableObject
     public string mainMenu;
     public string options;
     public string saveAndLoad;
+    public string transition;
     public List<Zone> zones;
 }

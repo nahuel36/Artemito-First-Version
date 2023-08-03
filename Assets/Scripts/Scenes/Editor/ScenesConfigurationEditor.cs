@@ -73,13 +73,15 @@ public class ScenesConfigurationEditor : Editor
     {
         Rect rect = new Rect();
 
-        ShowPopupForScenePath(rect, serializedObject.FindProperty("canvas"), "Canvas Ingame Scene",false);
+        ShowPopupForScenePath(rect, serializedObject.FindProperty("canvas"), "Canvas ingame Scene",false);
 
-        ShowPopupForScenePath(rect,serializedObject.FindProperty("mainMenu"), "mainMenu", false);
+        ShowPopupForScenePath(rect,serializedObject.FindProperty("mainMenu"), "Main menu scene", false);
 
-        ShowPopupForScenePath(rect,serializedObject.FindProperty("options"), "options", false);
+        ShowPopupForScenePath(rect,serializedObject.FindProperty("options"), "Options menu scene", false);
 
-        ShowPopupForScenePath(rect,serializedObject.FindProperty("saveAndLoad"), "saveAndLoad", false);
+        ShowPopupForScenePath(rect,serializedObject.FindProperty("saveAndLoad"), "Save And Load", false);
+
+        ShowPopupForScenePath(rect, serializedObject.FindProperty("transition"), "Scene transition", false);
 
         Zones.DoLayoutList();
        

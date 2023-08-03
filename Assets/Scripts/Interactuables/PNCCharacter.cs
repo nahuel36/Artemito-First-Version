@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using System.Threading.Tasks;
 
 
 public interface SayScript
@@ -33,9 +33,13 @@ public class PNCCharacter : PNCInteractuable
     public bool forceTalkerLucasArts = false;
     [HideInInspector]
     public bool dontConfigureAnimator = false;
-    public IEnumerator Initialize()
+    public async Task Initialize()
     {
-        yield return new WaitUntil(() => MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized);
+        while (!(MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized))
+        {
+            await Task.Delay(Mathf.RoundToInt(Time.deltaTime*1000));
+        }
+
 
         anim = GetComponentInChildren<Animator>();
         ConfigurePathFinder(1, forceAronPathFinder);
@@ -47,6 +51,10 @@ public class PNCCharacter : PNCInteractuable
             characterAnimator = GetComponentInChildren<CharacterAnimator>();
             characterAnimator.Configure(characterAnimatorAdapter, this);
         }
+
+        
+
+
     }
 
     public void ConfigureTalker(bool forceLucas = false)
