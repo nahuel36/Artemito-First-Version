@@ -14,7 +14,7 @@ public class CharacterAnimator : MonoBehaviour
     int angle;
     bool configured;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         angle = 90;
         lastPos.x = transform.position.x;
@@ -24,7 +24,12 @@ public class CharacterAnimator : MonoBehaviour
 
     public void Configure(CharacterAnimatorInterface anim, PNCCharacter charact)
     {
-        delay = 0.1f;
+        angle = 90;
+        lastPos.x = transform.position.x;
+        lastPos.y = transform.position.y;
+        lastPos.z = transform.position.z;
+
+        delay = 0;
         animator = anim;
         character = charact;
         configured = true;
@@ -42,6 +47,7 @@ public class CharacterAnimator : MonoBehaviour
         }
         else
             animator.SetWalking(false);
+
         animator.SetAngle(angle);
 
         animator.SetTalking(character.isTalking());
