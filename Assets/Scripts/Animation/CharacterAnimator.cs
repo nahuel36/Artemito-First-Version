@@ -33,6 +33,8 @@ public class CharacterAnimator : MonoBehaviour
         animator = anim;
         character = charact;
         configured = true;
+
+        animator.SetAngle(angle);
     }
     
     // Update is called once per frame
