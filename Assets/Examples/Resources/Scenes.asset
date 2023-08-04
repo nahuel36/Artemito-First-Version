@@ -16,7 +16,7 @@ MonoBehaviour:
   mainMenu: Assets/Scenes/Zone 1/sceneWalk.unity
   options: Assets/Scenes/Zone 1/sceneWalk.unity
   saveAndLoad: Assets/Scenes/Zone 1/sceneWalk.unity
-  transition: Assets/Scenes/Zone 1/sceneWalk.unity
+  transition: Assets/Scenes/Transition.unity
   zones:
   - zoneScenes:
     - Assets/Scenes/Zone 1/sceneWalk.unity

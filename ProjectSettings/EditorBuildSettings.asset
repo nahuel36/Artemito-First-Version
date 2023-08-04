@@ -6,12 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/sceneWalk.unity
+    path: Assets/Scenes/Zone 1/sceneWalk.unity
     guid: df694018d5f932c4fa0dfe91e65ed315
   - enabled: 1
     path: Assets/Scenes/CanvasScene.unity
     guid: 5c1ac72f725ac32449464bd9529491d5
   - enabled: 1
-    path: Assets/Scenes/scenePantano.unity
+    path: Assets/Scenes/Zone 1/scenePantano.unity
     guid: 6e0a4a8ba16918241a31f3f64d02e5a9
+  - enabled: 1
+    path: Assets/Scenes/Zone 2/scenePantano2.unity
+    guid: 39507f6f158547042b997d35f8cccd3b
+  - enabled: 1
+    path: Assets/Scenes/Zone 2/sceneWalk2.unity
+    guid: b9c779f2ea0d8c448bd9ac6c7d903662
+  - enabled: 1
+    path: Assets/Scenes/Transition.unity
+    guid: d7dc2d36aceabb94eadb46bfbe5b24ff
   m_configObjects: {}

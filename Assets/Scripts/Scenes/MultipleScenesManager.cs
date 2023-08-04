@@ -20,6 +20,8 @@ public class MultipleScenesManager : MonoBehaviour
     [HideInInspector]public bool allZoneScenesInitialized = false;
     private List<ZoneScene> zone_scenes;
     bool charactersInitialized = false;
+    Scene transitionScene;
+    bool transitionLoaded;
     // Start is called before the first frame update
     async void Start()
     {
@@ -37,11 +39,12 @@ public class MultipleScenesManager : MonoBehaviour
             DontDestroyOnLoad(instance.gameObject);
         }
 
+
+        transitionLoaded = false;
         charactersInitialized = false;
 
 
         scenesConfiguration = Resources.Load<ScenesConfiguration>("Scenes");
-
 
         int actualZone = CheckZone(scenesConfiguration);
         if (actualZone < 0)
@@ -68,9 +71,9 @@ public class MultipleScenesManager : MonoBehaviour
             {
                 if (actualScene.path != scenesConfiguration.zones[actualZone].zoneScenes[i])
                 {
-                    LoadSceneParameters parameters = new LoadSceneParameters();
-                    parameters.loadSceneMode = LoadSceneMode.Additive;
-                    Scene scene = SceneManager.LoadScene(Path.GetFileName(scenesConfiguration.zones[actualZone].zoneScenes[i]).Replace(".unity", ""), parameters);
+                    LoadSceneParameters zoneParameters = new LoadSceneParameters();
+                    zoneParameters.loadSceneMode = LoadSceneMode.Additive;
+                    Scene scene = SceneManager.LoadScene(Path.GetFileName(scenesConfiguration.zones[actualZone].zoneScenes[i]).Replace(".unity", ""), zoneParameters);
                     ZoneScene zoneScene = new ZoneScene();
                     zoneScene.scene = scene;
                     zoneScene.isInitialized = false;
@@ -85,7 +88,13 @@ public class MultipleScenesManager : MonoBehaviour
                 }
             }
         }
-        SceneManager.LoadScene(Path.GetFileName(scenesConfiguration.canvas).Replace(".unity", ""), LoadSceneMode.Additive);
+
+        LoadSceneParameters parameters = new LoadSceneParameters();
+        parameters.loadSceneMode = LoadSceneMode.Additive;
+        SceneManager.LoadScene(Path.GetFileName(scenesConfiguration.canvas).Replace(".unity", ""), parameters);
+
+        transitionScene = SceneManager.LoadScene(Path.GetFileName(scenesConfiguration.transition).Replace(".unity", ""), parameters);
+
 
         PNCCharacter[] characters = FindObjectsOfType<PNCCharacter>();
         foreach (PNCCharacter character in characters)
@@ -103,18 +112,33 @@ public class MultipleScenesManager : MonoBehaviour
             if (zoneScene.scene.isLoaded && !zoneScene.isInitialized)
             {
                 AllInitialized = false;
-                foreach (GameObject gameObject in zoneScene.scene.GetRootGameObjects())
+                foreach (GameObject actualGameObject in zoneScene.scene.GetRootGameObjects())
                 {
-                    gameObject.SetActive(false);
+                    actualGameObject.SetActive(false);
                     //guardar si inicialmente esta activo o no
                 }
                 zoneScene.isInitialized = true;
             }
         }
+
         if (AllInitialized == true)
         {
             allZoneScenesInitialized = true;
         }
+
+        if (transitionScene != null && transitionScene.isLoaded && !transitionLoaded && allZoneScenesInitialized)
+        {
+            foreach (GameObject actualGameObject in transitionScene.GetRootGameObjects())
+            {
+                SceneTransitionAnimation sceneTransitionAnimation = actualGameObject.GetComponent<SceneTransitionAnimation>();
+                if (sceneTransitionAnimation != null)
+                {
+                    sceneTransitionAnimation.Out();
+                    transitionLoaded = true;
+                }
+            }
+        }
+
     }
 
     private int CheckZone(ScenesConfiguration scenesConfig)
@@ -134,6 +158,8 @@ public class MultipleScenesManager : MonoBehaviour
     }
     public async Task LoadZoneSceneInmediate(string scenePath, string playerSpawnPoint)
     {
+        await FindObjectOfType<SceneTransitionAnimation>().In();
+
         PNCCharacter player = null;
         foreach (GameObject actualGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
         {
@@ -209,6 +235,7 @@ public class MultipleScenesManager : MonoBehaviour
         walkableArea.Start();
         await player.Initialize();
         FindObjectOfType<UI_PNC_Manager>().ReInitialize();
+        await FindObjectOfType<SceneTransitionAnimation>().Out();
     }
 
 }
