@@ -226,11 +226,6 @@ public class MultipleScenesManager : MonoBehaviour
         if(player != null && point != null)
             player.transform.position = point.transform.position;
 
-        await InitializeScene(player, walkableArea);
-    }
-
-    private async Task InitializeScene(PNCCharacter player, WalkableArea2D walkableArea)
-    {
         await Task.Yield();
         walkableArea.Start();
         await player.Initialize();
