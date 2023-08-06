@@ -35,7 +35,8 @@ public class PNCCharacter : PNCInteractuable
     public bool dontConfigureAnimator = false;
     public async Task Initialize()
     {
-        while (!(MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized))
+        WalkableArea2D walkableArea = FindObjectOfType<WalkableArea2D>();
+        while (!(MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized && walkableArea.initialized))
         {
             await Task.Delay(Mathf.RoundToInt(Time.deltaTime*1000));
         }

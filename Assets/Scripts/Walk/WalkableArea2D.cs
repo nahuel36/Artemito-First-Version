@@ -7,7 +7,7 @@ public class WalkableArea2D : MonoBehaviour
 {
 
     public float node_size = 1;
-
+    public bool initialized = false;
     public void Disable()
     {
         for (int i = transform.childCount - 1; i >= 0; i--)
@@ -23,11 +23,12 @@ public class WalkableArea2D : MonoBehaviour
 
     public async void Start()
     {
+        initialized = false;
         while (!(MultipleScenesManager.Instance != null && MultipleScenesManager.Instance.allZoneScenesInitialized))
         {
             await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
         }
-
+        
 
         for (int i = transform.childCount - 1; i >= 0; i--)
             Destroy(transform.GetChild(i).gameObject);
@@ -48,6 +49,9 @@ public class WalkableArea2D : MonoBehaviour
         if (AstarPath.active)
             Destroy(AstarPath.active.gameObject);
 #endif
+
+        await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000) * 3);
+
         WalkObstacle[] obstacles = FindObjectsOfType<WalkObstacle>();
         for (int i = 0; i < obstacles.Length; i++)
         {
@@ -87,6 +91,8 @@ public class WalkableArea2D : MonoBehaviour
             GO.transform.parent = transform;
 
 #endif
+
+            initialized = true;
         }
 
     }
