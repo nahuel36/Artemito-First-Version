@@ -17,7 +17,7 @@ public static class InteractionUtils
         return null;
     }
 
-    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer, InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex, PNCInteractuable sceneObject = null, bool runInBackground = false)
+    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer, InteractionObjectsType interactionType, string[] prefixNameAndPostfix, int verbIndex, int[] itemIndex, PNCInteractuable[] sceneObject = null, bool runInBackground = false)
     {
         bool runUnhandledEvents = false;
         if (attempsContainer.attemps.Count == 0)
@@ -62,10 +62,46 @@ public static class InteractionUtils
                         argument = attempsContainer.attemps[index].interactions[i].customActionArguments[0];
                     }
                     argument.interactionType = interactionType;
-                    argument.prefixNameAndPostfix = prefixNameAndPostfix;
+                    argument.prefixNameAndPostfix = prefixNameAndPostfix[0];
                     argument.verbIndex = verbIndex;
-                    argument.itemIndex = itemIndex;
+                    argument.itemIndex = itemIndex[0];
+
                     attempsContainer.attemps[index].interactions[i].customActionArguments[0] = argument;
+
+                    if (interactionType == InteractionObjectsType.inventoryIninventory)
+                    {
+                        CustomArgument argument2 = new CustomArgument();
+                        argument2.interactionType = interactionType;
+                        argument2.prefixNameAndPostfix = prefixNameAndPostfix[1];
+                        argument2.verbIndex = verbIndex;
+                        argument2.itemIndex = itemIndex[1];
+
+                        if (attempsContainer.attemps[index].interactions[i].customActionArguments.Count <= 1)
+                        {
+                            attempsContainer.attemps[index].interactions[i].customActionArguments.Add(argument2);
+                        }
+                        else
+                        {
+                            attempsContainer.attemps[index].interactions[i].customActionArguments[1] = argument2;
+                        }
+                    }
+                    else if (interactionType == InteractionObjectsType.objectInObject)
+                    {
+                        CustomArgument argument2 = new CustomArgument();
+                        argument2.interactionType = interactionType;
+                        argument2.prefixNameAndPostfix = prefixNameAndPostfix[1];
+                        argument2.verbIndex = verbIndex;
+
+                        if (attempsContainer.attemps[index].interactions[i].customActionArguments.Count <= 1)
+                        {
+                            attempsContainer.attemps[index].interactions[i].customActionArguments.Add(argument2);
+                        }
+                        else
+                        {
+                            attempsContainer.attemps[index].interactions[i].customActionArguments[1] = argument2;
+                        }
+                    }
+                    
 
 
                     command.action.Invoke(attempsContainer.attemps[index].interactions[i].customActionArguments);
@@ -86,13 +122,13 @@ public static class InteractionUtils
 
         if (runUnhandledEvents && interactionType != InteractionObjectsType.unhandledEvent)
         {
-            RunHunhandledEvents(interactionType, prefixNameAndPostfix, verbIndex, itemIndex);
+            RunHunhandledEvents(interactionType, prefixNameAndPostfix , verbIndex, itemIndex);
         }
         
         attempsContainer.executedTimes++;
     }
 
-    public static void RunHunhandledEvents(InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex, PNCInteractuable sceneObject = null)
+    public static void RunHunhandledEvents(InteractionObjectsType interactionType, string[] prefixNameAndPostfix, int verbIndex, int[] itemIndex, PNCInteractuable[] sceneObject = null)
     {
         if (!unhandledEvents)
         {
@@ -116,7 +152,7 @@ public static class InteractionUtils
         {
             for (int i = 0; i < unhandledEvents.inventoryActions.Count; i++)
             {
-                if (itemIndex == unhandledEvents.inventoryActions[i].specialIndex && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
+                if (itemIndex[0] == unhandledEvents.inventoryActions[i].specialIndex && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
                 {
                     RunAttempsInteraction(unhandledEvents.inventoryActions[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex);
                 }
@@ -126,7 +162,7 @@ public static class InteractionUtils
         {
             for (int i = 0; i < unhandledEvents.inventoryActions.Count; i++)
             {
-                if (itemIndex == unhandledEvents.inventoryActions[i].specialIndex && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
+                if (itemIndex[0] == unhandledEvents.inventoryActions[i].specialIndex && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
                 {
                     RunAttempsInteraction(unhandledEvents.inventoryActions[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex);
                 }
@@ -136,7 +172,7 @@ public static class InteractionUtils
         { 
             for (int i = 0; i < unhandledEvents.inventoryActions.Count; i++)
             {
-                if (unhandledEvents.inventoryActions[i].sceneObject == sceneObject && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
+                if (unhandledEvents.inventoryActions[i].sceneObject == sceneObject[0] && verbIndex == unhandledEvents.inventoryActions[i].verb.index)
                 {
                     RunAttempsInteraction(unhandledEvents.inventoryActions[i].attempsContainer, InteractionObjectsType.unhandledEvent, prefixNameAndPostfix, verbIndex, itemIndex, sceneObject);
                 }

@@ -299,11 +299,11 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         int index = InventoryManager.Instance.getInventoryActionsIndex(item, inventoryActions, verb);
         if (index != -1)
         {
-            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryInObject, namePrefix + name + namePostfix, verb.index, item.specialIndex);
+            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryInObject, new string[] { namePrefix + name + namePostfix }, verb.index, new int[] { item.specialIndex });
         }
         else
         {
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryInObject, namePrefix + name + namePostfix, verb.index, item.specialIndex);
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryInObject, new string[] { namePrefix + name + namePostfix }, verb.index, new int[] { item.specialIndex });
         }
     }
 
@@ -312,11 +312,11 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         int index = InventoryManager.Instance.getInventoryActionsIndex(pncObject, inventoryActions, verb);
         if (index != -1)
         {
-            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer, InteractionObjectsType.objectInObject, namePrefix + name + namePostfix, verb.index, -1, pncObject);
+            InteractionUtils.RunAttempsInteraction(inventoryActions[index].attempsContainer, InteractionObjectsType.objectInObject, new string[] {pncObject.namePrefix + pncObject.name + pncObject.namePostfix, namePrefix + name + namePostfix }, verb.index, new int[] { -1 }, new PNCInteractuable[] { this ,pncObject});
         }
         else
         {
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.objectInObject, namePrefix + name + namePostfix, verb.index, -1, pncObject);
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.objectInObject, new string[] { pncObject.namePrefix + pncObject.name + pncObject.namePostfix, namePrefix + name + namePostfix }, verb.index, new int[] { -1 }, new PNCInteractuable[] { this, pncObject });
         }
     }
 
@@ -325,8 +325,8 @@ public abstract class PNCInteractuable : PNCVariablesContainer
         VerbInteractions verbToRun = InteractionUtils.FindVerb(verb, verbs);
 
         if (verbToRun != null)
-            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInObject, namePrefix + name + namePostfix, verb.index, -1);
+            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInObject, new string[] { namePrefix + name + namePostfix }, verb.index, new int[] { -1 });
         else
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInObject, namePrefix + name + namePostfix, verb.index, -1);
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInObject, new string[] { namePrefix + name + namePostfix }, verb.index, new int[] { -1 });
     }
 }

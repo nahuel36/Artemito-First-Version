@@ -159,7 +159,7 @@ public class MultipleScenesManager : MonoBehaviour
             {
                 if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.beforeFadeIn)
                 {
-                    await InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1);
+                    await InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, new string[] { "" }, -1, new int[] { -1 });
                 }
             }
 
@@ -170,7 +170,7 @@ public class MultipleScenesManager : MonoBehaviour
             {
                 if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.afterFadeIn)
                 {
-                    await InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1);
+                    await InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, new string[] { "" }, -1, new int[] { -1 });
                 }
             }
     }
@@ -266,7 +266,7 @@ public class MultipleScenesManager : MonoBehaviour
                         {
                             if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.beforeFadeIn)
                             {
-                                InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1, null, true);
+                                InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, new string[] { "" }, -1, new int[] { -1 }, null, true);
                             }
                         }
 
@@ -305,7 +305,7 @@ public class MultipleScenesManager : MonoBehaviour
                 if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.afterFadeIn)
                 {
                     //nunca poner un await, sino espera a que termine para ejecutar la proxima y no termina nunca
-                    InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1);
+                    InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, new string[] { "" }, -1, new int[] { -1 });
                 }
             }
         }

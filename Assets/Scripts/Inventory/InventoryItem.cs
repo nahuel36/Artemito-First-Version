@@ -24,9 +24,9 @@ public class InventoryItem
         VerbInteractions verbToRun = InteractionUtils.FindVerb(verbToRunString, verbs);
 
         if (verbToRun != null)
-            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInInventory, namePrefix + itemName + namePostfix, verbToRunString.index, -1);
+            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInInventory, new string[] { namePrefix + itemName + namePostfix }, verbToRunString.index, new int[] { specialIndex });
         else
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInInventory, namePrefix + itemName + namePostfix, verbToRunString.index, -1);
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInInventory, new string[] { namePrefix + itemName + namePostfix }, verbToRunString.index, new int[] { specialIndex });
     }
 
     public Verb[] GetActiveVerbs()
