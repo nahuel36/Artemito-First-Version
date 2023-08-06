@@ -126,20 +126,55 @@ public class MultipleScenesManager : MonoBehaviour
             allZoneScenesInitialized = true;
         }
 
+        SceneTransitionAnimation sceneTransitionAnimation = null;
+        SceneEvents sceneEvents = null;
+
         if (transitionScene != null && transitionScene.isLoaded && !transitionLoaded && allZoneScenesInitialized)
         {
             foreach (GameObject actualGameObject in transitionScene.GetRootGameObjects())
             {
-                SceneTransitionAnimation sceneTransitionAnimation = actualGameObject.GetComponent<SceneTransitionAnimation>();
-                if (sceneTransitionAnimation != null)
+                SceneTransitionAnimation actualSceneTransitionAnimation = actualGameObject.GetComponent<SceneTransitionAnimation>();
+                if (actualSceneTransitionAnimation != null)
                 {
-                    sceneTransitionAnimation.Out();
-                    transitionLoaded = true;
+                    sceneTransitionAnimation = actualSceneTransitionAnimation;
                 }
             }
+            foreach (GameObject actualGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                SceneEvents actualSceneEvents = actualGameObject.GetComponent<SceneEvents>();
+                if (actualSceneEvents != null)
+                {
+                    sceneEvents = actualSceneEvents;
+                }
+            }
+            RunTransitionEvents(sceneTransitionAnimation, sceneEvents);
+            transitionLoaded = true;
         }
-
     }
+
+    public async Task RunTransitionEvents(SceneTransitionAnimation sceneTransitionAnimation, SceneEvents sceneEvents)
+    {
+        if(sceneEvents)
+            for (int j = 0; j < sceneEvents.events.Count; j++)
+            {
+                if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.beforeFadeIn)
+                {
+                    await InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1);
+                }
+            }
+
+        await sceneTransitionAnimation.Out();
+
+        if(sceneEvents)
+            for (int j = 0; j < sceneEvents.events.Count; j++)
+            {
+                if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.afterFadeIn)
+                {
+                    await InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1);
+                }
+            }
+    }
+
 
     private int CheckZone(ScenesConfiguration scenesConfig)
     {
