@@ -31,6 +31,9 @@ public class InventoryItem
 
     public Verb[] GetActiveVerbs()
     {
+        if (settings == null)
+            settings = Resources.Load<Settings>("Settings/Settings");
+
         List<Verb> activeVerbs = new List<Verb>();
         for (int i = 0; i < settings.verbs.Length; i++)
         {
