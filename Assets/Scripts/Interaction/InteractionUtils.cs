@@ -17,7 +17,7 @@ public static class InteractionUtils
         return null;
     }
 
-    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer, InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex, PNCInteractuable sceneObject = null)
+    public async static Task RunAttempsInteraction(AttempsContainer attempsContainer, InteractionObjectsType interactionType, string prefixNameAndPostfix, int verbIndex, int itemIndex, PNCInteractuable sceneObject = null, bool runInBackground = false)
     {
         bool runUnhandledEvents = false;
         if (attempsContainer.attemps.Count == 0)
@@ -43,7 +43,7 @@ public static class InteractionUtils
                 while (i < attempsContainer.attemps[index].interactions.Count)
                 {
                     InitializeInteractionCommand command = new InitializeInteractionCommand();
-                    command.Queue(attempsContainer.attemps[index].interactions[i]);
+                    command.Queue(attempsContainer.attemps[index].interactions[i], runInBackground);
 
                     while (command.action == null)
                     {

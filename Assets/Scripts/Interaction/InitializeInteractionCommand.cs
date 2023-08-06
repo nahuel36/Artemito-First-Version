@@ -19,10 +19,13 @@ public class InitializeInteractionCommand : ICommand
 
     }
 
-    public void Queue(Interaction interaction)
+    public void Queue(Interaction interaction, bool runInBackground)
     {
         this.interaction = interaction;
-        CommandsQueue.Instance.AddCommand(this);
+        if (!runInBackground)
+            CommandsQueue.Instance.AddCommand(this);
+        else
+            CommandsQueue.BackgroundInstance.AddCommand(this);
     }
 
 }

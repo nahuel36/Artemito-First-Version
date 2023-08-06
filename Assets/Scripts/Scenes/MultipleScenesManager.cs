@@ -227,7 +227,7 @@ public class MultipleScenesManager : MonoBehaviour
                         {
                             if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.beforeFadeIn)
                             {
-                                await InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1);
+                                InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1,null, true);
                             }
                         }
 

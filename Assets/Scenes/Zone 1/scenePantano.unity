@@ -124,6 +124,91 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &148413498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 148413500}
+  - component: {fileID: 148413499}
+  m_Layer: 0
+  m_Name: Triangle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &148413499
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148413498}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &148413500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148413498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7358692, y: 0.85, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &387523442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,6 +1177,79 @@ MonoBehaviour:
           action:
             m_PersistentCalls:
               m_Calls: []
+          global_changeBooleanValue: 0
+          global_changeStringValue: 0
+          global_changeIntegerValue: 0
+          local_changeBooleanValue: 0
+          local_changeStringValue: 0
+          local_changeIntegerValue: 0
+          global_compareBooleanValue: 0
+          global_compareStringValue: 0
+          global_compareIntegerValue: 0
+          local_compareBooleanValue: 0
+          local_compareStringValue: 0
+          local_compareIntegerValue: 0
+          local_defaultBooleanValue: 0
+          local_defaultIntegerValue: 0
+          local_defaultStringValue: 
+          global_defaultBooleanValue: 0
+          global_defaultIntegerValue: 0
+          global_defaultStringValue: 
+          global_BooleanValue: 0
+          global_StringValue: 
+          global_IntegerValue: 0
+          local_BooleanValue: 0
+          local_StringValue: 
+          local_IntegerValue: 0
+          SayScript: {fileID: 0}
+          CanSkip: 0
+          customScriptAction: 0
+          customActionArguments: []
+        expandedInInspector: 1
+      expandedInInspector: 1
+      executedTimes: 0
+  - sceneEvent: 1
+    attempsContainer:
+      attempsIteration: 0
+      attemps:
+      - interactions:
+        - type: 4
+          expandedInInspector: 1
+          inventoryAction: 0
+          character: {fileID: 1810703246}
+          characterAction: 3
+          WhatToSay: 
+          WhereToWalk: {fileID: 569658329}
+          globalVariableSelected: 0
+          localVariableSelected: 0
+          variablesAction: 0
+          variableObject: {fileID: 0}
+          dialogAction: 0
+          dialogSelected: {fileID: 0}
+          newDialogEntry: 0
+          newOptionState: 0
+          newOptionText: 
+          subDialogIndex: 0
+          optionIndex: 0
+          OnCompareResultTrueAction: 0
+          OnCompareResultFalseAction: 0
+          LineToGoOnTrueResult: 0
+          LineToGoOnFalseResult: 0
+          action:
+            m_PersistentCalls:
+              m_Calls:
+              - m_Target: {fileID: 148413498}
+                m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+                m_MethodName: SetActive
+                m_Mode: 6
+                m_Arguments:
+                  m_ObjectArgument: {fileID: 0}
+                  m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                  m_IntArgument: 0
+                  m_FloatArgument: 0
+                  m_StringArgument: 
+                  m_BoolArgument: 0
+                m_CallState: 2
           global_changeBooleanValue: 0
           global_changeStringValue: 0
           global_changeIntegerValue: 0
