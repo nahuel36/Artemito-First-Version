@@ -163,7 +163,7 @@ public class UnhandledEventsEditor : Editor
                     rect.y += EditorGUIUtility.singleLineHeight;
                 }
 
-                PNCEditorUtils.DrawElementAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, customScriptInteractionDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
+                PNCEditorUtils.DrawArrayWithAttempContainer(inv_serialized, indexInv, rect, invAttempsListDict, invInteractionsListDict, customScriptInteractionDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
             }
         };
 
@@ -186,7 +186,7 @@ public class UnhandledEventsEditor : Editor
             },
             drawElementCallback = (rect, indexV, active, focus) =>
             {
-                PNCEditorUtils.DrawElementAttempContainer(serializedProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, customScriptInteractionDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
+                PNCEditorUtils.DrawArrayWithAttempContainer(serializedProperty, indexV, rect, verbAttempsListDict, verbInteractionsListDict, customScriptInteractionDict, myTarget.verbs[indexV].attempsContainer.attemps, false);
             },
             onCanAddCallback = (list) =>
             {

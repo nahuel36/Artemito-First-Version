@@ -147,4 +147,9 @@ public class PNCCharacter : PNCInteractuable
     {
         pathFinder.Erase();
     }
+
+    public void DisablePathFinder()
+    {
+        pathFinder.Disable();
+    }
 }

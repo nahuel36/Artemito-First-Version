@@ -252,6 +252,10 @@ public static class InteractionUtils
             {
                 action.AddListener((arguments) => charact.Walk(interaction.WhereToWalk.position));
             }
+            else if (interaction.characterAction == Interaction.CharacterAction.walkStraight)
+            {
+                action.AddListener((arguments) => charact.WalkStraight(interaction.WhereToWalk.position));
+            }
         }
         else if (interaction.type == Interaction.InteractionType.dialog)
         {

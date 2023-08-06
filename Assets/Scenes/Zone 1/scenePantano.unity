@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenePath: Assets/Scenes/Zone 1/sceneWalk.unity
-  entryPointName: EntryLeft
+  entryPointName: EntryRight
   goToPoint: {fileID: 1542097399}
   cursorName: To walk
 --- !u!4 &387523445
@@ -271,6 +271,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &569658328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569658329}
+  m_Layer: 0
+  m_Name: PointToGoAfterEntry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &569658329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569658328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.78, y: -1.0711806, z: -0.09368132}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &637042497
 GameObject:
@@ -1001,6 +1032,112 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1758917170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758917172}
+  - component: {fileID: 1758917171}
+  m_Layer: 0
+  m_Name: SceneEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1758917171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758917170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b790b89e89e84f14c891805a8f1ec127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - sceneEvent: 0
+    attempsContainer:
+      attempsIteration: 0
+      attemps:
+      - interactions:
+        - type: 0
+          expandedInInspector: 1
+          inventoryAction: 0
+          character: {fileID: 1810703246}
+          characterAction: 3
+          WhatToSay: 
+          WhereToWalk: {fileID: 569658329}
+          globalVariableSelected: 0
+          localVariableSelected: 0
+          variablesAction: 0
+          variableObject: {fileID: 0}
+          dialogAction: 0
+          dialogSelected: {fileID: 0}
+          newDialogEntry: 0
+          newOptionState: 0
+          newOptionText: 
+          subDialogIndex: 0
+          optionIndex: 0
+          OnCompareResultTrueAction: 0
+          OnCompareResultFalseAction: 0
+          LineToGoOnTrueResult: 0
+          LineToGoOnFalseResult: 0
+          action:
+            m_PersistentCalls:
+              m_Calls: []
+          global_changeBooleanValue: 0
+          global_changeStringValue: 0
+          global_changeIntegerValue: 0
+          local_changeBooleanValue: 0
+          local_changeStringValue: 0
+          local_changeIntegerValue: 0
+          global_compareBooleanValue: 0
+          global_compareStringValue: 0
+          global_compareIntegerValue: 0
+          local_compareBooleanValue: 0
+          local_compareStringValue: 0
+          local_compareIntegerValue: 0
+          local_defaultBooleanValue: 0
+          local_defaultIntegerValue: 0
+          local_defaultStringValue: 
+          global_defaultBooleanValue: 0
+          global_defaultIntegerValue: 0
+          global_defaultStringValue: 
+          global_BooleanValue: 0
+          global_StringValue: 
+          global_IntegerValue: 0
+          local_BooleanValue: 0
+          local_StringValue: 
+          local_IntegerValue: 0
+          SayScript: {fileID: 0}
+          CanSkip: 0
+          customScriptAction: 0
+          customActionArguments: []
+        expandedInInspector: 1
+      expandedInInspector: 1
+      executedTimes: 0
+--- !u!4 &1758917172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758917170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.7930818, y: -1.0711806, z: -0.09368132}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1810703246 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -1038,7 +1175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930364572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.78, y: -1.8322865, z: -3.3087041}
+  m_LocalPosition: {x: -12.16, y: -1.8322865, z: -3.3087041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

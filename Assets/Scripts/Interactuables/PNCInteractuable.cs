@@ -102,7 +102,8 @@ public class Interaction
     {
         say,
         sayWithScript,
-        walk
+        walk,
+        walkStraight
     }
     public PNCCharacter character;
     public CharacterAction characterAction;
@@ -244,7 +245,10 @@ public enum InteractionObjectsType
     verbInObject,
     verbInInventory,
     dialogOption,
-    unhandledEvent
+    sceneEvent,
+    finishedTimer,
+    unhandledEvent,
+
 }
 
 [System.Serializable]

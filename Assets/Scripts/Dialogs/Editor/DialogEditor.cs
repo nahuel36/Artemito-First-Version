@@ -59,7 +59,7 @@ public class DialogEditor : Editor
                                 recOpt.y += EditorGUIUtility.singleLineHeight;
                                 EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("say"));
                             }
-                            PNCEditorUtils.DrawElementAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict,customScriptInteractionDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, false, true);
+                            PNCEditorUtils.DrawArrayWithAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict,customScriptInteractionDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, false, true);
                         },
                         elementHeightCallback = (int indexOpt) =>
                         {

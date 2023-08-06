@@ -192,6 +192,7 @@ public class MultipleScenesManager : MonoBehaviour
         }
         ScenePoint point = null;
         WalkableArea2D walkableArea = null;
+        SceneEvents sceneEvents = null;
         for (int i = 0; i < zone_scenes.Count; i++)
         {
             if (zone_scenes[i].scene.path == scenePath)
@@ -218,19 +219,53 @@ public class MultipleScenesManager : MonoBehaviour
                         walkableArea = actualWalkable;
                     }
 
+                    SceneEvents actualSceneEvents = actualGameObject.GetComponent<SceneEvents>();
+                    if (actualSceneEvents != null && actualSceneEvents.events != null)
+                    {
+                        sceneEvents = actualSceneEvents;
+                        for (int j = 0; j < sceneEvents.events.Count; j++)
+                        {
+                            if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.beforeFadeIn)
+                            {
+                                await InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1);
+                            }
+                        }
+
+                        
+                    }
+
                 }
                 SceneManager.SetActiveScene(zone_scenes[i].scene);
                 break;
             }
         }
-        if(player != null && point != null)
-            player.transform.position = point.transform.position;
+        
+            
 
         await Task.Yield();
         walkableArea.Start();
         await player.Initialize();
         FindObjectOfType<UI_PNC_Manager>().ReInitialize();
+
+        if (player != null && point != null)
+        {
+            player.DisablePathFinder();
+            player.transform.position = point.transform.position;
+        }
+
         await FindObjectOfType<SceneTransitionAnimation>().Out();
+
+        if (sceneEvents != null && sceneEvents.events != null)
+        {
+            for (int j = 0; j < sceneEvents.events.Count; j++)
+            {
+                if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.afterFadeIn)
+                {
+                    //nunca poner un await, sino espera a que termine para ejecutar la proxima y no termina nunca
+                    InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1);
+                }
+            }
+        }
     }
 
 }

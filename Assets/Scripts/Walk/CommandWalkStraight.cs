@@ -13,8 +13,6 @@ public class CommandWalkStraight : ICommand
     float moveDistance = 0.05f;
     public async Task Execute()
     {
-        Settings settings = Resources.Load<Settings>("Settings/Settings");
-
         pathFinder.Disable();
 
         while (Vector3.Distance(character.transform.position, goToPoint) > stopDistance)
