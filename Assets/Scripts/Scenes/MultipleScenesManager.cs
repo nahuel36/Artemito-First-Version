@@ -196,6 +196,7 @@ public class MultipleScenesManager : MonoBehaviour
         await FindObjectOfType<SceneTransitionAnimation>().In();
 
         PNCCharacter player = null;
+        List<PNCCharacter> otherPlayers = new List<PNCCharacter>();
         foreach (GameObject actualGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
         {
             PNCCharacter actualCharacter = actualGameObject.GetComponent<PNCCharacter>();
@@ -212,7 +213,7 @@ public class MultipleScenesManager : MonoBehaviour
             }
 
             WalkObstacle actualObstacle = actualGameObject.GetComponent<WalkObstacle>();
-            if(actualObstacle != null){
+            if (actualObstacle != null) {
                 actualObstacle.ErasePathFinder();
             }
 
@@ -243,9 +244,12 @@ public class MultipleScenesManager : MonoBehaviour
                     }
 
                     PNCCharacter actualCharacter = actualGameObject.GetComponent<PNCCharacter>();
-                    if (actualCharacter != null && actualCharacter.isPlayerCharacter)
+                    if (actualCharacter != null)
                     {
-                        player = actualCharacter;
+                        if (actualCharacter.isPlayerCharacter)
+                            player = actualCharacter;
+                        else
+                            otherPlayers.Add(actualCharacter);
                     }
 
                     WalkableArea2D actualWalkable = actualGameObject.GetComponent<WalkableArea2D>();
@@ -262,11 +266,11 @@ public class MultipleScenesManager : MonoBehaviour
                         {
                             if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.beforeFadeIn)
                             {
-                                InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1,null, true);
+                                InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, "", -1, -1, null, true);
                             }
                         }
 
-                        
+
                     }
 
                 }
@@ -274,12 +278,16 @@ public class MultipleScenesManager : MonoBehaviour
                 break;
             }
         }
-        
-            
+
+
 
         await Task.Yield();
         walkableArea.Start();
         await player.Initialize();
+        foreach (PNCCharacter charact in otherPlayers)
+        {
+            await charact.Initialize();
+        }
         FindObjectOfType<UI_PNC_Manager>().ReInitialize();
 
         if (player != null && point != null)
