@@ -436,8 +436,7 @@ public static class PNCEditorUtils
                                 if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue ||
                                     interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue ||
                                     interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue)
-                                    height += 2;
-                                height += GetGoToLineHeight(interactionSerialized);
+                                    height += GetGoToLineHeight(interactionSerialized);
                             }
                         }
                     }
@@ -476,8 +475,7 @@ public static class PNCEditorUtils
                                 if (interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue ||
                                     interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue ||
                                     interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue)
-                                    height += 2;
-                                height += GetGoToLineHeight(interactionSerialized);
+                                    height += GetGoToLineHeight(interactionSerialized);
                             }
                         }
 
@@ -487,14 +485,15 @@ public static class PNCEditorUtils
             }
             if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.custom)
             { 
-                float height = EditorGUIUtility.singleLineHeight * (12.5f + (interactionSerialized.FindPropertyRelative("action.m_PersistentCalls.m_Calls").arraySize * 3));
+                float height = EditorGUIUtility.singleLineHeight * (10.5f + (interactionSerialized.FindPropertyRelative("action.m_PersistentCalls.m_Calls").arraySize * 3));
 
                 for (int i = 0; i < interactionSerialized.FindPropertyRelative("customActionArguments").arraySize; i++)
                 {
                     height += GetCustomArgumentHeight(interactionSerialized, i);
                 }
-
-                height += GetGoToLineHeight(interactionSerialized) * EditorGUIUtility.singleLineHeight;
+                
+                if(interactionSerialized.FindPropertyRelative("customScriptAction").enumValueIndex == (int)Interaction.CustomScriptAction.customBoolean)
+                    height += GetGoToLineHeight(interactionSerialized) * EditorGUIUtility.singleLineHeight;
 
                 return height;
             }
@@ -514,7 +513,7 @@ public static class PNCEditorUtils
 
     public static float GetGoToLineHeight(SerializedProperty interactionSerialized)
     {
-        float height = 0;
+        float height = 2;
         if (interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
             height += 1;
 
