@@ -371,7 +371,7 @@ public static class PNCEditorUtils
                     height += 3;
                     for (int i = 0; i < interactionSerialized.FindPropertyRelative("customActionArguments").arraySize; i++)
                     {
-                        height += GetCustomScriptHeight(interactionSerialized, i) / EditorGUIUtility.singleLineHeight;
+                        height += GetCustomArgumentHeight(interactionSerialized, i) / EditorGUIUtility.singleLineHeight;
                     }
                 }
                 return EditorGUIUtility.singleLineHeight * height;
@@ -491,7 +491,7 @@ public static class PNCEditorUtils
 
                 for (int i = 0; i < interactionSerialized.FindPropertyRelative("customActionArguments").arraySize; i++)
                 {
-                    height += GetCustomScriptHeight(interactionSerialized, i);
+                    height += GetCustomArgumentHeight(interactionSerialized, i);
                 }
 
                 height += GetGoToLineHeight(interactionSerialized) * EditorGUIUtility.singleLineHeight;
@@ -503,7 +503,7 @@ public static class PNCEditorUtils
 
     }
 
-    private static float GetCustomScriptHeight(SerializedProperty interactionSerialized, int indexCS)
+    private static float GetCustomArgumentHeight(SerializedProperty interactionSerialized, int indexCS)
     {
         bool expanded = interactionSerialized.FindPropertyRelative("customActionArguments").GetArrayElementAtIndex(indexCS).FindPropertyRelative("expandedInInspector").boolValue;
         if (expanded)
@@ -1060,7 +1060,7 @@ public static class PNCEditorUtils
                 },
                 elementHeightCallback = (indexCS) =>
                 {
-                    return GetCustomScriptHeight(interactionSerialized, indexCS);
+                    return GetCustomArgumentHeight(interactionSerialized, indexCS);
                 }
 
 
@@ -1075,7 +1075,7 @@ public static class PNCEditorUtils
 
         for (int i = 0; i < interactionSerialized.FindPropertyRelative("customActionArguments").arraySize; i++)
         {
-            interactRect.y += GetCustomScriptHeight(interactionSerialized, i);
+            interactRect.y += GetCustomArgumentHeight(interactionSerialized, i);
         }
     }
 
