@@ -638,7 +638,7 @@ public static class PNCEditorUtils
                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                     EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("CanSkip"));
 
-                                                    ShowCustomArguments(interactRect, interactionSerialized, customScriptArgumentsDict);
+                                                    ShowCustomArguments(ref interactRect, interactionSerialized, customScriptArgumentsDict);
                                                 }
                                                 else if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.walk ||
                                                 interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.walkStraight )
@@ -988,7 +988,7 @@ public static class PNCEditorUtils
 
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
 
-                                                ShowCustomArguments(interactRect, interactionSerialized, customScriptArgumentsDict);
+                                                ShowCustomArguments(ref interactRect, interactionSerialized, customScriptArgumentsDict);
                                                 
 
                                                 if (interactionSerialized.FindPropertyRelative("customScriptAction").enumValueIndex == (int)Interaction.CustomScriptAction.customBoolean)
@@ -1033,7 +1033,7 @@ public static class PNCEditorUtils
         }
     }
 
-    private static void ShowCustomArguments(Rect interactRect, SerializedProperty interactionSerialized, Dictionary<string, ReorderableList> customScriptArgumentsDict)
+    private static void ShowCustomArguments(ref Rect interactRect, SerializedProperty interactionSerialized, Dictionary<string, ReorderableList> customScriptArgumentsDict)
     {
         string customScriptArgumentsKey = interactionSerialized.propertyPath;
 
