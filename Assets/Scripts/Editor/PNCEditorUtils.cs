@@ -433,14 +433,11 @@ public static class PNCEditorUtils
                                     height += 2;
                                 if (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue)
                                     height += 2;
-                                if (interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
-                                    height += 1;
-                                if (interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
-                                    height += 1;
                                 if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue ||
                                     interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue ||
                                     interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue)
                                     height += 2;
+                                height += GetGoToLineHeight(interactionSerialized);
                             }
                         }
                     }
@@ -476,14 +473,11 @@ public static class PNCEditorUtils
                                     height += 2;
                                 if (interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue)
                                     height += 2;
-                                if (interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
-                                    height += 1;
-                                if (interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
-                                    height += 1;
                                 if (interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue ||
                                     interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue ||
                                     interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue)
                                     height += 2;
+                                height += GetGoToLineHeight(interactionSerialized);
                             }
                         }
 
@@ -500,11 +494,7 @@ public static class PNCEditorUtils
                     height += GetCustomScriptHeight(interactionSerialized, i);
                 }
 
-                if (interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
-                    height += EditorGUIUtility.singleLineHeight;
-
-                if (interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
-                    height += EditorGUIUtility.singleLineHeight;
+                height += GetGoToLineHeight(interactionSerialized) * EditorGUIUtility.singleLineHeight;
 
                 return height;
             }
@@ -522,6 +512,17 @@ public static class PNCEditorUtils
             return EditorGUIUtility.singleLineHeight;
     }
 
+    public static float GetGoToLineHeight(SerializedProperty interactionSerialized)
+    {
+        float height = 0;
+        if (interactionSerialized.FindPropertyRelative("OnCompareResultFalseAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
+            height += 1;
+
+        if (interactionSerialized.FindPropertyRelative("OnCompareResultTrueAction").enumValueIndex == (int)Conditional.GetVariableAction.GoToSpecificLine)
+            height += 1;
+
+        return height;
+    }
 
     public static void ShowLineToGo(ref Rect interactRect, SerializedProperty interactionSerialized, SerializedProperty attemps, int indexA)
     {
