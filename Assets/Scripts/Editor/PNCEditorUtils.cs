@@ -485,7 +485,7 @@ public static class PNCEditorUtils
             }
             if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.custom)
             { 
-                float height = EditorGUIUtility.singleLineHeight * (10.5f + (interactionSerialized.FindPropertyRelative("action.m_PersistentCalls.m_Calls").arraySize * 3));
+                float height = EditorGUIUtility.singleLineHeight * (12 + (interactionSerialized.FindPropertyRelative("action.m_PersistentCalls.m_Calls").arraySize * 2.5f));
 
                 for (int i = 0; i < interactionSerialized.FindPropertyRelative("customActionArguments").arraySize; i++)
                 {
