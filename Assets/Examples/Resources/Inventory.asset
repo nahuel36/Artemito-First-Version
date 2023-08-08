@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: 
   items:
-  - itemName: new item 1
-    namePrefix: 
-    namePostfix: 
+  - itemName: blister
     normalImage: {fileID: 21300000, guid: 884c8d9e17732594fb108349614cb726, type: 3}
     selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b, type: 3}
     startWithThisItem: 1
@@ -148,8 +146,6 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-            customActionObject: {fileID: 0}
-            customScriptBool: 0
           expandedInInspector: 1
         expandedInInspector: 1
         executedTimes: 0
@@ -227,8 +223,6 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-            customActionObject: {fileID: 0}
-            customScriptBool: 0
           - type: 0
             expandedInInspector: 0
             inventoryAction: 0
@@ -282,8 +276,6 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-            customActionObject: {fileID: 0}
-            customScriptBool: 0
           expandedInInspector: 1
         - interactions: []
           expandedInInspector: 1
@@ -291,9 +283,7 @@ MonoBehaviour:
         executedTimes: 0
     expandedInInspector: 0
     specialIndex: 1
-  - itemName: new item 2
-    namePrefix: 
-    namePostfix: 
+  - itemName: resorte
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     startWithThisItem: 1
@@ -350,7 +340,6 @@ MonoBehaviour:
       stringDefault: 1
     inventoryActions:
     - specialIndex: 1
-      name: 
       verb:
         name: 
         isLikeGive: 0
@@ -427,8 +416,6 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-            customActionObject: {fileID: 0}
-            customScriptBool: 0
           expandedInInspector: 1
         expandedInInspector: 1
         executedTimes: 0
@@ -520,8 +507,6 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-            customActionObject: {fileID: 0}
-            customScriptBool: 0
           expandedInInspector: 1
         expandedInInspector: 1
         executedTimes: 0
@@ -538,4 +523,4 @@ MonoBehaviour:
         executedTimes: 0
     expandedInInspector: 0
     specialIndex: 2
-  specialIndex: 2
+  specialIndex: 3

@@ -33,7 +33,7 @@ public class PnCCharacterEditor : PNCInteractuableEditor
         PNCCharacter myTarget = (PNCCharacter)target;
 
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("name"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("interactuableName"));
 
         ShowInteractionVerbs();
 

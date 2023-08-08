@@ -6,8 +6,6 @@ using UnityEngine;
 public class InventoryItem
 {
     public string itemName;
-    public string namePrefix;
-    public string namePostfix;
     public Sprite normalImage;
     public Sprite selectedImage;
     public bool startWithThisItem = false;
@@ -24,9 +22,9 @@ public class InventoryItem
         VerbInteractions verbToRun = InteractionUtils.FindVerb(verbToRunString, verbs);
 
         if (verbToRun != null)
-            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInInventory, new string[] { namePrefix + itemName + namePostfix }, verbToRunString.index, new int[] { specialIndex });
+            InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInInventory, verbToRunString, new InventoryItem[] { this });
         else
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInInventory, new string[] { namePrefix + itemName + namePostfix }, verbToRunString.index, new int[] { specialIndex });
+            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInInventory, verbToRunString, new InventoryItem[] { this });
     }
 
     public Verb[] GetActiveVerbs()

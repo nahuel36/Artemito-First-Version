@@ -49,9 +49,9 @@ public class UI_PNC_Manager : MonoBehaviour
                 if (isInventoryItemActive())
                     return itemActive.itemName;
                 if (interactuableActive != null)
-                    return interactuableActive.name;
+                    return interactuableActive.interactuableName;
                 if (interactuableAsInventory != null)
-                    return interactuableAsInventory.name;
+                    return interactuableAsInventory.interactuableName;
             }
             return "";
         }
@@ -264,7 +264,7 @@ public class UI_PNC_Manager : MonoBehaviour
             else if (!showingVerbs && inventoryUI.overInventory != null)
                 cursorTextString = inventoryUI.overInventory.itemName;
             else if (objetive.overInteractuable)
-                cursorTextString = objetive.overInteractuable.name;
+                cursorTextString = objetive.overInteractuable.interactuableName;
             else
                 cursorTextString = "";
 

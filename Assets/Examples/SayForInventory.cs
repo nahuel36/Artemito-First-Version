@@ -10,7 +10,7 @@ public class SayForInventory : MonoBehaviour
         {
             if (charact.isPlayerCharacter)
             {
-                charact.Talk(arguments[0].stringArgument + arguments[0].prefixNameAndPostfix);
+                charact.Talk(arguments[0].stringArgument);
             }
         }
     }
