@@ -102,20 +102,24 @@ MonoBehaviour:
           customActionArguments:
           - name: look with scene interactuable
             type: 0
-            stringArgument: "S\xF3lo es "
+            stringArgument: "S\xF3lo es"
             boolArgument: 0
             intArgument: 0
             objectArgument: {fileID: 11500000, guid: fb481a931ae804c4d8d0e3d5c8ee2f4a,
               type: 3}
             resultBool: 0
-            interactionType: 6
-            prefixNameAndPostfix: Lucio
-            verbIndex: 2
+            interactionType: 8
+            verb:
+              name: Look
+              isLikeGive: 0
+              isLikeUse: 0
+              index: 2
             itemIndex: -1
+            interactuableID: 21784
             expandedInInspector: 1
         expandedInInspector: 1
       expandedInInspector: 1
-      executedTimes: 7
+      executedTimes: 2
   - verb:
       name: Talk
       isLikeGive: 0
@@ -129,7 +133,6 @@ MonoBehaviour:
       executedTimes: 0
   inventoryActions:
   - specialIndex: 2
-    name: 
     verb:
       name: 
       isLikeGive: 0
@@ -214,10 +217,14 @@ MonoBehaviour:
             objectArgument: {fileID: 0}
             resultBool: 0
             interactionType: 6
-            prefixNameAndPostfix: Lucio
-            verbIndex: 1
+            verb:
+              name: 
+              isLikeGive: 0
+              isLikeUse: 0
+              index: 0
             itemIndex: 2
+            interactuableID: 0
             expandedInInspector: 0
         expandedInInspector: 1
       expandedInInspector: 1
-      executedTimes: 2
+      executedTimes: 0
