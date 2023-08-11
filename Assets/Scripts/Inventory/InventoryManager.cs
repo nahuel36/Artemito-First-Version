@@ -101,11 +101,27 @@ public class InventoryManager : MonoBehaviour
         }
         if (index != -1)
         {
-            InteractionUtils.RunAttempsInteraction(itemWithAction.inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item1, item2});
+            if (index1 != -1 && index2 != -1)
+            {
+                if (item1.priority >= item2.priority)
+                    InteractionUtils.RunAttempsInteraction(itemWithAction.inventoryActions[index1].attempsContainer, InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item1, item2 });
+                else
+                    InteractionUtils.RunAttempsInteraction(itemWithAction.inventoryActions[index2].attempsContainer, InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item2, item1 });
+            }
+            else
+            {
+                if (item1.priority >= item2.priority)
+                    InteractionUtils.RunAttempsInteraction(itemWithAction.inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item1, item2 });
+                else
+                    InteractionUtils.RunAttempsInteraction(itemWithAction.inventoryActions[index].attempsContainer, InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item2, item1 });
+            }
         }
         else
-        {
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item1, item2 });
+        { 
+            if(item1.priority >= item2.priority)
+                InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item1, item2 });
+            else
+                InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item2, item1 });
         }
     }
 

@@ -283,6 +283,7 @@ MonoBehaviour:
         executedTimes: 0
     expandedInInspector: 0
     specialIndex: 1
+    priority: 0
   - itemName: resorte
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
@@ -523,4 +524,5 @@ MonoBehaviour:
         executedTimes: 0
     expandedInInspector: 0
     specialIndex: 2
+    priority: 0
   specialIndex: 3

@@ -16,6 +16,7 @@ public class InventoryItem
     public List<VerbInteractions> verbs;
     public bool expandedInInspector = false;
     public int specialIndex = -1;
+    public int priority = 0;
     private Settings settings;
     public void RunVerbInteraction(Verb verbToRunString)
     {
