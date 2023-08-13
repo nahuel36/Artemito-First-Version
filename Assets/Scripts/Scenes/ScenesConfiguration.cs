@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class Zone
 {
-    public List<string> zoneScenes;
+    public string[] zoneScenes;
 }
 
 [CreateAssetMenu(fileName = "Scenes", menuName = "Pnc/ScenesConfiguration", order = 1)]

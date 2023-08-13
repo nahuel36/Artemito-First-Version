@@ -11,26 +11,7 @@ public class ScenesConfigurationEditor : Editor
 
     ReorderableList Zones;
     Dictionary<string, ReorderableList> ZonesScenes = new Dictionary<string, ReorderableList>();
-    private void ShowPopupForScenePath(Rect rect, SerializedProperty property, string description, bool useRect)
-    {
-        int selected = 0;
-
-        string[] paths = new string[EditorBuildSettings.scenes.Length];
-        for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
-        {
-            paths[i] = EditorBuildSettings.scenes[i].path;
-            if (paths[i] == property.stringValue)
-            {
-                selected = i;
-            }
-        }
-        if(useRect)
-            selected = EditorGUI.Popup(rect, description, selected, paths);
-        else
-            selected = EditorGUILayout.Popup(description, selected, paths);
-
-        property.stringValue = paths[selected];
-    }
+   
 
     private void OnEnable()
     {
@@ -46,7 +27,7 @@ public class ScenesConfigurationEditor : Editor
                     {
                         drawElementCallback = (rectS, indexS, activeS, focusS) =>
                         {
-                            ShowPopupForScenePath(rectS, serializedObject.FindProperty("zones").GetArrayElementAtIndex(index).FindPropertyRelative("zoneScenes").GetArrayElementAtIndex(indexS), "game scene n" + (indexS+1).ToString(), true);
+                            SceneEditorUtils.ShowPopupForScenePath(rectS, serializedObject.FindProperty("zones").GetArrayElementAtIndex(index).FindPropertyRelative("zoneScenes").GetArrayElementAtIndex(indexS), "game scene n" + (indexS+1).ToString(), true, EditorBuildSettings.scenes);
                         },
                         drawHeaderCallback = (rect) =>
                         {
@@ -73,15 +54,15 @@ public class ScenesConfigurationEditor : Editor
     {
         Rect rect = new Rect();
 
-        ShowPopupForScenePath(rect, serializedObject.FindProperty("canvas"), "Canvas ingame Scene",false);
+        SceneEditorUtils.ShowPopupForScenePath(rect, serializedObject.FindProperty("canvas"), "Canvas ingame Scene",false, EditorBuildSettings.scenes);
 
-        ShowPopupForScenePath(rect,serializedObject.FindProperty("mainMenu"), "Main menu scene", false);
+        SceneEditorUtils.ShowPopupForScenePath(rect,serializedObject.FindProperty("mainMenu"), "Main menu scene", false, EditorBuildSettings.scenes);
 
-        ShowPopupForScenePath(rect,serializedObject.FindProperty("options"), "Options menu scene", false);
+        SceneEditorUtils.ShowPopupForScenePath(rect,serializedObject.FindProperty("options"), "Options menu scene", false, EditorBuildSettings.scenes);
 
-        ShowPopupForScenePath(rect,serializedObject.FindProperty("saveAndLoad"), "Save And Load", false);
+        SceneEditorUtils.ShowPopupForScenePath(rect,serializedObject.FindProperty("saveAndLoad"), "Save And Load", false, EditorBuildSettings.scenes);
 
-        ShowPopupForScenePath(rect, serializedObject.FindProperty("transition"), "Scene transition", false);
+        SceneEditorUtils.ShowPopupForScenePath(rect, serializedObject.FindProperty("transition"), "Scene transition", false, EditorBuildSettings.scenes);
 
         Zones.DoLayoutList();
        

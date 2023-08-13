@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
 public class MultipleScenesManager : MonoBehaviour
 {
     public class ZoneScene
@@ -67,7 +68,7 @@ public class MultipleScenesManager : MonoBehaviour
         {
             allZoneScenesInitialized = false;
             zone_scenes = new List<ZoneScene>();
-            for (int i = 0; i < scenesConfiguration.zones[actualZone].zoneScenes.Count; i++)
+            for (int i = 0; i < scenesConfiguration.zones[actualZone].zoneScenes.Length; i++)
             {
                 if (actualScene.path != scenesConfiguration.zones[actualZone].zoneScenes[i])
                 {
