@@ -189,15 +189,25 @@ public class MultipleScenesManager : MonoBehaviour
 
     public void LoadZoneScene(string scenePath, string playerSpawnPoint)
     {
-        CommandLoadZoneScene command = new CommandLoadZoneScene();
+        CommandLoadZoneSceneIn command = new CommandLoadZoneSceneIn();
         command.Queue(scenePath, playerSpawnPoint);
+        CommandLoadZoneSceneInCommands commandsSceneIn = new CommandLoadZoneSceneInCommands();
+        commandsSceneIn.Queue(scenePath, playerSpawnPoint);
     }
-    public async Task LoadZoneSceneInmediate(string scenePath, string playerSpawnPoint)
+    public async Task LoadZoneSceneIn(string scenePath, string playerSpawnPoint)
     {
         await FindObjectOfType<SceneTransitionAnimation>().In();
+    }
 
-        PNCCharacter player = null;
-        List<PNCCharacter> otherPlayers = new List<PNCCharacter>();
+    ScenePoint point = null;
+    WalkableArea2D walkableArea = null;
+    SceneEvents sceneEvents = null;
+    PNCCharacter player = null;
+    List<PNCCharacter> otherPlayers = new List<PNCCharacter>();
+
+    public async Task LoadSceneInCommands(string scenePath, string playerSpawnPoint)
+    {
+
         foreach (GameObject actualGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
         {
             PNCCharacter actualCharacter = actualGameObject.GetComponent<PNCCharacter>();
@@ -214,7 +224,8 @@ public class MultipleScenesManager : MonoBehaviour
             }
 
             WalkObstacle actualObstacle = actualGameObject.GetComponent<WalkObstacle>();
-            if (actualObstacle != null) {
+            if (actualObstacle != null)
+            {
                 actualObstacle.ErasePathFinder();
             }
 
@@ -227,9 +238,7 @@ public class MultipleScenesManager : MonoBehaviour
             Debug.Log("Add this scene to Build Settings and Scenes Configuration");
             return;
         }
-        ScenePoint point = null;
-        WalkableArea2D walkableArea = null;
-        SceneEvents sceneEvents = null;
+
         for (int i = 0; i < zone_scenes.Count; i++)
         {
             if (zone_scenes[i].scene.path == scenePath)
@@ -267,7 +276,7 @@ public class MultipleScenesManager : MonoBehaviour
                         {
                             if (sceneEvents.events[j].sceneEvent == SceneEventInteraction.SceneEvent.beforeFadeIn)
                             {
-                                InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, null, null, null, true);
+                                InteractionUtils.RunAttempsInteraction(sceneEvents.events[j].attempsContainer, InteractionObjectsType.sceneEvent, null, null);
                             }
                         }
 
@@ -280,8 +289,13 @@ public class MultipleScenesManager : MonoBehaviour
             }
         }
 
+        CommandLoadZoneSceneOut commandLoadZoneSceneOut = new CommandLoadZoneSceneOut();
+        commandLoadZoneSceneOut.Queue(scenePath, playerSpawnPoint);
+    }
 
 
+    public async Task LoadSceneOut(string scenePath, string playerSpawnPoint)
+    { 
         await Task.Yield();
         walkableArea.Start();
         await player.Initialize();
@@ -311,5 +325,6 @@ public class MultipleScenesManager : MonoBehaviour
             }
         }
     }
+
 
 }

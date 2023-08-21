@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   node_size: 0.2
+  initialized: 0
 --- !u!61 &531574999
 BoxCollider2D:
   m_ObjectHideFlags: 0

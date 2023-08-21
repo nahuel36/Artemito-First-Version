@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class CommandLoadZoneScene : ICommand
+public class CommandLoadZoneSceneOut : ICommand
 {
     string scenePath;
     string entryPoint;
     public async Task Execute()
     {
         await Task.Yield();
-        await MultipleScenesManager.Instance.LoadZoneSceneInmediate(scenePath, entryPoint);
+        await MultipleScenesManager.Instance.LoadSceneOut(scenePath, entryPoint);
     }
 
     public void Skip()
