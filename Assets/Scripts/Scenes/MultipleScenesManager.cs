@@ -26,6 +26,8 @@ public class MultipleScenesManager : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
+        runningEvents = -1;
+
         if (instance != null)
         {
             if (this != instance)
@@ -107,6 +109,15 @@ public class MultipleScenesManager : MonoBehaviour
 
     private void Update()
     {
+        if (runningEvents > 0)
+            runningEvents -= Time.deltaTime;
+        if(runningEvents <= 0 && runningEvents != -1 && !CommandsQueue.Instance.Executing())
+        {
+            CommandLoadZoneSceneOut commandLoadZoneSceneOut = new CommandLoadZoneSceneOut();
+            commandLoadZoneSceneOut.Queue();
+            runningEvents = -1;
+        }
+
         bool AllInitialized = true;
         foreach(ZoneScene zoneScene in zone_scenes)
         {
@@ -204,7 +215,7 @@ public class MultipleScenesManager : MonoBehaviour
     SceneEvents sceneEvents = null;
     PNCCharacter player = null;
     List<PNCCharacter> otherPlayers = new List<PNCCharacter>();
-
+    float runningEvents = 0;
     public async Task LoadSceneInCommands(string scenePath, string playerSpawnPoint)
     {
 
@@ -268,6 +279,8 @@ public class MultipleScenesManager : MonoBehaviour
                         walkableArea = actualWalkable;
                     }
 
+                    runningEvents = 1;
+
                     SceneEvents actualSceneEvents = actualGameObject.GetComponent<SceneEvents>();
                     if (actualSceneEvents != null && actualSceneEvents.events != null)
                     {
@@ -289,12 +302,11 @@ public class MultipleScenesManager : MonoBehaviour
             }
         }
 
-        CommandLoadZoneSceneOut commandLoadZoneSceneOut = new CommandLoadZoneSceneOut();
-        commandLoadZoneSceneOut.Queue(scenePath, playerSpawnPoint);
+        
     }
 
 
-    public async Task LoadSceneOut(string scenePath, string playerSpawnPoint)
+    public async Task LoadSceneOut()
     { 
         await Task.Yield();
         walkableArea.Start();

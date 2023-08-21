@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class CommandLoadZoneSceneOut : ICommand
 {
-    string scenePath;
-    string entryPoint;
     public async Task Execute()
     {
         await Task.Yield();
-        await MultipleScenesManager.Instance.LoadSceneOut(scenePath, entryPoint);
+        await MultipleScenesManager.Instance.LoadSceneOut();
     }
 
     public void Skip()
@@ -18,10 +16,8 @@ public class CommandLoadZoneSceneOut : ICommand
     }
 
     // Start is called before the first frame update
-    public void Queue(string scenePath, string entryPoint)
+    public void Queue()
     {
-        this.scenePath = scenePath;
-        this.entryPoint = entryPoint;
         CommandsQueue.Instance.AddCommand(this);
     }
 
