@@ -183,7 +183,7 @@ public static class InteractionUtils
     private static int CheckConditionals(int actualindex, Interaction interaction)
     {
         if ((interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean) ||
-            interaction.type == Interaction.InteractionType.properties && (interaction.propertiesAction == Interaction.PropertiesAction.getGlobalProperty || interaction.propertiesAction == Interaction.PropertiesAction.getLocalProperty))
+            (interaction.type == Interaction.InteractionType.properties && (interaction.propertiesAction == Interaction.PropertiesAction.getGlobalProperty || interaction.propertiesAction == Interaction.PropertiesAction.getLocalProperty)))
         {
             bool result = true;
             
