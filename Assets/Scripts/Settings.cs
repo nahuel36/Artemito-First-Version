@@ -52,7 +52,7 @@ public class Settings : ScriptableObject
     }
     public Verb[] verbs;
     public int verbIndex;
-    public GlobalPropertyConfig[] globalPropertiesConfig;
+    public GlobalPropertyConfig[] globalPropertiesConfig = new GlobalPropertyConfig[0];
     public int global_propertiesIndex;
     public PathFindingType pathFindingType;
     public SpeechStyle speechStyle;
