@@ -215,7 +215,7 @@ public static class InteractionUtils
             }
             else if (interaction.type == Interaction.InteractionType.properties && interaction.propertiesAction == Interaction.PropertiesAction.getLocalProperty)
             {
-                var property = interaction.propertyObject.local_properties[interaction.localPropertySelected];
+                var property = interaction.propertyObject.local_properties[interaction.localPropertySelected]; 
 
                 if (interaction.local_compareBooleanValue)
                 {
