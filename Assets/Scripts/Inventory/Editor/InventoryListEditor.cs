@@ -12,7 +12,7 @@ public class InventoryListEditor : Editor
     int selectedButton = -1;
 
     Settings settings;
-    Dictionary<string,ReorderableList> localVariablesLists = new Dictionary<string, ReorderableList>();
+    Dictionary<string,ReorderableList> localPropertiesLists = new Dictionary<string, ReorderableList>();
 
     Dictionary<string, ReorderableList> invAttempsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> invInteractionsListDict = new Dictionary<string, ReorderableList>();
@@ -30,13 +30,13 @@ public class InventoryListEditor : Editor
         InventoryList myTarget = (InventoryList)target;
         for (int i = 0; i < myTarget.items.Length; i++)
         {
-            PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.inventory,ref myTarget.items[i].global_variables);
+            PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.inventory,ref myTarget.items[i].global_properties);
             string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("specialIndex").intValue.ToString();
 
-            localVariablesLists.Add(key,null);
-            ReorderableList list = localVariablesLists[key];
-            PNCEditorUtils.InitializeLocalVariables(out list, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("local_variables"));
-            localVariablesLists[key] = list;
+            localPropertiesLists.Add(key,null);
+            ReorderableList list = localPropertiesLists[key];
+            PNCEditorUtils.InitializeLocalProperties(out list, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("local_properties"));
+            localPropertiesLists[key] = list;
             
             invList.Add(key, null);
             ReorderableList listInv = invList[key];
@@ -103,12 +103,12 @@ public class InventoryListEditor : Editor
                                     
             string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("specialIndex").intValue.ToString();
 
-            if (!localVariablesLists.ContainsKey(key))
+            if (!localPropertiesLists.ContainsKey(key))
             { 
-                localVariablesLists.Add(key, null);
-                ReorderableList list = localVariablesLists[key];
-                PNCEditorUtils.InitializeLocalVariables(out list, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("local_variables"));
-                localVariablesLists[key] = list;
+                localPropertiesLists.Add(key, null);
+                ReorderableList list = localPropertiesLists[key];
+                PNCEditorUtils.InitializeLocalProperties(out list, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).serializedObject, serializedObject.FindProperty("items").GetArrayElementAtIndex(index).FindPropertyRelative("local_properties"));
+                localPropertiesLists[key] = list;
             }
 
             if (!invList.ContainsKey(key))
@@ -167,8 +167,8 @@ public class InventoryListEditor : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("priority"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("cuantity"));
 
-            SerializedProperty local_variables_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("local_variables");
-            SerializedProperty global_variables_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("global_variables");
+            SerializedProperty local_properties_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("local_properties");
+            SerializedProperty global_properties_serialized = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("global_properties");
 
             string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(selectedButton).FindPropertyRelative("specialIndex").intValue.ToString();
 
@@ -183,9 +183,9 @@ public class InventoryListEditor : Editor
 
             invList[key].DoLayoutList();
 
-            PNCEditorUtils.ShowLocalVariables(localVariablesLists[key], ref myTarget.items[selectedButton].local_variables, ref local_variables_serialized);
+            PNCEditorUtils.ShowLocalProperties(localPropertiesLists[key], ref myTarget.items[selectedButton].local_properties, ref local_properties_serialized);
 
-            PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.inventory, ref myTarget.items[selectedButton].global_variables, ref global_variables_serialized);
+            PNCEditorUtils.ShowGlobalProperties(GlobalPropertyConfig.object_types.inventory, ref myTarget.items[selectedButton].global_properties, ref global_properties_serialized);
 
             ShowInteractionVerbs(key);
         }

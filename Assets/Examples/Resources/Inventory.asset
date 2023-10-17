@@ -18,56 +18,8 @@ MonoBehaviour:
     selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b, type: 3}
     startWithThisItem: 1
     cuantity: 0
-    local_variables: []
-    global_variables:
-    - name: New Global Variable 8
-      integer: 0
-      boolean: 0
-      String: 
-      globalID: 9
-      properties:
-        name: New Global Variable 8
-        ID: 9
-        object_type: 4
-        hasInteger: 0
-        hasBoolean: 0
-        hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
-    - name: New Global Variable 10
-      integer: 0
-      boolean: 0
-      String: 
-      globalID: 11
-      properties:
-        name: New Global Variable 10
-        ID: 11
-        object_type: 4
-        hasInteger: 0
-        hasBoolean: 1
-        hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
-    - name: New Global Variable 11
-      integer: 0
-      boolean: 0
-      String: 
-      globalID: 12
-      properties:
-        name: New Global Variable 11
-        ID: 12
-        object_type: 4
-        hasInteger: 0
-        hasBoolean: 1
-        hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
+    local_properties: []
+    global_properties: []
     inventoryActions: []
     verbs:
     - verb:
@@ -87,10 +39,10 @@ MonoBehaviour:
             characterAction: 0
             WhatToSay: 
             WhereToWalk: {fileID: 0}
-            globalVariableSelected: 0
-            localVariableSelected: 0
-            variablesAction: 0
-            variableObject: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
             dialogAction: 0
             dialogSelected: {fileID: 0}
             newDialogEntry: 0
@@ -177,10 +129,10 @@ MonoBehaviour:
             characterAction: 0
             WhatToSay: 
             WhereToWalk: {fileID: 0}
-            globalVariableSelected: 0
-            localVariableSelected: 0
-            variablesAction: 0
-            variableObject: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
             dialogAction: 0
             dialogSelected: {fileID: 0}
             newDialogEntry: 0
@@ -230,10 +182,10 @@ MonoBehaviour:
             characterAction: 0
             WhatToSay: 
             WhereToWalk: {fileID: 0}
-            globalVariableSelected: 0
-            localVariableSelected: 0
-            variablesAction: 0
-            variableObject: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
             dialogAction: 0
             dialogSelected: {fileID: 0}
             newDialogEntry: 0
@@ -289,56 +241,8 @@ MonoBehaviour:
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     startWithThisItem: 1
     cuantity: 0
-    local_variables: []
-    global_variables:
-    - name: New Global Variable 8
-      integer: 0
-      boolean: 0
-      String: 
-      globalID: 9
-      properties:
-        name: New Global Variable 8
-        ID: 9
-        object_type: 4
-        hasInteger: 0
-        hasBoolean: 0
-        hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
-    - name: New Global Variable 10
-      integer: 0
-      boolean: 0
-      String: 
-      globalID: 11
-      properties:
-        name: New Global Variable 10
-        ID: 11
-        object_type: 4
-        hasInteger: 0
-        hasBoolean: 1
-        hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
-    - name: New Global Variable 11
-      integer: 0
-      boolean: 0
-      String: 
-      globalID: 12
-      properties:
-        name: New Global Variable 11
-        ID: 12
-        object_type: 4
-        hasInteger: 0
-        hasBoolean: 1
-        hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
+    local_properties: []
+    global_properties: []
     inventoryActions:
     - specialIndex: 1
       verb:
@@ -358,10 +262,10 @@ MonoBehaviour:
             characterAction: 0
             WhatToSay: 
             WhereToWalk: {fileID: 0}
-            globalVariableSelected: 0
-            localVariableSelected: 0
-            variablesAction: 0
-            variableObject: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
             dialogAction: 0
             dialogSelected: {fileID: 0}
             newDialogEntry: 0
@@ -449,10 +353,10 @@ MonoBehaviour:
             characterAction: 0
             WhatToSay: 
             WhereToWalk: {fileID: 0}
-            globalVariableSelected: 0
-            localVariableSelected: 0
-            variablesAction: 0
-            variableObject: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
             dialogAction: 0
             dialogSelected: {fileID: 0}
             newDialogEntry: 0

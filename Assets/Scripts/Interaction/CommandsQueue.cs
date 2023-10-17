@@ -4,14 +4,14 @@ using UnityEngine;
 using System.Threading.Tasks;
 
 public class Conditional {
-    public enum GetVariableAction
+    public enum GetPropertyAction
     {
         Stop,
         Continue,
         GoToSpecificLine
     }
-    public GetVariableAction actionIfTrue;
-    public GetVariableAction actionIfFalse;
+    public GetPropertyAction actionIfTrue;
+    public GetPropertyAction actionIfFalse;
     public int lineToGoIfTrue;
     public int lineToGoIfFalse;
     public bool condition;
@@ -54,15 +54,15 @@ public class CommandsQueue
 
          if (_conditional != null && _conditional.condition == true)
             {
-                if (_conditional.actionIfTrue == Conditional.GetVariableAction.Stop)
+                if (_conditional.actionIfTrue == Conditional.GetPropertyAction.Stop)
                 {
                     execute = false;
                 }
-                if (_conditional.actionIfTrue == Conditional.GetVariableAction.Continue)
+                if (_conditional.actionIfTrue == Conditional.GetPropertyAction.Continue)
                 {
                     execute = true;
                 }
-                if (_conditional.actionIfTrue == Conditional.GetVariableAction.GoToSpecificLine)
+                if (_conditional.actionIfTrue == Conditional.GetPropertyAction.GoToSpecificLine)
                 {
                     actualCommandIndex = _conditional.lineToGoIfTrue;
                     execute = true;
@@ -70,15 +70,15 @@ public class CommandsQueue
             }
             if (_conditional != null && _conditional.condition == false)
             {
-                if (_conditional.actionIfFalse == Conditional.GetVariableAction.Stop)
+                if (_conditional.actionIfFalse == Conditional.GetPropertyAction.Stop)
                 {
                     execute = false;
                 }
-                if (_conditional.actionIfFalse == Conditional.GetVariableAction.Continue)
+                if (_conditional.actionIfFalse == Conditional.GetPropertyAction.Continue)
                 {
                     execute = true;
                 }
-                if (_conditional.actionIfFalse == Conditional.GetVariableAction.GoToSpecificLine)
+                if (_conditional.actionIfFalse == Conditional.GetPropertyAction.GoToSpecificLine)
                 {
                     actualCommandIndex = _conditional.lineToGoIfFalse;
                     execute = true;

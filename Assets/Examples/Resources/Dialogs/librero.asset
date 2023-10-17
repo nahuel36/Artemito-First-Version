@@ -30,10 +30,10 @@ MonoBehaviour:
             characterAction: 0
             WhatToSay: 1
             WhereToWalk: {fileID: 0}
-            globalVariableSelected: 0
-            localVariableSelected: 0
-            variablesAction: 0
-            variableObject: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
             dialogAction: 0
             dialogSelected: {fileID: 0}
             newDialogEntry: 0
@@ -89,8 +89,6 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-            customActionObject: {fileID: 0}
-            customScriptBool: 0
           expandedInInspector: 1
         expandedInInspector: 0
         executedTimes: 0
@@ -136,10 +134,10 @@ MonoBehaviour:
             characterAction: 0
             WhatToSay: 
             WhereToWalk: {fileID: 0}
-            globalVariableSelected: 0
-            localVariableSelected: 0
-            variablesAction: 0
-            variableObject: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
             dialogAction: 3
             dialogSelected: {fileID: 11400000}
             newDialogEntry: 0
@@ -182,8 +180,6 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-            customActionObject: {fileID: 0}
-            customScriptBool: 0
           expandedInInspector: 1
         expandedInInspector: 0
         executedTimes: 23

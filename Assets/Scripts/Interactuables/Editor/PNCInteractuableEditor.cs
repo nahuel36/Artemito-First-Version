@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using System;
 
-public class PNCInteractuableEditor : PNCVariablesContainerEditor
+public class PNCInteractuableEditor : PNCPropertiesContainerEditor
 {
     Dictionary<string, ReorderableList> verbAttempsListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> verbInteractionsListDict = new Dictionary<string, ReorderableList>();

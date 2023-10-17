@@ -79,7 +79,7 @@ public class Interaction
     public enum InteractionType
     {
         character,
-        variables,
+        properties,
         inventory,
         dialog,
         custom
@@ -108,18 +108,18 @@ public class Interaction
     public CharacterAction characterAction;
     public string WhatToSay;
     public Transform WhereToWalk;
-    //VARIABLES
-    public enum VariablesAction
+    //PROPERTIES
+    public enum PropertiesAction
     {
-        setLocalVariable,
-        getLocalVariable,
-        setGlobalVariable,
-        getGlobalVariable
+        setLocalProperty,
+        getLocalProperty,
+        setGlobalProperty,
+        getGlobalProperty
     }
-    public int globalVariableSelected;
-    public int localVariableSelected;
-    public VariablesAction variablesAction;
-    public PNCVariablesContainer variableObject;
+    public int globalPropertySelected;
+    public int localPropertySelected;
+    public PropertiesAction propertiesAction;
+    public PNCPropertiesContainer propertyObject;
 
     public enum DialogAction
     { 
@@ -139,8 +139,8 @@ public class Interaction
     public int subDialogIndex;
     public int optionIndex;
 
-    public Conditional.GetVariableAction OnCompareResultTrueAction;
-    public Conditional.GetVariableAction OnCompareResultFalseAction;
+    public Conditional.GetPropertyAction OnCompareResultTrueAction;
+    public Conditional.GetPropertyAction OnCompareResultFalseAction;
     public int LineToGoOnTrueResult;
     public int LineToGoOnFalseResult;
     //CUSTOM
@@ -194,11 +194,11 @@ public class Interaction
         destiny.newOptionText = newOptionText;
         destiny.subDialogIndex = subDialogIndex;
         destiny.optionIndex = optionIndex;
-        destiny.globalVariableSelected = globalVariableSelected;
-        destiny.localVariableSelected = localVariableSelected;
+        destiny.globalPropertySelected = globalPropertySelected;
+        destiny.localPropertySelected = localPropertySelected;
         destiny.type = type;
-        destiny.variableObject = variableObject;
-        destiny.variablesAction = variablesAction;
+        destiny.propertyObject = propertyObject;
+        destiny.propertiesAction = propertiesAction;
         destiny.WhatToSay = WhatToSay;
         destiny.WhereToWalk = WhereToWalk;
         destiny.local_changeBooleanValue = local_changeBooleanValue;
@@ -251,7 +251,7 @@ public enum InteractionObjectsType
 }
 
 [System.Serializable]
-public abstract class PNCInteractuable : PNCVariablesContainer
+public abstract class PNCInteractuable : PNCPropertiesContainer
 {
     public string interactuableName;
     

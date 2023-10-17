@@ -16,12 +16,12 @@ public class PnCCharacterEditor : PNCInteractuableEditor
     {
         InitializeVerbs(out verbsList, serializedObject , serializedObject.FindProperty("verbs"),((PNCCharacter)target));
 
-        PNCEditorUtils.InitializeGlobalVariables(GlobalVariableProperty.object_types.characters, ref ((PNCCharacter)target).global_variables);
-        PNCEditorUtils.InitializeLocalVariables(out localVariablesList, serializedObject, serializedObject.FindProperty("local_variables"));
+        PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.characters, ref ((PNCCharacter)target).global_properties);
+        PNCEditorUtils.InitializeLocalProperties(out localPropertiesList, serializedObject, serializedObject.FindProperty("local_properties"));
 
 
-        local_variables_serialized = serializedObject.FindProperty("local_variables");
-        global_variables_serialized = serializedObject.FindProperty("global_variables");
+        local_properties_serialized = serializedObject.FindProperty("local_properties");
+        global_properties_serialized = serializedObject.FindProperty("global_properties");
 
         InitializeInventoryInteractions();
     }
@@ -47,9 +47,9 @@ public class PnCCharacterEditor : PNCInteractuableEditor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SierraTextFace"));
         }
 
-        PNCEditorUtils.ShowLocalVariables(localVariablesList, ref myTarget.local_variables, ref local_variables_serialized);
+        PNCEditorUtils.ShowLocalProperties(localPropertiesList, ref myTarget.local_properties, ref local_properties_serialized);
 
-        PNCEditorUtils.ShowGlobalVariables(GlobalVariableProperty.object_types.characters, ref myTarget.global_variables, ref global_variables_serialized);
+        PNCEditorUtils.ShowGlobalProperties(GlobalPropertyConfig.object_types.characters, ref myTarget.global_properties, ref global_properties_serialized);
 
         serializedObject.ApplyModifiedProperties();
 

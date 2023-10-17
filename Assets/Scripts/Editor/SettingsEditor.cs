@@ -9,25 +9,25 @@ using System;
 [CustomEditor(typeof(Settings))]
 public class SettingsEditor : Editor
 {
-    private struct NewGlobalVariableParam{
+    private struct NewGlobalPropertyParam{
         
-        public GlobalVariableProperty.object_types object_type;
+        public GlobalPropertyConfig.object_types object_type;
         public bool hasBoolean;
         public bool hasInteger;
         public bool hasString;
     }
 
     ReorderableList verbsList;
-    ReorderableList global_variables_list;
+    ReorderableList global_properties_list;
 
     [System.Flags]
-    enum VariableType
+    enum PropertyType
     { 
         boolean = 1 << 0,
         integer = 1 << 2,
         String = 1 << 3
     }
-    Dictionary<int,VariableType> variablesType;
+    Dictionary<int,PropertyType> propertiesType;
 
     public void CheckVerbsSameIndex() 
     {
@@ -56,19 +56,19 @@ public class SettingsEditor : Editor
         }
     }
 
-    private void InitializeGlobalVariableTypes()
+    private void InitializeGlobalPropertiesTypes()
     {
-        variablesType = new Dictionary<int, VariableType>();
-        for (int i = 0; i < serializedObject.FindProperty("global_variables").arraySize; i++)
+        propertiesType = new Dictionary<int, PropertyType>();
+        for (int i = 0; i < serializedObject.FindProperty("globalPropertiesConfig").arraySize; i++)
         {
-            VariableType actualVariableType = 0;
-            if (serializedObject.FindProperty("global_variables").GetArrayElementAtIndex(i).FindPropertyRelative("hasBoolean").boolValue)
-                actualVariableType |= VariableType.boolean;
-            if (serializedObject.FindProperty("global_variables").GetArrayElementAtIndex(i).FindPropertyRelative("hasString").boolValue)
-                actualVariableType |= VariableType.String;
-            if (serializedObject.FindProperty("global_variables").GetArrayElementAtIndex(i).FindPropertyRelative("hasInteger").boolValue)
-                actualVariableType |= VariableType.integer;
-            variablesType.Add(serializedObject.FindProperty("global_variables").GetArrayElementAtIndex(i).FindPropertyRelative("ID").intValue, actualVariableType);
+            PropertyType actualPropertyType = 0;
+            if (serializedObject.FindProperty("globalPropertiesConfig").GetArrayElementAtIndex(i).FindPropertyRelative("hasBoolean").boolValue)
+                actualPropertyType |= PropertyType.boolean;
+            if (serializedObject.FindProperty("globalPropertiesConfig").GetArrayElementAtIndex(i).FindPropertyRelative("hasString").boolValue)
+                actualPropertyType |= PropertyType.String;
+            if (serializedObject.FindProperty("globalPropertiesConfig").GetArrayElementAtIndex(i).FindPropertyRelative("hasInteger").boolValue)
+                actualPropertyType |= PropertyType.integer;
+            propertiesType.Add(serializedObject.FindProperty("globalPropertiesConfig").GetArrayElementAtIndex(i).FindPropertyRelative("ID").intValue, actualPropertyType);
         }
     }
 
@@ -111,75 +111,75 @@ public class SettingsEditor : Editor
             return list.count > 1;
         };
 
-        InitializeGlobalVariableTypes();
+        InitializeGlobalPropertiesTypes();
 
-        global_variables_list = new ReorderableList(serializedObject, serializedObject.FindProperty("global_variables"), true, true, true, true);
-        global_variables_list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+        global_properties_list = new ReorderableList(serializedObject, serializedObject.FindProperty("globalPropertiesConfig"), true, true, true, true);
+        global_properties_list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
         {
-            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width / 3, EditorGUIUtility.singleLineHeight), global_variables_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("name"), GUIContent.none);
+            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width / 3, EditorGUIUtility.singleLineHeight), global_properties_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("name"), GUIContent.none);
 
-            EditorGUI.PropertyField(new Rect(rect.x + rect.width / 3, rect.y, rect.width / 3, EditorGUIUtility.singleLineHeight), global_variables_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("object_type"), GUIContent.none);
+            EditorGUI.PropertyField(new Rect(rect.x + rect.width / 3, rect.y, rect.width / 3, EditorGUIUtility.singleLineHeight), global_properties_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("object_type"), GUIContent.none);
 
-            //EditorGUI.PropertyField(new Rect(rect.x + rect.width / 3 * 2, rect.y, rect.width / 3, EditorGUIUtility.singleLineHeight), global_variables_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("variable_type"), GUIContent.none);
-            int globalvariableIndex = global_variables_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("ID").intValue;
-            variablesType[globalvariableIndex] = (VariableType)EditorGUI.EnumFlagsField(new Rect(rect.x + rect.width / 3 * 2, rect.y, rect.width / 3, EditorGUIUtility.singleLineHeight), variablesType[globalvariableIndex]);
-            global_variables_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("hasBoolean").boolValue = variablesType[globalvariableIndex].HasFlag(VariableType.boolean);
-            global_variables_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("hasInteger").boolValue = variablesType[globalvariableIndex].HasFlag(VariableType.integer);
-            global_variables_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("hasString").boolValue = variablesType[globalvariableIndex].HasFlag(VariableType.String);
+            //EditorGUI.PropertyField(new Rect(rect.x + rect.width / 3 * 2, rect.y, rect.width / 3, EditorGUIUtility.singleLineHeight), global_properties_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("property_type"), GUIContent.none);
+            int globalpropertyIndex = global_properties_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("ID").intValue;
+            propertiesType[globalpropertyIndex] = (PropertyType)EditorGUI.EnumFlagsField(new Rect(rect.x + rect.width / 3 * 2, rect.y, rect.width / 3, EditorGUIUtility.singleLineHeight), propertiesType[globalpropertyIndex]);
+            global_properties_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("hasBoolean").boolValue = propertiesType[globalpropertyIndex].HasFlag(PropertyType.boolean);
+            global_properties_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("hasInteger").boolValue = propertiesType[globalpropertyIndex].HasFlag(PropertyType.integer);
+            global_properties_list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("hasString").boolValue = propertiesType[globalpropertyIndex].HasFlag(PropertyType.String);
         };
-        global_variables_list.drawHeaderCallback = (Rect rect) =>
+        global_properties_list.drawHeaderCallback = (Rect rect) =>
         {
-            EditorGUI.LabelField(rect, "Global Variables");
+            EditorGUI.LabelField(rect, "Global Properties");
         };
-        global_variables_list.onAddDropdownCallback = (Rect buttonRect, ReorderableList l) =>
+        global_properties_list.onAddDropdownCallback = (Rect buttonRect, ReorderableList l) =>
         {
             var menu = new GenericMenu();
-            menu.AddItem(new GUIContent("characters/boolean"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.characters, hasBoolean = true});
-            menu.AddItem(new GUIContent("inventory/boolean"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.inventory, hasBoolean = true});
-            menu.AddItem(new GUIContent("object/boolean"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.objects, hasBoolean = true});
-            menu.AddItem(new GUIContent("variable container/boolean"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.variableContainer, hasBoolean = true });
-            menu.AddItem(new GUIContent("characters/integer"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.characters, hasInteger = true});
-            menu.AddItem(new GUIContent("inventory/integer"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.inventory, hasInteger = true });
-            menu.AddItem(new GUIContent("object/integer"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.objects, hasInteger = true });
-            menu.AddItem(new GUIContent("variable container/integer"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.variableContainer, hasInteger = true });
-            menu.AddItem(new GUIContent("characters/string"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.characters, hasString = true});
-            menu.AddItem(new GUIContent("inventory/string"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.inventory, hasString = true });
-            menu.AddItem(new GUIContent("object/string"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.objects, hasString = true });
-            menu.AddItem(new GUIContent("variable container/string"), false, OnAddNewGlobalVar, new NewGlobalVariableParam() { object_type = GlobalVariableProperty.object_types.variableContainer, hasString = true });
+            menu.AddItem(new GUIContent("characters/boolean"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.characters, hasBoolean = true});
+            menu.AddItem(new GUIContent("inventory/boolean"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.inventory, hasBoolean = true});
+            menu.AddItem(new GUIContent("object/boolean"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.objects, hasBoolean = true});
+            menu.AddItem(new GUIContent("properties container/boolean"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.propertiesContainer, hasBoolean = true });
+            menu.AddItem(new GUIContent("characters/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.characters, hasInteger = true});
+            menu.AddItem(new GUIContent("inventory/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.inventory, hasInteger = true });
+            menu.AddItem(new GUIContent("object/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.objects, hasInteger = true });
+            menu.AddItem(new GUIContent("properties container/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.propertiesContainer, hasInteger = true });
+            menu.AddItem(new GUIContent("characters/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.characters, hasString = true});
+            menu.AddItem(new GUIContent("inventory/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.inventory, hasString = true });
+            menu.AddItem(new GUIContent("object/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.objects, hasString = true });
+            menu.AddItem(new GUIContent("properties container/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.propertiesContainer, hasString = true });
             menu.ShowAsContext();
         };
     }
 
     private void OnAddNewGlobalVar(object target)
     {
-        NewGlobalVariableParam newGlobalVariable = (NewGlobalVariableParam)target;
-        var index = global_variables_list.serializedProperty.arraySize;
-        global_variables_list.serializedProperty.arraySize++;
-        global_variables_list.index = index;
-        serializedObject.FindProperty("global_variableIndex").intValue++;
-        int elementID = serializedObject.FindProperty("global_variableIndex").intValue;
-        var element = global_variables_list.serializedProperty.GetArrayElementAtIndex(index);
-        element.FindPropertyRelative("name").stringValue = "New Global Variable " + index;
+        NewGlobalPropertyParam newGlobalProperty = (NewGlobalPropertyParam)target;
+        var index = global_properties_list.serializedProperty.arraySize;
+        global_properties_list.serializedProperty.arraySize++;
+        global_properties_list.index = index;
+        serializedObject.FindProperty("global_propertiesIndex").intValue++;
+        int elementID = serializedObject.FindProperty("global_propertiesIndex").intValue;
+        var element = global_properties_list.serializedProperty.GetArrayElementAtIndex(index);
+        element.FindPropertyRelative("name").stringValue = "New Global Property " + index;
         element.FindPropertyRelative("ID").intValue = elementID;
-        element.FindPropertyRelative("object_type").intValue = (int)newGlobalVariable.object_type;
-        element.FindPropertyRelative("hasBoolean").boolValue = newGlobalVariable.hasBoolean;
-        element.FindPropertyRelative("hasInteger").boolValue = newGlobalVariable.hasInteger;
-        element.FindPropertyRelative("hasString").boolValue = newGlobalVariable.hasString;
+        element.FindPropertyRelative("object_type").intValue = (int)newGlobalProperty.object_type;
+        element.FindPropertyRelative("hasBoolean").boolValue = newGlobalProperty.hasBoolean;
+        element.FindPropertyRelative("hasInteger").boolValue = newGlobalProperty.hasInteger;
+        element.FindPropertyRelative("hasString").boolValue = newGlobalProperty.hasString;
         serializedObject.ApplyModifiedProperties();
-        InitializeGlobalVariableTypes();
+        InitializeGlobalPropertiesTypes();
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
         verbsList.DoLayoutList();
-        global_variables_list.DoLayoutList();
+        global_properties_list.DoLayoutList();
 
         Dictionary<string, int> tempDict = new Dictionary<string, int>();
 
-        for (int i = 0; i < serializedObject.FindProperty("global_variables").arraySize; i++)
+        for (int i = 0; i < serializedObject.FindProperty("globalPropertiesConfig").arraySize; i++)
         {
-            string name = serializedObject.FindProperty("global_variables").GetArrayElementAtIndex(i).FindPropertyRelative("name").stringValue;
+            string name = serializedObject.FindProperty("globalPropertiesConfig").GetArrayElementAtIndex(i).FindPropertyRelative("name").stringValue;
             if (tempDict.ContainsKey(name))
                 tempDict[name]++;
             else
@@ -194,7 +194,7 @@ public class SettingsEditor : Editor
         }
 
         if (repeated)
-            GUILayout.Label("There are more than one variable with the same name", EditorStyles.boldLabel);
+            GUILayout.Label("There are more than one property with the same name", EditorStyles.boldLabel);
 
         GUILayout.Label("Path Finding Type");
         ((Settings)target).pathFindingType = (Settings.PathFindingType)EditorGUILayout.EnumPopup(((Settings)target).pathFindingType);

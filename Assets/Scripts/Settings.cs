@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GlobalVariableProperty
+public class GlobalPropertyConfig
 {
     public string name;
     public int ID = -1;
@@ -13,7 +13,7 @@ public class GlobalVariableProperty
         characters = (1 << 0),
         objects = (1 << 1),
         inventory = (1 << 2),
-        variableContainer = (1 << 3)
+        propertiesContainer = (1 << 3)
     }
     public object_types object_type;
 
@@ -52,8 +52,8 @@ public class Settings : ScriptableObject
     }
     public Verb[] verbs;
     public int verbIndex;
-    public GlobalVariableProperty[] global_variables;
-    public int global_variableIndex;
+    public GlobalPropertyConfig[] globalPropertiesConfig;
+    public int global_propertiesIndex;
     public PathFindingType pathFindingType;
     public SpeechStyle speechStyle;
     public InteractionExecuteMethod interactionExecuteMethod;
