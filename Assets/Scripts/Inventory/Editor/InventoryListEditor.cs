@@ -154,6 +154,8 @@ public class InventoryListEditor : Editor
 
         if (selectedButton != -1)
         {
+            serializedObject.Update();
+
             EditorGUILayout.BeginHorizontal();
             if(myTarget.items[selectedButton].normalImage)
                 GUILayout.Box(myTarget.items[selectedButton].normalImage.texture, GUILayout.MaxHeight(size), GUILayout.MaxWidth(size), GUILayout.MinHeight(size), GUILayout.MinWidth(size));
