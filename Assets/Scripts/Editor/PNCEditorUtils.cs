@@ -39,6 +39,7 @@ public static class PNCEditorUtils
                 tempVar.name = settings.globalPropertiesConfig[i].name;
                 tempVar.globalID = settings.globalPropertiesConfig[i].ID;
                 tempVar.properties = settings.globalPropertiesConfig[i];
+                tempVar.expandedInInspector = true;
                 if (settings.globalPropertiesConfig[i].object_type.HasFlag(type))
                     tempGlobalVarList.Add(tempVar);
             }
