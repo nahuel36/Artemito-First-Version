@@ -89,13 +89,26 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-          expandedInInspector: 1
-        expandedInInspector: 0
+          expandedInInspector: 0
+        expandedInInspector: 1
         executedTimes: 0
       subDialogDestinyIndex: 2
       initialState: 0
       currentState: 0
       say: 1
+      local_properties:
+      - name: 
+        hasInteger: 0
+        integer: 0
+        integerDefault: 0
+        hasBoolean: 0
+        boolean: 0
+        booleanDefault: 0
+        hasString: 0
+        String: 
+        stringDefault: 0
+        expandedInInspector: 0
+      global_properties: []
     - initialText: "\xBFComo est\xE1 el negocio?"
       currentText: "\xBFComo est\xE1 el negocio?"
       index: 2
@@ -108,6 +121,19 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties:
+      - name: 
+        hasInteger: 0
+        integer: 0
+        integerDefault: 0
+        hasBoolean: 0
+        boolean: 0
+        booleanDefault: 0
+        hasString: 0
+        String: 
+        stringDefault: 0
+        expandedInInspector: 0
+      global_properties: []
     - initialText: Quisiera comprar un libro.
       currentText: Quisiera comprar un libro.
       index: 3
@@ -120,6 +146,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Bonito sombrero.
       currentText: He dicho, bonito sombrero.
       index: 4
@@ -187,6 +215,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Estoy vendiendo estas chaquetas de cuero.
       currentText: Estoy vendiendo estas chaquetas de cuero.
       index: 5
@@ -199,6 +229,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: "Adi\xF3s."
       currentText: "Adi\xF3s."
       index: 6
@@ -211,6 +243,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     nodeRect:
       serializedVersion: 2
       x: 110.17674
@@ -234,6 +268,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Uh, que mal.
       currentText: Uh, que mal.
       index: 2
@@ -246,6 +282,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: "No me interesa, adi\xF3s."
       currentText: "No me interesa, adi\xF3s."
       index: 3
@@ -258,13 +296,15 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     nodeRect:
       serializedVersion: 2
       x: 618.7305
       y: 390
       width: 212
       height: 162.5
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 6
   - text: negocio
     index: 5
@@ -281,6 +321,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: "\xBFCu\xE1l mafia?"
       currentText: "\xBFCu\xE1l mafia?"
       index: 2
@@ -293,6 +335,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: "\xBFDebe mucha plata?"
       currentText: "\xBFDebe mucha plata?"
       index: 3
@@ -305,6 +349,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Mejor hablemos de otra cosa.
       currentText: Mejor hablemos de otra cosa.
       index: 4
@@ -317,13 +363,15 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     nodeRect:
       serializedVersion: 2
       x: 366.95004
       y: 66
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: mafia
     index: 7
@@ -340,6 +388,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: "\xBFD\xF3nde est\xE1 su cuartel?"
       currentText: "\xBFD\xF3nde est\xE1 su cuartel?"
       index: 2
@@ -352,6 +402,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: "\xBFLes debe mucha plata?"
       currentText: "\xBFLes debe mucha plata?"
       index: 3
@@ -364,6 +416,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Volvamos a hablar de su negocio.
       currentText: Volvamos a hablar de su negocio.
       index: 4
@@ -376,6 +430,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
       currentText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
       index: 5
@@ -388,13 +444,15 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     nodeRect:
       serializedVersion: 2
       x: 656.4461
       y: 56
       width: 212
       height: 237.5
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: plata
     index: 8
@@ -411,6 +469,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Ah, entonces puedo fiarle.
       currentText: Ah, entonces puedo fiarle.
       index: 2
@@ -423,6 +483,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Uh, que mal.
       currentText: Uh, que mal.
       index: 3
@@ -435,6 +497,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Mejor hablemos de otra cosa.
       currentText: Mejor hablemos de otra cosa.
       index: 4
@@ -447,13 +511,15 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     nodeRect:
       serializedVersion: 2
       x: 351.7711
       y: 421
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 4
   - text: que mal
     index: 9
@@ -470,6 +536,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Muy muy mal.
       currentText: Muy muy mal.
       index: 2
@@ -482,6 +550,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Demasiado mal.
       currentText: Demasiado mal.
       index: 3
@@ -494,6 +564,8 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     - initialText: Tanto que me voy.
       currentText: Tanto que me voy.
       index: 4
@@ -506,13 +578,15 @@ MonoBehaviour:
       initialState: 0
       currentState: 0
       say: 1
+      local_properties: []
+      global_properties: []
     nodeRect:
       serializedVersion: 2
       x: 864.62885
       y: 423
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   subDialogIndex: 11
   initial_entryDialogIndex: 1

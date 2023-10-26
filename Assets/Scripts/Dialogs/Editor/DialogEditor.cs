@@ -13,10 +13,26 @@ public class DialogEditor : Editor
     Dictionary<string, ReorderableList> optionInteractionListDict = new Dictionary<string, ReorderableList>();
     Dictionary<string, ReorderableList> customScriptInteractionDict = new Dictionary<string, ReorderableList>();
     NodeBasedEditor nodeBase;
+    Dictionary<string, ReorderableList> localPropertiesLists = new Dictionary<string, ReorderableList>();
 
     private void OnEnable()
     {
         CheckNodes();
+
+        Dialog myTarget = (Dialog)target;
+
+        for (int i = 0; i < myTarget.subDialogs.Count; i++)
+        {
+            for (int j = 0; j < myTarget.subDialogs[i].options.Count; j++)
+            {
+                string key = serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).propertyPath;
+
+                localPropertiesLists.Add(key, null);
+                ReorderableList list = localPropertiesLists[key];
+                PNCEditorUtils.InitializeLocalProperties(out list, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).serializedObject, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("local_properties"));
+                localPropertiesLists[key] = list;
+            }
+        }
     }
 
     private void CheckNodes()
@@ -58,14 +74,31 @@ public class DialogEditor : Editor
                                 EditorGUI.PropertyField(new Rect(recOpt.x +7,recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("initialState"));
                                 recOpt.y += EditorGUIUtility.singleLineHeight;
                                 EditorGUI.PropertyField(new Rect(recOpt.x + 7, recOpt.y, recOpt.width - 7, EditorGUIUtility.singleLineHeight), options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("say"));
+
+                                
                             }
                             PNCEditorUtils.DrawArrayWithAttempContainer(options, indexOpt, recOpt, optionAttempsListDict, optionInteractionListDict,customScriptInteractionDict, myTarget.subDialogs[index].options[indexOpt].attempsContainer.attemps, false, true);
+
+                            if (verbExpanded.boolValue)
+                            {
+                                recOpt.y += PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
+
+                                string key = options.GetArrayElementAtIndex(indexOpt).propertyPath;
+
+                                SerializedProperty local_properties_serialized = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("local_properties");
+
+                                PNCEditorUtils.ShowLocalPropertiesOnRect(recOpt, localPropertiesLists[key], ref myTarget.subDialogs[index].options[indexOpt].local_properties, ref local_properties_serialized);
+                            }
+
+
                         },
                         elementHeightCallback = (int indexOpt) =>
                         {
                             var verbExpanded = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector");
                             if (verbExpanded.boolValue)
-                                return EditorGUIUtility.singleLineHeight * 2 + PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt);
+                                return EditorGUIUtility.singleLineHeight * 2 + PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt)
+                                    + PNCEditorUtils.GetLocalPropertiesHeight(options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("local_properties"));
+                                 
                             return EditorGUIUtility.singleLineHeight;
                         },
                         drawHeaderCallback = (rect) =>

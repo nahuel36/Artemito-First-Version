@@ -24,6 +24,9 @@ public class DialogOption
     public current_state currentState;
 
     public bool say = true;
+
+    public LocalProperty[] local_properties = new LocalProperty[0];
+    public GlobalProperty[] global_properties = new GlobalProperty[0];
 }
 
 [System.Serializable]
