@@ -387,8 +387,26 @@ public static class PNCEditorUtils
 
 
     public static float GetLocalPropertiesHeight(SerializedProperty serializedLocalProperties)
-    { 
-        return EditorGUIUtility.singleLineHeight  * 4 + EditorGUIUtility.singleLineHeight * 5 * serializedLocalProperties.arraySize;
+    {
+        float height = 4 * EditorGUIUtility.singleLineHeight;
+
+        height += EditorGUIUtility.singleLineHeight * 5 * serializedLocalProperties.arraySize;
+
+        for (int i = 0; i < serializedLocalProperties.arraySize; i++)
+        {
+
+            if (serializedLocalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("hasBoolean").boolValue)
+                height += 2 * EditorGUIUtility.singleLineHeight;
+
+            if (serializedLocalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("hasString").boolValue)
+                height += 2 * EditorGUIUtility.singleLineHeight;
+
+            if (serializedLocalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("hasInteger").boolValue)
+                height += 2 * EditorGUIUtility.singleLineHeight;
+        }
+
+
+        return height;
     }
 
     public static float GetInteractionHeight(SerializedProperty interactionSerialized)
