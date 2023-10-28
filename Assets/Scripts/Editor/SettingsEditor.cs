@@ -138,14 +138,17 @@ public class SettingsEditor : Editor
             menu.AddItem(new GUIContent("inventory/boolean"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.inventory, hasBoolean = true});
             menu.AddItem(new GUIContent("object/boolean"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.objects, hasBoolean = true});
             menu.AddItem(new GUIContent("properties container/boolean"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.propertiesContainer, hasBoolean = true });
+            menu.AddItem(new GUIContent("dialog option/boolean"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.dialogOption, hasBoolean = true });
             menu.AddItem(new GUIContent("characters/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.characters, hasInteger = true});
             menu.AddItem(new GUIContent("inventory/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.inventory, hasInteger = true });
             menu.AddItem(new GUIContent("object/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.objects, hasInteger = true });
             menu.AddItem(new GUIContent("properties container/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.propertiesContainer, hasInteger = true });
+            menu.AddItem(new GUIContent("dialog option/integer"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.dialogOption, hasInteger = true });
             menu.AddItem(new GUIContent("characters/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.characters, hasString = true});
             menu.AddItem(new GUIContent("inventory/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.inventory, hasString = true });
             menu.AddItem(new GUIContent("object/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.objects, hasString = true });
             menu.AddItem(new GUIContent("properties container/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.propertiesContainer, hasString = true });
+            menu.AddItem(new GUIContent("dialog option/string"), false, OnAddNewGlobalVar, new NewGlobalPropertyParam() { object_type = GlobalPropertyConfig.object_types.dialogOption, hasString = true });
             menu.ShowAsContext();
         };
     }
@@ -194,7 +197,13 @@ public class SettingsEditor : Editor
         }
 
         if (repeated)
-            GUILayout.Label("There are more than one property with the same name", EditorStyles.boldLabel);
+        {
+            GUIStyle styleRepeated = new GUIStyle();
+            styleRepeated.normal.textColor = Color.red;
+            styleRepeated.fontSize = 13;
+            GUILayout.Label("There are more than one property with the same name", styleRepeated);
+        }
+
 
         GUILayout.Label("Path Finding Type");
         ((Settings)target).pathFindingType = (Settings.PathFindingType)EditorGUILayout.EnumPopup(((Settings)target).pathFindingType);

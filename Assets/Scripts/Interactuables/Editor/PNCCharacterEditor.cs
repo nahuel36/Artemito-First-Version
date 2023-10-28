@@ -49,7 +49,7 @@ public class PnCCharacterEditor : PNCInteractuableEditor
 
         PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesList, ref myTarget.local_properties, ref local_properties_serialized);
 
-        PNCEditorUtils.ShowGlobalProperties(GlobalPropertyConfig.object_types.characters, ref myTarget.global_properties, ref global_properties_serialized);
+        PNCEditorUtils.ShowGlobalPropertiesOnRect(GlobalPropertyConfig.object_types.characters, ref myTarget.global_properties, ref global_properties_serialized);
 
         serializedObject.ApplyModifiedProperties();
 

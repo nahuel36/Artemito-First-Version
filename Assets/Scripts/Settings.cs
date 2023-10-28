@@ -13,7 +13,8 @@ public class GlobalPropertyConfig
         characters = (1 << 0),
         objects = (1 << 1),
         inventory = (1 << 2),
-        propertiesContainer = (1 << 3)
+        propertiesContainer = (1 << 3),
+        dialogOption = (1 << 4)
     }
     public object_types object_type;
 

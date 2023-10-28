@@ -30,6 +30,8 @@ public class DialogEditor : Editor
                 localPropertiesLists.Add(key, null);
                 ReorderableList list = localPropertiesLists[key];
                 PNCEditorUtils.InitializeLocalProperties(out list, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).serializedObject, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("local_properties"));
+                PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.dialogOption, ref myTarget.subDialogs[i].options[j].global_properties);
+
                 localPropertiesLists[key] = list;
             }
         }
@@ -86,8 +88,14 @@ public class DialogEditor : Editor
                                 string key = options.GetArrayElementAtIndex(indexOpt).propertyPath;
 
                                 SerializedProperty local_properties_serialized = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("local_properties");
+                                SerializedProperty global_properties_serialized = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("global_properties");
 
                                 PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesLists[key], ref myTarget.subDialogs[index].options[indexOpt].local_properties, ref local_properties_serialized, recOpt);
+
+                                recOpt.y += PNCEditorUtils.GetLocalPropertiesHeight(local_properties_serialized);
+
+
+                                PNCEditorUtils.ShowGlobalPropertiesOnRect(GlobalPropertyConfig.object_types.dialogOption, ref myTarget.subDialogs[index].options[indexOpt].global_properties, ref global_properties_serialized, recOpt);
                             }
 
 
@@ -97,7 +105,8 @@ public class DialogEditor : Editor
                             var verbExpanded = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("attempsContainer").FindPropertyRelative("expandedInInspector");
                             if (verbExpanded.boolValue)
                                 return EditorGUIUtility.singleLineHeight * 2 + PNCEditorUtils.GetAttempsContainerHeight(options, indexOpt)
-                                    + PNCEditorUtils.GetLocalPropertiesHeight(options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("local_properties"));
+                                    + PNCEditorUtils.GetLocalPropertiesHeight(options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("local_properties"))
+                                    + PNCEditorUtils.GetGlobalPropertiesHeight(options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("global_properties"));
                                  
                             return EditorGUIUtility.singleLineHeight;
                         },

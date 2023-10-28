@@ -221,18 +221,35 @@ public static class PNCEditorUtils
     }
 
 
-    public static void ShowGlobalProperties(System.Enum type, ref GlobalProperty[] properties, ref SerializedProperty properties_serialized)
+    public static void ShowGlobalPropertiesOnRect(System.Enum type, ref GlobalProperty[] properties, ref SerializedProperty properties_serialized, Rect? rect = null)
     {
+        Rect newRect = new Rect();
+        if (rect != null)
+        {
+            newRect = rect.Value;
+            newRect.height = EditorGUIUtility.singleLineHeight;
+        }
+
+
         Settings settings = Resources.Load<Settings>("Settings/Settings");
 
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
         GUIStyle style = new GUIStyle();
         style.normal.textColor = Color.white;
         style.fontSize = 14;
-        GUILayout.Label("<b>Global Properties</b>", style);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
+
+        if (rect == null)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("<b>Global Properties</b>", style);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+        }
+        else 
+        {
+            GUI.Label(newRect, "<b>Global Properties</b>", style);
+            newRect.y += EditorGUIUtility.singleLineHeight;
+        }
 
         for (int i = 0; i < properties.Length; i++)
         {
@@ -250,71 +267,110 @@ public static class PNCEditorUtils
             if (!areType)
                 continue;
 
-            properties[i].expandedInInspector = EditorGUILayout.Foldout(properties[i].expandedInInspector, properties[i].name);
+            properties[i].expandedInInspector = rect == null? EditorGUILayout.Foldout(properties[i].expandedInInspector, properties[i].name) : EditorGUI.Foldout(newRect, properties[i].expandedInInspector, properties[i].name);
+
+            newRect.y += EditorGUIUtility.singleLineHeight;
+
 
             if (properties[i].expandedInInspector)
             {
-                EditorGUILayout.BeginVertical("GroupBox");
+                if(rect == null)
+                    EditorGUILayout.BeginVertical("GroupBox");
 
                 if (properties[i].properties.hasInteger)
                 {
                     if (!properties[i].integerDefault)
                     {
-                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue = EditorGUILayout.IntField("integer value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue);
-                        if (GUILayout.Button("Set integer default value"))
+                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue = 
+                            (rect==null?
+                              EditorGUILayout.IntField("integer value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue)
+                            : EditorGUI.IntField(newRect, "integer value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue));
+                        newRect.y += EditorGUIUtility.singleLineHeight;
+                        if (rect == null ? GUILayout.Button("Set integer default value"): GUI.Button(newRect, "Set integer default value"))
                         {
                             properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integerDefault").boolValue = true;
                         }
+                        newRect.y += EditorGUIUtility.singleLineHeight;
                     }
                     else
                     {
-                        GUILayout.Label("integer value : default", EditorStyles.boldLabel);
-                        if (GUILayout.Button("Set integer value"))
+                        if (rect == null)
+                            GUILayout.Label("integer value : default", EditorStyles.boldLabel);
+                        else
+                            GUI.Label(newRect, "integer value : default", EditorStyles.boldLabel);
+                        newRect.y += EditorGUIUtility.singleLineHeight;
+                        if (rect == null ? GUILayout.Button("Set integer value"): GUI.Button(newRect, "Set integer value"))
                         {
                             properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integerDefault").boolValue = false;
                         }
+                        newRect.y += EditorGUIUtility.singleLineHeight;
                     }
                 }
                 if (properties[i].properties.hasBoolean)
                 {
                     if (!properties[i].booleanDefault)
                     {
-                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue = EditorGUILayout.Toggle("boolean value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue);
-                        if (GUILayout.Button("Set boolean default value"))
+                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue = 
+                            (rect == null)?EditorGUILayout.Toggle("boolean value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue)
+                                          :EditorGUI.Toggle(newRect, "boolean value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue);
+                        newRect.y += EditorGUIUtility.singleLineHeight;
+                        if (rect == null ? GUILayout.Button("Set boolean default value") : GUI.Button(newRect, "Set boolean default value"))
                             properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = true;
+                        newRect.y += EditorGUIUtility.singleLineHeight;
                     }
                     else
                     {
-                        GUILayout.Label("boolean value : default", EditorStyles.boldLabel);
-                        if (GUILayout.Button("Set boolean value"))
+                        if(rect == null)
+                            GUILayout.Label("boolean value : default", EditorStyles.boldLabel);
+                        else
+                            GUI.Label(newRect, "boolean value : default", EditorStyles.boldLabel);
+                        newRect.y += EditorGUIUtility.singleLineHeight;
+                        if (rect == null?GUILayout.Button("Set boolean value"): GUI.Button(newRect, "Set boolean value"))
                         {
                             properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = false;
                         }
+                        newRect.y += EditorGUIUtility.singleLineHeight;
                     }
                 }
                 if (properties[i].properties.hasString)
                 {
                     if (!properties[i].stringDefault)
                     {
-                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue = EditorGUILayout.TextField("string value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue);
-                        if (GUILayout.Button("Set string default value"))
+                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue =
+                            (rect == null ?
+                                EditorGUILayout.TextField("string value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue)
+                               : EditorGUI.TextField(newRect, "string value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue));
+                        newRect.y += EditorGUIUtility.singleLineHeight;
+                        if (rect == null?GUILayout.Button("Set string default value"): GUI.Button(newRect, "Set string default value"))
                             properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("stringDefault").boolValue = true;
+                        newRect.y += EditorGUIUtility.singleLineHeight;
                     }
                     else
                     {
-                        GUILayout.Label("string value : default", EditorStyles.boldLabel);
-                        if (GUILayout.Button("Set string value"))
+                        if(rect == null)
+                            GUILayout.Label("string value : default", EditorStyles.boldLabel);
+                        else
+                            GUI.Label(newRect, "string value : default", EditorStyles.boldLabel);
+
+                        newRect.y += EditorGUIUtility.singleLineHeight;
+
+                        if (rect == null?GUILayout.Button("Set string value"): GUI.Button(newRect, "Set string value"))
                         {
                             properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("stringDefault").boolValue = false;
                         }
+                        newRect.y += EditorGUIUtility.singleLineHeight;
                     }
                 }
 
-                GUILayout.EndVertical();
+                if(rect == null)
+                    GUILayout.EndVertical();
             }
         }
 
-        if (GUILayout.Button("Edit global properties"))
+
+        
+
+        if (rect == null? GUILayout.Button("Edit global properties"): GUI.Button(newRect,"Edit global properties"))
         {
             Selection.objects = new UnityEngine.Object[] { settings };
             EditorGUIUtility.PingObject(settings);
@@ -332,11 +388,19 @@ public static class PNCEditorUtils
         }
         if (repeated)
         {
+            newRect.y += EditorGUIUtility.singleLineHeight;
+
             GUIStyle styleRepeated = new GUIStyle();
             styleRepeated.normal.textColor = Color.red;
             styleRepeated.fontSize = 5;
-            
-            GUILayout.Label("<b>There are more than one global property with the same name</b>", styleRepeated);
+
+            if (rect == null)
+                GUILayout.Label("<b>There are more than one global property with the same name</b>", styleRepeated);
+            else
+            {
+                styleRepeated.fontSize = 12;
+                GUI.Label(newRect,"<b>There are more than one global property with the same name</b>", styleRepeated);
+            }
         }
 
     }
@@ -374,6 +438,32 @@ public static class PNCEditorUtils
 
     }
 
+
+    public static float GetGlobalPropertiesHeight(SerializedProperty serializedGlobalProperties)
+    {
+        float height = 4 * EditorGUIUtility.singleLineHeight;
+
+        height += EditorGUIUtility.singleLineHeight * 1 * serializedGlobalProperties.arraySize;
+
+        for (int i = 0; i < serializedGlobalProperties.arraySize; i++)
+        {
+            if(serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("expandedInInspector").boolValue)
+            {
+                
+                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("properties").FindPropertyRelative("hasBoolean").boolValue)
+                    height += 2 * EditorGUIUtility.singleLineHeight;
+
+                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("properties").FindPropertyRelative("hasString").boolValue)
+                    height += 2 * EditorGUIUtility.singleLineHeight;
+
+                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("properties").FindPropertyRelative("hasInteger").boolValue)
+                    height += 2 * EditorGUIUtility.singleLineHeight;
+            }
+        }
+
+
+        return height;
+    }
 
     public static float GetLocalPropertiesHeight(SerializedProperty serializedLocalProperties)
     {

@@ -187,7 +187,7 @@ public class InventoryListEditor : Editor
 
             PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesLists[key], ref myTarget.items[selectedButton].local_properties, ref local_properties_serialized);
 
-            PNCEditorUtils.ShowGlobalProperties(GlobalPropertyConfig.object_types.inventory, ref myTarget.items[selectedButton].global_properties, ref global_properties_serialized);
+            PNCEditorUtils.ShowGlobalPropertiesOnRect(GlobalPropertyConfig.object_types.inventory, ref myTarget.items[selectedButton].global_properties, ref global_properties_serialized);
 
             ShowInteractionVerbs(key);
         }

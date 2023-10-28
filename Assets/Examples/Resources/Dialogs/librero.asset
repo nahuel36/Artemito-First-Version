@@ -90,7 +90,7 @@ MonoBehaviour:
             customScriptAction: 0
             customActionArguments: []
           expandedInInspector: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 2
       initialState: 0
@@ -108,7 +108,39 @@ MonoBehaviour:
         String: 
         stringDefault: 0
         expandedInInspector: 0
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: "\xBFComo est\xE1 el negocio?"
       currentText: "\xBFComo est\xE1 el negocio?"
       index: 2
@@ -133,7 +165,39 @@ MonoBehaviour:
         String: 
         stringDefault: 0
         expandedInInspector: 0
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Quisiera comprar un libro.
       currentText: Quisiera comprar un libro.
       index: 3
@@ -147,7 +211,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Bonito sombrero.
       currentText: He dicho, bonito sombrero.
       index: 4
@@ -216,21 +312,85 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Estoy vendiendo estas chaquetas de cuero.
       currentText: Estoy vendiendo estas chaquetas de cuero.
       index: 5
       attempsContainer:
         attempsIteration: 0
         attemps: []
-        expandedInInspector: 0
+        expandedInInspector: 1
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 1
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 0
+        booleanDefault: 0
+        stringDefault: 1
     - initialText: "Adi\xF3s."
       currentText: "Adi\xF3s."
       index: 6
@@ -244,7 +404,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     nodeRect:
       serializedVersion: 2
       x: 110.17674
@@ -269,7 +461,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Uh, que mal.
       currentText: Uh, que mal.
       index: 2
@@ -283,7 +507,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: "No me interesa, adi\xF3s."
       currentText: "No me interesa, adi\xF3s."
       index: 3
@@ -297,7 +553,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     nodeRect:
       serializedVersion: 2
       x: 618.7305
@@ -315,14 +603,46 @@ MonoBehaviour:
       attempsContainer:
         attempsIteration: 0
         attemps: []
-        expandedInInspector: 0
+        expandedInInspector: 1
         executedTimes: 0
       subDialogDestinyIndex: 2
       initialState: 0
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: "\xBFCu\xE1l mafia?"
       currentText: "\xBFCu\xE1l mafia?"
       index: 2
@@ -336,7 +656,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: "\xBFDebe mucha plata?"
       currentText: "\xBFDebe mucha plata?"
       index: 3
@@ -350,7 +702,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Mejor hablemos de otra cosa.
       currentText: Mejor hablemos de otra cosa.
       index: 4
@@ -364,14 +748,46 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     nodeRect:
       serializedVersion: 2
       x: 366.95004
       y: 66
       width: 212
       height: 200
-    expandedInInspector: 0
+    expandedInInspector: 1
     optionSpecialIndex: 5
   - text: mafia
     index: 7
@@ -389,7 +805,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: "\xBFD\xF3nde est\xE1 su cuartel?"
       currentText: "\xBFD\xF3nde est\xE1 su cuartel?"
       index: 2
@@ -403,7 +851,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: "\xBFLes debe mucha plata?"
       currentText: "\xBFLes debe mucha plata?"
       index: 3
@@ -417,7 +897,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Volvamos a hablar de su negocio.
       currentText: Volvamos a hablar de su negocio.
       index: 4
@@ -431,7 +943,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
       currentText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
       index: 5
@@ -445,7 +989,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     nodeRect:
       serializedVersion: 2
       x: 656.4461
@@ -470,7 +1046,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Ah, entonces puedo fiarle.
       currentText: Ah, entonces puedo fiarle.
       index: 2
@@ -484,7 +1092,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Uh, que mal.
       currentText: Uh, que mal.
       index: 3
@@ -498,7 +1138,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Mejor hablemos de otra cosa.
       currentText: Mejor hablemos de otra cosa.
       index: 4
@@ -512,7 +1184,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     nodeRect:
       serializedVersion: 2
       x: 351.7711
@@ -537,7 +1241,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Muy muy mal.
       currentText: Muy muy mal.
       index: 2
@@ -551,7 +1287,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Demasiado mal.
       currentText: Demasiado mal.
       index: 3
@@ -565,7 +1333,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Tanto que me voy.
       currentText: Tanto que me voy.
       index: 4
@@ -579,7 +1379,39 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties: []
-      global_properties: []
+      global_properties:
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 1
+        properties:
+          name: New Global Property 0
+          ID: 1
+          object_type: 17
+          hasInteger: 1
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      - name: New Global Property 0
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 3
+        properties:
+          name: New Global Property 0
+          ID: 3
+          object_type: 16
+          hasInteger: 1
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     nodeRect:
       serializedVersion: 2
       x: 864.62885

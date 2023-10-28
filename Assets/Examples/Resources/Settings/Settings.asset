@@ -26,8 +26,26 @@ MonoBehaviour:
     isLikeUse: 0
     index: 3
   verbIndex: 3
-  globalPropertiesConfig: []
-  global_propertiesIndex: 0
+  globalPropertiesConfig:
+  - name: New Global Property 0
+    ID: 1
+    object_type: 17
+    hasInteger: 1
+    hasBoolean: 0
+    hasString: 0
+  - name: New Global Property 1
+    ID: 2
+    object_type: 1
+    hasInteger: 0
+    hasBoolean: 1
+    hasString: 0
+  - name: New Global Property 0
+    ID: 3
+    object_type: 16
+    hasInteger: 1
+    hasBoolean: 1
+    hasString: 0
+  global_propertiesIndex: 3
   pathFindingType: 0
   speechStyle: 0
   interactionExecuteMethod: 1
