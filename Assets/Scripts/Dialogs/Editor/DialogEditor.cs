@@ -87,7 +87,7 @@ public class DialogEditor : Editor
 
                                 SerializedProperty local_properties_serialized = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("local_properties");
 
-                                PNCEditorUtils.ShowLocalPropertiesOnRect(recOpt, localPropertiesLists[key], ref myTarget.subDialogs[index].options[indexOpt].local_properties, ref local_properties_serialized);
+                                PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesLists[key], ref myTarget.subDialogs[index].options[indexOpt].local_properties, ref local_properties_serialized, recOpt);
                             }
 
 

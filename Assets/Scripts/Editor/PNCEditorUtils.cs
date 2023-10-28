@@ -158,7 +158,7 @@ public static class PNCEditorUtils
         
     }
 
-    public static void VerificateLocalProperties(ref LocalProperty[] properties, ref SerializedProperty properties_serialized)
+    public static bool VerificateLocalPropertiesOnRect(ref LocalProperty[] properties, ref SerializedProperty properties_serialized, Rect? rect = null)
     {
 
         var group = properties.GroupBy(prop => prop.name, (vari) => new { Count = vari.name.Count() });
@@ -176,61 +176,50 @@ public static class PNCEditorUtils
             style.normal.textColor = Color.red;
             style.fontSize = 12;
 
-            GUILayout.Label("<b>There are more than one local property with the same name</b>", style);
-        }
+            if (rect == null)
+                GUILayout.Label("<b>There are more than one local property with the same name</b>", style);
+            else
+                GUI.Label(rect.Value, "<b>There are more than one local property with the same name</b>", style);
 
-
-    }
-
-    public static bool VerificateLocalPropertiesOnRect(Rect rect, ref LocalProperty[] properties, ref SerializedProperty properties_serialized)
-    {
-
-        var group = properties.GroupBy(prop => prop.name, (vari) => new { Count = vari.name.Count() });
-        bool repeated = false;
-
-        foreach (var vari in group)
-        {
-            if (vari.Count() > 1)
-                repeated = true;
-
-        }
-        if (repeated)
-        {
-            GUIStyle style = new GUIStyle();
-            style.normal.textColor = Color.red;
-            style.fontSize = 12;
-
-            GUI.Label(rect,"<b>There are more than one local property with the same name</b>", style);
             return true;
         }
-
         return false;
+
     }
 
-    public static void ShowLocalProperties(ReorderableList list, ref LocalProperty[] local_properties, ref SerializedProperty local_properties_serialized)
+    public static void ShowLocalPropertiesOnRect(ReorderableList list, ref LocalProperty[] local_properties, ref SerializedProperty local_properties_serialized, Rect? rect = null)
     {
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUIStyle tittleStyle = new GUIStyle();
-        tittleStyle.normal.textColor = Color.white;
-        tittleStyle.fontSize = 14;
-        GUILayout.Label("<b>Local Properties</b>", tittleStyle);
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
+        if (rect == null)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUIStyle tittleStyle = new GUIStyle();
+            tittleStyle.normal.textColor = Color.white;
+            tittleStyle.fontSize = 14;
+            GUILayout.Label("<b>Local Properties</b>", tittleStyle);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
 
-        list.DoLayoutList();
+            list.DoLayoutList();
 
-        PNCEditorUtils.VerificateLocalProperties(ref local_properties, ref local_properties_serialized);
+            PNCEditorUtils.VerificateLocalPropertiesOnRect(ref local_properties, ref local_properties_serialized, rect);
+        }
+        else
+        {
+            Rect newRect = rect.Value;
+
+            if (PNCEditorUtils.VerificateLocalPropertiesOnRect(ref local_properties, ref local_properties_serialized, rect))
+                newRect.y += EditorGUIUtility.singleLineHeight;
+
+            list.DoList(newRect);
+        }
+
+        
+
+
+
     }
 
-    public static void ShowLocalPropertiesOnRect(Rect rect,ReorderableList list, ref LocalProperty[] local_properties, ref SerializedProperty local_properties_serialized)
-    {
-        if (PNCEditorUtils.VerificateLocalPropertiesOnRect(rect, ref local_properties, ref local_properties_serialized))
-            rect.y += EditorGUIUtility.singleLineHeight;
-
-        list.DoList(rect);
-               
-    }
 
     public static void ShowGlobalProperties(System.Enum type, ref GlobalProperty[] properties, ref SerializedProperty properties_serialized)
     {

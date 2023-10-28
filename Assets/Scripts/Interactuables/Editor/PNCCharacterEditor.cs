@@ -47,7 +47,7 @@ public class PnCCharacterEditor : PNCInteractuableEditor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("SierraTextFace"));
         }
 
-        PNCEditorUtils.ShowLocalProperties(localPropertiesList, ref myTarget.local_properties, ref local_properties_serialized);
+        PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesList, ref myTarget.local_properties, ref local_properties_serialized);
 
         PNCEditorUtils.ShowGlobalProperties(GlobalPropertyConfig.object_types.characters, ref myTarget.global_properties, ref global_properties_serialized);
 
