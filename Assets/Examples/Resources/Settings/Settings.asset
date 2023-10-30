@@ -29,7 +29,7 @@ MonoBehaviour:
   globalPropertiesConfig:
   - name: New Global Property 0
     ID: 1
-    object_type: 17
+    object_type: 1
     hasInteger: 1
     hasBoolean: 0
     hasString: 0

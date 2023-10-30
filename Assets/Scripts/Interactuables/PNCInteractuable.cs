@@ -79,7 +79,7 @@ public class Interaction
     public enum InteractionType
     {
         character,
-        properties,
+        properties_container,
         inventory,
         dialog,
         custom
@@ -92,7 +92,11 @@ public class Interaction
         useAsInventory,
         addInventory,
         quitInventory,
-        haveInventory
+        haveInventory, 
+        setLocalProperty,
+        getLocalProperty,
+        setGlobalProperty,
+        getGlobalProperty
     }
     public InventoryAction inventoryAction;
 
@@ -102,14 +106,18 @@ public class Interaction
         say,
         sayWithScript,
         walk,
-        walkStraight
+        walkStraight,
+        setLocalProperty,
+        getLocalProperty,
+        setGlobalProperty,
+        getGlobalProperty
     }
     public PNCCharacter character;
     public CharacterAction characterAction;
     public string WhatToSay;
     public Transform WhereToWalk;
     //PROPERTIES
-    public enum PropertiesAction
+    public enum PropertiesContainerAction
     {
         setLocalProperty,
         getLocalProperty,
@@ -118,7 +126,7 @@ public class Interaction
     }
     public int globalPropertySelected;
     public int localPropertySelected;
-    public PropertiesAction propertiesAction;
+    public PropertiesContainerAction propertiesAction;
     public PNCPropertiesContainer propertyObject;
 
     public enum DialogAction
@@ -129,7 +137,11 @@ public class Interaction
         changeOptionText,
         getOptionState,
         getNumberOfAttemps,
-        areAllSubdialogOptionsDisabled
+        areAllSubdialogOptionsDisabled,
+        setLocalProperty,
+        getLocalProperty,
+        setGlobalProperty,
+        getGlobalProperty
     }
     public DialogAction dialogAction;
     public Dialog dialogSelected;

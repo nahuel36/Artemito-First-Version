@@ -183,11 +183,11 @@ public static class InteractionUtils
     private static int CheckConditionals(int actualindex, Interaction interaction)
     {
         if ((interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean) ||
-            (interaction.type == Interaction.InteractionType.properties && (interaction.propertiesAction == Interaction.PropertiesAction.getGlobalProperty || interaction.propertiesAction == Interaction.PropertiesAction.getLocalProperty)))
+            (interaction.type == Interaction.InteractionType.properties_container && (interaction.propertiesAction == Interaction.PropertiesContainerAction.getGlobalProperty || interaction.propertiesAction == Interaction.PropertiesContainerAction.getLocalProperty)))
         {
             bool result = true;
             
-            if (interaction.type == Interaction.InteractionType.properties && interaction.propertiesAction == Interaction.PropertiesAction.getGlobalProperty)
+            if (interaction.type == Interaction.InteractionType.properties_container && interaction.propertiesAction == Interaction.PropertiesContainerAction.getGlobalProperty)
             {
                 var property = interaction.propertyObject.global_properties[interaction.globalPropertySelected];
 
@@ -213,7 +213,7 @@ public static class InteractionUtils
                         result = false;
                 }
             }
-            else if (interaction.type == Interaction.InteractionType.properties && interaction.propertiesAction == Interaction.PropertiesAction.getLocalProperty)
+            else if (interaction.type == Interaction.InteractionType.properties_container && interaction.propertiesAction == Interaction.PropertiesContainerAction.getLocalProperty)
             {
                 var property = interaction.propertyObject.local_properties[interaction.localPropertySelected]; 
 
@@ -315,16 +315,16 @@ public static class InteractionUtils
                 action.AddListener((arguments) => DialogsManager.Instance.ChangeOptionText(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionText));
             }
         }
-        else if (interaction.type == Interaction.InteractionType.properties)
+        else if (interaction.type == Interaction.InteractionType.properties_container)
         {
             PNCPropertiesContainer varContainer = interaction.propertyObject;
-            if (interaction.propertiesAction == Interaction.PropertiesAction.setLocalProperty)
+            if (interaction.propertiesAction == Interaction.PropertiesContainerAction.setLocalProperty)
             {
                 action.AddListener((arguments) =>
                 varContainer.SetLocalProperty(interaction,
                                                 interaction.propertyObject.local_properties[interaction.localPropertySelected]));
             }
-            else if (interaction.propertiesAction == Interaction.PropertiesAction.setGlobalProperty)
+            else if (interaction.propertiesAction == Interaction.PropertiesContainerAction.setGlobalProperty)
             {
                 action.AddListener((arguments) =>
                 varContainer.SetGlobalProperty(interaction,
