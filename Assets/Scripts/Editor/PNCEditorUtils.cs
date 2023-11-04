@@ -674,6 +674,73 @@ public static class PNCEditorUtils
         }
     }
 
+    public static int GetInventoryWithPopUp(Rect rect, InventoryList inventory, int valueToSet, bool haveSceneObject, int inventoryIndexToExclude = -1)
+    {
+        List<string> content = new List<string>();
+        if(haveSceneObject)
+            content.Add("(Scene Object)");
+        List<int> itemsIndexes = new List<int>();
+        for (int i = 0; i < inventory.items.Length; i++)
+        {
+            if (inventoryIndexToExclude == -1 || inventory.items[i].specialIndex != inventoryIndexToExclude)
+            { 
+                content.Add(inventory.items[i].itemName);
+                itemsIndexes.Add(inventory.items[i].specialIndex);
+            }
+        }
+
+        int selected = 0;
+        if (valueToSet != -1 && valueToSet != 0)
+        {
+            for (int i = 0; i < itemsIndexes.Count; i++)
+            {
+                if (itemsIndexes[i] == valueToSet)
+                    selected = (haveSceneObject? i + 1 : i);
+            }
+        }
+        rect.height = EditorGUIUtility.singleLineHeight;
+
+        selected = EditorGUI.Popup(new Rect(rect.x + rect.width / 2.25f, rect.y, rect.width / 2, rect.height), "", selected, content.ToArray());
+
+        if (haveSceneObject)
+        {
+            if (selected != 0)
+                return itemsIndexes[selected - 1];
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return itemsIndexes[selected];
+        }
+
+    }
+
+
+    public static int SetVerbWithPopUp(Rect rect,Verb[] verbs, int valueToSet)
+    {
+        List<string> verbsContent = new List<string>();
+        for (int i = 0; i < verbs.Length; i++)
+        {
+            if (verbs[i].isLikeGive || verbs[i].isLikeUse)
+                verbsContent.Add(verbs[i].name);
+        }
+        int verbSelected = 0;
+        if (valueToSet >= 0)
+        {
+            for (int i = 0; i < verbs.Length; i++)
+            {
+                if (verbs[i].index == valueToSet)
+                    verbSelected = i;
+            }
+        }
+        verbSelected = EditorGUI.Popup(new Rect(rect.x + 7, rect.y, rect.width / 2.5f, EditorGUIUtility.singleLineHeight), "", verbSelected, verbsContent.ToArray());
+
+        return verbs[verbSelected].index;
+    }
+
     public static void DrawArrayWithAttempContainer(SerializedProperty containerProperty, int indexC, Rect rect, Dictionary<string, ReorderableList> attempsListDict, Dictionary<string, ReorderableList> interactionsListDict, Dictionary<string, ReorderableList> customScriptArgumentsDict, List<InteractionsAttemp> noSerializedAttemps, bool isInventoryItem = false, bool isDialogOption = false)
     {
         var attempContainer = containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("attempsContainer");

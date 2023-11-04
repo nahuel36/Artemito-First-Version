@@ -79,56 +79,14 @@ public class PNCInteractuableEditor : PNCPropertiesContainerEditor
             },
             drawElementCallback = (rect, indexInv, active, focus) =>
             {
-                string[] content = new string[inventory.items.Length +1 ];
-                content[0] = "(Scene Object)";
-                for (int i = 0; i < inventory.items.Length; i++) 
-                {
-                    content[i+1] = inventory.items[i].itemName;
-                }
-                
-                int selected = 0;
-                if (myTarget.inventoryActions[indexInv].specialIndex != -1 && myTarget.inventoryActions[indexInv].specialIndex != 0)
-                {
-                    for (int i = 0; i < inventory.items.Length; i++)
-                    {
-                        if (inventory.items[i].specialIndex == myTarget.inventoryActions[indexInv].specialIndex)
-                            selected = i+1;
-                    }
-                }
                 rect.height = EditorGUIUtility.singleLineHeight;
-
-                selected = EditorGUI.Popup(new Rect(rect.x + rect.width / 2.25f , rect.y, rect.width / 2, rect.height), "", selected, content);
-
-                if (selected != 0)
-                    myTarget.inventoryActions[indexInv].specialIndex = inventory.items[selected - 1].specialIndex;
-                else
-                {
-                    myTarget.inventoryActions[indexInv].specialIndex = 0;
-                }
-
-
-
-                List<string> verbsContent = new List<string>();
-                for (int i = 0; i < settings.verbs.Length; i++)
-                {
-                    if (settings.verbs[i].isLikeGive || settings.verbs[i].isLikeUse)
-                        verbsContent.Add(settings.verbs[i].name);
-                }
-                int verbSelected = 0;
-                if (myTarget.inventoryActions[indexInv].verb.index >= 0)
-                {
-                    for (int i = 0; i < settings.verbs.Length; i++)
-                    {
-                        if (settings.verbs[i].index == myTarget.inventoryActions[indexInv].verb.index)
-                            verbSelected = i;
-                    }
-                }
-                verbSelected = EditorGUI.Popup(new Rect(rect.x + 7, rect.y, rect.width / 2.5f, EditorGUIUtility.singleLineHeight), "", verbSelected, verbsContent.ToArray());
-
-                myTarget.inventoryActions[indexInv].verb.index = settings.verbs[verbSelected].index;
+                int selected = inv_serialized.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = PNCEditorUtils.GetInventoryWithPopUp(rect, inventory, inv_serialized.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue, true);
+                                
+                myTarget.inventoryActions[indexInv].verb.index = PNCEditorUtils.SetVerbWithPopUp(rect, settings.verbs, myTarget.inventoryActions[indexInv].verb.index);
 
                 if(selected == 0)
                 {
+
                     EditorGUI.PropertyField(new Rect(rect.x + rect.width/2 - 20, rect.y + EditorGUIUtility.singleLineHeight, rect.width/2, rect.height), inv_serialized.GetArrayElementAtIndex(indexInv).FindPropertyRelative("sceneObject"), GUIContent.none);
                     rect.y += EditorGUIUtility.singleLineHeight;
                 }

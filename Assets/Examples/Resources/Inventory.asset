@@ -20,7 +20,19 @@ MonoBehaviour:
     cuantity: 0
     local_properties: []
     global_properties: []
-    inventoryActions: []
+    inventoryActions:
+    - specialIndex: 5
+      verb:
+        name: 
+        isLikeGive: 0
+        isLikeUse: 0
+        index: 1
+      sceneObject: {fileID: 0}
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
     verbs:
     - verb:
         name: Look
@@ -429,4 +441,197 @@ MonoBehaviour:
     expandedInInspector: 0
     specialIndex: 2
     priority: 0
-  specialIndex: 3
+  - itemName: new item 5
+    normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
+    selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
+    startWithThisItem: 1
+    cuantity: 0
+    local_properties: []
+    global_properties: []
+    inventoryActions:
+    - specialIndex: 2
+      verb:
+        name: 
+        isLikeGive: 0
+        isLikeUse: 0
+        index: 1
+      sceneObject: {fileID: 0}
+      attempsContainer:
+        attempsIteration: 0
+        attemps:
+        - interactions:
+          - type: 3
+            expandedInInspector: 1
+            inventoryAction: 0
+            character: {fileID: 0}
+            characterAction: 0
+            WhatToSay: 
+            WhereToWalk: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
+            dialogAction: 0
+            dialogSelected: {fileID: 0}
+            newDialogEntry: 0
+            newOptionState: 0
+            newOptionText: 
+            subDialogIndex: 0
+            optionIndex: 0
+            OnCompareResultTrueAction: 0
+            OnCompareResultFalseAction: 0
+            LineToGoOnTrueResult: 0
+            LineToGoOnFalseResult: 0
+            action:
+              m_PersistentCalls:
+                m_Calls:
+                - m_Target: {fileID: 6091360687955946689, guid: ec260d7f39d9606408466e04ffe4f126,
+                    type: 3}
+                  m_TargetAssemblyTypeName: SayForInventory, Assembly-CSharp
+                  m_MethodName: Say
+                  m_Mode: 5
+                  m_Arguments:
+                    m_ObjectArgument: {fileID: 0}
+                    m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                    m_IntArgument: 0
+                    m_FloatArgument: 0
+                    m_StringArgument: inv con inv
+                    m_BoolArgument: 0
+                  m_CallState: 2
+            global_changeBooleanValue: 0
+            global_changeStringValue: 0
+            global_changeIntegerValue: 0
+            local_changeBooleanValue: 0
+            local_changeStringValue: 0
+            local_changeIntegerValue: 0
+            global_compareBooleanValue: 0
+            global_compareStringValue: 0
+            global_compareIntegerValue: 0
+            local_compareBooleanValue: 0
+            local_compareStringValue: 0
+            local_compareIntegerValue: 0
+            local_defaultBooleanValue: 0
+            local_defaultIntegerValue: 0
+            local_defaultStringValue: 
+            global_defaultBooleanValue: 0
+            global_defaultIntegerValue: 0
+            global_defaultStringValue: 
+            global_BooleanValue: 0
+            global_StringValue: 
+            global_IntegerValue: 0
+            local_BooleanValue: 0
+            local_StringValue: 
+            local_IntegerValue: 0
+            SayScript: {fileID: 0}
+            CanSkip: 0
+            customScriptAction: 0
+            customActionArguments: []
+          expandedInInspector: 1
+        expandedInInspector: 1
+        executedTimes: 0
+    verbs:
+    - verb:
+        name: Use
+        isLikeGive: 0
+        isLikeUse: 1
+        index: 1
+      use: 1
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    - verb:
+        name: Look
+        isLikeGive: 0
+        isLikeUse: 0
+        index: 2
+      use: 1
+      attempsContainer:
+        attempsIteration: 0
+        attemps:
+        - interactions:
+          - type: 3
+            expandedInInspector: 1
+            inventoryAction: 0
+            character: {fileID: 0}
+            characterAction: 0
+            WhatToSay: 
+            WhereToWalk: {fileID: 0}
+            globalPropertySelected: 0
+            localPropertySelected: 0
+            propertiesAction: 0
+            propertyObject: {fileID: 0}
+            dialogAction: 0
+            dialogSelected: {fileID: 0}
+            newDialogEntry: 0
+            newOptionState: 0
+            newOptionText: 
+            subDialogIndex: 0
+            optionIndex: 0
+            OnCompareResultTrueAction: 0
+            OnCompareResultFalseAction: 0
+            LineToGoOnTrueResult: 0
+            LineToGoOnFalseResult: 0
+            action:
+              m_PersistentCalls:
+                m_Calls:
+                - m_Target: {fileID: 6091360687955946689, guid: ec260d7f39d9606408466e04ffe4f126,
+                    type: 3}
+                  m_TargetAssemblyTypeName: SayForInventory, Assembly-CSharp
+                  m_MethodName: Say
+                  m_Mode: 5
+                  m_Arguments:
+                    m_ObjectArgument: {fileID: 0}
+                    m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                    m_IntArgument: 0
+                    m_FloatArgument: 0
+                    m_StringArgument: un simple blister
+                    m_BoolArgument: 0
+                  m_CallState: 2
+            global_changeBooleanValue: 0
+            global_changeStringValue: 0
+            global_changeIntegerValue: 0
+            local_changeBooleanValue: 0
+            local_changeStringValue: 0
+            local_changeIntegerValue: 0
+            global_compareBooleanValue: 0
+            global_compareStringValue: 0
+            global_compareIntegerValue: 0
+            local_compareBooleanValue: 0
+            local_compareStringValue: 0
+            local_compareIntegerValue: 0
+            local_defaultBooleanValue: 0
+            local_defaultIntegerValue: 0
+            local_defaultStringValue: 
+            global_defaultBooleanValue: 0
+            global_defaultIntegerValue: 0
+            global_defaultStringValue: 
+            global_BooleanValue: 0
+            global_StringValue: 
+            global_IntegerValue: 0
+            local_BooleanValue: 0
+            local_StringValue: 
+            local_IntegerValue: 0
+            SayScript: {fileID: 0}
+            CanSkip: 0
+            customScriptAction: 0
+            customActionArguments: []
+          expandedInInspector: 1
+        expandedInInspector: 1
+        executedTimes: 0
+    - verb:
+        name: Talk
+        isLikeGive: 0
+        isLikeUse: 0
+        index: 3
+      use: 1
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+    expandedInInspector: 0
+    specialIndex: 5
+    priority: 0
+  specialIndex: 5

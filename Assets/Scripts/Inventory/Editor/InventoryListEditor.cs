@@ -260,10 +260,10 @@ public class InventoryListEditor : Editor
     }
 
 
-protected void InitializeInventoryInteractions(out ReorderableList inventoryList, SerializedObject serializedInventory, SerializedProperty inventoryProperty, InventoryItem myTarget)
+protected void InitializeInventoryInteractions(out ReorderableList inventoryList, SerializedObject serializedInventory, SerializedProperty inventoryProperty, InventoryItem inventoryItem)
     {
         settings = Resources.Load<Settings>("Settings/Settings");
-       
+
 
         inventoryList = new ReorderableList(serializedInventory, inventoryProperty, true, true, true, true)
         {
@@ -277,55 +277,13 @@ protected void InitializeInventoryInteractions(out ReorderableList inventoryList
             },
             drawElementCallback = (rect, indexInv, active, focus) =>
             {
-                List<string> content = new List<string>();
-                List<int> posibleItems = new List<int>();
-                for (int i = 0; i < serializedObject.FindProperty("items").arraySize; i++)
-                {
-                    if (serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("specialIndex").intValue != myTarget.specialIndex)
-                    { 
-                        content.Add(serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("itemName").stringValue);
-                        posibleItems.Add(serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("specialIndex").intValue);
-                    }
-                }
-                int selected = 0;
-                if (inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue != -1 && inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue != 0)
-                {
-                    for (int i = 0; i < posibleItems.Count; i++)
-                    {
-                        if (posibleItems[i] == inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue)
-                            selected = i;
-                    }
-                }
-                rect.height = EditorGUIUtility.singleLineHeight;
+                inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = PNCEditorUtils.GetInventoryWithPopUp(rect, (InventoryList)target, inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue, false, inventoryItem.specialIndex);
 
-                selected = EditorGUI.Popup(new Rect(rect.x + rect.width / 2.25f, rect.y, rect.width / 2, rect.height), "",selected, content.ToArray());
-
-                inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("specialIndex").intValue = posibleItems[selected];
-
-
-
-                List<string> verbsContent = new List<string>();
-                for (int i = 0; i < settings.verbs.Length; i++)
-                {
-                    if (settings.verbs[i].isLikeGive || settings.verbs[i].isLikeUse)
-                        verbsContent.Add(settings.verbs[i].name);
-                }
-                int verbSelected = 0;
-                if (myTarget.inventoryActions[indexInv].verb.index >= 0)
-                {
-                    for (int i = 0; i < settings.verbs.Length; i++)
-                    {
-                        if (settings.verbs[i].index == myTarget.inventoryActions[indexInv].verb.index)
-                            verbSelected = i;
-                    }
-                }
-                verbSelected = EditorGUI.Popup(new Rect(rect.x + 7, rect.y, rect.width / 2.5f, EditorGUIUtility.singleLineHeight), "", verbSelected, verbsContent.ToArray());
-
-                inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("verb").FindPropertyRelative("index").intValue = settings.verbs[verbSelected].index;
+                inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("verb").FindPropertyRelative("index").intValue = PNCEditorUtils.SetVerbWithPopUp(rect, settings.verbs, inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("verb").FindPropertyRelative("index").intValue);
 
                 //EditorGUI.PropertyField(new Rect(rect.x + 7, rect.y, rect.width / 2.5f, EditorGUIUtility.singleLineHeight), inventoryProperty.GetArrayElementAtIndex(indexInv).FindPropertyRelative("verb").FindPropertyRelative("name"), GUIContent.none);
 
-                PNCEditorUtils.DrawArrayWithAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, customScriptInteractionDict, myTarget.inventoryActions[indexInv].attempsContainer.attemps, true);
+                PNCEditorUtils.DrawArrayWithAttempContainer(inventoryProperty, indexInv, rect, invAttempsListDict, invInteractionsListDict, customScriptInteractionDict, inventoryItem.inventoryActions[indexInv].attempsContainer.attemps, true);
             }
         };
 
