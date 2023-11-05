@@ -99,7 +99,7 @@ public class Interaction
         getGlobalProperty
     }
     public InventoryAction inventoryAction;
-
+    public int inventorySelected;
     //CHARACTER
     public enum CharacterAction
     {
@@ -199,6 +199,7 @@ public class Interaction
         destiny.characterAction = characterAction;
         destiny.expandedInInspector = expandedInInspector;
         destiny.inventoryAction = inventoryAction;
+        destiny.inventorySelected = inventorySelected;
         destiny.dialogAction = dialogAction;
         destiny.dialogSelected = dialogSelected;
         destiny.newDialogEntry = newDialogEntry;

@@ -21,7 +21,7 @@ MonoBehaviour:
     local_properties: []
     global_properties: []
     inventoryActions:
-    - specialIndex: 5
+    - specialIndex: 2
       verb:
         name: 
         isLikeGive: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
           - type: 3
             expandedInInspector: 1
             inventoryAction: 0
+            inventorySelected: 0
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 
@@ -137,6 +138,7 @@ MonoBehaviour:
           - type: 0
             expandedInInspector: 0
             inventoryAction: 0
+            inventorySelected: 0
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 
@@ -190,6 +192,7 @@ MonoBehaviour:
           - type: 0
             expandedInInspector: 0
             inventoryAction: 0
+            inventorySelected: 0
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 
@@ -270,6 +273,7 @@ MonoBehaviour:
           - type: 3
             expandedInInspector: 1
             inventoryAction: 0
+            inventorySelected: 0
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 
@@ -361,6 +365,7 @@ MonoBehaviour:
           - type: 3
             expandedInInspector: 1
             inventoryAction: 0
+            inventorySelected: 0
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 
@@ -463,6 +468,7 @@ MonoBehaviour:
           - type: 3
             expandedInInspector: 1
             inventoryAction: 0
+            inventorySelected: 0
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 
@@ -554,6 +560,7 @@ MonoBehaviour:
           - type: 3
             expandedInInspector: 1
             inventoryAction: 0
+            inventorySelected: 0
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 

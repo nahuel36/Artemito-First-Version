@@ -511,7 +511,7 @@ public static class PNCEditorUtils
             }
             if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
             {
-                float height = 3.25f;
+                float height = 4.25f;
                 return EditorGUIUtility.singleLineHeight * height;
             }
             if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
@@ -961,6 +961,10 @@ public static class PNCEditorUtils
                                             else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
                                             {
                                                 EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("inventoryAction"));
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                InventoryList inventory = Resources.Load<InventoryList>("Inventory");
+                                                EditorGUI.LabelField(interactRect, "Inventory");
+                                                interactionSerialized.FindPropertyRelative("inventorySelected").intValue = GetInventoryWithPopUp(interactRect, inventory, interactionSerialized.FindPropertyRelative("inventorySelected").intValue, false);
                                             }
                                             else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container)
                                             {
