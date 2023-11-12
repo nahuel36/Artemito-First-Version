@@ -136,7 +136,7 @@ public class Interaction
         changeOptionState,
         changeOptionText,
         getOptionState,
-        getNumberOfAttemps,
+        getNumberOfExecutions,
         areAllSubdialogOptionsDisabled,
         setLocalProperty,
         getLocalProperty,
