@@ -835,133 +835,8 @@ public static class PNCEditorUtils
                                         {
                                             EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("type"));
                                             interactRect.y += EditorGUIUtility.singleLineHeight;
-                                            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character)
-                                            {
-                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("character"));
-                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("characterAction"));
-                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.say)
-                                                {
-                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhatToSay"));
-                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("CanSkip"));
-                                                }
-                                                if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.sayWithScript)
-                                                {
-                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("SayScript"));
-                                                    if (!(interactionSerialized.FindPropertyRelative("SayScript").objectReferenceValue is SayScript))
-                                                    {
-                                                        interactionSerialized.FindPropertyRelative("SayScript").objectReferenceValue = null;
-                                                    }
-                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("CanSkip"));
 
-                                                    ShowCustomArguments(ref interactRect, interactionSerialized, customScriptArgumentsDict);
-                                                }
-                                                else if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.walk ||
-                                                interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.walkStraight )
-                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhereToWalk"));
-                                            }
-                                            else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
-                                            {
-                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("dialogAction"));
-                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                if(interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex != (int)Interaction.DialogAction.endCurrentDialog)
-                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("dialogSelected"));
-
-                                                Dialog currentDialog = ((Dialog)interactionSerialized.FindPropertyRelative("dialogSelected").objectReferenceValue);
-
-                                                if (currentDialog != null || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.endCurrentDialog)
-                                                {
-                                                    if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeEntry)
-                                                    {
-                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                        string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
-                                                        int[] subdialogsIndexs = new int[currentDialog.subDialogs.Count];
-                                                        for (int i = 0; i < currentDialog.subDialogs.Count; i++)
-                                                        {
-                                                            subdialogsTexts[i] = currentDialog.subDialogs[i].text;
-                                                            subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
-                                                        }
-                                                        interactionSerialized.FindPropertyRelative("newDialogEntry").intValue = EditorGUI.IntPopup(interactRect, "new subdialog entry", interactionSerialized.FindPropertyRelative("newDialogEntry").intValue, subdialogsTexts, subdialogsIndexs);
-                                                    }
-                                                
-                                                    else if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionState)
-                                                    {
-                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                            string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
-                                                            int[] subdialogsIndexs = new int[currentDialog.subDialogs.Count];
-                                                            Dictionary<int, int> subDialogIndexAndArrayIndex = new Dictionary<int, int>();
-                                                            for (int i = 0; i < currentDialog.subDialogs.Count; i++)
-                                                            {
-                                                                subdialogsTexts[i] = currentDialog.subDialogs[i].text;
-                                                                subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
-                                                                subDialogIndexAndArrayIndex.Add(currentDialog.subDialogs[i].index, i);
-                                                            }
-                                                            interactionSerialized.FindPropertyRelative("subDialogIndex").intValue = EditorGUI.IntPopup(interactRect, "subdialog", interactionSerialized.FindPropertyRelative("subDialogIndex").intValue, subdialogsTexts, subdialogsIndexs);
-                                                            if (interactionSerialized.FindPropertyRelative("subDialogIndex").intValue > 0)
-                                                            {
-                                                                int currentSubDialogArrayIndex = subDialogIndexAndArrayIndex[interactionSerialized.FindPropertyRelative("subDialogIndex").intValue];
-                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                string[] optionsTexts = new string[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
-                                                                int[] optionsIndexs = new int[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
-                                                                for (int i = 0; i < currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count; i++)
-                                                                {
-                                                                    optionsTexts[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].initialText;
-                                                                    optionsIndexs[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].index;
-                                                                }
-                                                                interactionSerialized.FindPropertyRelative("optionIndex").intValue = EditorGUI.IntPopup(interactRect, "option", interactionSerialized.FindPropertyRelative("optionIndex").intValue, optionsTexts, optionsIndexs);
-                                                                if (interactionSerialized.FindPropertyRelative("optionIndex").intValue > 0)
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("newOptionState"));
-                                                                }
-                                                            }
-                                                    }
-                                                    else if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionText)
-                                                    {
-                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                            string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
-                                                            int[] subdialogsIndexs = new int[currentDialog.subDialogs.Count];
-                                                            Dictionary<int, int> subDialogIndexAndArrayIndex = new Dictionary<int, int>();
-                                                            for (int i = 0; i < currentDialog.subDialogs.Count; i++)
-                                                            {
-                                                                subdialogsTexts[i] = currentDialog.subDialogs[i].text;
-                                                                subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
-                                                                subDialogIndexAndArrayIndex.Add(currentDialog.subDialogs[i].index, i);
-                                                            }
-                                                            interactionSerialized.FindPropertyRelative("subDialogIndex").intValue = EditorGUI.IntPopup(interactRect, "subdialog", interactionSerialized.FindPropertyRelative("subDialogIndex").intValue, subdialogsTexts, subdialogsIndexs);
-                                                            int currentSubDialogArrayIndex = subDialogIndexAndArrayIndex[interactionSerialized.FindPropertyRelative("subDialogIndex").intValue];
-                                                            if (interactionSerialized.FindPropertyRelative("subDialogIndex").intValue > 0)
-                                                            {
-                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                string[] optionsTexts = new string[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
-                                                                int[] optionsIndexs = new int[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
-                                                                for (int i = 0; i < currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count; i++)
-                                                                {
-                                                                    optionsTexts[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].initialText;
-                                                                    optionsIndexs[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].index;
-                                                                }
-                                                                interactionSerialized.FindPropertyRelative("optionIndex").intValue = EditorGUI.IntPopup(interactRect, "option", interactionSerialized.FindPropertyRelative("optionIndex").intValue, optionsTexts, optionsIndexs);
-                                                                if (interactionSerialized.FindPropertyRelative("optionIndex").intValue > 0)
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("newOptionText"));
-                                                                }
-                                                            }
-                                                    }
-                                                }
-                                            }
-                                            else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
-                                            {
-                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("inventoryAction"));
-                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                InventoryList inventory = Resources.Load<InventoryList>("Inventory");
-                                                EditorGUI.LabelField(interactRect, "Inventory");
-                                                interactionSerialized.FindPropertyRelative("inventorySelected").intValue = GetInventoryWithPopUp(interactRect, inventory, interactionSerialized.FindPropertyRelative("inventorySelected").intValue, false);
-                                            }
-                                            else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container)
+                                            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container)
                                             {
                                                 EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("propertiesAction"));
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
@@ -1178,6 +1053,132 @@ public static class PNCEditorUtils
                                                     }
                                                 }
                                             }
+                                            else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character)
+                                            {
+                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("character"));
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("characterAction"));
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.say)
+                                                {
+                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhatToSay"));
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("CanSkip"));
+                                                }
+                                                if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.sayWithScript)
+                                                {
+                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("SayScript"));
+                                                    if (!(interactionSerialized.FindPropertyRelative("SayScript").objectReferenceValue is SayScript))
+                                                    {
+                                                        interactionSerialized.FindPropertyRelative("SayScript").objectReferenceValue = null;
+                                                    }
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("CanSkip"));
+
+                                                    ShowCustomArguments(ref interactRect, interactionSerialized, customScriptArgumentsDict);
+                                                }
+                                                else if (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.walk ||
+                                                interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.walkStraight)
+                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("WhereToWalk"));
+                                            }
+                                            else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
+                                            {
+                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("dialogAction"));
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex != (int)Interaction.DialogAction.endCurrentDialog)
+                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("dialogSelected"));
+
+                                                Dialog currentDialog = ((Dialog)interactionSerialized.FindPropertyRelative("dialogSelected").objectReferenceValue);
+
+                                                if (currentDialog != null || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.endCurrentDialog)
+                                                {
+                                                    if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeEntry)
+                                                    {
+                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                        string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
+                                                        int[] subdialogsIndexs = new int[currentDialog.subDialogs.Count];
+                                                        for (int i = 0; i < currentDialog.subDialogs.Count; i++)
+                                                        {
+                                                            subdialogsTexts[i] = currentDialog.subDialogs[i].text;
+                                                            subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
+                                                        }
+                                                        interactionSerialized.FindPropertyRelative("newDialogEntry").intValue = EditorGUI.IntPopup(interactRect, "new subdialog entry", interactionSerialized.FindPropertyRelative("newDialogEntry").intValue, subdialogsTexts, subdialogsIndexs);
+                                                    }
+
+                                                    else if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionState)
+                                                    {
+                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                        string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
+                                                        int[] subdialogsIndexs = new int[currentDialog.subDialogs.Count];
+                                                        Dictionary<int, int> subDialogIndexAndArrayIndex = new Dictionary<int, int>();
+                                                        for (int i = 0; i < currentDialog.subDialogs.Count; i++)
+                                                        {
+                                                            subdialogsTexts[i] = currentDialog.subDialogs[i].text;
+                                                            subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
+                                                            subDialogIndexAndArrayIndex.Add(currentDialog.subDialogs[i].index, i);
+                                                        }
+                                                        interactionSerialized.FindPropertyRelative("subDialogIndex").intValue = EditorGUI.IntPopup(interactRect, "subdialog", interactionSerialized.FindPropertyRelative("subDialogIndex").intValue, subdialogsTexts, subdialogsIndexs);
+                                                        if (interactionSerialized.FindPropertyRelative("subDialogIndex").intValue > 0)
+                                                        {
+                                                            int currentSubDialogArrayIndex = subDialogIndexAndArrayIndex[interactionSerialized.FindPropertyRelative("subDialogIndex").intValue];
+                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                            string[] optionsTexts = new string[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
+                                                            int[] optionsIndexs = new int[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
+                                                            for (int i = 0; i < currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count; i++)
+                                                            {
+                                                                optionsTexts[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].initialText;
+                                                                optionsIndexs[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].index;
+                                                            }
+                                                            interactionSerialized.FindPropertyRelative("optionIndex").intValue = EditorGUI.IntPopup(interactRect, "option", interactionSerialized.FindPropertyRelative("optionIndex").intValue, optionsTexts, optionsIndexs);
+                                                            if (interactionSerialized.FindPropertyRelative("optionIndex").intValue > 0)
+                                                            {
+                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("newOptionState"));
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionText)
+                                                    {
+                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                        string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
+                                                        int[] subdialogsIndexs = new int[currentDialog.subDialogs.Count];
+                                                        Dictionary<int, int> subDialogIndexAndArrayIndex = new Dictionary<int, int>();
+                                                        for (int i = 0; i < currentDialog.subDialogs.Count; i++)
+                                                        {
+                                                            subdialogsTexts[i] = currentDialog.subDialogs[i].text;
+                                                            subdialogsIndexs[i] = currentDialog.subDialogs[i].index;
+                                                            subDialogIndexAndArrayIndex.Add(currentDialog.subDialogs[i].index, i);
+                                                        }
+                                                        interactionSerialized.FindPropertyRelative("subDialogIndex").intValue = EditorGUI.IntPopup(interactRect, "subdialog", interactionSerialized.FindPropertyRelative("subDialogIndex").intValue, subdialogsTexts, subdialogsIndexs);
+                                                        int currentSubDialogArrayIndex = subDialogIndexAndArrayIndex[interactionSerialized.FindPropertyRelative("subDialogIndex").intValue];
+                                                        if (interactionSerialized.FindPropertyRelative("subDialogIndex").intValue > 0)
+                                                        {
+                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                            string[] optionsTexts = new string[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
+                                                            int[] optionsIndexs = new int[currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count];
+                                                            for (int i = 0; i < currentDialog.subDialogs[currentSubDialogArrayIndex].options.Count; i++)
+                                                            {
+                                                                optionsTexts[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].initialText;
+                                                                optionsIndexs[i] = currentDialog.subDialogs[currentSubDialogArrayIndex].options[i].index;
+                                                            }
+                                                            interactionSerialized.FindPropertyRelative("optionIndex").intValue = EditorGUI.IntPopup(interactRect, "option", interactionSerialized.FindPropertyRelative("optionIndex").intValue, optionsTexts, optionsIndexs);
+                                                            if (interactionSerialized.FindPropertyRelative("optionIndex").intValue > 0)
+                                                            {
+                                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("newOptionText"));
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
+                                            {
+                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("inventoryAction"));
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                InventoryList inventory = Resources.Load<InventoryList>("Inventory");
+                                                EditorGUI.LabelField(interactRect, "Inventory");
+                                                interactionSerialized.FindPropertyRelative("inventorySelected").intValue = GetInventoryWithPopUp(interactRect, inventory, interactionSerialized.FindPropertyRelative("inventorySelected").intValue, false);
+                                            }
                                             else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.custom)
                                             {
                                                 EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("customScriptAction"));
@@ -1185,7 +1186,7 @@ public static class PNCEditorUtils
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
 
                                                 ShowCustomArguments(ref interactRect, interactionSerialized, customScriptArgumentsDict);
-                                                
+
 
                                                 if (interactionSerialized.FindPropertyRelative("customScriptAction").enumValueIndex == (int)Interaction.CustomScriptAction.customBoolean)
                                                 {
