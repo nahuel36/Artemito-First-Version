@@ -132,6 +132,7 @@ public class Interaction
     public enum DialogAction
     { 
         startDialog,
+        endCurrentDialog,
         changeEntry,
         changeOptionState,
         changeOptionText,
