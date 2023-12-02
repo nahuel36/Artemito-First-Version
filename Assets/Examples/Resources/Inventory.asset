@@ -18,8 +18,35 @@ MonoBehaviour:
     selectedImage: {fileID: 21300000, guid: 68a2099e0bf0e5748967cb5d2f871f3b, type: 3}
     startWithThisItem: 1
     cuantity: 0
-    local_properties: []
-    global_properties: []
+    local_properties:
+    - name: blisterp
+      hasInteger: 0
+      integer: 0
+      integerDefault: 0
+      hasBoolean: 0
+      boolean: 0
+      booleanDefault: 0
+      hasString: 0
+      String: 
+      stringDefault: 0
+      expandedInInspector: 0
+    global_properties:
+    - name: inv
+      integer: 0
+      boolean: 0
+      String: 
+      globalID: 2
+      properties:
+        name: inv
+        ID: 2
+        object_type: 4
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
+      expandedInInspector: 1
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
     inventoryActions:
     - specialIndex: 2
       verb:
@@ -251,13 +278,42 @@ MonoBehaviour:
     expandedInInspector: 0
     specialIndex: 1
     priority: 0
+    current_local_properties: []
+    current_global_properties: []
   - itemName: resorte
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     startWithThisItem: 1
     cuantity: 0
-    local_properties: []
-    global_properties: []
+    local_properties:
+    - name: resortep
+      hasInteger: 0
+      integer: 0
+      integerDefault: 0
+      hasBoolean: 1
+      boolean: 1
+      booleanDefault: 0
+      hasString: 0
+      String: 
+      stringDefault: 0
+      expandedInInspector: 0
+    global_properties:
+    - name: inv
+      integer: 0
+      boolean: 1
+      String: 
+      globalID: 2
+      properties:
+        name: inv
+        ID: 2
+        object_type: 4
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
+      expandedInInspector: 1
+      integerDefault: 1
+      booleanDefault: 0
+      stringDefault: 1
     inventoryActions:
     - specialIndex: 1
       verb:
@@ -446,13 +502,42 @@ MonoBehaviour:
     expandedInInspector: 0
     specialIndex: 2
     priority: 0
+    current_local_properties: []
+    current_global_properties: []
   - itemName: new item 5
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     startWithThisItem: 1
     cuantity: 0
-    local_properties: []
-    global_properties: []
+    local_properties:
+    - name: newip
+      hasInteger: 1
+      integer: 0
+      integerDefault: 0
+      hasBoolean: 0
+      boolean: 0
+      booleanDefault: 0
+      hasString: 1
+      String: 
+      stringDefault: 0
+      expandedInInspector: 0
+    global_properties:
+    - name: inv
+      integer: 0
+      boolean: 0
+      String: 
+      globalID: 2
+      properties:
+        name: inv
+        ID: 2
+        object_type: 4
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
+      expandedInInspector: 1
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
     inventoryActions:
     - specialIndex: 2
       verb:
@@ -641,4 +726,6 @@ MonoBehaviour:
     expandedInInspector: 0
     specialIndex: 5
     priority: 0
+    current_local_properties: []
+    current_global_properties: []
   specialIndex: 5

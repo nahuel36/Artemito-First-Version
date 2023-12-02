@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class InventoryItem
+public class InventoryItem:PNCPropertyInterface
 {
     public string itemName;
     public Sprite normalImage;
@@ -18,6 +18,26 @@ public class InventoryItem
     public int specialIndex = -1;
     public int priority = 0;
     private Settings settings;
+
+    public LocalProperty[] LocalProperties { get { return local_properties; } set { } }
+    public GlobalProperty[] GlobalProperties { get { return global_properties; } set { } }
+
+
+    public LocalProperty[] current_local_properties = new LocalProperty[0];
+    public GlobalProperty[] current_global_properties;
+
+    public void SetLocalProperty(Interaction interact, LocalProperty property)
+    {
+        CommandSetLocalProperty command = new CommandSetLocalProperty();
+        command.Queue(property, interact);
+    }
+
+    internal void SetGlobalProperty(Interaction interaction, GlobalProperty property)
+    {
+        CommandSetGlobalProperty command = new CommandSetGlobalProperty();
+        command.Queue(property, interaction);
+    }
+
     public void RunVerbInteraction(Verb verbToRunString)
     {
         VerbInteractions verbToRun = InteractionUtils.FindVerb(verbToRunString, verbs);
@@ -25,7 +45,7 @@ public class InventoryItem
         if (verbToRun != null)
             InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInInventory, verbToRunString, new InventoryItem[] { this });
         else
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInInventory, verbToRunString, new InventoryItem[] { this });
+            InteractionUtils.RunUnhandledEvents(InteractionObjectsType.verbInInventory, verbToRunString, new InventoryItem[] { this });
     }
 
     public Verb[] GetActiveVerbs()

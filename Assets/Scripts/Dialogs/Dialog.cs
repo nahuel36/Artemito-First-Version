@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class DialogOption
+public class DialogOption:PNCPropertyInterface
 {
     public string initialText;
     public string currentText;
@@ -27,6 +27,13 @@ public class DialogOption
 
     public LocalProperty[] local_properties = new LocalProperty[0];
     public GlobalProperty[] global_properties = new GlobalProperty[0];
+
+    public LocalProperty[] current_local_properties = new LocalProperty[0];
+    public GlobalProperty[] current_global_properties = new GlobalProperty[0];
+
+
+    public LocalProperty[] LocalProperties { get { return local_properties; } set { local_properties = value; } }
+    public GlobalProperty[] GlobalProperties { get { return global_properties; } set { global_properties = value;  } }
 }
 
 [System.Serializable]
@@ -167,5 +174,6 @@ public class Dialog : ScriptableObject
         }
         return null;
     }
+
 
 }

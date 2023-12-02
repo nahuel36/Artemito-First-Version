@@ -43,7 +43,36 @@ public class InventoryManager : MonoBehaviour
 
     public void Initialize()
     {
-        
+        inventory = Resources.Load<InventoryList>("Inventory");
+        for (int i = 0; i < inventory.items.Length; i++)
+        {
+            inventory.items[i].current_local_properties = new LocalProperty[inventory.items[i].local_properties.Length];
+            for (int z = 0; z < inventory.items[i].local_properties.Length; z++)
+            {
+                inventory.items[i].current_local_properties[z] = new LocalProperty();
+                inventory.items[i].current_local_properties[z].boolean =        inventory.items[i].local_properties[z].boolean;
+                inventory.items[i].current_local_properties[z].booleanDefault = inventory.items[i].local_properties[z].booleanDefault;
+                inventory.items[i].current_local_properties[z].integer =        inventory.items[i].local_properties[z].integer;
+                inventory.items[i].current_local_properties[z].integerDefault = inventory.items[i].local_properties[z].integerDefault;
+                inventory.items[i].current_local_properties[z].String =         inventory.items[i].local_properties[z].String;
+                inventory.items[i].current_local_properties[z].stringDefault =  inventory.items[i].local_properties[z].stringDefault;
+
+            }
+
+            inventory.items[i].current_global_properties = new GlobalProperty[inventory.items[i].global_properties.Length];
+            for (int z = 0; z < inventory.items[i].current_global_properties.Length; z++)
+            {
+               inventory.items[i].current_global_properties[z] = new GlobalProperty();
+               inventory.items[i].current_global_properties[z].boolean =        inventory.items[i].global_properties[z].boolean;
+               inventory.items[i].current_global_properties[z].booleanDefault = inventory.items[i].global_properties[z].booleanDefault;
+               inventory.items[i].current_global_properties[z].integer =        inventory.items[i].global_properties[z].integer;
+               inventory.items[i].current_global_properties[z].integerDefault = inventory.items[i].global_properties[z].integerDefault;
+               inventory.items[i].current_global_properties[z].String =         inventory.items[i].global_properties[z].String;
+               inventory.items[i].current_global_properties[z].stringDefault =  inventory.items[i].global_properties[z].stringDefault;
+
+            }
+
+        }
     }
 
     public bool HaveInteraction(InventoryItem item, Verb verb)
@@ -119,9 +148,9 @@ public class InventoryManager : MonoBehaviour
         else
         { 
             if(item1.priority >= item2.priority)
-                InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item1, item2 });
+                InteractionUtils.RunUnhandledEvents(InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item1, item2 });
             else
-                InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item2, item1 });
+                InteractionUtils.RunUnhandledEvents(InteractionObjectsType.inventoryIninventory, verb, new InventoryItem[] { item2, item1 });
         }
     }
 

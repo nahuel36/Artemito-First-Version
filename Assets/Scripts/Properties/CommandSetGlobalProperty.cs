@@ -11,7 +11,7 @@ public class CommandSetGlobalProperty : ICommand
     public async Task Execute()
     {
         await Task.Yield();
-        if (interaction.propertiesAction == Interaction.PropertiesContainerAction.setGlobalProperty)
+        if (InteractionUtils.CheckArePropertyInteraction( InteractionUtils.PropertyObjectType.any, InteractionUtils.PropertyActionType.set_global_property, interaction))
         {
             if (interaction.global_changeBooleanValue)
             {

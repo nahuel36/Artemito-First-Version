@@ -48,9 +48,40 @@ public class DialogsManager : MonoBehaviour
                 {
                     dialog.subDialogs[i].options[j].currentState = (DialogOption.current_state)dialog.subDialogs[i].options[j].initialState;
                     dialog.subDialogs[i].options[j].currentText = dialog.subDialogs[i].options[j].initialText;
+                    
+                    dialog.subDialogs[i].options[j].current_local_properties = new LocalProperty[dialog.subDialogs[i].options[j].local_properties.Length];
+                    for (int z = 0; z < dialog.subDialogs[i].options[j].local_properties.Length; z++)
+                    {
+                        dialog.subDialogs[i].options[j].current_local_properties[z] = new LocalProperty();
+                        dialog.subDialogs[i].options[j].current_local_properties[z].boolean = dialog.subDialogs[i].options[j].local_properties[z].boolean;
+                        dialog.subDialogs[i].options[j].current_local_properties[z].booleanDefault = dialog.subDialogs[i].options[j].local_properties[z].booleanDefault;
+                        dialog.subDialogs[i].options[j].current_local_properties[z].integer = dialog.subDialogs[i].options[j].local_properties[z].integer;
+                        dialog.subDialogs[i].options[j].current_local_properties[z].integerDefault = dialog.subDialogs[i].options[j].local_properties[z].integerDefault;
+                        dialog.subDialogs[i].options[j].current_local_properties[z].String = dialog.subDialogs[i].options[j].local_properties[z].String;
+                        dialog.subDialogs[i].options[j].current_local_properties[z].stringDefault = dialog.subDialogs[i].options[j].local_properties[z].stringDefault;
+
+                    }
+
+                    dialog.subDialogs[i].options[j].current_global_properties = new GlobalProperty[dialog.subDialogs[i].options[j].global_properties.Length];
+                    for (int z = 0; z < dialog.subDialogs[i].options[j].current_global_properties.Length; z++)
+                    {
+                        dialog.subDialogs[i].options[j].current_global_properties[z] = new GlobalProperty();
+                        dialog.subDialogs[i].options[j].current_global_properties[z].boolean = dialog.subDialogs[i].options[j].global_properties[z].boolean;
+                        dialog.subDialogs[i].options[j].current_global_properties[z].booleanDefault = dialog.subDialogs[i].options[j].global_properties[z].booleanDefault;
+                        dialog.subDialogs[i].options[j].current_global_properties[z].integer = dialog.subDialogs[i].options[j].global_properties[z].integer;
+                        dialog.subDialogs[i].options[j].current_global_properties[z].integerDefault = dialog.subDialogs[i].options[j].global_properties[z].integerDefault;
+                        dialog.subDialogs[i].options[j].current_global_properties[z].String = dialog.subDialogs[i].options[j].global_properties[z].String;
+                        dialog.subDialogs[i].options[j].current_global_properties[z].stringDefault = dialog.subDialogs[i].options[j].global_properties[z].stringDefault;
+
+                    }
+
                 }
             }
+
+
         }
+
+       
     }
 
     public void StartDialog(Dialog dialog, int subDialogIndex)
@@ -83,6 +114,81 @@ public class DialogsManager : MonoBehaviour
         ChangeOptionTextCommand command = new ChangeOptionTextCommand();
         command.Queue(dialogSelected, subDialogIndex, optionIndex, newOptionText);
     }
+
+
+    public void SetLocalProperty(Dialog dialogSelected, int subDialogIndex, int optionIndex, Interaction interact)
+    {
+        for (int i = 0; i < dialogSelected.subDialogs.Count; i++)
+        {
+            if (dialogSelected.subDialogs[i].index == subDialogIndex)
+            {
+                for (int j = 0; j < dialogSelected.subDialogs[i].options.Count; j++)
+                {
+                    if (dialogSelected.subDialogs[i].options[j].index == optionIndex)
+                    {
+                        CommandSetLocalProperty command = new CommandSetLocalProperty();
+                        command.Queue(dialogSelected.subDialogs[i].options[j].current_local_properties[interact.localPropertySelected], interact);
+                    }
+                }
+            }
+        }
+    }
+
+    public void SetGlobalProperty(Dialog dialogSelected, int subDialogIndex, int optionIndex, Interaction interaction)
+    {
+        for (int i = 0; i < dialogSelected.subDialogs.Count; i++)
+        {
+            if (dialogSelected.subDialogs[i].index == subDialogIndex)
+            {
+                for (int j = 0; j < dialogSelected.subDialogs[i].options.Count; j++)
+                {
+                    if (dialogSelected.subDialogs[i].options[j].index == optionIndex)
+                    {
+                        CommandSetGlobalProperty command = new CommandSetGlobalProperty();
+                        command.Queue(dialogSelected.subDialogs[i].options[j].current_global_properties[interaction.globalPropertySelected], interaction);
+                    }
+                }
+            }
+        }
+
+    }
+
+    public GlobalProperty GetGlobalProperty(Dialog dialogSelected, int subDialogIndex, int optionIndex, Interaction interaction)
+    {
+        for (int i = 0; i < dialogSelected.subDialogs.Count; i++)
+        {
+            if (dialogSelected.subDialogs[i].index == subDialogIndex)
+            {
+                for (int j = 0; j < dialogSelected.subDialogs[i].options.Count; j++)
+                {
+                    if (dialogSelected.subDialogs[i].options[j].index == optionIndex)
+                    {
+                        return dialogSelected.subDialogs[i].options[j].current_global_properties[interaction.globalPropertySelected];
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public LocalProperty GetLocalProperty(Dialog dialogSelected, int subDialogIndex, int optionIndex, Interaction interaction)
+    {
+        for (int i = 0; i < dialogSelected.subDialogs.Count; i++)
+        {
+            if (dialogSelected.subDialogs[i].index == subDialogIndex)
+            {
+                for (int j = 0; j < dialogSelected.subDialogs[i].options.Count; j++)
+                {
+                    if (dialogSelected.subDialogs[i].options[j].index == optionIndex)
+                    {
+                        return dialogSelected.subDialogs[i].options[j].current_local_properties[interaction.localPropertySelected];
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 
     public void OnClickOnOption(DialogOption actualOption)
     {

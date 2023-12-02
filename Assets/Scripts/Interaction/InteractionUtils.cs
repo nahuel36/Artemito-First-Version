@@ -103,7 +103,6 @@ public static class InteractionUtils
                         }
                     }
 
-
                     command.action.Invoke(attempsContainer.attemps[index].interactions[i].customActionArguments);
 
                     i++;
@@ -122,13 +121,13 @@ public static class InteractionUtils
 
         if (runUnhandledEvents && interactionType != InteractionObjectsType.unhandledEvent)
         {
-            RunHunhandledEvents(interactionType, verb, items, sceneInteractuables, runInBackground);
+            RunUnhandledEvents(interactionType, verb, items, sceneInteractuables, runInBackground);
         }
         
         attempsContainer.executedTimes++;
     }
 
-    public static void RunHunhandledEvents(InteractionObjectsType interactionType, Verb verb, InventoryItem[] item, PNCInteractuable[] sceneInteractuable = null, bool runInBackground = false)
+    public static void RunUnhandledEvents(InteractionObjectsType interactionType, Verb verb, InventoryItem[] item, PNCInteractuable[] sceneInteractuable = null, bool runInBackground = false)
     {
         if (!unhandledEvents)
         {
@@ -182,14 +181,35 @@ public static class InteractionUtils
 
     private static int CheckConditionals(int actualindex, Interaction interaction)
     {
-        if ((interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean) ||
-            (interaction.type == Interaction.InteractionType.properties_container && (interaction.propertiesAction == Interaction.PropertiesContainerAction.getGlobalProperty || interaction.propertiesAction == Interaction.PropertiesContainerAction.getLocalProperty)))
+        if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.any_get, interaction))
         {
             bool result = true;
-            
-            if (interaction.type == Interaction.InteractionType.properties_container && interaction.propertiesAction == Interaction.PropertiesContainerAction.getGlobalProperty)
+
+            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
             {
-                var property = interaction.propertyObject.global_properties[interaction.globalPropertySelected];
+                GlobalProperty property = null;
+                if (interaction.type == Interaction.InteractionType.properties_container)
+                    property = interaction.propertyObject.GlobalProperties[interaction.globalPropertySelected];
+                else if (interaction.type == Interaction.InteractionType.character)
+                    property = interaction.character.GlobalProperties[interaction.globalPropertySelected];
+                else if (interaction.type == Interaction.InteractionType.inventory)
+                {
+                    if (inventory == null)
+                        inventory = Resources.Load<InventoryList>("Inventory");
+
+                    for (int i = 0; i < inventory.items.Length; i++)
+                    {
+                        if (inventory.items[i].specialIndex == interaction.inventorySelected)
+                        {
+                            property = inventory.items[i].current_global_properties[interaction.globalPropertySelected];
+                        }
+                    }
+                }
+                else if (interaction.type == Interaction.InteractionType.dialog)
+                {
+                    property = DialogsManager.Instance.GetGlobalProperty(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction);
+
+                }
 
                 if (interaction.global_compareBooleanValue)
                 {
@@ -213,9 +233,32 @@ public static class InteractionUtils
                         result = false;
                 }
             }
-            else if (interaction.type == Interaction.InteractionType.properties_container && interaction.propertiesAction == Interaction.PropertiesContainerAction.getLocalProperty)
+            else if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.get_local_property,interaction))                
             {
-                var property = interaction.propertyObject.local_properties[interaction.localPropertySelected]; 
+                LocalProperty property = null;
+                if (interaction.type == Interaction.InteractionType.properties_container)
+                    property = interaction.propertyObject.LocalProperties[interaction.localPropertySelected];
+                else if (interaction.type == Interaction.InteractionType.character)
+                    property = interaction.character.LocalProperties[interaction.localPropertySelected];
+                else if (interaction.type == Interaction.InteractionType.inventory)
+                {
+                    if (inventory == null)
+                        inventory = Resources.Load<InventoryList>("Inventory");
+
+                    for (int i = 0; i < inventory.items.Length; i++)
+                    {
+                        if (inventory.items[i].specialIndex == interaction.inventorySelected)
+                        {
+                            property = inventory.items[i].current_local_properties[interaction.localPropertySelected];
+                        }
+                    }
+                }
+                else if (interaction.type == Interaction.InteractionType.dialog)
+                {
+                    property = DialogsManager.Instance.GetLocalProperty(interaction.dialogSelected,interaction.subDialogIndex,interaction.optionIndex,interaction);
+
+                }
+                               
 
                 if (interaction.local_compareBooleanValue)
                 {
@@ -295,6 +338,22 @@ public static class InteractionUtils
             {
                 action.AddListener((arguments) => charact.WalkStraight(interaction.WhereToWalk.position));
             }
+            else if (interaction.characterAction == Interaction.CharacterAction.setLocalProperty || interaction.characterAction == Interaction.CharacterAction.setGlobalProperty)
+            { 
+                PNCCharacter varContainer = (PNCCharacter)interaction.propertyObject;
+                if (interaction.characterAction == Interaction.CharacterAction.setLocalProperty)
+                {
+                    action.AddListener((arguments) =>
+                    varContainer.SetLocalProperty(interaction,
+                                                    interaction.propertyObject.LocalProperties[interaction.localPropertySelected]));
+                }
+                else if (interaction.characterAction== Interaction.CharacterAction.setGlobalProperty)
+                {
+                    action.AddListener((arguments) =>
+                    varContainer.SetGlobalProperty(interaction,
+                                                    interaction.propertyObject.GlobalProperties[interaction.globalPropertySelected]));
+                }
+            }
         }
         else if (interaction.type == Interaction.InteractionType.dialog)
         {
@@ -314,21 +373,35 @@ public static class InteractionUtils
             {
                 action.AddListener((arguments) => DialogsManager.Instance.ChangeOptionText(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction.newOptionText));
             }
+            else if (interaction.dialogAction == Interaction.DialogAction.setGlobalProperty || interaction.dialogAction == Interaction.DialogAction.setLocalProperty)
+            {
+                if (interaction.dialogAction == Interaction.DialogAction.setLocalProperty)
+                {
+                    action.AddListener((arguments) =>
+                    DialogsManager.Instance.SetLocalProperty(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction)
+                    );
+                }
+                else if (interaction.dialogAction == Interaction.DialogAction.setGlobalProperty)
+                {
+                    action.AddListener((arguments) =>
+                    DialogsManager.Instance.SetGlobalProperty(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex,interaction));
+                }
+            }
         }
         else if (interaction.type == Interaction.InteractionType.properties_container)
         {
-            PNCPropertiesContainer varContainer = interaction.propertyObject;
+            PNCPropertiesContainer varContainer = (PNCPropertiesContainer)interaction.propertyObject;
             if (interaction.propertiesAction == Interaction.PropertiesContainerAction.setLocalProperty)
             {
                 action.AddListener((arguments) =>
                 varContainer.SetLocalProperty(interaction,
-                                                interaction.propertyObject.local_properties[interaction.localPropertySelected]));
+                                                varContainer.LocalProperties[interaction.localPropertySelected]));
             }
             else if (interaction.propertiesAction == Interaction.PropertiesContainerAction.setGlobalProperty)
             {
                 action.AddListener((arguments) =>
                 varContainer.SetGlobalProperty(interaction,
-                                                interaction.propertyObject.global_properties[interaction.globalPropertySelected]));
+                                                varContainer.GlobalProperties[interaction.globalPropertySelected]));
             }
         }
         else if (interaction.type == Interaction.InteractionType.inventory)
@@ -341,8 +414,179 @@ public static class InteractionUtils
                     command.Queue();
                 });
             }
+            else if (interaction.inventoryAction == Interaction.InventoryAction.setLocalProperty || interaction.inventoryAction == Interaction.InventoryAction.setGlobalProperty)
+            {
+                if (interaction.inventorySelected > 0)
+                {
+                    
+                    if(inventory == null)
+                        inventory = Resources.Load<InventoryList>("Inventory");
+
+                    int specialIndex = interaction.inventorySelected;
+                    for (int i = 0; i < inventory.items.Length; i++)
+                    {
+                        if (inventory.items[i].specialIndex == specialIndex)
+                        {
+                            InventoryItem varContainer = (InventoryItem)inventory.items[i];
+
+                            if (interaction.inventoryAction == Interaction.InventoryAction.setLocalProperty)
+                                action.AddListener((arguments) =>
+                                {
+                                    varContainer.SetLocalProperty(interaction, varContainer.current_local_properties[interaction.localPropertySelected]);
+                                });
+
+                            else
+                                action.AddListener((arguments) =>
+                                {
+                                    varContainer.SetGlobalProperty(interaction, varContainer.current_global_properties[interaction.globalPropertySelected]);
+                                });
+                        }    
+                        
+                    }
+                }
+
+            }
+            
+            
         }
         return action;
     }
+
+    public enum PropertyObjectType
+    {
+        room_object,
+        character,
+        dialog_option,
+        inventory,
+        properties_container,
+        any
+    }
+
+    public enum PropertyActionType
+    {
+        set_global_property,
+        get_global_property,
+        set_local_property,
+        get_local_property,
+        any_local,
+        any_global,
+        any_set,
+        any_get,
+        any
+    }
+
+    public static bool CheckArePropertyInteraction(PropertyObjectType type, PropertyActionType proptype, Interaction interaction)
+    {
+        bool areType = false;
+        bool areProp = false;
+
+        if (proptype == PropertyActionType.any)
+        {
+            if ((interaction.type == Interaction.InteractionType.properties_container &&
+                     (interaction.propertiesAction == Interaction.PropertiesContainerAction.getGlobalProperty
+                   || interaction.propertiesAction == Interaction.PropertiesContainerAction.getLocalProperty
+                   || interaction.propertiesAction == Interaction.PropertiesContainerAction.setGlobalProperty
+                   || interaction.propertiesAction == Interaction.PropertiesContainerAction.setLocalProperty))
+            || (interaction.type == Interaction.InteractionType.inventory &&
+                     (interaction.inventoryAction == Interaction.InventoryAction.getGlobalProperty
+                   || interaction.inventoryAction == Interaction.InventoryAction.getLocalProperty
+                   || interaction.inventoryAction == Interaction.InventoryAction.setGlobalProperty
+                   || interaction.inventoryAction == Interaction.InventoryAction.setLocalProperty))
+            || (interaction.type == Interaction.InteractionType.character &&
+                     (interaction.characterAction == Interaction.CharacterAction.getGlobalProperty
+                   || interaction.characterAction == Interaction.CharacterAction.getLocalProperty
+                   || interaction.characterAction == Interaction.CharacterAction.setGlobalProperty
+                   || interaction.characterAction == Interaction.CharacterAction.setLocalProperty))
+            || (interaction.type == Interaction.InteractionType.dialog &&
+                     (interaction.dialogAction == Interaction.DialogAction.getGlobalProperty
+                   || interaction.dialogAction == Interaction.DialogAction.getLocalProperty
+                   || interaction.dialogAction == Interaction.DialogAction.setGlobalProperty
+                   || interaction.dialogAction == Interaction.DialogAction.setLocalProperty)))
+                areProp = true;
+        }
+        if (proptype == PropertyActionType.get_global_property || proptype == PropertyActionType.any_global || proptype == PropertyActionType.any_get)
+        {
+            if ((interaction.type == Interaction.InteractionType.properties_container &&
+                     interaction.propertiesAction == Interaction.PropertiesContainerAction.getGlobalProperty)
+               || (interaction.type == Interaction.InteractionType.inventory &&
+                     interaction.inventoryAction == Interaction.InventoryAction.getGlobalProperty)
+               || (interaction.type == Interaction.InteractionType.character &&
+                     interaction.characterAction == Interaction.CharacterAction.getGlobalProperty)
+                || (interaction.type == Interaction.InteractionType.dialog &&
+                     interaction.dialogAction == Interaction.DialogAction.getGlobalProperty))
+                areProp = true;
+        }
+        if (proptype == PropertyActionType.get_local_property || proptype == PropertyActionType.any_local || proptype == PropertyActionType.any_get)
+        {
+            if ((interaction.type == Interaction.InteractionType.properties_container &&
+                     interaction.propertiesAction == Interaction.PropertiesContainerAction.getLocalProperty)
+               || (interaction.type == Interaction.InteractionType.inventory &&
+                     interaction.inventoryAction == Interaction.InventoryAction.getLocalProperty)
+               || (interaction.type == Interaction.InteractionType.character &&
+                     interaction.characterAction == Interaction.CharacterAction.getLocalProperty)
+                || (interaction.type == Interaction.InteractionType.dialog &&
+                     interaction.dialogAction == Interaction.DialogAction.getLocalProperty))
+                areProp = true;
+        }
+        if (proptype == PropertyActionType.set_global_property || proptype == PropertyActionType.any_global || proptype == PropertyActionType.any_set)
+        {
+            if ((interaction.type == Interaction.InteractionType.properties_container &&
+                     interaction.propertiesAction == Interaction.PropertiesContainerAction.setGlobalProperty)
+               || (interaction.type == Interaction.InteractionType.inventory &&
+                     interaction.inventoryAction == Interaction.InventoryAction.setGlobalProperty)
+               || (interaction.type == Interaction.InteractionType.character &&
+                     interaction.characterAction == Interaction.CharacterAction.setGlobalProperty)
+                || (interaction.type == Interaction.InteractionType.dialog &&
+                     interaction.dialogAction == Interaction.DialogAction.setGlobalProperty))
+                areProp = true;
+        }
+        if (proptype == PropertyActionType.set_local_property || proptype == PropertyActionType.any_local || proptype == PropertyActionType.any_set)
+        {
+            if ((interaction.type == Interaction.InteractionType.properties_container &&
+                     interaction.propertiesAction == Interaction.PropertiesContainerAction.setLocalProperty)
+               || (interaction.type == Interaction.InteractionType.inventory &&
+                     interaction.inventoryAction == Interaction.InventoryAction.setLocalProperty)
+               || (interaction.type == Interaction.InteractionType.character &&
+                     interaction.characterAction == Interaction.CharacterAction.setLocalProperty)
+                || (interaction.type == Interaction.InteractionType.dialog &&
+                     interaction.dialogAction == Interaction.DialogAction.setLocalProperty))
+                areProp = true;
+        }
+
+
+        if (type == PropertyObjectType.any)
+        {
+            if (interaction.type == Interaction.InteractionType.properties_container
+             || interaction.type == Interaction.InteractionType.inventory
+             || interaction.type == Interaction.InteractionType.character
+             || interaction.type == Interaction.InteractionType.dialog)
+                areType = true;
+        }
+        else if (type == PropertyObjectType.properties_container)
+        {
+            if (interaction.type == Interaction.InteractionType.properties_container)
+                areType = true;
+        }
+        else if (type == PropertyObjectType.inventory)
+        {
+            if (interaction.type == Interaction.InteractionType.inventory)
+                areType = true;
+        }
+        else if (type == PropertyObjectType.character)
+        {
+            if (interaction.type == Interaction.InteractionType.character)
+                areType = true;
+        }
+        else if (type == PropertyObjectType.dialog_option)
+        {
+            if (interaction.type == Interaction.InteractionType.dialog)
+                areType = true;
+        }
+        else
+            areType = false;
+
+        return areType && areProp;
+    }
+
 }
 

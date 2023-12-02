@@ -264,6 +264,13 @@ public enum InteractionObjectsType
 
 }
 
+public interface PNCPropertyInterface
+{
+    public LocalProperty[] LocalProperties { get; set; }
+    public GlobalProperty[] GlobalProperties { get; set; }
+}
+
+
 [System.Serializable]
 public abstract class PNCInteractuable : PNCPropertiesContainer
 {
@@ -314,7 +321,7 @@ public abstract class PNCInteractuable : PNCPropertiesContainer
         }
         else
         {
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.inventoryInObject, verb, new InventoryItem[] { item }, new PNCInteractuable[] { this });
+            InteractionUtils.RunUnhandledEvents(InteractionObjectsType.inventoryInObject, verb, new InventoryItem[] { item }, new PNCInteractuable[] { this });
         }
     }
 
@@ -327,7 +334,7 @@ public abstract class PNCInteractuable : PNCPropertiesContainer
         }
         else
         {
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.objectInObject, verb, null, new PNCInteractuable[] { this, pncObject });
+            InteractionUtils.RunUnhandledEvents(InteractionObjectsType.objectInObject, verb, null, new PNCInteractuable[] { this, pncObject });
         }
     }
 
@@ -338,6 +345,6 @@ public abstract class PNCInteractuable : PNCPropertiesContainer
         if (verbToRun != null)
             InteractionUtils.RunAttempsInteraction(verbToRun.attempsContainer, InteractionObjectsType.verbInObject, verb, null, new PNCInteractuable[] {this });
         else
-            InteractionUtils.RunHunhandledEvents(InteractionObjectsType.verbInObject, verb, null, new PNCInteractuable[] { this });
+            InteractionUtils.RunUnhandledEvents(InteractionObjectsType.verbInObject, verb, null, new PNCInteractuable[] { this });
     }
 }

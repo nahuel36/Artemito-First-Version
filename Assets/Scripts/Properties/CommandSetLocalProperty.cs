@@ -11,7 +11,7 @@ public class CommandSetLocalProperty : ICommand
     public async Task Execute()
     {
         await Task.Yield();
-        if (interaction.propertiesAction == Interaction.PropertiesContainerAction.setLocalProperty)
+        if (InteractionUtils.CheckArePropertyInteraction(InteractionUtils.PropertyObjectType.any, InteractionUtils.PropertyActionType.set_local_property, interaction))
         {
             if (interaction.local_changeBooleanValue)
             {

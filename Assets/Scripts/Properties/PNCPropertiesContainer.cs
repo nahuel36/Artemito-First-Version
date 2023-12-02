@@ -35,10 +35,13 @@ public class GlobalProperty
     public bool stringDefault = true;
 }
 
-public class PNCPropertiesContainer : MonoBehaviour
+public class PNCPropertiesContainer : MonoBehaviour, PNCPropertyInterface
 {
     public LocalProperty[] local_properties = new LocalProperty[0];
     public GlobalProperty[] global_properties = new GlobalProperty[0];
+
+    public LocalProperty[] LocalProperties { get { return local_properties; } set { } }
+    public GlobalProperty[] GlobalProperties { get { return global_properties; } set { } }
 
     public void SetLocalProperty(Interaction interact, LocalProperty property)
     {

@@ -5,6 +5,29 @@ using UnityEditorInternal;
 using UnityEngine;
 public static class PNCEditorUtils 
 {
+
+    private enum PropertyObjectType{ 
+        room_object,
+        character,
+        dialog_option,
+        inventory,
+        properties_container,
+        any
+    }
+
+    private enum PropertyActionType { 
+       set_global_property,
+       get_global_property,
+       set_local_property,
+       get_local_property,
+       any_local,
+       any_global,
+       any_set,
+       any_get,
+       any
+    }
+
+
     public static void InitializeGlobalProperties(System.Enum type, ref GlobalProperty[] globalProperties)
     {
         Settings settings = Resources.Load<Settings>("Settings/Settings");
@@ -493,6 +516,145 @@ public static class PNCEditorUtils
 
         if (interactionSerialized.FindPropertyRelative("expandedInInspector").boolValue)
         {
+            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any, interactionSerialized))
+            {
+                float height = 4.25f;
+
+                PNCPropertyInterface propertiesObject = null;
+
+                if (CheckArePropertyInteraction(PropertyObjectType.inventory, PropertyActionType.any, interactionSerialized))
+                {
+                    InventoryList inventory = Resources.Load<InventoryList>("Inventory");
+                    int specialIndex = interactionSerialized.FindPropertyRelative("inventorySelected").intValue;
+                    if (specialIndex > 0)
+                    {
+                        for (int i = 0; i < inventory.items.Length; i++)
+                        {
+                            if(inventory.items[i].specialIndex == specialIndex)
+                                propertiesObject = inventory.items[i];
+                        }
+                    }
+                }
+                else if (CheckArePropertyInteraction(PropertyObjectType.dialog_option, PropertyActionType.any, interactionSerialized))
+                {
+                    Dialog currentDialog = (Dialog) interactionSerialized.FindPropertyRelative("dialogSelected").objectReferenceValue;
+
+                    if (currentDialog != null)
+                    {
+                        for (int i = 0; i < currentDialog.subDialogs.Count; i++)
+                        {
+                            if (currentDialog.subDialogs[i].index == interactionSerialized.FindPropertyRelative("subDialogIndex").intValue)
+                            {
+                                for (int j = 0; j < currentDialog.subDialogs[i].options.Count; j++)
+                                {
+                                    if (currentDialog.subDialogs[i].options[j].index == interactionSerialized.FindPropertyRelative("optionIndex").intValue)
+                                    {
+                                        propertiesObject = currentDialog.subDialogs[i].options[j];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    height += 2;
+                }
+                else
+                {
+                    propertiesObject = (PNCPropertyInterface)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue;
+                }
+
+                if (propertiesObject != null)
+                {
+                    height += 1;
+                    if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_global, interactionSerialized))
+                    {
+                        int index = interactionSerialized.FindPropertyRelative("globalPropertySelected").intValue;
+
+                        if (propertiesObject.GlobalProperties.Length > index)
+                        {
+                            if (propertiesObject.GlobalProperties[index].properties.hasBoolean)
+                            {
+                                height += 1;
+                                if (interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue
+                                    && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property, interactionSerialized))
+                                    height += 1;
+                            }
+                            if (propertiesObject.GlobalProperties[index].properties.hasInteger)
+                            {
+                                height += 1;
+                                if (interactionSerialized.FindPropertyRelative("global_changeIntegerValue").boolValue
+                                    && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property, interactionSerialized))
+                                    height += 1;
+                            }
+                            if (propertiesObject.GlobalProperties[index].properties.hasString)
+                            {
+                                height += 1;
+                                if (interactionSerialized.FindPropertyRelative("global_changeStringValue").boolValue
+                                    && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property, interactionSerialized))
+                                    height += 1;
+                            }
+                            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interactionSerialized))
+                            {
+                                if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasBoolean)
+                                    height += 2;
+                                if (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasInteger)
+                                    height += 2;
+                                if (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasString)
+                                    height += 2;
+                                if ((interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasBoolean) ||
+                                    (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasInteger) ||
+                                    (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasString))
+                                    height += GetGoToLineHeight(interactionSerialized);
+                            }
+                        }
+                    }
+                    if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_local, interactionSerialized))
+                    {
+                        int index = interactionSerialized.FindPropertyRelative("localPropertySelected").intValue;
+                        if (propertiesObject.LocalProperties.Length > index)
+                        {
+                            if (propertiesObject.LocalProperties[index].hasBoolean)
+                            {
+                                height += 1;
+                                if (interactionSerialized.FindPropertyRelative("local_changeBooleanValue").boolValue
+                                    && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_local_property, interactionSerialized))
+                                    height += 1;
+                            }
+                            if (propertiesObject.LocalProperties[index].hasInteger)
+                            {
+                                height += 1;
+                                if (interactionSerialized.FindPropertyRelative("local_changeIntegerValue").boolValue
+                                    && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_local_property, interactionSerialized))
+                                    height += 1;
+                            }
+                            if (propertiesObject.LocalProperties[index].hasString)
+                            {
+                                height += 1;
+                                if (interactionSerialized.FindPropertyRelative("local_changeStringValue").boolValue
+                                    && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_local_property, interactionSerialized))
+                                    height += 1;
+                            }
+                            if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.get_local_property, interactionSerialized))
+                            {
+                                if (interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue && propertiesObject.LocalProperties[index].hasBoolean)
+                                    height += 2;
+                                if (interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue && propertiesObject.LocalProperties[index].hasInteger)
+                                    height += 2;
+                                if (interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue && propertiesObject.LocalProperties[index].hasString)
+                                    height += 2;
+                                if ((interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue && propertiesObject.LocalProperties[index].hasBoolean) ||
+                                    (interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue && propertiesObject.LocalProperties[index].hasInteger) ||
+                                    (interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue && propertiesObject.LocalProperties[index].hasString))
+                                    height += GetGoToLineHeight(interactionSerialized);
+                            }
+                        }
+
+                    }
+                }
+                return EditorGUIUtility.singleLineHeight * height;
+            }
+
+
             if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character)
             {
                 float height = 5.25f;
@@ -525,97 +687,7 @@ public static class PNCEditorUtils
                     height += 3;
                 return EditorGUIUtility.singleLineHeight * height;
             }
-            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container)
-            {
-                float height = 4.25f;
-                if ((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue != null)
-                {
-                    height += 1;
-                    if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getGlobalProperty
-                        || interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setGlobalProperty)
-                    {
-                        int index = interactionSerialized.FindPropertyRelative("globalPropertySelected").intValue;
-
-                        if (((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue).global_properties.Length > index)
-                        {
-                            if (((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue).global_properties[index].properties.hasBoolean)
-                            {
-                                height += 1;
-                                if (interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue)
-                                    height += 1;
-
-
-                            }
-                            if (((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue).global_properties[index].properties.hasInteger)
-                            {
-                                height += 1;
-                                if (interactionSerialized.FindPropertyRelative("global_changeIntegerValue").boolValue)
-                                    height += 1;
-                            }
-                            if (((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue).global_properties[index].properties.hasString)
-                            {
-                                height += 1;
-                                if (interactionSerialized.FindPropertyRelative("global_changeStringValue").boolValue)
-                                    height += 1;
-                            }
-                            if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getGlobalProperty)
-                            {
-                                if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue)
-                                    height += 2;
-                                if (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue)
-                                    height += 2;
-                                if (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue)
-                                    height += 2;
-                                if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue ||
-                                    interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue ||
-                                    interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue)
-                                    height += GetGoToLineHeight(interactionSerialized);
-                            }
-                        }
-                    }
-                    if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getLocalProperty
-                        || interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setLocalProperty)
-                    {
-                        int index = interactionSerialized.FindPropertyRelative("localPropertySelected").intValue;
-                        if (((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue).local_properties.Length > index)
-                        {
-                            if (((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue).local_properties[index].hasBoolean)
-                            {
-                                height += 1;
-                                if (interactionSerialized.FindPropertyRelative("local_changeBooleanValue").boolValue)
-                                    height += 1;
-                            }
-                            if (((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue).local_properties[index].hasInteger)
-                            {
-                                height += 1;
-                                if (interactionSerialized.FindPropertyRelative("local_changeIntegerValue").boolValue)
-                                    height += 1;
-                            }
-                            if (((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue).local_properties[index].hasString)
-                            {
-                                height += 1;
-                                if (interactionSerialized.FindPropertyRelative("local_changeStringValue").boolValue)
-                                    height += 1;
-                            }
-                            if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getLocalProperty)
-                            {
-                                if (interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue)
-                                    height += 2;
-                                if (interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue)
-                                    height += 2;
-                                if (interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue)
-                                    height += 2;
-                                if (interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue ||
-                                    interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue ||
-                                    interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue)
-                                    height += GetGoToLineHeight(interactionSerialized);
-                            }
-                        }
-
-                    }
-                }
-                return EditorGUIUtility.singleLineHeight * height;
-            }
+            
             if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.custom)
             { 
                 float height = EditorGUIUtility.singleLineHeight * (12 + (interactionSerialized.FindPropertyRelative("action.m_PersistentCalls.m_Calls").arraySize * 2.5f));
@@ -749,7 +821,7 @@ public static class PNCEditorUtils
         var verbExpanded = attempContainer.FindPropertyRelative("expandedInInspector");
         verbRect.x += 8;
 
-
+        InventoryList inventory = null;
 
         //verbExpanded.boolValue = EditorGUI.Foldout(new Rect(verbRect.x, verbRect.y, verbRect.width, EditorGUIUtility.singleLineHeight), verbExpanded.boolValue, containerProperty.GetArrayElementAtIndex(indexC).FindPropertyRelative("name").stringValue);
         if(isInventoryItem)
@@ -831,42 +903,106 @@ public static class PNCEditorUtils
                                         interactExpanded.boolValue = EditorGUI.Foldout(interactRect, interactExpanded.boolValue, (indexI + 1).ToString() + "° interaction");
                                         interactRect.y += EditorGUIUtility.singleLineHeight;
 
+                                        float propertyRectPosition = interactRect.y;
+                                        PNCPropertyInterface propertyObject = null;
+
                                         if (interactExpanded.boolValue)
                                         {
                                             EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("type"));
-                                            interactRect.y += EditorGUIUtility.singleLineHeight;
 
-                                            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container)
+                                            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any, interactionSerialized))
                                             {
-                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("propertiesAction"));
-                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("propertyObject"));
-                                                if (interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue != null && interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue.GetType() != typeof(PNCPropertiesContainer))
-                                                    interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue = null;
-                                                interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getGlobalProperty ||
-                                                    interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setGlobalProperty)
+                                                if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container)
                                                 {
-                                                    if (interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue != null)
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("propertiesAction"));
+
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                    EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("propertyObject"));
+
+                                                    if (interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue != null && interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue.GetType() != typeof(PNCPropertiesContainer))
+                                                        interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue = null;
+
+                                                    propertyObject = (PNCPropertyInterface)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue;
+                                                }
+                                                else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
+                                                {
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight * 2;
+
+                                                    if(inventory == null )
+                                                        inventory = Resources.Load<InventoryList>("Inventory");
+
+                                                    int specialIndex = interactionSerialized.FindPropertyRelative("inventorySelected").intValue;
+                                                    if (specialIndex > 0)
                                                     {
-                                                        PNCPropertiesContainer propertyObject = ((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue);
-                                                        GlobalProperty[] properties = propertyObject.global_properties;
+
+                                                        for (int i = 0; i < inventory.items.Length; i++)
+                                                        {
+                                                            if (inventory.items[i].specialIndex == specialIndex)
+                                                            {
+                                                                propertyObject = inventory.items[i];
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
+                                                else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
+                                                {
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight * 4;
+
+                                                    Dialog currentDialog = (Dialog)interactionSerialized.FindPropertyRelative("dialogSelected").objectReferenceValue;
+
+                                                    if (currentDialog != null)
+                                                    {
+                                                        for (int i = 0; i < currentDialog.subDialogs.Count; i++)
+                                                        {
+                                                            if (currentDialog.subDialogs[i].index == interactionSerialized.FindPropertyRelative("subDialogIndex").intValue)
+                                                            {
+                                                                for (int j = 0; j < currentDialog.subDialogs[i].options.Count; j++)
+                                                                {
+                                                                    if (currentDialog.subDialogs[i].options[j].index == interactionSerialized.FindPropertyRelative("optionIndex").intValue)
+                                                                    {
+                                                                        propertyObject = currentDialog.subDialogs[i].options[j];
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character)
+                                                {
+                                                    propertyRectPosition = interactRect.y;
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight * 2;
+
+                                                    interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue = interactionSerialized.FindPropertyRelative("character").objectReferenceValue;
+
+                                                    propertyObject = (PNCPropertyInterface)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue;
+                                                }
+
+
+                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
+                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_global,interactionSerialized))
+                                                {
+                                                    if (propertyObject != null)
+                                                    {
+                                                        GlobalProperty[] properties = propertyObject.GlobalProperties;
                                                         string[] content = new string[properties.Length];
 
                                                         for (int z = 0; z < properties.Length; z++)
                                                         {
-                                                            content[z] = propertyObject.global_properties[z].name;
+                                                            content[z] = propertyObject.GlobalProperties[z].name;
                                                         }
+
                                                         interactionSerialized.FindPropertyRelative("globalPropertySelected").intValue = EditorGUI.Popup(interactRect, "Property", interactionSerialized.FindPropertyRelative("globalPropertySelected").intValue, content);
 
                                                         int index = interactionSerialized.FindPropertyRelative("globalPropertySelected").intValue;
-                                                        if (propertyObject.global_properties.Length > index)
+                                                        if (propertyObject.GlobalProperties.Length > index)
                                                         {
-                                                            interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                            if (propertyObject.global_properties[index].properties.hasBoolean)
+                                                            if (propertyObject.GlobalProperties[index].properties.hasBoolean)
                                                             {
-                                                                if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setGlobalProperty)
+                                                                if (CheckArePropertyInteraction(PropertyObjectType.any,PropertyActionType.set_global_property,interactionSerialized))
                                                                 {
+                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                     interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "change boolean value", interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue);
                                                                     if (interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue)
                                                                     {
@@ -874,8 +1010,9 @@ public static class PNCEditorUtils
                                                                         interactionSerialized.FindPropertyRelative("global_BooleanValue").boolValue = EditorGUI.Toggle(interactRect, "value to set", interactionSerialized.FindPropertyRelative("global_BooleanValue").boolValue);
                                                                     }
                                                                 }
-                                                                else if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getGlobalProperty)
+                                                                else if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interactionSerialized))
                                                                 {
+                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                     interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "compare boolean value", interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue);
                                                                     if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue)
                                                                     {
@@ -886,9 +1023,9 @@ public static class PNCEditorUtils
                                                                     }
                                                                 }
                                                             }
-                                                            if (propertyObject.global_properties[index].properties.hasInteger)
+                                                            if (propertyObject.GlobalProperties[index].properties.hasInteger)
                                                             {
-                                                                if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setGlobalProperty)
+                                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property,interactionSerialized))
                                                                 {
                                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                     interactionSerialized.FindPropertyRelative("global_changeIntegerValue").boolValue = EditorGUI.Toggle(interactRect, "change integer value", interactionSerialized.FindPropertyRelative("global_changeIntegerValue").boolValue);
@@ -911,9 +1048,9 @@ public static class PNCEditorUtils
                                                                     }
                                                                 }
                                                             }
-                                                            if (propertyObject.global_properties[index].properties.hasString)
+                                                            if (propertyObject.GlobalProperties[index].properties.hasString)
                                                             {
-                                                                if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setGlobalProperty)
+                                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property, interactionSerialized))
                                                                 {
                                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                     interactionSerialized.FindPropertyRelative("global_changeStringValue").boolValue = EditorGUI.Toggle(interactRect, "change string value", interactionSerialized.FindPropertyRelative("global_changeStringValue").boolValue);
@@ -936,10 +1073,10 @@ public static class PNCEditorUtils
                                                                     }
                                                                 }
                                                             }
-                                                            if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getGlobalProperty &&
-                                                                    (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue ||
-                                                                    interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue ||
-                                                                    interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue))
+                                                            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interactionSerialized) &&
+                                                                    ((interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertyObject.GlobalProperties[index].properties.hasBoolean)||
+                                                                    (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertyObject.GlobalProperties[index].properties.hasInteger)||
+                                                                    (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertyObject.GlobalProperties[index].properties.hasString)))
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 ShowLineToGo(ref interactRect, interactionSerialized, attemps, indexA);
@@ -948,26 +1085,25 @@ public static class PNCEditorUtils
 
                                                     }
                                                 }
-                                                else if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getLocalProperty ||
-                                                    interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setLocalProperty)
+                                                else if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_local, interactionSerialized))
                                                 {
-                                                    PNCPropertiesContainer propertyObject = ((PNCPropertiesContainer)interactionSerialized.FindPropertyRelative("propertyObject").objectReferenceValue);
                                                     if (propertyObject != null)
                                                     {
-                                                        LocalProperty[] properties = propertyObject.local_properties;
+                                                        LocalProperty[] properties = propertyObject.LocalProperties;
                                                         string[] content = new string[properties.Length];
 
                                                         for (int z = 0; z < properties.Length; z++)
                                                         {
-                                                            content[z] = propertyObject.local_properties[z].name;
+                                                            content[z] = propertyObject.LocalProperties[z].name;
                                                         }
+
                                                         interactionSerialized.FindPropertyRelative("localPropertySelected").intValue = EditorGUI.Popup(interactRect, "Property", interactionSerialized.FindPropertyRelative("localPropertySelected").intValue, content);
                                                         int index = interactionSerialized.FindPropertyRelative("localPropertySelected").intValue;
-                                                        if (propertyObject.local_properties.Length > index)
+                                                        if (propertyObject.LocalProperties.Length > index)
                                                         {
-                                                            if (propertyObject.local_properties[index].hasBoolean)
+                                                            if (propertyObject.LocalProperties[index].hasBoolean)
                                                             {
-                                                                if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setLocalProperty)
+                                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_local_property, interactionSerialized))
                                                                 {
                                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                     interactionSerialized.FindPropertyRelative("local_changeBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "change boolean value", interactionSerialized.FindPropertyRelative("local_changeBooleanValue").boolValue);
@@ -980,7 +1116,7 @@ public static class PNCEditorUtils
                                                                 else
                                                                 {
                                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "compare integer value", interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue);
+                                                                    interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "compare boolean value", interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue);
                                                                     if (interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue)
                                                                     {
                                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
@@ -990,9 +1126,9 @@ public static class PNCEditorUtils
                                                                     }
                                                                 }
                                                             }
-                                                            if (propertyObject.local_properties[index].hasInteger)
+                                                            if (propertyObject.LocalProperties[index].hasInteger)
                                                             {
-                                                                if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setLocalProperty)
+                                                                if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.set_local_property,interactionSerialized))
                                                                 {
                                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                     interactionSerialized.FindPropertyRelative("local_changeIntegerValue").boolValue = EditorGUI.Toggle(interactRect, "change integer value", interactionSerialized.FindPropertyRelative("local_changeIntegerValue").boolValue);
@@ -1015,9 +1151,9 @@ public static class PNCEditorUtils
                                                                     }
                                                                 }
                                                             }
-                                                            if (propertyObject.local_properties[index].hasString)
+                                                            if (propertyObject.LocalProperties[index].hasString)
                                                             {
-                                                                if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setLocalProperty)
+                                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_local_property, interactionSerialized))
                                                                 {
                                                                     interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                     interactionSerialized.FindPropertyRelative("local_changeStringValue").boolValue = EditorGUI.Toggle(interactRect, "change string value", interactionSerialized.FindPropertyRelative("local_changeStringValue").boolValue);
@@ -1040,10 +1176,10 @@ public static class PNCEditorUtils
                                                                     }
                                                                 }
                                                             }
-                                                            if (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getLocalProperty &&
-                                                                    (interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue ||
-                                                                    interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue ||
-                                                                    interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue))
+                                                            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_local_property, interactionSerialized) &&
+                                                                    ((interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue && propertyObject.LocalProperties[index].hasBoolean)||
+                                                                    (interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue && propertyObject.LocalProperties[index].hasInteger) ||
+                                                                    (interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue && propertyObject.LocalProperties[index].hasString)))
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 ShowLineToGo(ref interactRect, interactionSerialized, attemps, indexA);
@@ -1053,8 +1189,13 @@ public static class PNCEditorUtils
                                                     }
                                                 }
                                             }
-                                            else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character)
+                                            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character)
                                             {
+                                                if (CheckArePropertyInteraction(PropertyObjectType.character, PropertyActionType.any, interactionSerialized))
+                                                    interactRect.y = propertyRectPosition;
+
+                                                interactRect.y = interactRect.y + EditorGUIUtility.singleLineHeight;
+
                                                 EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("character"));
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                 EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("characterAction"));
@@ -1083,6 +1224,10 @@ public static class PNCEditorUtils
                                             }
                                             else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
                                             {
+                                                if (CheckArePropertyInteraction(PropertyObjectType.dialog_option, PropertyActionType.any, interactionSerialized))
+                                                    interactRect.y = propertyRectPosition;
+
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
                                                 EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("dialogAction"));
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                 if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex != (int)Interaction.DialogAction.endCurrentDialog)
@@ -1094,7 +1239,8 @@ public static class PNCEditorUtils
                                                 {
                                                     if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeEntry  
                                                     || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionState 
-                                                    || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionText)
+                                                    || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionText
+                                                    || CheckArePropertyInteraction(PropertyObjectType.dialog_option, PropertyActionType.any, interactionSerialized))
                                                     {
                                                         interactRect.y += EditorGUIUtility.singleLineHeight;
                                                         string[] subdialogsTexts = new string[currentDialog.subDialogs.Count];
@@ -1108,7 +1254,8 @@ public static class PNCEditorUtils
                                                             interactionSerialized.FindPropertyRelative("newDialogEntry").intValue = EditorGUI.IntPopup(interactRect, "new subdialog entry", interactionSerialized.FindPropertyRelative("newDialogEntry").intValue, subdialogsTexts, subdialogsIndexs);
 
                                                         if (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionState
-                                                            || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionText)
+                                                            || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.changeOptionText
+                                                            || CheckArePropertyInteraction(PropertyObjectType.dialog_option, PropertyActionType.any, interactionSerialized))
                                                         {
                                                             Dictionary<int, int> subDialogIndexAndArrayIndex = new Dictionary<int, int>();
                                                             for (int i = 0; i < currentDialog.subDialogs.Count; i++)
@@ -1139,10 +1286,17 @@ public static class PNCEditorUtils
                                                             }
                                                         }
                                                     }
+
+                                                    
                                                 }
                                             }
                                             else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
                                             {
+                                                if (CheckArePropertyInteraction(PropertyObjectType.inventory, PropertyActionType.any, interactionSerialized))
+                                                    interactRect.y = propertyRectPosition;
+
+                                                interactRect.y = interactRect.y + EditorGUIUtility.singleLineHeight;
+
                                                 EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("inventoryAction"));
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                 InventoryList inventory = Resources.Load<InventoryList>("Inventory");
@@ -1151,6 +1305,8 @@ public static class PNCEditorUtils
                                             }
                                             else if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.custom)
                                             {
+                                                interactRect.y += EditorGUIUtility.singleLineHeight;
+
                                                 EditorGUI.PropertyField(interactRect, interactionSerialized.FindPropertyRelative("customScriptAction"));
 
                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
@@ -1403,6 +1559,119 @@ public static class PNCEditorUtils
 
         return texts;
 
+    }
+
+    private static bool CheckArePropertyInteraction(PropertyObjectType type, PropertyActionType proptype, SerializedProperty interactionSerialized)
+    {
+        bool areType = false;
+        bool areProp = false;
+
+        if (proptype == PropertyActionType.any)
+        {
+            if ((interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container &&
+                     (interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getGlobalProperty
+                   || interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getLocalProperty
+                   || interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setGlobalProperty
+                   || interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setLocalProperty))
+            || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory &&
+                     (interactionSerialized.FindPropertyRelative("inventoryAction").enumValueIndex == (int)Interaction.InventoryAction.getGlobalProperty
+                   || interactionSerialized.FindPropertyRelative("inventoryAction").enumValueIndex == (int)Interaction.InventoryAction.getLocalProperty
+                   || interactionSerialized.FindPropertyRelative("inventoryAction").enumValueIndex == (int)Interaction.InventoryAction.setGlobalProperty
+                   || interactionSerialized.FindPropertyRelative("inventoryAction").enumValueIndex == (int)Interaction.InventoryAction.setLocalProperty))
+            || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character &&
+                     (interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.getGlobalProperty
+                   || interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.getLocalProperty
+                   || interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.setGlobalProperty
+                   || interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.setLocalProperty))
+            || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog &&
+                     (interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.getGlobalProperty
+                   || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.getLocalProperty
+                   || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.setGlobalProperty
+                   || interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.setLocalProperty)))
+                areProp = true;
+        }
+        if (proptype == PropertyActionType.get_global_property || proptype == PropertyActionType.any_global || proptype == PropertyActionType.any_get)
+        {
+            if ((interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container &&
+                     interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getGlobalProperty)
+               || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory &&
+                     interactionSerialized.FindPropertyRelative("inventoryAction").enumValueIndex == (int)Interaction.InventoryAction.getGlobalProperty)
+               || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character &&
+                     interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.getGlobalProperty)
+                || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog &&
+                     interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.getGlobalProperty))
+                areProp = true;
+        }
+        if (proptype == PropertyActionType.get_local_property || proptype == PropertyActionType.any_local || proptype == PropertyActionType.any_get)
+        {
+            if ((interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container &&
+                     interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.getLocalProperty)
+               || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory &&
+                     interactionSerialized.FindPropertyRelative("inventoryAction").enumValueIndex == (int)Interaction.InventoryAction.getLocalProperty)
+               || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character &&
+                     interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.getLocalProperty)
+                || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog &&
+                     interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.getLocalProperty))
+                areProp = true;
+        }
+        if (proptype == PropertyActionType.set_global_property || proptype == PropertyActionType.any_global || proptype == PropertyActionType.any_set)
+        {
+            if ((interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container &&
+                     interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setGlobalProperty)
+               || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory &&
+                     interactionSerialized.FindPropertyRelative("inventoryAction").enumValueIndex == (int)Interaction.InventoryAction.setGlobalProperty)
+               || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character &&
+                     interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.setGlobalProperty)
+                || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog &&
+                     interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.setGlobalProperty))
+                areProp = true;
+        }
+        if (proptype == PropertyActionType.set_local_property || proptype == PropertyActionType.any_local || proptype == PropertyActionType.any_set)
+        {
+            if ((interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container &&
+                     interactionSerialized.FindPropertyRelative("propertiesAction").enumValueIndex == (int)Interaction.PropertiesContainerAction.setLocalProperty)
+               || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory &&
+                     interactionSerialized.FindPropertyRelative("inventoryAction").enumValueIndex == (int)Interaction.InventoryAction.setLocalProperty)
+               || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character &&
+                     interactionSerialized.FindPropertyRelative("characterAction").enumValueIndex == (int)Interaction.CharacterAction.setLocalProperty)
+                || (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog &&
+                     interactionSerialized.FindPropertyRelative("dialogAction").enumValueIndex == (int)Interaction.DialogAction.setLocalProperty))
+                areProp = true;
+        }
+
+
+        if (type == PropertyObjectType.any)
+        {
+            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container
+             || interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory
+             || interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character
+             || interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
+                areType = true;
+        }
+        else if (type == PropertyObjectType.properties_container)
+        {
+            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.properties_container)
+                areType = true;
+        }
+        else if (type == PropertyObjectType.inventory)
+        {
+            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.inventory)
+                areType = true;
+        }
+        else if (type == PropertyObjectType.character)
+        {
+            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.character)
+                areType = true;
+        }
+        else if (type == PropertyObjectType.dialog_option)
+        {
+            if (interactionSerialized.FindPropertyRelative("type").enumValueIndex == (int)Interaction.InteractionType.dialog)
+                areType = true;
+        }
+        else
+            areType = false;
+
+        return areType && areProp;
     }
 
 }

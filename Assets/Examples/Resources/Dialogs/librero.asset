@@ -23,9 +23,10 @@ MonoBehaviour:
         attempsIteration: 0
         attemps:
         - interactions:
-          - type: 4
+          - type: 3
             expandedInInspector: 1
             inventoryAction: 0
+            inventorySelected: 1
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 1
@@ -89,8 +90,8 @@ MonoBehaviour:
             CanSkip: 0
             customScriptAction: 0
             customActionArguments: []
-          expandedInInspector: 0
-        expandedInInspector: 0
+          expandedInInspector: 1
+        expandedInInspector: 1
         executedTimes: 0
       subDialogDestinyIndex: 2
       initialState: 0
@@ -101,45 +102,58 @@ MonoBehaviour:
         hasInteger: 0
         integer: 0
         integerDefault: 0
-        hasBoolean: 0
-        boolean: 0
+        hasBoolean: 1
+        boolean: 1
         booleanDefault: 0
         hasString: 0
         String: 
         stringDefault: 0
         expandedInInspector: 0
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
-        boolean: 0
+        boolean: 1
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
-          hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
-      - name: New Global Property 0
-        integer: 0
-        boolean: 0
-        String: 
-        globalID: 3
-        properties:
-          name: New Global Property 0
-          ID: 3
+          name: dialog
+          ID: 5
           object_type: 16
-          hasInteger: 1
+          hasInteger: 0
           hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
-        booleanDefault: 1
+        booleanDefault: 0
+        stringDefault: 1
+      current_local_properties:
+      - name: new property
+        hasInteger: 0
+        integer: 0
+        integerDefault: 0
+        hasBoolean: 0
+        boolean: 1
+        booleanDefault: 0
+        hasString: 0
+        String: 
+        stringDefault: 0
+        expandedInInspector: 0
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 1
+        String: 
+        globalID: -1
+        properties:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 0
         stringDefault: 1
     - initialText: "\xBFComo est\xE1 el negocio?"
       currentText: "\xBFComo est\xE1 el negocio?"
@@ -154,7 +168,36 @@ MonoBehaviour:
       currentState: 0
       say: 1
       local_properties:
-      - name: 
+      - name: a
+        hasInteger: 0
+        integer: 0
+        integerDefault: 0
+        hasBoolean: 1
+        boolean: 0
+        booleanDefault: 0
+        hasString: 0
+        String: 
+        stringDefault: 0
+        expandedInInspector: 0
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        properties:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties:
+      - name: new property
         hasInteger: 0
         integer: 0
         integerDefault: 0
@@ -165,36 +208,20 @@ MonoBehaviour:
         String: 
         stringDefault: 0
         expandedInInspector: 0
-      global_properties:
-      - name: New Global Property 0
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
-      - name: New Global Property 0
-        integer: 0
-        boolean: 0
-        String: 
-        globalID: 3
-        properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
-          hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -212,40 +239,42 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
-          hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
-      - name: New Global Property 0
-        integer: 0
-        boolean: 0
-        String: 
-        globalID: 3
-        properties:
-          name: New Global Property 0
-          ID: 3
+          name: dialog
+          ID: 5
           object_type: 16
-          hasInteger: 1
+          hasInteger: 0
           hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        properties:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
     - initialText: Bonito sombrero.
-      currentText: He dicho, bonito sombrero.
+      currentText: Bonito sombrero.
       index: 4
       attempsContainer:
         attempsIteration: 0
@@ -254,6 +283,7 @@ MonoBehaviour:
           - type: 3
             expandedInInspector: 1
             inventoryAction: 0
+            inventorySelected: 0
             character: {fileID: 0}
             characterAction: 0
             WhatToSay: 
@@ -313,35 +343,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -351,7 +383,7 @@ MonoBehaviour:
       attempsContainer:
         attempsIteration: 0
         attemps: []
-        expandedInInspector: 1
+        expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
@@ -359,37 +391,39 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        properties:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
           hasBoolean: 0
           hasString: 0
         expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
-        stringDefault: 1
-      - name: New Global Property 0
-        integer: 0
-        boolean: 1
-        String: 
-        globalID: 3
-        properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
-          hasString: 0
-        expandedInInspector: 0
-        integerDefault: 0
-        booleanDefault: 0
         stringDefault: 1
     - initialText: "Adi\xF3s."
       currentText: "Adi\xF3s."
@@ -405,35 +439,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -462,35 +498,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -508,35 +546,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -554,35 +594,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -611,35 +653,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -657,35 +701,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -703,35 +749,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -749,35 +797,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -787,7 +837,7 @@ MonoBehaviour:
       y: 66
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: mafia
     index: 7
@@ -806,35 +856,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -852,35 +904,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -898,35 +952,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -944,35 +1000,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -990,35 +1048,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -1047,35 +1107,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -1093,35 +1155,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -1139,35 +1203,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -1185,35 +1251,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -1242,35 +1310,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -1288,35 +1358,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -1334,35 +1406,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
@@ -1380,35 +1454,37 @@ MonoBehaviour:
       say: 1
       local_properties: []
       global_properties:
-      - name: New Global Property 0
+      - name: dialog
         integer: 0
         boolean: 0
         String: 
-        globalID: 1
+        globalID: 5
         properties:
-          name: New Global Property 0
-          ID: 1
-          object_type: 17
-          hasInteger: 1
-          hasBoolean: 0
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
           hasString: 0
         expandedInInspector: 1
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
-      - name: New Global Property 0
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
         integer: 0
         boolean: 0
         String: 
-        globalID: 3
+        globalID: -1
         properties:
-          name: New Global Property 0
-          ID: 3
-          object_type: 16
-          hasInteger: 1
-          hasBoolean: 1
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
+        expandedInInspector: 0
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
