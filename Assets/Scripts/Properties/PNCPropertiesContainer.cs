@@ -28,7 +28,7 @@ public class GlobalProperty
     public bool boolean = false;
     public string String = "";
     public int globalID = -1;
-    public GlobalPropertyConfig properties;
+    public GlobalPropertyConfig config;
     public bool expandedInInspector;
     public bool integerDefault = true;
     public bool booleanDefault = true;

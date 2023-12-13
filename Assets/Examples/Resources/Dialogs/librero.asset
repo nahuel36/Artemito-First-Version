@@ -103,7 +103,7 @@ MonoBehaviour:
         integer: 0
         integerDefault: 0
         hasBoolean: 1
-        boolean: 1
+        boolean: 0
         booleanDefault: 0
         hasString: 0
         String: 
@@ -115,7 +115,7 @@ MonoBehaviour:
         boolean: 1
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -132,7 +132,7 @@ MonoBehaviour:
         integer: 0
         integerDefault: 0
         hasBoolean: 0
-        boolean: 1
+        boolean: 0
         booleanDefault: 0
         hasString: 0
         String: 
@@ -144,7 +144,7 @@ MonoBehaviour:
         boolean: 1
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -214,7 +214,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -262,7 +262,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -366,7 +366,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -396,7 +396,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -414,7 +414,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -462,7 +462,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -521,7 +521,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -551,7 +551,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -569,7 +569,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -599,7 +599,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -617,7 +617,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -658,7 +658,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -676,7 +676,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -706,7 +706,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -724,7 +724,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -754,7 +754,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -772,7 +772,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -802,7 +802,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -820,7 +820,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -848,7 +848,7 @@ MonoBehaviour:
       attempsContainer:
         attempsIteration: 0
         attemps: []
-        expandedInInspector: 0
+        expandedInInspector: 1
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
@@ -861,7 +861,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -879,7 +879,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -909,7 +909,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -927,7 +927,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -957,7 +957,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -975,7 +975,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1005,7 +1005,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1023,7 +1023,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1053,7 +1053,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1071,7 +1071,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1088,7 +1088,7 @@ MonoBehaviour:
       y: 56
       width: 212
       height: 237.5
-    expandedInInspector: 0
+    expandedInInspector: 1
     optionSpecialIndex: 5
   - text: plata
     index: 8
@@ -1112,7 +1112,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1130,7 +1130,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1160,7 +1160,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1178,7 +1178,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1208,7 +1208,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1226,7 +1226,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1256,7 +1256,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1274,7 +1274,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1302,7 +1302,7 @@ MonoBehaviour:
       attempsContainer:
         attempsIteration: 0
         attemps: []
-        expandedInInspector: 0
+        expandedInInspector: 1
         executedTimes: 0
       subDialogDestinyIndex: 0
       initialState: 0
@@ -1315,7 +1315,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1333,7 +1333,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1363,7 +1363,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1381,7 +1381,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1411,7 +1411,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1429,7 +1429,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1459,7 +1459,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: 5
-        properties:
+        config:
           name: dialog
           ID: 5
           object_type: 16
@@ -1477,7 +1477,7 @@ MonoBehaviour:
         boolean: 0
         String: 
         globalID: -1
-        properties:
+        config:
           name: 
           ID: -1
           object_type: 0
@@ -1496,7 +1496,1022 @@ MonoBehaviour:
       height: 200
     expandedInInspector: 0
     optionSpecialIndex: 5
-  subDialogIndex: 11
+  - text: que mal
+    index: 12
+    options:
+    - initialText: Muy mal.
+      currentText: Muy mal.
+      index: 1
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 1
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Muy muy mal.
+      currentText: Muy muy mal.
+      index: 2
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Demasiado mal.
+      currentText: Demasiado mal.
+      index: 3
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Tanto que me voy.
+      currentText: Tanto que me voy.
+      index: 4
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    nodeRect:
+      serializedVersion: 2
+      x: 864.62885
+      y: 423
+      width: 212
+      height: 200
+    expandedInInspector: 1
+    optionSpecialIndex: 5
+  - text: que mal
+    index: 13
+    options:
+    - initialText: Muy mal.
+      currentText: Muy mal.
+      index: 1
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 1
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Muy muy mal.
+      currentText: Muy muy mal.
+      index: 2
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Demasiado mal.
+      currentText: Demasiado mal.
+      index: 3
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Tanto que me voy.
+      currentText: Tanto que me voy.
+      index: 4
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    nodeRect:
+      serializedVersion: 2
+      x: 864.62885
+      y: 423
+      width: 212
+      height: 200
+    expandedInInspector: 1
+    optionSpecialIndex: 5
+  - text: que mal
+    index: 14
+    options:
+    - initialText: Muy mal.
+      currentText: Muy mal.
+      index: 1
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 1
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Muy muy mal.
+      currentText: Muy muy mal.
+      index: 2
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Demasiado mal.
+      currentText: Demasiado mal.
+      index: 3
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Tanto que me voy.
+      currentText: Tanto que me voy.
+      index: 4
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    nodeRect:
+      serializedVersion: 2
+      x: 864.62885
+      y: 423
+      width: 212
+      height: 200
+    expandedInInspector: 1
+    optionSpecialIndex: 5
+  - text: que mal
+    index: 15
+    options:
+    - initialText: Muy mal.
+      currentText: Muy mal.
+      index: 1
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 1
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Muy muy mal.
+      currentText: Muy muy mal.
+      index: 2
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Demasiado mal.
+      currentText: Demasiado mal.
+      index: 3
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Tanto que me voy.
+      currentText: Tanto que me voy.
+      index: 4
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    nodeRect:
+      serializedVersion: 2
+      x: 864.62885
+      y: 423
+      width: 212
+      height: 200
+    expandedInInspector: 1
+    optionSpecialIndex: 5
+  - text: que mal
+    index: 16
+    options:
+    - initialText: Muy mal.
+      currentText: Muy mal.
+      index: 1
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 1
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Muy muy mal.
+      currentText: Muy muy mal.
+      index: 2
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Demasiado mal.
+      currentText: Demasiado mal.
+      index: 3
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: 0
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    - initialText: Tanto que me voy.
+      currentText: Tanto que me voy.
+      index: 4
+      attempsContainer:
+        attempsIteration: 0
+        attemps: []
+        expandedInInspector: 0
+        executedTimes: 0
+      subDialogDestinyIndex: -2
+      initialState: 0
+      currentState: 0
+      say: 1
+      local_properties: []
+      global_properties:
+      - name: dialog
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: 5
+        config:
+          name: dialog
+          ID: 5
+          object_type: 16
+          hasInteger: 0
+          hasBoolean: 1
+          hasString: 0
+        expandedInInspector: 1
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+      current_local_properties: []
+      current_global_properties:
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
+        expandedInInspector: 0
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+    nodeRect:
+      serializedVersion: 2
+      x: 864.62885
+      y: 423
+      width: 212
+      height: 200
+    expandedInInspector: 1
+    optionSpecialIndex: 5
+  subDialogIndex: 16
   initial_entryDialogIndex: 1
   current_entryDialogIndex: 1
   enterNodeRect:

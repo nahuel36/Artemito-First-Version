@@ -30,7 +30,7 @@ MonoBehaviour:
   - name: char
     ID: 1
     object_type: 1
-    hasInteger: 0
+    hasInteger: 1
     hasBoolean: 1
     hasString: 0
   - name: inv
@@ -57,7 +57,13 @@ MonoBehaviour:
     hasInteger: 0
     hasBoolean: 1
     hasString: 0
-  global_propertiesIndex: 5
+  - name: New Global Property 5
+    ID: 6
+    object_type: 8
+    hasInteger: 0
+    hasBoolean: 1
+    hasString: 0
+  global_propertiesIndex: 6
   pathFindingType: 0
   speechStyle: 0
   interactionExecuteMethod: 1

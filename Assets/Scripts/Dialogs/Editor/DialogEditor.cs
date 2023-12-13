@@ -32,6 +32,8 @@ public class DialogEditor : Editor
                 PNCEditorUtils.InitializeLocalProperties(out list, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).serializedObject, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("local_properties"));
                 PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.dialogOption, ref myTarget.subDialogs[i].options[j].global_properties);
 
+                Debug.Log("dialog initialized:" + i);
+
                 localPropertiesLists[key] = list;
             }
         }
@@ -90,7 +92,17 @@ public class DialogEditor : Editor
                                 SerializedProperty local_properties_serialized = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("local_properties");
                                 SerializedProperty global_properties_serialized = options.GetArrayElementAtIndex(indexOpt).FindPropertyRelative("global_properties");
 
-                                PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesLists[key], ref myTarget.subDialogs[index].options[indexOpt].local_properties, ref local_properties_serialized, recOpt);
+                                if (localPropertiesLists.ContainsKey(key))
+                                    PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesLists[key], ref myTarget.subDialogs[index].options[indexOpt].local_properties, ref local_properties_serialized, recOpt);
+                                else
+                                {
+                                    localPropertiesLists.Add(key, null);
+                                    ReorderableList list = localPropertiesLists[key];
+                                    PNCEditorUtils.InitializeLocalProperties(out list, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("options").GetArrayElementAtIndex(indexOpt).serializedObject, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(index).FindPropertyRelative("options").GetArrayElementAtIndex(indexOpt).FindPropertyRelative("local_properties"));
+                                    localPropertiesLists[key] = list;
+                                 }
+
+
 
                                 recOpt.y += PNCEditorUtils.GetLocalPropertiesHeight(local_properties_serialized);
 

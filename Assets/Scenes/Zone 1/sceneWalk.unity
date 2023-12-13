@@ -10919,6 +10919,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: global_properties.Array.data[0].boolean
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_variables.Array.data[0].globalID
       value: 3
       objectReference: {fileID: 0}
@@ -10945,6 +10950,11 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: local_properties.Array.data[0].hasString
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_properties.Array.data[0].config.ID
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -10977,6 +10987,11 @@ PrefabInstance:
       propertyPath: inventoryActions.Array.data[1].sceneObject
       value: 
       objectReference: {fileID: 1810703246}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_properties.Array.data[0].config.name
+      value: char
+      objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].specialIndex
@@ -11089,6 +11104,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: global_properties.Array.data[0].config.hasBoolean
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_properties.Array.data[0].config.hasInteger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_properties.Array.data[0].config.object_type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_variables.Array.data[0].expandedInInspector
       value: 1
       objectReference: {fileID: 0}
@@ -11135,7 +11165,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_properties.Array.data[0].properties.hasInteger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -14920,9 +14950,25 @@ MonoBehaviour:
     boolean: 0
     String: 
     globalID: 3
-    properties:
+    config:
       name: prop
       ID: 3
+      object_type: 8
+      hasInteger: 0
+      hasBoolean: 1
+      hasString: 0
+    expandedInInspector: 1
+    integerDefault: 1
+    booleanDefault: 0
+    stringDefault: 1
+  - name: New Global Property 5
+    integer: 0
+    boolean: 1
+    String: 
+    globalID: 6
+    config:
+      name: New Global Property 5
+      ID: 6
       object_type: 8
       hasInteger: 0
       hasBoolean: 1

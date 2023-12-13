@@ -3,10 +3,10 @@ using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-public static class PNCEditorUtils 
+public static class PNCEditorUtils
 {
 
-    private enum PropertyObjectType{ 
+    private enum PropertyObjectType {
         room_object,
         character,
         dialog_option,
@@ -15,18 +15,29 @@ public static class PNCEditorUtils
         any
     }
 
-    private enum PropertyActionType { 
-       set_global_property,
-       get_global_property,
-       set_local_property,
-       get_local_property,
-       any_local,
-       any_global,
-       any_set,
-       any_get,
-       any
+    private enum PropertyActionType {
+        set_global_property,
+        get_global_property,
+        set_local_property,
+        get_local_property,
+        any_local,
+        any_global,
+        any_set,
+        any_get,
+        any
     }
 
+    private enum PropertyVariableType {
+        boolean_type,
+        float_type,
+        integer_type,
+        string_type
+    }
+
+    private enum PropertyType {
+        local,
+        global
+    }
 
     public static void InitializeGlobalProperties(System.Enum type, ref GlobalProperty[] globalProperties)
     {
@@ -43,13 +54,13 @@ public static class PNCEditorUtils
                     (settings.globalPropertiesConfig[i].ID != -1 && globalProperties[j].globalID != -1 && globalProperties[j].globalID == settings.globalPropertiesConfig[i].ID))
                 {
                     globalProperties[j].name = settings.globalPropertiesConfig[i].name;
-                    
+
                     if (globalProperties[j].globalID == -1)
                     {
                         globalProperties[j].globalID = settings.globalPropertiesConfig[i].ID;
                     }
 
-                    globalProperties[j].properties = settings.globalPropertiesConfig[i];
+                    globalProperties[j].config = settings.globalPropertiesConfig[i];
 
                     if (settings.globalPropertiesConfig[i].object_type.HasFlag(type))
                         tempGlobalVarList.Add(globalProperties[j]);
@@ -61,7 +72,7 @@ public static class PNCEditorUtils
                 GlobalProperty tempVar = new GlobalProperty();
                 tempVar.name = settings.globalPropertiesConfig[i].name;
                 tempVar.globalID = settings.globalPropertiesConfig[i].ID;
-                tempVar.properties = settings.globalPropertiesConfig[i];
+                tempVar.config = settings.globalPropertiesConfig[i];
                 tempVar.expandedInInspector = true;
                 if (settings.globalPropertiesConfig[i].object_type.HasFlag(type))
                     tempGlobalVarList.Add(tempVar);
@@ -84,29 +95,9 @@ public static class PNCEditorUtils
                 EditorGUI.PropertyField(propertiesRect, property.GetArrayElementAtIndex(index).FindPropertyRelative("name"));
                 propertiesRect.y += EditorGUIUtility.singleLineHeight;
                 element.FindPropertyRelative("hasBoolean").boolValue = EditorGUI.Toggle(propertiesRect, "have boolean value:", element.FindPropertyRelative("hasBoolean").boolValue);
-                if (element.FindPropertyRelative("hasBoolean").boolValue)
-                { 
-                    propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                    if (element.FindPropertyRelative("booleanDefault").boolValue)
-                    {
-                        EditorGUI.LabelField(propertiesRect, "boolean value: default");
-                        propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                        if (GUI.Button(propertiesRect, "set boolean value"))
-                        {
-                            element.FindPropertyRelative("booleanDefault").boolValue = false;
-                        }
-                    }
-                    else
-                    {
-                        element.FindPropertyRelative("boolean").boolValue =
-                            EditorGUI.Toggle(propertiesRect, "boolean value:", element.FindPropertyRelative("boolean").boolValue);
-                        propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                        if (GUI.Button(propertiesRect, "set boolean default value"))
-                        {
-                            element.FindPropertyRelative("booleanDefault").boolValue = true;
-                        }
-                    }
-                }
+
+                ShowProperty(element, PropertyType.local, ref propertiesRect, true);
+
                 propertiesRect.y += EditorGUIUtility.singleLineHeight;
                 element.FindPropertyRelative("hasInteger").boolValue = EditorGUI.Toggle(propertiesRect, "have integer value:", element.FindPropertyRelative("hasInteger").boolValue);
                 if (element.FindPropertyRelative("hasInteger").boolValue)
@@ -148,7 +139,7 @@ public static class PNCEditorUtils
                     }
                     else
                     {
-                        property.GetArrayElementAtIndex(index).FindPropertyRelative("String").stringValue=
+                        property.GetArrayElementAtIndex(index).FindPropertyRelative("String").stringValue =
                             EditorGUI.TextField(propertiesRect, "string value:", property.GetArrayElementAtIndex(index).FindPropertyRelative("String").stringValue);
                         propertiesRect.y += EditorGUIUtility.singleLineHeight;
                         if (GUI.Button(propertiesRect, "set string default value"))
@@ -159,7 +150,7 @@ public static class PNCEditorUtils
                 }
 
             },
-            elementHeightCallback = (int index) => 
+            elementHeightCallback = (int index) =>
             {
                 SerializedProperty element = property.GetArrayElementAtIndex(index);
 
@@ -178,7 +169,7 @@ public static class PNCEditorUtils
             }
 
         };
-        
+
     }
 
     public static bool VerificateLocalPropertiesOnRect(ref LocalProperty[] properties, ref SerializedProperty properties_serialized, Rect? rect = null)
@@ -236,24 +227,71 @@ public static class PNCEditorUtils
 
             list.DoList(newRect);
         }
-
-        
-
-
-
     }
+
+
+    private static void ShowProperty(SerializedProperty element, PropertyType type, ref Rect rect, bool useRect = false)
+    {
+        bool haveProperty;
+        if (type == PropertyType.global)
+        {
+            haveProperty = element.FindPropertyRelative("config").FindPropertyRelative("hasBoolean").boolValue;
+        }
+        else
+        { 
+            haveProperty = element.FindPropertyRelative("hasBoolean").boolValue;
+        }
+
+        Rect getRect(Rect rectParam)
+        {
+            if (useRect == false) return EditorGUILayout.GetControlRect();
+            else return rectParam;
+        }
+
+        if (haveProperty)
+        {
+            rect.y += EditorGUIUtility.singleLineHeight;
+            if (element.FindPropertyRelative("booleanDefault").boolValue)
+            {
+                EditorGUI.LabelField(getRect(rect), "boolean value: default");
+                rect.y += EditorGUIUtility.singleLineHeight;
+                if (GUI.Button(getRect(rect), "set boolean value"))
+                {
+                    element.FindPropertyRelative("booleanDefault").boolValue = false;
+                }
+            }
+            else
+            {
+                element.FindPropertyRelative("boolean").boolValue =
+                    EditorGUI.Toggle(getRect(rect), "boolean value:", element.FindPropertyRelative("boolean").boolValue);
+                rect.y += EditorGUIUtility.singleLineHeight;
+                if (GUI.Button(getRect(rect), "set boolean default value"))
+                {
+                    element.FindPropertyRelative("booleanDefault").boolValue = true;
+                }
+            }
+        }
+    
+    }
+
 
 
     public static void ShowGlobalPropertiesOnRect(System.Enum type, ref GlobalProperty[] properties, ref SerializedProperty properties_serialized, Rect? rect = null)
     {
         Rect newRect = new Rect();
+
         if (rect != null)
         {
             newRect = rect.Value;
             newRect.height = EditorGUIUtility.singleLineHeight;
         }
 
-
+        Rect getRect(){
+            if (rect == null) return EditorGUILayout.GetControlRect();
+            else return newRect;
+        }
+                       
+        
         Settings settings = Resources.Load<Settings>("Settings/Settings");
 
         GUIStyle style = new GUIStyle();
@@ -292,22 +330,22 @@ public static class PNCEditorUtils
 
             properties[i].expandedInInspector = rect == null? EditorGUILayout.Foldout(properties[i].expandedInInspector, properties[i].name) : EditorGUI.Foldout(newRect, properties[i].expandedInInspector, properties[i].name);
 
-            newRect.y += EditorGUIUtility.singleLineHeight;
-
-
             if (properties[i].expandedInInspector)
             {
                 if(rect == null)
                     EditorGUILayout.BeginVertical("GroupBox");
 
-                if (properties[i].properties.hasInteger)
+                SerializedProperty element = properties_serialized.GetArrayElementAtIndex(i);
+
+                ShowProperty(element, PropertyType.global, ref newRect, rect != null);
+
+                if (element.FindPropertyRelative("config").FindPropertyRelative("hasInteger").boolValue)
                 {
                     if (!properties[i].integerDefault)
                     {
-                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue = 
-                            (rect==null?
-                              EditorGUILayout.IntField("integer value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue)
-                            : EditorGUI.IntField(newRect, "integer value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue));
+                        newRect.y += EditorGUIUtility.singleLineHeight;
+                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue =
+                            EditorGUI.IntField(getRect(), "integer value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue);
                         newRect.y += EditorGUIUtility.singleLineHeight;
                         if (rect == null ? GUILayout.Button("Set integer default value"): GUI.Button(newRect, "Set integer default value"))
                         {
@@ -317,6 +355,7 @@ public static class PNCEditorUtils
                     }
                     else
                     {
+                        newRect.y += EditorGUIUtility.singleLineHeight;
                         if (rect == null)
                             GUILayout.Label("integer value : default", EditorStyles.boldLabel);
                         else
@@ -329,33 +368,7 @@ public static class PNCEditorUtils
                         newRect.y += EditorGUIUtility.singleLineHeight;
                     }
                 }
-                if (properties[i].properties.hasBoolean)
-                {
-                    if (!properties[i].booleanDefault)
-                    {
-                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue = 
-                            (rect == null)?EditorGUILayout.Toggle("boolean value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue)
-                                          :EditorGUI.Toggle(newRect, "boolean value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("boolean").boolValue);
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                        if (rect == null ? GUILayout.Button("Set boolean default value") : GUI.Button(newRect, "Set boolean default value"))
-                            properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = true;
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                    }
-                    else
-                    {
-                        if(rect == null)
-                            GUILayout.Label("boolean value : default", EditorStyles.boldLabel);
-                        else
-                            GUI.Label(newRect, "boolean value : default", EditorStyles.boldLabel);
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                        if (rect == null?GUILayout.Button("Set boolean value"): GUI.Button(newRect, "Set boolean value"))
-                        {
-                            properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("booleanDefault").boolValue = false;
-                        }
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                    }
-                }
-                if (properties[i].properties.hasString)
+                if (properties[i].config.hasString)
                 {
                     if (!properties[i].stringDefault)
                     {
@@ -387,6 +400,8 @@ public static class PNCEditorUtils
 
                 if(rect == null)
                     GUILayout.EndVertical();
+
+                newRect.y += EditorGUIUtility.singleLineHeight;
             }
         }
 
@@ -473,13 +488,13 @@ public static class PNCEditorUtils
             if(serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("expandedInInspector").boolValue)
             {
                 
-                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("properties").FindPropertyRelative("hasBoolean").boolValue)
+                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("config").FindPropertyRelative("hasBoolean").boolValue)
                     height += 2 * EditorGUIUtility.singleLineHeight;
 
-                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("properties").FindPropertyRelative("hasString").boolValue)
+                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("config").FindPropertyRelative("hasString").boolValue)
                     height += 2 * EditorGUIUtility.singleLineHeight;
 
-                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("properties").FindPropertyRelative("hasInteger").boolValue)
+                if (serializedGlobalProperties.GetArrayElementAtIndex(i).FindPropertyRelative("config").FindPropertyRelative("hasInteger").boolValue)
                     height += 2 * EditorGUIUtility.singleLineHeight;
             }
         }
@@ -572,21 +587,21 @@ public static class PNCEditorUtils
 
                         if (propertiesObject.GlobalProperties.Length > index)
                         {
-                            if (propertiesObject.GlobalProperties[index].properties.hasBoolean)
+                            if (propertiesObject.GlobalProperties[index].config.hasBoolean)
                             {
                                 height += 1;
                                 if (interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue
                                     && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property, interactionSerialized))
                                     height += 1;
                             }
-                            if (propertiesObject.GlobalProperties[index].properties.hasInteger)
+                            if (propertiesObject.GlobalProperties[index].config.hasInteger)
                             {
                                 height += 1;
                                 if (interactionSerialized.FindPropertyRelative("global_changeIntegerValue").boolValue
                                     && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property, interactionSerialized))
                                     height += 1;
                             }
-                            if (propertiesObject.GlobalProperties[index].properties.hasString)
+                            if (propertiesObject.GlobalProperties[index].config.hasString)
                             {
                                 height += 1;
                                 if (interactionSerialized.FindPropertyRelative("global_changeStringValue").boolValue
@@ -595,15 +610,15 @@ public static class PNCEditorUtils
                             }
                             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interactionSerialized))
                             {
-                                if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasBoolean)
+                                if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertiesObject.GlobalProperties[index].config.hasBoolean)
                                     height += 2;
-                                if (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasInteger)
+                                if (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertiesObject.GlobalProperties[index].config.hasInteger)
                                     height += 2;
-                                if (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasString)
+                                if (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertiesObject.GlobalProperties[index].config.hasString)
                                     height += 2;
-                                if ((interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasBoolean) ||
-                                    (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasInteger) ||
-                                    (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertiesObject.GlobalProperties[index].properties.hasString))
+                                if ((interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertiesObject.GlobalProperties[index].config.hasBoolean) ||
+                                    (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertiesObject.GlobalProperties[index].config.hasInteger) ||
+                                    (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertiesObject.GlobalProperties[index].config.hasString))
                                     height += GetGoToLineHeight(interactionSerialized);
                             }
                         }
@@ -998,7 +1013,7 @@ public static class PNCEditorUtils
                                                         int index = interactionSerialized.FindPropertyRelative("globalPropertySelected").intValue;
                                                         if (propertyObject.GlobalProperties.Length > index)
                                                         {
-                                                            if (propertyObject.GlobalProperties[index].properties.hasBoolean)
+                                                            if (propertyObject.GlobalProperties[index].config.hasBoolean)
                                                             {
                                                                 if (CheckArePropertyInteraction(PropertyObjectType.any,PropertyActionType.set_global_property,interactionSerialized))
                                                                 {
@@ -1023,7 +1038,7 @@ public static class PNCEditorUtils
                                                                     }
                                                                 }
                                                             }
-                                                            if (propertyObject.GlobalProperties[index].properties.hasInteger)
+                                                            if (propertyObject.GlobalProperties[index].config.hasInteger)
                                                             {
                                                                 if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property,interactionSerialized))
                                                                 {
@@ -1048,7 +1063,7 @@ public static class PNCEditorUtils
                                                                     }
                                                                 }
                                                             }
-                                                            if (propertyObject.GlobalProperties[index].properties.hasString)
+                                                            if (propertyObject.GlobalProperties[index].config.hasString)
                                                             {
                                                                 if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property, interactionSerialized))
                                                                 {
@@ -1074,9 +1089,9 @@ public static class PNCEditorUtils
                                                                 }
                                                             }
                                                             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interactionSerialized) &&
-                                                                    ((interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertyObject.GlobalProperties[index].properties.hasBoolean)||
-                                                                    (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertyObject.GlobalProperties[index].properties.hasInteger)||
-                                                                    (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertyObject.GlobalProperties[index].properties.hasString)))
+                                                                    ((interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertyObject.GlobalProperties[index].config.hasBoolean)||
+                                                                    (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertyObject.GlobalProperties[index].config.hasInteger)||
+                                                                    (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && propertyObject.GlobalProperties[index].config.hasString)))
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 ShowLineToGo(ref interactRect, interactionSerialized, attemps, indexA);
