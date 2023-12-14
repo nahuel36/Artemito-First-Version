@@ -40,9 +40,9 @@ MonoBehaviour:
         name: inv
         ID: 2
         object_type: 4
-        hasInteger: 0
+        hasInteger: 1
         hasBoolean: 1
-        hasString: 0
+        hasString: 1
       expandedInInspector: 1
       integerDefault: 1
       booleanDefault: 1
@@ -334,9 +334,9 @@ MonoBehaviour:
         name: inv
         ID: 2
         object_type: 4
-        hasInteger: 0
+        hasInteger: 1
         hasBoolean: 1
-        hasString: 0
+        hasString: 1
       expandedInInspector: 1
       integerDefault: 1
       booleanDefault: 0
@@ -585,9 +585,9 @@ MonoBehaviour:
         name: inv
         ID: 2
         object_type: 4
-        hasInteger: 0
+        hasInteger: 1
         hasBoolean: 1
-        hasString: 0
+        hasString: 1
       expandedInInspector: 1
       integerDefault: 1
       booleanDefault: 1

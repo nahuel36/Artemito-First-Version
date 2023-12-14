@@ -32,8 +32,6 @@ public class DialogEditor : Editor
                 PNCEditorUtils.InitializeLocalProperties(out list, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).serializedObject, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("local_properties"));
                 PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.dialogOption, ref myTarget.subDialogs[i].options[j].global_properties);
 
-                Debug.Log("dialog initialized:" + i);
-
                 localPropertiesLists[key] = list;
             }
         }

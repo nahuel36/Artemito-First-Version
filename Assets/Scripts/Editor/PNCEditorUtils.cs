@@ -92,69 +92,20 @@ public static class PNCEditorUtils
 
                 Rect propertiesRect = rect;
                 propertiesRect.height = EditorGUIUtility.singleLineHeight;
-                EditorGUI.PropertyField(propertiesRect, property.GetArrayElementAtIndex(index).FindPropertyRelative("name"));
-                propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                element.FindPropertyRelative("hasBoolean").boolValue = EditorGUI.Toggle(propertiesRect, "have boolean value:", element.FindPropertyRelative("hasBoolean").boolValue);
+                EditorGUI.PropertyField(propertiesRect, element.FindPropertyRelative("name"));
+                              
+                ShowProperties(ref propertiesRect, element, PropertyType.local,  PropertyVariableType.boolean_type, true);
 
-                ShowProperty(element, PropertyType.local, ref propertiesRect, true);
+                ShowProperties(ref propertiesRect, element, PropertyType.local, PropertyVariableType.integer_type, true);
 
-                propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                element.FindPropertyRelative("hasInteger").boolValue = EditorGUI.Toggle(propertiesRect, "have integer value:", element.FindPropertyRelative("hasInteger").boolValue);
-                if (element.FindPropertyRelative("hasInteger").boolValue)
-                {
-                    propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                    if (element.FindPropertyRelative("integerDefault").boolValue)
-                    {
-                        EditorGUI.LabelField(propertiesRect, "integer value: default");
-                        propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                        if (GUI.Button(propertiesRect, "set integer value"))
-                        {
-                            element.FindPropertyRelative("integerDefault").boolValue = false;
-                        }
-                    }
-                    else
-                    {
-                        element.FindPropertyRelative("integer").intValue =
-                            EditorGUI.IntField(propertiesRect, "integer value:", element.FindPropertyRelative("integer").intValue);
-                        propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                        if (GUI.Button(propertiesRect, "set integer default value"))
-                        {
-                            element.FindPropertyRelative("integerDefault").boolValue = true;
-                        }
-                    }
-                }
-                propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                element.FindPropertyRelative("hasString").boolValue = EditorGUI.Toggle(propertiesRect, "have string value:", element.FindPropertyRelative("hasString").boolValue);
-                if (element.FindPropertyRelative("hasString").boolValue)
-                {
-                    propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                    if (element.FindPropertyRelative("stringDefault").boolValue)
-                    {
-                        EditorGUI.LabelField(propertiesRect, "string value: default");
-                        propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                        if (GUI.Button(propertiesRect, "set string value"))
-                        {
-                            property.GetArrayElementAtIndex(index).FindPropertyRelative("stringDefault").boolValue = false;
-                        }
-                    }
-                    else
-                    {
-                        property.GetArrayElementAtIndex(index).FindPropertyRelative("String").stringValue =
-                            EditorGUI.TextField(propertiesRect, "string value:", property.GetArrayElementAtIndex(index).FindPropertyRelative("String").stringValue);
-                        propertiesRect.y += EditorGUIUtility.singleLineHeight;
-                        if (GUI.Button(propertiesRect, "set string default value"))
-                        {
-                            element.FindPropertyRelative("stringDefault").boolValue = true;
-                        }
-                    }
-                }
+                ShowProperties(ref propertiesRect, element, PropertyType.local, PropertyVariableType.string_type, true);
 
             },
             elementHeightCallback = (int index) =>
             {
                 SerializedProperty element = property.GetArrayElementAtIndex(index);
 
-                float height = 5f;
+                float height = 4f;
                 if (element.FindPropertyRelative("hasBoolean").boolValue)
                     height += 2;
                 if (element.FindPropertyRelative("hasInteger").boolValue)
@@ -230,44 +181,97 @@ public static class PNCEditorUtils
     }
 
 
-    private static void ShowProperty(SerializedProperty element, PropertyType type, ref Rect rect, bool useRect = false)
+    private static void ShowProperties(ref Rect rect, SerializedProperty element, PropertyType type, PropertyVariableType variable, bool useRect = false)
     {
-        bool haveProperty;
-        if (type == PropertyType.global)
-        {
-            haveProperty = element.FindPropertyRelative("config").FindPropertyRelative("hasBoolean").boolValue;
-        }
-        else
-        { 
-            haveProperty = element.FindPropertyRelative("hasBoolean").boolValue;
-        }
-
         Rect getRect(Rect rectParam)
         {
             if (useRect == false) return EditorGUILayout.GetControlRect();
             else return rectParam;
         }
 
-        if (haveProperty)
+        bool hasProperty;
+        string typeString;
+        if (type == PropertyType.global)
+        {
+            if(variable == PropertyVariableType.boolean_type)
+                hasProperty = element.FindPropertyRelative("config").FindPropertyRelative("hasBoolean").boolValue;
+            else if(variable == PropertyVariableType.integer_type)
+                hasProperty = element.FindPropertyRelative("config").FindPropertyRelative("hasInteger").boolValue;
+            else if (variable == PropertyVariableType.string_type)
+                hasProperty = element.FindPropertyRelative("config").FindPropertyRelative("hasString").boolValue;
+            else
+                hasProperty = element.FindPropertyRelative("config").FindPropertyRelative("hasFloat").boolValue;
+        }
+        else
         {
             rect.y += EditorGUIUtility.singleLineHeight;
-            if (element.FindPropertyRelative("booleanDefault").boolValue)
+            if (variable == PropertyVariableType.boolean_type)
             {
-                EditorGUI.LabelField(getRect(rect), "boolean value: default");
+                element.FindPropertyRelative("hasBoolean").boolValue = EditorGUI.Toggle(getRect(rect), "has boolean value:", element.FindPropertyRelative("hasBoolean").boolValue);
+                hasProperty = element.FindPropertyRelative("hasBoolean").boolValue;
+            }
+            else if (variable == PropertyVariableType.integer_type)
+            {
+                element.FindPropertyRelative("hasInteger").boolValue = EditorGUI.Toggle(getRect(rect), "has integer value:", element.FindPropertyRelative("hasInteger").boolValue);
+                hasProperty = element.FindPropertyRelative("hasInteger").boolValue;
+            }
+            else if (variable == PropertyVariableType.string_type)
+            {
+                element.FindPropertyRelative("hasString").boolValue = EditorGUI.Toggle(getRect(rect), "has string value:", element.FindPropertyRelative("hasString").boolValue);
+                hasProperty = element.FindPropertyRelative("hasString").boolValue;
+            }
+            else
+            {
+                element.FindPropertyRelative("hasFloat").boolValue = EditorGUI.Toggle(getRect(rect), "has float value:", element.FindPropertyRelative("hasFloat").boolValue);
+                hasProperty = element.FindPropertyRelative("hasFloat").boolValue;
+            }
+        }
+
+
+
+        if (variable == PropertyVariableType.boolean_type)
+            typeString = "boolean";
+        else if (variable == PropertyVariableType.integer_type)
+            typeString = "integer";
+        else if (variable == PropertyVariableType.string_type)
+            typeString = "string";
+        else
+            typeString = "float";
+
+
+
+
+        if (hasProperty)
+        {
+            rect.y += EditorGUIUtility.singleLineHeight;
+            if (element.FindPropertyRelative(typeString + "Default").boolValue)
+            {
+                EditorGUI.LabelField(getRect(rect), typeString + " value: default");
                 rect.y += EditorGUIUtility.singleLineHeight;
-                if (GUI.Button(getRect(rect), "set boolean value"))
+                if (GUI.Button(getRect(rect), "set " + typeString + " value"))
                 {
-                    element.FindPropertyRelative("booleanDefault").boolValue = false;
+                    element.FindPropertyRelative(typeString + "Default").boolValue = false;
                 }
             }
             else
             {
-                element.FindPropertyRelative("boolean").boolValue =
-                    EditorGUI.Toggle(getRect(rect), "boolean value:", element.FindPropertyRelative("boolean").boolValue);
+                if(variable == PropertyVariableType.boolean_type)
+                    element.FindPropertyRelative("boolean").boolValue =
+                        EditorGUI.Toggle(getRect(rect), "boolean value:", element.FindPropertyRelative("boolean").boolValue);
+                else if (variable == PropertyVariableType.integer_type)
+                    element.FindPropertyRelative("integer").intValue =
+                        EditorGUI.IntField(getRect(rect), "integer value:", element.FindPropertyRelative("integer").intValue);
+                else if (variable == PropertyVariableType.string_type)
+                    element.FindPropertyRelative("String").stringValue =
+                        EditorGUI.TextField(getRect(rect), "string value:", element.FindPropertyRelative("String").stringValue);
+                else
+                    element.FindPropertyRelative("boolean").boolValue =
+                        EditorGUI.Toggle(getRect(rect), "float value:", element.FindPropertyRelative("boolean").boolValue);
+
                 rect.y += EditorGUIUtility.singleLineHeight;
-                if (GUI.Button(getRect(rect), "set boolean default value"))
+                if (GUI.Button(getRect(rect), "set " + typeString + " default value"))
                 {
-                    element.FindPropertyRelative("booleanDefault").boolValue = true;
+                    element.FindPropertyRelative(typeString + "Default").boolValue = true;
                 }
             }
         }
@@ -284,11 +288,6 @@ public static class PNCEditorUtils
         {
             newRect = rect.Value;
             newRect.height = EditorGUIUtility.singleLineHeight;
-        }
-
-        Rect getRect(){
-            if (rect == null) return EditorGUILayout.GetControlRect();
-            else return newRect;
         }
                        
         
@@ -337,66 +336,11 @@ public static class PNCEditorUtils
 
                 SerializedProperty element = properties_serialized.GetArrayElementAtIndex(i);
 
-                ShowProperty(element, PropertyType.global, ref newRect, rect != null);
+                ShowProperties(ref newRect, element, PropertyType.global, PropertyVariableType.boolean_type , rect != null);
 
-                if (element.FindPropertyRelative("config").FindPropertyRelative("hasInteger").boolValue)
-                {
-                    if (!properties[i].integerDefault)
-                    {
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue =
-                            EditorGUI.IntField(getRect(), "integer value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integer").intValue);
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                        if (rect == null ? GUILayout.Button("Set integer default value"): GUI.Button(newRect, "Set integer default value"))
-                        {
-                            properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integerDefault").boolValue = true;
-                        }
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                    }
-                    else
-                    {
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                        if (rect == null)
-                            GUILayout.Label("integer value : default", EditorStyles.boldLabel);
-                        else
-                            GUI.Label(newRect, "integer value : default", EditorStyles.boldLabel);
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                        if (rect == null ? GUILayout.Button("Set integer value"): GUI.Button(newRect, "Set integer value"))
-                        {
-                            properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("integerDefault").boolValue = false;
-                        }
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                    }
-                }
-                if (properties[i].config.hasString)
-                {
-                    if (!properties[i].stringDefault)
-                    {
-                        properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue =
-                            (rect == null ?
-                                EditorGUILayout.TextField("string value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue)
-                               : EditorGUI.TextField(newRect, "string value:", properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("String").stringValue));
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                        if (rect == null?GUILayout.Button("Set string default value"): GUI.Button(newRect, "Set string default value"))
-                            properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("stringDefault").boolValue = true;
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                    }
-                    else
-                    {
-                        if(rect == null)
-                            GUILayout.Label("string value : default", EditorStyles.boldLabel);
-                        else
-                            GUI.Label(newRect, "string value : default", EditorStyles.boldLabel);
+                ShowProperties(ref newRect, element, PropertyType.global, PropertyVariableType.integer_type, rect != null);
 
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-
-                        if (rect == null?GUILayout.Button("Set string value"): GUI.Button(newRect, "Set string value"))
-                        {
-                            properties_serialized.GetArrayElementAtIndex(i).FindPropertyRelative("stringDefault").boolValue = false;
-                        }
-                        newRect.y += EditorGUIUtility.singleLineHeight;
-                    }
-                }
+                ShowProperties(ref newRect, element, PropertyType.global, PropertyVariableType.string_type, rect != null);
 
                 if(rect == null)
                     GUILayout.EndVertical();
@@ -761,10 +705,10 @@ public static class PNCEditorUtils
         }
     }
 
-    public static int GetInventoryWithPopUp(Rect rect, InventoryList inventory, int valueToSet, bool haveSceneObject, int inventoryIndexToExclude = -1)
+    public static int GetInventoryWithPopUp(Rect rect, InventoryList inventory, int valueToSet, bool hasSceneObject, int inventoryIndexToExclude = -1)
     {
         List<string> content = new List<string>();
-        if(haveSceneObject)
+        if(hasSceneObject)
             content.Add("(Scene Object)");
         List<int> itemsIndexes = new List<int>();
         for (int i = 0; i < inventory.items.Length; i++)
@@ -782,14 +726,14 @@ public static class PNCEditorUtils
             for (int i = 0; i < itemsIndexes.Count; i++)
             {
                 if (itemsIndexes[i] == valueToSet)
-                    selected = (haveSceneObject? i + 1 : i);
+                    selected = (hasSceneObject? i + 1 : i);
             }
         }
         rect.height = EditorGUIUtility.singleLineHeight;
 
         selected = EditorGUI.Popup(new Rect(rect.x + rect.width / 2.25f, rect.y, rect.width / 2, rect.height), "", selected, content.ToArray());
 
-        if (haveSceneObject)
+        if (hasSceneObject)
         {
             if (selected != 0)
                 return itemsIndexes[selected - 1];

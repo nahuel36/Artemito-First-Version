@@ -11024,6 +11024,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: local_properties.Array.data[0].stringDefault
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_properties.Array.data[0].properties.ID
       value: 1
       objectReference: {fileID: 0}
@@ -11060,6 +11065,11 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: local_properties.Array.data[0].booleanDefault
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: local_properties.Array.data[0].integerDefault
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -11101,6 +11111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: global_properties.Array.data[1].properties.name
       value: New Global Property 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_properties.Array.data[0].config.hasString
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -14954,9 +14969,9 @@ MonoBehaviour:
       name: prop
       ID: 3
       object_type: 8
-      hasInteger: 0
+      hasInteger: 1
       hasBoolean: 1
-      hasString: 0
+      hasString: 1
     expandedInInspector: 1
     integerDefault: 1
     booleanDefault: 0
@@ -14970,9 +14985,9 @@ MonoBehaviour:
       name: New Global Property 5
       ID: 6
       object_type: 8
-      hasInteger: 0
+      hasInteger: 1
       hasBoolean: 1
-      hasString: 0
+      hasString: 1
     expandedInInspector: 1
     integerDefault: 1
     booleanDefault: 0
