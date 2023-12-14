@@ -90,15 +90,14 @@ public static class PNCEditorUtils
             {
                 SerializedProperty element = property.GetArrayElementAtIndex(index);
 
-                Rect propertiesRect = rect;
-                propertiesRect.height = EditorGUIUtility.singleLineHeight;
-                EditorGUI.PropertyField(propertiesRect, element.FindPropertyRelative("name"));
+                rect.height = EditorGUIUtility.singleLineHeight;
+                EditorGUI.PropertyField(rect, element.FindPropertyRelative("name"));
                               
-                ShowProperties(ref propertiesRect, element, PropertyType.local,  PropertyVariableType.boolean_type, true);
+                ShowProperties(ref rect, element, PropertyType.local,  PropertyVariableType.boolean_type, true);
 
-                ShowProperties(ref propertiesRect, element, PropertyType.local, PropertyVariableType.integer_type, true);
+                ShowProperties(ref rect, element, PropertyType.local, PropertyVariableType.integer_type, true);
 
-                ShowProperties(ref propertiesRect, element, PropertyType.local, PropertyVariableType.string_type, true);
+                ShowProperties(ref rect, element, PropertyType.local, PropertyVariableType.string_type, true);
 
             },
             elementHeightCallback = (int index) =>
