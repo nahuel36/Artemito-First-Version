@@ -93,11 +93,11 @@ public static class PNCEditorUtils
                 rect.height = EditorGUIUtility.singleLineHeight;
                 EditorGUI.PropertyField(rect, element.FindPropertyRelative("name"));
                               
-                ShowProperties(ref rect, element, PropertyType.local,  PropertyVariableType.boolean_type, true);
+                ShowProperty(ref rect, element, PropertyType.local,  PropertyVariableType.boolean_type, true);
 
-                ShowProperties(ref rect, element, PropertyType.local, PropertyVariableType.integer_type, true);
+                ShowProperty(ref rect, element, PropertyType.local, PropertyVariableType.integer_type, true);
 
-                ShowProperties(ref rect, element, PropertyType.local, PropertyVariableType.string_type, true);
+                ShowProperty(ref rect, element, PropertyType.local, PropertyVariableType.string_type, true);
 
             },
             elementHeightCallback = (int index) =>
@@ -180,7 +180,7 @@ public static class PNCEditorUtils
     }
 
 
-    private static void ShowProperties(ref Rect rect, SerializedProperty element, PropertyType type, PropertyVariableType variable, bool useRect = false)
+    private static void ShowProperty(ref Rect rect, SerializedProperty element, PropertyType type, PropertyVariableType variable, bool useRect = false)
     {
         Rect getRect(Rect rectParam)
         {
@@ -335,11 +335,11 @@ public static class PNCEditorUtils
 
                 SerializedProperty element = properties_serialized.GetArrayElementAtIndex(i);
 
-                ShowProperties(ref newRect, element, PropertyType.global, PropertyVariableType.boolean_type , rect != null);
+                ShowProperty(ref newRect, element, PropertyType.global, PropertyVariableType.boolean_type , rect != null);
 
-                ShowProperties(ref newRect, element, PropertyType.global, PropertyVariableType.integer_type, rect != null);
+                ShowProperty(ref newRect, element, PropertyType.global, PropertyVariableType.integer_type, rect != null);
 
-                ShowProperties(ref newRect, element, PropertyType.global, PropertyVariableType.string_type, rect != null);
+                ShowProperty(ref newRect, element, PropertyType.global, PropertyVariableType.string_type, rect != null);
 
                 if(rect == null)
                     GUILayout.EndVertical();
