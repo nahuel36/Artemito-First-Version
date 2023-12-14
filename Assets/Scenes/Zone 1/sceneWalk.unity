@@ -11820,7 +11820,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[7].dialogAction
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11855,7 +11855,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[4].dialogAction
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12218,7 +12218,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].characterAction
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12253,7 +12253,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[5].inventoryAction
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12288,7 +12288,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].characterAction
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12298,7 +12298,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].inventoryAction
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12333,7 +12333,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].propertiesAction
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -12373,7 +12373,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].propertiesAction
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -13112,6 +13112,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_compareStringValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].local_changeIntegerValue
       value: 1
       objectReference: {fileID: 0}
@@ -13119,6 +13124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_changeIntegerValue
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_compareStringValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -13159,6 +13169,11 @@ PrefabInstance:
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].local_compareStringValue
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].global_changeStringValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -13257,8 +13272,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].global_compareStringValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_compareBooleanValue
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_compareIntegerValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -13294,6 +13319,16 @@ PrefabInstance:
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_compareBooleanValue
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_compareIntegerValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_defaultBooleanValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -13397,6 +13432,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].global_changeIntegerValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_compareBooleanValue
       value: 1
       objectReference: {fileID: 0}
@@ -13494,6 +13534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].global_compareBooleanValue
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].global_compareIntegerValue
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}

@@ -277,7 +277,131 @@ public static class PNCEditorUtils
     
     }
 
+    private static void PropertyInteraction(ref Rect rect, SerializedProperty interactionSerialized, PNCPropertyInterface propertyObject, PropertyActionType propertyActionType, PropertyVariableType variableType)
+    {
+        string propertyTypeString = "";
+        if (propertyActionType == PropertyActionType.any_global)
+        {
+            propertyTypeString = "global";
+        }
+        else
+        {
+            propertyTypeString = "local";
+        }
 
+        int index = interactionSerialized.FindPropertyRelative(propertyTypeString + "PropertySelected").intValue;
+        bool hasProperty = false;
+        string typeString = "";
+        if (propertyActionType == PropertyActionType.any_global)
+        {
+            if (variableType == PropertyVariableType.boolean_type)
+            {
+                hasProperty = propertyObject.GlobalProperties[index].config.hasBoolean;
+            }
+            else if (variableType == PropertyVariableType.integer_type)
+            {
+                hasProperty = propertyObject.GlobalProperties[index].config.hasInteger;
+            }
+            else if (variableType == PropertyVariableType.string_type)
+            {
+                hasProperty = propertyObject.GlobalProperties[index].config.hasString;
+            }
+            else if (variableType == PropertyVariableType.float_type)
+            {
+                //hasProperty = propertyObject.GlobalProperties[index].config.hasFloat;
+            }
+        }
+        else if (propertyActionType == PropertyActionType.any_local)
+        {
+            if (variableType == PropertyVariableType.boolean_type)
+            {
+                hasProperty = propertyObject.LocalProperties[index].hasBoolean;
+            }
+            else if (variableType == PropertyVariableType.integer_type)
+            {
+                hasProperty = propertyObject.LocalProperties[index].hasInteger;
+            }
+            else if (variableType == PropertyVariableType.string_type)
+            {
+                hasProperty = propertyObject.LocalProperties[index].hasString;
+            }
+            else if (variableType == PropertyVariableType.float_type)
+            {
+                //hasProperty = propertyObject.LocalProperties[index].hasFloat;
+            }
+        }
+
+        if (variableType == PropertyVariableType.boolean_type)
+            typeString = "Boolean";
+        else if (variableType == PropertyVariableType.integer_type)
+            typeString = "Integer";
+        else if (variableType == PropertyVariableType.string_type)
+            typeString = "String";
+        else
+            typeString = "Float";
+
+
+        if (hasProperty)
+        {
+            PropertyActionType propertyActionTypeSet;
+            PropertyActionType propertyActionTypeGet;
+            if (propertyActionType == PropertyActionType.any_global)
+            {
+                propertyActionTypeSet = PropertyActionType.set_global_property;
+                propertyActionTypeGet = PropertyActionType.get_global_property;
+            }
+            else
+            {
+                propertyActionTypeSet = PropertyActionType.set_local_property;
+                propertyActionTypeGet = PropertyActionType.get_local_property;
+            }
+
+            if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeSet ,interactionSerialized))
+            {
+                rect.y += EditorGUIUtility.singleLineHeight;
+                interactionSerialized.FindPropertyRelative(propertyTypeString + "_change" + typeString + "Value").boolValue = EditorGUI.Toggle(rect, "change " + typeString.ToLower() + " value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_change" + typeString + "Value").boolValue);
+                if (interactionSerialized.FindPropertyRelative(propertyTypeString + "_change" + typeString + "Value").boolValue)
+                {
+                    rect.y += EditorGUIUtility.singleLineHeight;
+                    if(variableType == PropertyVariableType.boolean_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue = EditorGUI.Toggle(rect, "value to set", interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue);
+                    else if (variableType == PropertyVariableType.integer_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue = EditorGUI.IntField(rect, "value to set", interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue);
+                    else if (variableType == PropertyVariableType.string_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue = EditorGUI.TextField(rect, "value to set", interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue);
+                    else 
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue = EditorGUI.FloatField(rect, "value to set", interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue);
+                }
+            }
+            else if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeGet, interactionSerialized))
+            {
+                rect.y += EditorGUIUtility.singleLineHeight;
+                interactionSerialized.FindPropertyRelative(propertyTypeString + "_compare" +typeString+"Value").boolValue = EditorGUI.Toggle(rect, "compare "+typeString.ToLower()+ " value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_compare" +typeString+"Value").boolValue);
+                if (interactionSerialized.FindPropertyRelative(propertyTypeString + "_compare" +typeString+"Value").boolValue)
+                {
+                    rect.y += EditorGUIUtility.singleLineHeight;
+                    if (variableType == PropertyVariableType.boolean_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue = EditorGUI.Toggle(rect, "value to compare", interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue);
+                    else if (variableType == PropertyVariableType.integer_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue = EditorGUI.IntField(rect, "value to compare", interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue);
+                    else if (variableType == PropertyVariableType.string_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue = EditorGUI.TextField(rect, "value to compare", interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue);
+                    else
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue = EditorGUI.FloatField(rect, "value to compare", interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue);
+                    rect.y += EditorGUIUtility.singleLineHeight;
+                    if (variableType == PropertyVariableType.boolean_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultBooleanValue").boolValue = EditorGUI.Toggle(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultBooleanValue").boolValue);
+                    else if (variableType == PropertyVariableType.integer_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultIntegerValue").intValue = EditorGUI.IntField(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultIntegerValue").intValue);
+                    else if (variableType == PropertyVariableType.string_type)
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultStringValue").stringValue = EditorGUI.TextField(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultStringValue").stringValue);
+                    else
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultFloatValue").floatValue = EditorGUI.FloatField(rect, "default value", interactionSerialized.FindPropertyRelative("global_defaultFloatValue").floatValue);
+                }
+            }
+        }
+
+    }
 
     public static void ShowGlobalPropertiesOnRect(System.Enum type, ref GlobalProperty[] properties, ref SerializedProperty properties_serialized, Rect? rect = null)
     {
@@ -956,81 +1080,12 @@ public static class PNCEditorUtils
                                                         int index = interactionSerialized.FindPropertyRelative("globalPropertySelected").intValue;
                                                         if (propertyObject.GlobalProperties.Length > index)
                                                         {
-                                                            if (propertyObject.GlobalProperties[index].config.hasBoolean)
-                                                            {
-                                                                if (CheckArePropertyInteraction(PropertyObjectType.any,PropertyActionType.set_global_property,interactionSerialized))
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "change boolean value", interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("global_changeBooleanValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_BooleanValue").boolValue = EditorGUI.Toggle(interactRect, "value to set", interactionSerialized.FindPropertyRelative("global_BooleanValue").boolValue);
-                                                                    }
-                                                                }
-                                                                else if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interactionSerialized))
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "compare boolean value", interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_BooleanValue").boolValue = EditorGUI.Toggle(interactRect, "value to compare", interactionSerialized.FindPropertyRelative("global_BooleanValue").boolValue);
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_defaultBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "default value", interactionSerialized.FindPropertyRelative("global_defaultBooleanValue").boolValue);
-                                                                    }
-                                                                }
-                                                            }
-                                                            if (propertyObject.GlobalProperties[index].config.hasInteger)
-                                                            {
-                                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property,interactionSerialized))
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("global_changeIntegerValue").boolValue = EditorGUI.Toggle(interactRect, "change integer value", interactionSerialized.FindPropertyRelative("global_changeIntegerValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("global_changeIntegerValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_IntegerValue").intValue = EditorGUI.IntField(interactRect, "value", interactionSerialized.FindPropertyRelative("global_IntegerValue").intValue);
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue = EditorGUI.Toggle(interactRect, "compare integer value", interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_IntegerValue").intValue = EditorGUI.IntField(interactRect, "value to compare", interactionSerialized.FindPropertyRelative("global_IntegerValue").intValue);
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_defaultIntegerValue").intValue = EditorGUI.IntField(interactRect, "default value", interactionSerialized.FindPropertyRelative("global_defaultIntegerValue").intValue);
-                                                                    }
-                                                                }
-                                                            }
-                                                            if (propertyObject.GlobalProperties[index].config.hasString)
-                                                            {
-                                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_global_property, interactionSerialized))
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("global_changeStringValue").boolValue = EditorGUI.Toggle(interactRect, "change string value", interactionSerialized.FindPropertyRelative("global_changeStringValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("global_changeStringValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_StringValue").stringValue = EditorGUI.TextField(interactRect, "value", interactionSerialized.FindPropertyRelative("global_StringValue").stringValue);
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue = EditorGUI.Toggle(interactRect, "compare string value", interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_StringValue").stringValue = EditorGUI.TextField(interactRect, "value to compare", interactionSerialized.FindPropertyRelative("global_StringValue").stringValue);
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("global_defaultStringValue").stringValue = EditorGUI.TextField(interactRect, "default value", interactionSerialized.FindPropertyRelative("global_defaultStringValue").stringValue);
-                                                                    }
-                                                                }
-                                                            }
+                                                            PropertyInteraction(ref interactRect, interactionSerialized, propertyObject, PropertyActionType.any_global, PropertyVariableType.boolean_type);
+
+                                                            PropertyInteraction(ref interactRect, interactionSerialized, propertyObject, PropertyActionType.any_global, PropertyVariableType.integer_type);
+
+                                                            PropertyInteraction(ref interactRect, interactionSerialized, propertyObject, PropertyActionType.any_global, PropertyVariableType.string_type);
+                                                            
                                                             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interactionSerialized) &&
                                                                     ((interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && propertyObject.GlobalProperties[index].config.hasBoolean)||
                                                                     (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && propertyObject.GlobalProperties[index].config.hasInteger)||
@@ -1059,81 +1114,12 @@ public static class PNCEditorUtils
                                                         int index = interactionSerialized.FindPropertyRelative("localPropertySelected").intValue;
                                                         if (propertyObject.LocalProperties.Length > index)
                                                         {
-                                                            if (propertyObject.LocalProperties[index].hasBoolean)
-                                                            {
-                                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_local_property, interactionSerialized))
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("local_changeBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "change boolean value", interactionSerialized.FindPropertyRelative("local_changeBooleanValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("local_changeBooleanValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_BooleanValue").boolValue = EditorGUI.Toggle(interactRect, "value", interactionSerialized.FindPropertyRelative("local_BooleanValue").boolValue);
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "compare boolean value", interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_BooleanValue").boolValue = EditorGUI.Toggle(interactRect, "value to compare", interactionSerialized.FindPropertyRelative("local_BooleanValue").boolValue);
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_defaultBooleanValue").boolValue = EditorGUI.Toggle(interactRect, "default value", interactionSerialized.FindPropertyRelative("local_defaultBooleanValue").boolValue);
-                                                                    }
-                                                                }
-                                                            }
-                                                            if (propertyObject.LocalProperties[index].hasInteger)
-                                                            {
-                                                                if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.set_local_property,interactionSerialized))
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("local_changeIntegerValue").boolValue = EditorGUI.Toggle(interactRect, "change integer value", interactionSerialized.FindPropertyRelative("local_changeIntegerValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("local_changeIntegerValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_IntegerValue").intValue = EditorGUI.IntField(interactRect, "value", interactionSerialized.FindPropertyRelative("local_IntegerValue").intValue);
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue = EditorGUI.Toggle(interactRect, "compare integer value", interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_IntegerValue").intValue = EditorGUI.IntField(interactRect, "value to compare", interactionSerialized.FindPropertyRelative("local_IntegerValue").intValue);
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_defaultIntegerValue").intValue = EditorGUI.IntField(interactRect, "default value", interactionSerialized.FindPropertyRelative("local_defaultIntegerValue").intValue);
-                                                                    }
-                                                                }
-                                                            }
-                                                            if (propertyObject.LocalProperties[index].hasString)
-                                                            {
-                                                                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.set_local_property, interactionSerialized))
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("local_changeStringValue").boolValue = EditorGUI.Toggle(interactRect, "change string value", interactionSerialized.FindPropertyRelative("local_changeStringValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("local_changeStringValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_StringValue").stringValue = EditorGUI.TextField(interactRect, "value", interactionSerialized.FindPropertyRelative("local_StringValue").stringValue);
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                    interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue = EditorGUI.Toggle(interactRect, "compare string value", interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue);
-                                                                    if (interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue)
-                                                                    {
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_StringValue").stringValue = EditorGUI.TextField(interactRect, "value to compare", interactionSerialized.FindPropertyRelative("local_StringValue").stringValue);
-                                                                        interactRect.y += EditorGUIUtility.singleLineHeight;
-                                                                        interactionSerialized.FindPropertyRelative("local_defaultStringValue").stringValue = EditorGUI.TextField(interactRect, "default value", interactionSerialized.FindPropertyRelative("local_defaultStringValue").stringValue);
-                                                                    }
-                                                                }
-                                                            }
+                                                            PropertyInteraction(ref interactRect, interactionSerialized, propertyObject, PropertyActionType.any_local, PropertyVariableType.boolean_type);
+
+                                                            PropertyInteraction(ref interactRect, interactionSerialized, propertyObject, PropertyActionType.any_local, PropertyVariableType.integer_type);
+
+                                                            PropertyInteraction(ref interactRect, interactionSerialized, propertyObject, PropertyActionType.any_local, PropertyVariableType.string_type);
+
                                                             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_local_property, interactionSerialized) &&
                                                                     ((interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue && propertyObject.LocalProperties[index].hasBoolean)||
                                                                     (interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue && propertyObject.LocalProperties[index].hasInteger) ||
