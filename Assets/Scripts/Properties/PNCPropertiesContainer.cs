@@ -4,35 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class LocalProperty
+
+public class GenericProperty
 {
     public string name = "new property";
-    public bool hasInteger = false;
     public int integer = 0;
-    public bool integerDefault = true;
-    public bool hasBoolean = false;
     public bool boolean = false;
-    public bool booleanDefault = true;
-    public bool hasString = false;
     public string String = "";
+    public bool integerDefault = true;
+    public bool booleanDefault = true;
     public bool stringDefault = true;
     public bool expandedInInspector;
 
 }
+[System.Serializable]
+public class LocalProperty : GenericProperty
+{
+    public bool hasInteger = false;
+    public bool hasBoolean = false;
+    public bool hasString = false;
+}
 
 [System.Serializable]
-public class GlobalProperty
+public class GlobalProperty : GenericProperty
 {
-    public string name = "new property";
-    public int integer = 0;
-    public bool boolean = false;
-    public string String = "";
     public int globalID = -1;
     public GlobalPropertyConfig config;
-    public bool expandedInInspector;
-    public bool integerDefault = true;
-    public bool booleanDefault = true;
-    public bool stringDefault = true;
 }
 
 public class PNCPropertiesContainer : MonoBehaviour, PNCPropertyInterface
