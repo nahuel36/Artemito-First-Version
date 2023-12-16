@@ -181,17 +181,22 @@ public static class InteractionUtils
 
     private static int CheckConditionals(int actualindex, Interaction interaction)
     {
+        bool result = true;
+
         if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.any_get, interaction))
         {
-            bool result = true;
+            
+                PropertyActionType actiontype;
+                if(CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
+                        actiontype = PropertyActionType.get_global_property;
+                else
+                        actiontype = PropertyActionType.get_local_property;
 
-            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
-            {
-                GlobalProperty property = null;
+                GenericProperty property = null;
                 if (interaction.type == Interaction.InteractionType.properties_container)
-                    property = interaction.propertyObject.GlobalProperties[interaction.globalPropertySelected];
+                    property = interaction.propertyObject.GenericProperties(actiontype)[interaction.globalPropertySelected];
                 else if (interaction.type == Interaction.InteractionType.character)
-                    property = interaction.character.GlobalProperties[interaction.globalPropertySelected];
+                    property = interaction.character.GenericProperties(actiontype)[interaction.globalPropertySelected];
                 else if (interaction.type == Interaction.InteractionType.inventory)
                 {
                     if (inventory == null)
@@ -201,89 +206,71 @@ public static class InteractionUtils
                     {
                         if (inventory.items[i].specialIndex == interaction.inventorySelected)
                         {
-                            property = inventory.items[i].current_global_properties[interaction.globalPropertySelected];
+                            property = inventory.items[i].GenericCurrentProperties(actiontype)[interaction.globalPropertySelected];
                         }
                     }
                 }
                 else if (interaction.type == Interaction.InteractionType.dialog)
                 {
-                    property = DialogsManager.Instance.GetGlobalProperty(interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction);
-
+                    property = DialogsManager.Instance.GetGenericProperty( actiontype, interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction);
                 }
 
-                if (interaction.global_compareBooleanValue)
-                {
-                    if (property.booleanDefault && interaction.global_BooleanValue != interaction.global_defaultBooleanValue)
-                        result = false;
-                    if (!property.booleanDefault && interaction.global_BooleanValue != property.boolean)
-                        result = false;
-                }
-                if (interaction.global_compareIntegerValue)
-                {
-                    if (property.integerDefault && interaction.global_IntegerValue != interaction.global_defaultIntegerValue)
-                        result = false;
-                    if (!property.integerDefault && interaction.global_IntegerValue != property.integer)
-                        result = false;
-                }
-                if (interaction.global_compareStringValue)
-                {
-                    if (property.stringDefault && interaction.global_StringValue != interaction.global_defaultStringValue)
-                        result = false;
-                    if (!property.stringDefault && interaction.global_StringValue != property.String)
-                        result = false;
-                }
-            }
-            else if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.get_local_property,interaction))                
-            {
-                LocalProperty property = null;
-                if (interaction.type == Interaction.InteractionType.properties_container)
-                    property = interaction.propertyObject.LocalProperties[interaction.localPropertySelected];
-                else if (interaction.type == Interaction.InteractionType.character)
-                    property = interaction.character.LocalProperties[interaction.localPropertySelected];
-                else if (interaction.type == Interaction.InteractionType.inventory)
-                {
-                    if (inventory == null)
-                        inventory = Resources.Load<InventoryList>("Inventory");
 
-                    for (int i = 0; i < inventory.items.Length; i++)
-                    {
-                        if (inventory.items[i].specialIndex == interaction.inventorySelected)
-                        {
-                            property = inventory.items[i].current_local_properties[interaction.localPropertySelected];
-                        }
-                    }
-                }
-                else if (interaction.type == Interaction.InteractionType.dialog)
+                bool compareBoolean, compareInteger, compareString, compareFloat;
+                bool booleanValue, defaultBooleanValue;
+                int integerValue, defaultIntegerValue;
+                string stringValue, defaultStringValue;
+                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
                 {
-                    property = DialogsManager.Instance.GetLocalProperty(interaction.dialogSelected,interaction.subDialogIndex,interaction.optionIndex,interaction);
-
+                    compareBoolean = interaction.global_compareBooleanValue;
+                    compareInteger = interaction.global_compareIntegerValue;
+                    compareString = interaction.global_compareStringValue;
+                    booleanValue = interaction.global_BooleanValue;
+                    integerValue = interaction.global_IntegerValue;
+                    stringValue = interaction.global_StringValue;
+                    defaultBooleanValue = interaction.global_defaultBooleanValue;
+                    defaultIntegerValue = interaction.global_defaultIntegerValue;
+                    defaultStringValue = interaction.global_defaultStringValue;
                 }
-                               
-
-                if (interaction.local_compareBooleanValue)
+                else
                 {
-                    if (property.booleanDefault && interaction.local_BooleanValue != interaction.local_defaultBooleanValue)
-                        result = false;
-                    if (!property.booleanDefault && interaction.local_BooleanValue != property.boolean)
-                        result = false;
+                    compareBoolean = interaction.local_compareBooleanValue;
+                    compareInteger = interaction.local_compareIntegerValue;
+                    compareString = interaction.local_compareStringValue;
+                    booleanValue = interaction.local_BooleanValue;
+                    integerValue = interaction.local_IntegerValue;
+                    stringValue = interaction.local_StringValue;
+                    defaultBooleanValue = interaction.local_defaultBooleanValue;
+                    defaultIntegerValue = interaction.local_defaultIntegerValue;
+                    defaultStringValue = interaction.local_defaultStringValue;
                 }
-                if (interaction.local_compareIntegerValue)
+                           
+ 
+                if (compareBoolean)
                 {
-                    if (property.integerDefault && interaction.local_IntegerValue != interaction.local_defaultIntegerValue)
+                    if (property.booleanDefault && booleanValue != defaultBooleanValue)
                         result = false;
-                    if (!property.integerDefault && interaction.local_IntegerValue != property.integer)
+                    if (!property.booleanDefault && booleanValue != property.boolean)
                         result = false;
                 }
-                if (interaction.local_compareStringValue)
+                if (compareInteger)
                 {
-                    if (property.stringDefault && interaction.local_StringValue != interaction.local_defaultStringValue)
+                    if (property.integerDefault && integerValue != defaultIntegerValue)
                         result = false;
-                    if (!property.stringDefault && interaction.local_StringValue != property.String)
+                    if (!property.integerDefault && integerValue != property.integer)
                         result = false;
                 }
-            }
-            else if (interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean)
-                result = interaction.customActionArguments[0].resultBool;
+                if (compareString)
+                {
+                    if (property.stringDefault && stringValue != defaultStringValue)
+                        result = false;
+                    if (!property.stringDefault && stringValue != property.String)
+                        result = false;
+                }
+        }
+           
+        else if (interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean)
+            result = interaction.customActionArguments[0].resultBool;
 
             if (result == true)
             {
@@ -303,8 +290,6 @@ public static class InteractionUtils
                 else
                     return interaction.LineToGoOnFalseResult;
             }
-        }
-        return actualindex;
     }
 
     public static UnityEvent<List<CustomArgument>> InitializeInteraction(Interaction interaction)

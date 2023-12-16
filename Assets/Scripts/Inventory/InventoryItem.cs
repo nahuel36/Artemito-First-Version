@@ -26,6 +26,14 @@ public class InventoryItem:PNCPropertyInterface
     public LocalProperty[] current_local_properties = new LocalProperty[0];
     public GlobalProperty[] current_global_properties;
 
+    public GenericProperty[] GenericCurrentProperties(InteractionUtils.PropertyActionType action)
+    {
+        if (action == InteractionUtils.PropertyActionType.any_local)
+            return current_local_properties;
+        else
+            return current_global_properties;
+    }
+
     public void SetLocalProperty(Interaction interact, LocalProperty property)
     {
         CommandSetLocalProperty command = new CommandSetLocalProperty();

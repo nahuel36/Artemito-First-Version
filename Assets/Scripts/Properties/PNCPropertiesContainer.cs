@@ -40,6 +40,14 @@ public class PNCPropertiesContainer : MonoBehaviour, PNCPropertyInterface
     public LocalProperty[] LocalProperties { get { return local_properties; } set { } }
     public GlobalProperty[] GlobalProperties { get { return global_properties; } set { } }
 
+    public GenericProperty[] GenericProperties(InteractionUtils.PropertyActionType action)
+    {
+        if (action == InteractionUtils.PropertyActionType.get_local_property)
+            return local_properties;
+        else
+            return global_properties;
+    }
+
     public void SetLocalProperty(Interaction interact, LocalProperty property)
     {
         CommandSetLocalProperty command = new CommandSetLocalProperty();
