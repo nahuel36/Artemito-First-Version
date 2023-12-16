@@ -21,7 +21,12 @@ public class CommandSetLocalProperty : ICommand
             if (interaction.local_changeIntegerValue)
             {
                 property.integerDefault = false;
-                property.integer = interaction.local_IntegerValue;
+                if (interaction.changeIntegerOrFloatOperation == Interaction.ChangeIntegerOrFloatOperation.set)
+                    property.integer = interaction.local_IntegerValue;
+                else if (interaction.changeIntegerOrFloatOperation == Interaction.ChangeIntegerOrFloatOperation.add)
+                    property.integer += interaction.local_IntegerValue;
+                else if (interaction.changeIntegerOrFloatOperation == Interaction.ChangeIntegerOrFloatOperation.subtract)
+                    property.integer -= interaction.local_IntegerValue;
             }
             if (interaction.local_changeStringValue)
             {

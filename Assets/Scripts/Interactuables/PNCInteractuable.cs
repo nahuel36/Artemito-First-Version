@@ -158,24 +158,42 @@ public class Interaction
     public int LineToGoOnFalseResult;
     //CUSTOM
     public UnityEvent<List<CustomArgument>> action;
+    
     public bool global_changeBooleanValue;
     public bool global_changeStringValue;
     public bool global_changeIntegerValue;
     public bool local_changeBooleanValue;
     public bool local_changeStringValue;
     public bool local_changeIntegerValue;
+    
     public bool global_compareBooleanValue;
     public bool global_compareStringValue;
     public bool global_compareIntegerValue;
     public bool local_compareBooleanValue;
     public bool local_compareStringValue;
     public bool local_compareIntegerValue;
+    
     public bool local_defaultBooleanValue;
     public int local_defaultIntegerValue;
     public string local_defaultStringValue;
     public bool global_defaultBooleanValue;
     public int global_defaultIntegerValue;
     public string global_defaultStringValue;
+
+    public enum ChangeIntegerOrFloatOperation
+    { 
+        add, set, subtract
+    }
+
+    public ChangeIntegerOrFloatOperation changeIntegerOrFloatOperation;
+
+    public enum CompareIntegerOrFloatOperation
+    {
+        isGreatherThan, isLessThan, areEqual
+    }
+
+    public CompareIntegerOrFloatOperation compareIntegerOrFloatOperation;
+
     public bool global_BooleanValue;
     public string global_StringValue;
     public int global_IntegerValue;
@@ -233,6 +251,8 @@ public class Interaction
         destiny.global_BooleanValue = global_BooleanValue;
         destiny.global_IntegerValue = global_IntegerValue;
         destiny.global_StringValue = global_StringValue;
+        destiny.compareIntegerOrFloatOperation = compareIntegerOrFloatOperation;
+        destiny.changeIntegerOrFloatOperation = changeIntegerOrFloatOperation;
         destiny.local_defaultBooleanValue = local_defaultBooleanValue;
         destiny.local_defaultIntegerValue = local_defaultIntegerValue;
         destiny.local_defaultStringValue = local_defaultStringValue;

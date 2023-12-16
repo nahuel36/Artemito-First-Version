@@ -185,88 +185,92 @@ public static class InteractionUtils
 
         if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.any_get, interaction))
         {
-            
-                PropertyActionType actiontype;
-                if(CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
-                        actiontype = PropertyActionType.get_global_property;
-                else
-                        actiontype = PropertyActionType.get_local_property;
+            PropertyActionType actiontype;
+            if(CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
+                    actiontype = PropertyActionType.get_global_property;
+            else
+                    actiontype = PropertyActionType.get_local_property;
 
-                GenericProperty property = null;
-                if (interaction.type == Interaction.InteractionType.properties_container)
-                    property = interaction.propertyObject.GenericProperties(actiontype)[interaction.globalPropertySelected];
-                else if (interaction.type == Interaction.InteractionType.character)
-                    property = interaction.character.GenericProperties(actiontype)[interaction.globalPropertySelected];
-                else if (interaction.type == Interaction.InteractionType.inventory)
+            GenericProperty property = null;
+            if (interaction.type == Interaction.InteractionType.properties_container)
+                property = interaction.propertyObject.GenericProperties(actiontype)[interaction.globalPropertySelected];
+            else if (interaction.type == Interaction.InteractionType.character)
+                property = interaction.character.GenericProperties(actiontype)[interaction.globalPropertySelected];
+            else if (interaction.type == Interaction.InteractionType.inventory)
+            {
+                if (inventory == null)
+                    inventory = Resources.Load<InventoryList>("Inventory");
+
+                for (int i = 0; i < inventory.items.Length; i++)
                 {
-                    if (inventory == null)
-                        inventory = Resources.Load<InventoryList>("Inventory");
-
-                    for (int i = 0; i < inventory.items.Length; i++)
+                    if (inventory.items[i].specialIndex == interaction.inventorySelected)
                     {
-                        if (inventory.items[i].specialIndex == interaction.inventorySelected)
-                        {
-                            property = inventory.items[i].GenericCurrentProperties(actiontype)[interaction.globalPropertySelected];
-                        }
+                        property = inventory.items[i].GenericCurrentProperties(actiontype)[interaction.globalPropertySelected];
                     }
                 }
-                else if (interaction.type == Interaction.InteractionType.dialog)
-                {
-                    property = DialogsManager.Instance.GetGenericProperty( actiontype, interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction);
-                }
+            }
+            else if (interaction.type == Interaction.InteractionType.dialog)
+            {
+                property = DialogsManager.Instance.GetGenericProperty( actiontype, interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction);
+            }
 
 
-                bool compareBoolean, compareInteger, compareString, compareFloat;
-                bool booleanValue, defaultBooleanValue;
-                int integerValue, defaultIntegerValue;
-                string stringValue, defaultStringValue;
-                if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
-                {
-                    compareBoolean = interaction.global_compareBooleanValue;
-                    compareInteger = interaction.global_compareIntegerValue;
-                    compareString = interaction.global_compareStringValue;
-                    booleanValue = interaction.global_BooleanValue;
-                    integerValue = interaction.global_IntegerValue;
-                    stringValue = interaction.global_StringValue;
-                    defaultBooleanValue = interaction.global_defaultBooleanValue;
-                    defaultIntegerValue = interaction.global_defaultIntegerValue;
-                    defaultStringValue = interaction.global_defaultStringValue;
-                }
-                else
-                {
-                    compareBoolean = interaction.local_compareBooleanValue;
-                    compareInteger = interaction.local_compareIntegerValue;
-                    compareString = interaction.local_compareStringValue;
-                    booleanValue = interaction.local_BooleanValue;
-                    integerValue = interaction.local_IntegerValue;
-                    stringValue = interaction.local_StringValue;
-                    defaultBooleanValue = interaction.local_defaultBooleanValue;
-                    defaultIntegerValue = interaction.local_defaultIntegerValue;
-                    defaultStringValue = interaction.local_defaultStringValue;
-                }
-                           
+            bool compareBoolean, compareInteger, compareString, compareFloat;
+            bool booleanValue, defaultBooleanValue;
+            int integerValue, defaultIntegerValue;
+            string stringValue, defaultStringValue;
+            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
+            {
+                compareBoolean = interaction.global_compareBooleanValue;
+                compareInteger = interaction.global_compareIntegerValue;
+                compareString = interaction.global_compareStringValue;
+                booleanValue = interaction.global_BooleanValue;
+                integerValue = interaction.global_IntegerValue;
+                stringValue = interaction.global_StringValue;
+                defaultBooleanValue = interaction.global_defaultBooleanValue;
+                defaultIntegerValue = interaction.global_defaultIntegerValue;
+                defaultStringValue = interaction.global_defaultStringValue;
+            }
+            else
+            {
+                compareBoolean = interaction.local_compareBooleanValue;
+                compareInteger = interaction.local_compareIntegerValue;
+                compareString = interaction.local_compareStringValue;
+                booleanValue = interaction.local_BooleanValue;
+                integerValue = interaction.local_IntegerValue;
+                stringValue = interaction.local_StringValue;
+                defaultBooleanValue = interaction.local_defaultBooleanValue;
+                defaultIntegerValue = interaction.local_defaultIntegerValue;
+                defaultStringValue = interaction.local_defaultStringValue;
+            }
+                       
  
-                if (compareBoolean)
-                {
-                    if (property.booleanDefault && booleanValue != defaultBooleanValue)
+            if (compareBoolean)
+            {
+                if (property.booleanDefault && booleanValue != defaultBooleanValue)
+                    result = false;
+                if (!property.booleanDefault && booleanValue != property.boolean)
+                    result = false;
+            }
+            if (compareInteger)
+            {
+                int valueToCompare = property.integerDefault ? defaultIntegerValue : property.integer;
+
+                if ((interaction.compareIntegerOrFloatOperation == Interaction.CompareIntegerOrFloatOperation.areEqual
+                    && integerValue != valueToCompare)
+                 || (interaction.compareIntegerOrFloatOperation == Interaction.CompareIntegerOrFloatOperation.isGreatherThan
+                    && integerValue >= valueToCompare)
+                 || (interaction.compareIntegerOrFloatOperation == Interaction.CompareIntegerOrFloatOperation.isLessThan
+                    && integerValue <= valueToCompare))
                         result = false;
-                    if (!property.booleanDefault && booleanValue != property.boolean)
-                        result = false;
-                }
-                if (compareInteger)
-                {
-                    if (property.integerDefault && integerValue != defaultIntegerValue)
-                        result = false;
-                    if (!property.integerDefault && integerValue != property.integer)
-                        result = false;
-                }
-                if (compareString)
-                {
-                    if (property.stringDefault && stringValue != defaultStringValue)
-                        result = false;
-                    if (!property.stringDefault && stringValue != property.String)
-                        result = false;
-                }
+            }
+            if (compareString)
+            {
+                if (property.stringDefault && stringValue != defaultStringValue)
+                    result = false;
+                if (!property.stringDefault && stringValue != property.String)
+                    result = false;
+            }
         }
            
         else if (interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean)

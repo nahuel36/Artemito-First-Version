@@ -13283,7 +13283,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_compareIntegerValue
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -13323,7 +13323,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_compareIntegerValue
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -13719,6 +13719,11 @@ PrefabInstance:
         type: 3}
       propertyPath: inventoryActions.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].expandedInInspector
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].compareIntegerOrFloatOperation
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -14994,21 +14999,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   local_properties:
   - name: 
-    hasInteger: 1
     integer: 0
-    integerDefault: 0
-    hasBoolean: 1
     boolean: 0
-    booleanDefault: 0
-    hasString: 1
     String: 
+    integerDefault: 0
+    booleanDefault: 0
     stringDefault: 0
     expandedInInspector: 0
+    hasInteger: 1
+    hasBoolean: 1
+    hasString: 1
   global_properties:
   - name: prop
     integer: 0
     boolean: 0
     String: 
+    integerDefault: 1
+    booleanDefault: 0
+    stringDefault: 1
+    expandedInInspector: 1
     globalID: 3
     config:
       name: prop
@@ -15017,14 +15026,14 @@ MonoBehaviour:
       hasInteger: 1
       hasBoolean: 1
       hasString: 1
-    expandedInInspector: 1
-    integerDefault: 1
-    booleanDefault: 0
-    stringDefault: 1
   - name: New Global Property 5
     integer: 0
     boolean: 1
     String: 
+    integerDefault: 1
+    booleanDefault: 0
+    stringDefault: 1
+    expandedInInspector: 1
     globalID: 6
     config:
       name: New Global Property 5
@@ -15033,10 +15042,6 @@ MonoBehaviour:
       hasInteger: 1
       hasBoolean: 1
       hasString: 1
-    expandedInInspector: 1
-    integerDefault: 1
-    booleanDefault: 0
-    stringDefault: 1
 --- !u!4 &431341940
 Transform:
   m_ObjectHideFlags: 0
@@ -16179,6 +16184,8 @@ MonoBehaviour:
           global_defaultBooleanValue: 0
           global_defaultIntegerValue: 0
           global_defaultStringValue: 
+          changeIntegerOrFloatOperation: 0
+          compareIntegerOrFloatOperation: 0
           global_BooleanValue: 0
           global_StringValue: 
           global_IntegerValue: 0
