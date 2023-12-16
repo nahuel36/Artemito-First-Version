@@ -291,7 +291,7 @@ public static class PNCEditorUtils
 
         int index = interactionSerialized.FindPropertyRelative(propertyTypeString + "PropertySelected").intValue;
         bool hasProperty = false;
-        string typeString = "";
+        string variableTypeString = "";
         if (propertyActionType == PropertyActionType.any_global)
         {
             if (variableType == PropertyVariableType.boolean_type)
@@ -332,13 +332,13 @@ public static class PNCEditorUtils
         }
 
         if (variableType == PropertyVariableType.boolean_type)
-            typeString = "Boolean";
+            variableTypeString = "Boolean";
         else if (variableType == PropertyVariableType.integer_type)
-            typeString = "Integer";
+            variableTypeString = "Integer";
         else if (variableType == PropertyVariableType.string_type)
-            typeString = "String";
+            variableTypeString = "String";
         else
-            typeString = "Float";
+            variableTypeString = "Float";
 
 
         if (hasProperty)
@@ -356,48 +356,52 @@ public static class PNCEditorUtils
                 propertyActionTypeGet = PropertyActionType.get_local_property;
             }
 
-            if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeSet ,interactionSerialized))
+            if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeSet, interactionSerialized) || CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeGet, interactionSerialized))
             {
-                rect.y += EditorGUIUtility.singleLineHeight;
-                interactionSerialized.FindPropertyRelative(propertyTypeString + "_change" + typeString + "Value").boolValue = EditorGUI.Toggle(rect, "change " + typeString.ToLower() + " value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_change" + typeString + "Value").boolValue);
-                if (interactionSerialized.FindPropertyRelative(propertyTypeString + "_change" + typeString + "Value").boolValue)
+                string actionString = "";
+                string editorDescription = "";
+
+                if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeSet, interactionSerialized))
                 {
-                    rect.y += EditorGUIUtility.singleLineHeight;
-                    if(variableType == PropertyVariableType.boolean_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue = EditorGUI.Toggle(rect, "value to set", interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue);
-                    else if (variableType == PropertyVariableType.integer_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue = EditorGUI.IntField(rect, "value to set", interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue);
-                    else if (variableType == PropertyVariableType.string_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue = EditorGUI.TextField(rect, "value to set", interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue);
-                    else 
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue = EditorGUI.FloatField(rect, "value to set", interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue);
+                    actionString = "change";
+                    editorDescription = "value to set";
                 }
-            }
-            else if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeGet, interactionSerialized))
-            {
+                else if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeGet, interactionSerialized))
+                {
+                    actionString = "compare";
+                    editorDescription = "value to compare";
+                }
+
                 rect.y += EditorGUIUtility.singleLineHeight;
-                interactionSerialized.FindPropertyRelative(propertyTypeString + "_compare" +typeString+"Value").boolValue = EditorGUI.Toggle(rect, "compare "+typeString.ToLower()+ " value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_compare" +typeString+"Value").boolValue);
-                if (interactionSerialized.FindPropertyRelative(propertyTypeString + "_compare" +typeString+"Value").boolValue)
+                interactionSerialized.FindPropertyRelative(propertyTypeString + "_" + actionString + variableTypeString + "Value").boolValue = EditorGUI.Toggle(rect, actionString + " " + variableTypeString.ToLower() + " value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_" + actionString + variableTypeString + "Value").boolValue);
+                if (interactionSerialized.FindPropertyRelative(propertyTypeString + "_" + actionString + variableTypeString + "Value").boolValue)
                 {
                     rect.y += EditorGUIUtility.singleLineHeight;
                     if (variableType == PropertyVariableType.boolean_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue = EditorGUI.Toggle(rect, "value to compare", interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue);
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue = EditorGUI.Toggle(rect, editorDescription, interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue);
                     else if (variableType == PropertyVariableType.integer_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue = EditorGUI.IntField(rect, "value to compare", interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue);
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue = EditorGUI.IntField(rect, editorDescription, interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue);
                     else if (variableType == PropertyVariableType.string_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue = EditorGUI.TextField(rect, "value to compare", interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue);
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue = EditorGUI.TextField(rect, editorDescription, interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue);
                     else
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue = EditorGUI.FloatField(rect, "value to compare", interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue);
-                    rect.y += EditorGUIUtility.singleLineHeight;
-                    if (variableType == PropertyVariableType.boolean_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultBooleanValue").boolValue = EditorGUI.Toggle(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultBooleanValue").boolValue);
-                    else if (variableType == PropertyVariableType.integer_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultIntegerValue").intValue = EditorGUI.IntField(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultIntegerValue").intValue);
-                    else if (variableType == PropertyVariableType.string_type)
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultStringValue").stringValue = EditorGUI.TextField(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultStringValue").stringValue);
-                    else
-                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultFloatValue").floatValue = EditorGUI.FloatField(rect, "default value", interactionSerialized.FindPropertyRelative("global_defaultFloatValue").floatValue);
+                        interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue = EditorGUI.FloatField(rect, editorDescription,interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue);
+
+
+                    if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeGet, interactionSerialized))
+                    {
+                        rect.y += EditorGUIUtility.singleLineHeight;
+                        if (variableType == PropertyVariableType.boolean_type)
+                            interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultBooleanValue").boolValue = EditorGUI.Toggle(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultBooleanValue").boolValue);
+                        else if (variableType == PropertyVariableType.integer_type)
+                            interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultIntegerValue").intValue = EditorGUI.IntField(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultIntegerValue").intValue);
+                        else if (variableType == PropertyVariableType.string_type)
+                            interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultStringValue").stringValue = EditorGUI.TextField(rect, "default value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultStringValue").stringValue);
+                        else
+                            interactionSerialized.FindPropertyRelative(propertyTypeString + "_defaultFloatValue").floatValue = EditorGUI.FloatField(rect, "default value", interactionSerialized.FindPropertyRelative("global_defaultFloatValue").floatValue);
+                    }
                 }
+
+                
             }
         }
 
