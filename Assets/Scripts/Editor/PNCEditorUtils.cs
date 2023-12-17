@@ -383,8 +383,8 @@ public static class PNCEditorUtils
                     {
                         if (interactionSerialized.FindPropertyRelative("compareIntegerOrFloatOperation").enumValueIndex == (int)Interaction.CompareIntegerOrFloatOperation.areEqual)
                             editorDescription = "value to compare";
-                        if (interactionSerialized.FindPropertyRelative("compareIntegerOrFloatOperation").enumValueIndex == (int)Interaction.CompareIntegerOrFloatOperation.isGreatherThan)
-                            editorDescription = "property is greather than value";
+                        if (interactionSerialized.FindPropertyRelative("compareIntegerOrFloatOperation").enumValueIndex == (int)Interaction.CompareIntegerOrFloatOperation.isGreaterThan)
+                            editorDescription = "property is greater than value";
                         if (interactionSerialized.FindPropertyRelative("compareIntegerOrFloatOperation").enumValueIndex == (int)Interaction.CompareIntegerOrFloatOperation.isLessThan)
                             editorDescription = "property is less than value";
                     }

@@ -258,7 +258,7 @@ public static class InteractionUtils
 
                 if ((interaction.compareIntegerOrFloatOperation == Interaction.CompareIntegerOrFloatOperation.areEqual
                     && integerValue != valueToCompare)
-                 || (interaction.compareIntegerOrFloatOperation == Interaction.CompareIntegerOrFloatOperation.isGreatherThan
+                 || (interaction.compareIntegerOrFloatOperation == Interaction.CompareIntegerOrFloatOperation.isGreaterThan
                     && integerValue >= valueToCompare)
                  || (interaction.compareIntegerOrFloatOperation == Interaction.CompareIntegerOrFloatOperation.isLessThan
                     && integerValue <= valueToCompare))

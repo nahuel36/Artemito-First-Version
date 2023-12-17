@@ -189,7 +189,7 @@ public class Interaction
 
     public enum CompareIntegerOrFloatOperation
     {
-        isGreatherThan, isLessThan, areEqual
+        isGreaterThan, isLessThan, areEqual
     }
 
     public CompareIntegerOrFloatOperation compareIntegerOrFloatOperation;
