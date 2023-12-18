@@ -182,11 +182,8 @@ public static class InteractionUtils
     private static int CheckConditionals(int actualindex, Interaction interaction)
     {
         bool result = true;
-        bool areConditional = false;
-
         if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_get, interaction))
         {
-            areConditional = true;
             int index;
             PropertyActionType actiontype;
             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
@@ -294,33 +291,30 @@ public static class InteractionUtils
 
         else if (interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean)
         { 
-            areConditional = true;
             result = interaction.customActionArguments[0].resultBool;
-        }
-
-        if (areConditional)
-        {
-            if (result == true)
-            {
-                if (interaction.OnCompareResultTrueAction == Conditional.GetPropertyAction.Stop)
-                    return -1;
-                else if (interaction.OnCompareResultTrueAction == Conditional.GetPropertyAction.Continue)
-                    return actualindex;
-                else
-                    return interaction.LineToGoOnTrueResult;
-            }
-            else
-            {
-                if (interaction.OnCompareResultFalseAction == Conditional.GetPropertyAction.Stop)
-                    return -1;
-                else if (interaction.OnCompareResultFalseAction == Conditional.GetPropertyAction.Continue)
-                    return actualindex;
-                else
-                    return interaction.LineToGoOnFalseResult;
-            }
         }
         else
             return actualindex;
+
+        if (result == true)
+        {
+            if (interaction.OnCompareResultTrueAction == Conditional.GetPropertyAction.Stop)
+                return -1;
+            else if (interaction.OnCompareResultTrueAction == Conditional.GetPropertyAction.Continue)
+                return actualindex;
+            else
+                return interaction.LineToGoOnTrueResult;
+        }
+        else
+        {
+            if (interaction.OnCompareResultFalseAction == Conditional.GetPropertyAction.Stop)
+                return -1;
+            else if (interaction.OnCompareResultFalseAction == Conditional.GetPropertyAction.Continue)
+                return actualindex;
+            else
+                return interaction.LineToGoOnFalseResult;
+        }
+            
     }
 
     public static UnityEvent<List<CustomArgument>> InitializeInteraction(Interaction interaction)
