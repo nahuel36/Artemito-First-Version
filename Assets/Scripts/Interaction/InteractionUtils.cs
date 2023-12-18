@@ -107,8 +107,6 @@ public static class InteractionUtils
 
                     i++;
 
-                    Debug.Log(i + " " + attempsContainer.attemps[index].interactions.Count);
-
                     if (i < attempsContainer.attemps[index].interactions.Count)
                     {
                         i = CheckConditionals(i, attempsContainer.attemps[index].interactions[i - 1]);
@@ -189,17 +187,27 @@ public static class InteractionUtils
         if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_get, interaction))
         {
             areConditional = true;
+            int index;
             PropertyActionType actiontype;
             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
+            {
                 actiontype = PropertyActionType.get_global_property;
+                index = interaction.globalPropertySelected;
+            }
             else
+            { 
                 actiontype = PropertyActionType.get_local_property;
+                index = interaction.localPropertySelected;
+            }
+
+
+
 
             GenericProperty property = null;
             if (interaction.type == Interaction.InteractionType.properties_container)
-                property = interaction.propertyObject.GenericProperties(actiontype)[interaction.globalPropertySelected];
+                property = interaction.propertyObject.GenericProperties(actiontype)[index];
             else if (interaction.type == Interaction.InteractionType.character)
-                property = interaction.character.GenericProperties(actiontype)[interaction.globalPropertySelected];
+                property = interaction.character.GenericProperties(actiontype)[index];
             else if (interaction.type == Interaction.InteractionType.inventory)
             {
                 if (inventory == null)
@@ -209,7 +217,7 @@ public static class InteractionUtils
                 {
                     if (inventory.items[i].specialIndex == interaction.inventorySelected)
                     {
-                        property = inventory.items[i].GenericCurrentProperties(actiontype)[interaction.globalPropertySelected];
+                        property = inventory.items[i].GenericCurrentProperties(actiontype)[index];
                     }
                 }
             }
