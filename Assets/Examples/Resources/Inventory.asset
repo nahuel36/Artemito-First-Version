@@ -547,7 +547,7 @@ MonoBehaviour:
     current_local_properties:
     - name: new property
       integer: 0
-      boolean: 1
+      boolean: 0
       String: 
       integerDefault: 0
       booleanDefault: 0
