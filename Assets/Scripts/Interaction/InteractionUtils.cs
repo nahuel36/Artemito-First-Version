@@ -107,6 +107,8 @@ public static class InteractionUtils
 
                     i++;
 
+                    Debug.Log(i + " " + attempsContainer.attemps[index].interactions.Count);
+
                     if (i < attempsContainer.attemps[index].interactions.Count)
                     {
                         i = CheckConditionals(i, attempsContainer.attemps[index].interactions[i - 1]);
@@ -182,14 +184,16 @@ public static class InteractionUtils
     private static int CheckConditionals(int actualindex, Interaction interaction)
     {
         bool result = true;
+        bool areConditional = false;
 
-        if (CheckArePropertyInteraction( PropertyObjectType.any, PropertyActionType.any_get, interaction))
+        if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_get, interaction))
         {
+            areConditional = true;
             PropertyActionType actiontype;
-            if(CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
-                    actiontype = PropertyActionType.get_global_property;
+            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
+                actiontype = PropertyActionType.get_global_property;
             else
-                    actiontype = PropertyActionType.get_local_property;
+                actiontype = PropertyActionType.get_local_property;
 
             GenericProperty property = null;
             if (interaction.type == Interaction.InteractionType.properties_container)
@@ -211,7 +215,7 @@ public static class InteractionUtils
             }
             else if (interaction.type == Interaction.InteractionType.dialog)
             {
-                property = DialogsManager.Instance.GetGenericProperty( actiontype, interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction);
+                property = DialogsManager.Instance.GetGenericProperty(actiontype, interaction.dialogSelected, interaction.subDialogIndex, interaction.optionIndex, interaction);
             }
 
 
@@ -243,8 +247,8 @@ public static class InteractionUtils
                 defaultIntegerValue = interaction.local_defaultIntegerValue;
                 defaultStringValue = interaction.local_defaultStringValue;
             }
-                       
- 
+
+
             if (compareBoolean)
             {
                 if (property.booleanDefault && booleanValue != defaultBooleanValue)
@@ -262,13 +266,13 @@ public static class InteractionUtils
                     && integerValue >= valueToCompare)
                  || (interaction.compareIntegerOrFloatOperation == Interaction.CompareIntegerOrFloatOperation.isLessThan
                     && integerValue <= valueToCompare))
-                        result = false;
+                    result = false;
             }
             if (compareString)
             {
                 string valueToCompare = property.stringDefault ? stringValue : property.String;
 
-                if((interaction.compareStringOperation ==  Interaction.CompareStringOperation.areEqualCaseSensitive
+                if ((interaction.compareStringOperation == Interaction.CompareStringOperation.areEqualCaseSensitive
                     && stringValue != valueToCompare)
                 || (interaction.compareStringOperation == Interaction.CompareStringOperation.areEqualCaseInsensitive
                     && stringValue.ToLower() != valueToCompare.ToLower())
@@ -279,10 +283,15 @@ public static class InteractionUtils
                     result = false;
             }
         }
-           
-        else if (interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean)
-            result = interaction.customActionArguments[0].resultBool;
 
+        else if (interaction.type == Interaction.InteractionType.custom && interaction.customScriptAction == Interaction.CustomScriptAction.customBoolean)
+        { 
+            areConditional = true;
+            result = interaction.customActionArguments[0].resultBool;
+        }
+
+        if (areConditional)
+        {
             if (result == true)
             {
                 if (interaction.OnCompareResultTrueAction == Conditional.GetPropertyAction.Stop)
@@ -301,6 +310,9 @@ public static class InteractionUtils
                 else
                     return interaction.LineToGoOnFalseResult;
             }
+        }
+        else
+            return actualindex;
     }
 
     public static UnityEvent<List<CustomArgument>> InitializeInteraction(Interaction interaction)
@@ -335,7 +347,7 @@ public static class InteractionUtils
                 action.AddListener((arguments) => charact.WalkStraight(interaction.WhereToWalk.position));
             }
             else if (interaction.characterAction == Interaction.CharacterAction.setLocalProperty || interaction.characterAction == Interaction.CharacterAction.setGlobalProperty)
-            { 
+            {
                 PNCCharacter varContainer = (PNCCharacter)interaction.propertyObject;
                 if (interaction.characterAction == Interaction.CharacterAction.setLocalProperty)
                 {
