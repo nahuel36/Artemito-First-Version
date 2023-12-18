@@ -31,7 +31,10 @@ public class CommandSetGenericProperty : ICommand
             if (interaction.local_changeStringValue)
             {
                 property.stringDefault = false;
-                property.String = interaction.local_StringValue;
+                if (interaction.changeStringOperation == Interaction.ChangeStringOperation.change)
+                    property.String = interaction.local_StringValue;
+                else if (interaction.changeStringOperation == Interaction.ChangeStringOperation.replace)
+                    property.String = property.String.Replace(interaction.replaceValueToFind, interaction.local_StringValue);
             }
         }
     }

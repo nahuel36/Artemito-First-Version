@@ -187,6 +187,13 @@ public class Interaction
 
     public ChangeIntegerOrFloatOperation changeIntegerOrFloatOperation;
 
+    public enum ChangeStringOperation
+    {
+        change, replace
+    }
+
+    public ChangeStringOperation changeStringOperation;
+    public string replaceValueToFind;
     public enum CompareIntegerOrFloatOperation
     {
         isGreaterThan, isLessThan, areEqual
@@ -263,6 +270,8 @@ public class Interaction
         destiny.global_StringValue = global_StringValue;
         destiny.compareIntegerOrFloatOperation = compareIntegerOrFloatOperation;
         destiny.changeIntegerOrFloatOperation = changeIntegerOrFloatOperation;
+        destiny.replaceValueToFind = replaceValueToFind;
+        destiny.changeStringOperation = changeStringOperation;
         destiny.compareStringOperation = compareStringOperation;
         destiny.local_defaultBooleanValue = local_defaultBooleanValue;
         destiny.local_defaultIntegerValue = local_defaultIntegerValue;

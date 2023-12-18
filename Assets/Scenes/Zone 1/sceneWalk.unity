@@ -12691,6 +12691,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].replaceValueToFind
+      value: n
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].customScriptAction
       value: 1
       objectReference: {fileID: 0}
@@ -13034,6 +13039,11 @@ PrefabInstance:
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].LineToGoOnFalseResult
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].changeStringOperation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -15056,7 +15066,7 @@ MonoBehaviour:
   - name: local prop container
     integer: 0
     boolean: 0
-    String: 
+    String: n
     integerDefault: 0
     booleanDefault: 0
     stringDefault: 0
@@ -16240,6 +16250,8 @@ MonoBehaviour:
           global_defaultIntegerValue: 0
           global_defaultStringValue: 
           changeIntegerOrFloatOperation: 0
+          changeStringOperation: 0
+          replaceValueToFind: 
           compareIntegerOrFloatOperation: 0
           compareStringOperation: 0
           global_BooleanValue: 0
