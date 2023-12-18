@@ -28,10 +28,12 @@ public class InventoryItem:PNCPropertyInterface
 
     public GenericProperty[] GenericCurrentProperties(InteractionUtils.PropertyActionType action)
     {
-        if (action == InteractionUtils.PropertyActionType.any_local)
+        if (action == InteractionUtils.PropertyActionType.get_local_property)
             return current_local_properties;
-        else
+        else if (action == InteractionUtils.PropertyActionType.get_global_property)
             return current_global_properties;
+        else
+            return null;
     }
 
     public void SetLocalProperty(Interaction interact, LocalProperty property)
