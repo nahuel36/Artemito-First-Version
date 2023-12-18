@@ -80,6 +80,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -99,21 +102,25 @@ MonoBehaviour:
       say: 1
       local_properties:
       - name: 
-        hasInteger: 0
         integer: 0
-        integerDefault: 0
-        hasBoolean: 1
-        boolean: 0
-        booleanDefault: 0
-        hasString: 0
+        boolean: 1
         String: 
+        integerDefault: 0
+        booleanDefault: 0
         stringDefault: 0
         expandedInInspector: 0
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
       global_properties:
       - name: dialog
         integer: 0
         boolean: 1
         String: 
+        integerDefault: 1
+        booleanDefault: 0
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -122,14 +129,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 0
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -138,27 +145,27 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties:
       - name: new property
-        hasInteger: 0
         integer: 0
-        integerDefault: 0
-        hasBoolean: 0
         boolean: 0
-        booleanDefault: 0
-        hasString: 0
         String: 
+        integerDefault: 0
+        booleanDefault: 0
         stringDefault: 0
         expandedInInspector: 0
+        hasInteger: 0
+        hasBoolean: 0
+        hasString: 0
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 1
         String: 
+        integerDefault: 1
+        booleanDefault: 0
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -167,10 +174,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
-        booleanDefault: 0
+        booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: "\xBFComo est\xE1 el negocio?"
       currentText: "\xBFComo est\xE1 el negocio?"
       index: 2
@@ -185,21 +204,25 @@ MonoBehaviour:
       say: 1
       local_properties:
       - name: a
-        hasInteger: 0
         integer: 0
-        integerDefault: 0
-        hasBoolean: 1
         boolean: 0
-        booleanDefault: 0
-        hasString: 0
         String: 
+        integerDefault: 0
+        booleanDefault: 0
         stringDefault: 0
         expandedInInspector: 0
+        hasInteger: 0
+        hasBoolean: 1
+        hasString: 0
       global_properties:
       - name: dialog
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -208,14 +231,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -224,27 +247,27 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties:
       - name: new property
-        hasInteger: 0
         integer: 0
-        integerDefault: 0
-        hasBoolean: 0
         boolean: 0
-        booleanDefault: 0
-        hasString: 0
         String: 
+        integerDefault: 0
+        booleanDefault: 0
         stringDefault: 0
         expandedInInspector: 0
+        hasInteger: 0
+        hasBoolean: 0
+        hasString: 0
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -253,10 +276,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Quisiera comprar un libro.
       currentText: Quisiera comprar un libro.
       index: 3
@@ -275,6 +310,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -283,14 +322,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -299,16 +338,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -317,10 +356,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Bonito sombrero.
       currentText: Bonito sombrero.
       index: 4
@@ -372,6 +423,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -395,6 +449,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -403,14 +461,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -419,16 +477,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -437,10 +495,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Estoy vendiendo estas chaquetas de cuero.
       currentText: Estoy vendiendo estas chaquetas de cuero.
       index: 5
@@ -459,6 +529,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -467,14 +541,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -483,16 +557,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -501,10 +575,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: "Adi\xF3s."
       currentText: "Adi\xF3s."
       index: 6
@@ -523,6 +609,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -531,14 +621,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -547,16 +637,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -565,10 +655,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 110.17674
@@ -598,6 +700,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -606,14 +712,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -622,16 +728,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -640,10 +746,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Uh, que mal.
       currentText: Uh, que mal.
       index: 2
@@ -662,6 +780,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -670,14 +792,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -686,16 +808,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -704,10 +826,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: "No me interesa, adi\xF3s."
       currentText: "No me interesa, adi\xF3s."
       index: 3
@@ -726,6 +860,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -734,14 +872,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -750,16 +888,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -768,10 +906,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 618.7305
@@ -801,6 +951,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -809,14 +963,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -825,16 +979,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -843,10 +997,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: "\xBFCu\xE1l mafia?"
       currentText: "\xBFCu\xE1l mafia?"
       index: 2
@@ -865,6 +1031,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -873,14 +1043,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -889,16 +1059,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -907,10 +1077,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: "\xBFDebe mucha plata?"
       currentText: "\xBFDebe mucha plata?"
       index: 3
@@ -929,6 +1111,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -937,14 +1123,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -953,16 +1139,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -971,10 +1157,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Mejor hablemos de otra cosa.
       currentText: Mejor hablemos de otra cosa.
       index: 4
@@ -993,6 +1191,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1001,14 +1203,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1017,16 +1219,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1035,10 +1237,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 366.95004
@@ -1068,6 +1282,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1076,14 +1294,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1092,16 +1310,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1110,10 +1328,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: "\xBFD\xF3nde est\xE1 su cuartel?"
       currentText: "\xBFD\xF3nde est\xE1 su cuartel?"
       index: 2
@@ -1132,6 +1362,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1140,14 +1374,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1156,16 +1390,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1174,10 +1408,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: "\xBFLes debe mucha plata?"
       currentText: "\xBFLes debe mucha plata?"
       index: 3
@@ -1196,6 +1442,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1204,14 +1454,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1220,16 +1470,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1238,10 +1488,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Volvamos a hablar de su negocio.
       currentText: Volvamos a hablar de su negocio.
       index: 4
@@ -1260,6 +1522,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1268,14 +1534,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1284,16 +1550,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1302,10 +1568,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
       currentText: "Esto me est\xE1 dando mucho miedo, mejor me voy."
       index: 5
@@ -1324,6 +1602,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1332,14 +1614,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1348,16 +1630,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1366,10 +1648,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 656.4461
@@ -1399,6 +1693,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1407,14 +1705,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1423,16 +1721,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1441,10 +1739,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Ah, entonces puedo fiarle.
       currentText: Ah, entonces puedo fiarle.
       index: 2
@@ -1463,6 +1773,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1471,14 +1785,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1487,16 +1801,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1505,10 +1819,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Uh, que mal.
       currentText: Uh, que mal.
       index: 3
@@ -1527,6 +1853,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1535,14 +1865,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1551,16 +1881,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1569,10 +1899,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Mejor hablemos de otra cosa.
       currentText: Mejor hablemos de otra cosa.
       index: 4
@@ -1591,6 +1933,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1599,14 +1945,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1615,16 +1961,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1633,10 +1979,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 351.7711
@@ -1666,6 +2024,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1674,14 +2036,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1690,16 +2052,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1708,10 +2070,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Muy muy mal.
       currentText: Muy muy mal.
       index: 2
@@ -1730,6 +2104,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1738,14 +2116,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1754,16 +2132,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1772,10 +2150,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Demasiado mal.
       currentText: Demasiado mal.
       index: 3
@@ -1794,6 +2184,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1802,14 +2196,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1818,16 +2212,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1836,10 +2230,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Tanto que me voy.
       currentText: Tanto que me voy.
       index: 4
@@ -1858,6 +2264,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1866,14 +2276,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1882,16 +2292,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1900,10 +2310,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 864.62885
@@ -1933,6 +2355,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -1941,14 +2367,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -1957,16 +2383,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -1975,10 +2401,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Muy muy mal.
       currentText: Muy muy mal.
       index: 2
@@ -1997,6 +2435,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2005,14 +2447,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2021,16 +2463,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2039,10 +2481,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Demasiado mal.
       currentText: Demasiado mal.
       index: 3
@@ -2061,6 +2515,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2069,14 +2527,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2085,16 +2543,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2103,10 +2561,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Tanto que me voy.
       currentText: Tanto que me voy.
       index: 4
@@ -2125,6 +2595,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2133,14 +2607,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2149,16 +2623,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2167,10 +2641,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 864.62885
@@ -2200,6 +2686,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2208,14 +2698,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2224,16 +2714,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2242,10 +2732,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Muy muy mal.
       currentText: Muy muy mal.
       index: 2
@@ -2264,6 +2766,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2272,14 +2778,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2288,16 +2794,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2306,10 +2812,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Demasiado mal.
       currentText: Demasiado mal.
       index: 3
@@ -2328,6 +2846,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2336,14 +2858,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2352,16 +2874,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2370,10 +2892,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Tanto que me voy.
       currentText: Tanto que me voy.
       index: 4
@@ -2392,6 +2926,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2400,14 +2938,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2416,16 +2954,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2434,10 +2972,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 864.62885
@@ -2467,6 +3017,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2475,14 +3029,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2491,16 +3045,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2509,10 +3063,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Muy muy mal.
       currentText: Muy muy mal.
       index: 2
@@ -2531,6 +3097,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2539,14 +3109,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2555,16 +3125,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2573,10 +3143,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Demasiado mal.
       currentText: Demasiado mal.
       index: 3
@@ -2595,6 +3177,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2603,14 +3189,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2619,16 +3205,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2637,10 +3223,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Tanto que me voy.
       currentText: Tanto que me voy.
       index: 4
@@ -2659,6 +3257,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2667,14 +3269,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2683,16 +3285,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2701,10 +3303,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 864.62885
@@ -2734,6 +3348,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2742,14 +3360,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2758,16 +3376,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2776,10 +3394,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Muy muy mal.
       currentText: Muy muy mal.
       index: 2
@@ -2798,6 +3428,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2806,14 +3440,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2822,16 +3456,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2840,10 +3474,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Demasiado mal.
       currentText: Demasiado mal.
       index: 3
@@ -2862,6 +3508,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2870,14 +3520,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2886,16 +3536,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2904,10 +3554,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Tanto que me voy.
       currentText: Tanto que me voy.
       index: 4
@@ -2926,6 +3588,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -2934,14 +3600,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -2950,16 +3616,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -2968,10 +3634,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 864.62885
@@ -3001,6 +3679,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -3009,14 +3691,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -3025,16 +3707,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -3043,10 +3725,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Muy muy mal.
       currentText: Muy muy mal.
       index: 2
@@ -3065,6 +3759,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -3073,14 +3771,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -3089,16 +3787,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -3107,10 +3805,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Demasiado mal.
       currentText: Demasiado mal.
       index: 3
@@ -3129,6 +3839,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -3137,14 +3851,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -3153,16 +3867,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -3171,10 +3885,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     - initialText: Tanto que me voy.
       currentText: Tanto que me voy.
       index: 4
@@ -3193,6 +3919,10 @@ MonoBehaviour:
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 5
         config:
           name: dialog
@@ -3201,14 +3931,14 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 1
           hasString: 1
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       - name: New Global Property 6
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 1
         globalID: 7
         config:
           name: New Global Property 6
@@ -3217,16 +3947,16 @@ MonoBehaviour:
           hasInteger: 1
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 1
-        integerDefault: 1
-        booleanDefault: 1
-        stringDefault: 1
       current_local_properties: []
       current_global_properties:
       - name: new property
         integer: 0
         boolean: 0
         String: 
+        integerDefault: 1
+        booleanDefault: 1
+        stringDefault: 1
+        expandedInInspector: 0
         globalID: -1
         config:
           name: 
@@ -3235,10 +3965,22 @@ MonoBehaviour:
           hasInteger: 0
           hasBoolean: 0
           hasString: 0
-        expandedInInspector: 0
+      - name: new property
+        integer: 0
+        boolean: 0
+        String: 
         integerDefault: 1
         booleanDefault: 1
         stringDefault: 1
+        expandedInInspector: 0
+        globalID: -1
+        config:
+          name: 
+          ID: -1
+          object_type: 0
+          hasInteger: 0
+          hasBoolean: 0
+          hasString: 0
     nodeRect:
       serializedVersion: 2
       x: 864.62885

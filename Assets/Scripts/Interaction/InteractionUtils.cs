@@ -266,9 +266,16 @@ public static class InteractionUtils
             }
             if (compareString)
             {
-                if (property.stringDefault && stringValue != defaultStringValue)
-                    result = false;
-                if (!property.stringDefault && stringValue != property.String)
+                string valueToCompare = property.stringDefault ? stringValue : property.String;
+
+                if((interaction.compareStringOperation ==  Interaction.CompareStringOperation.areEqualCaseSensitive
+                    && stringValue != valueToCompare)
+                || (interaction.compareStringOperation == Interaction.CompareStringOperation.areEqualCaseInsensitive
+                    && stringValue.ToLower() != valueToCompare.ToLower())
+                || (interaction.compareStringOperation == Interaction.CompareStringOperation.containsCaseSensitive
+                    && !valueToCompare.Contains(stringValue))
+                || (interaction.compareStringOperation == Interaction.CompareStringOperation.containsCaseInsensitive
+                    && !valueToCompare.ToLower().Contains(stringValue.ToLower())))
                     result = false;
             }
         }

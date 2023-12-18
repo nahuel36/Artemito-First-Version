@@ -194,6 +194,16 @@ public class Interaction
 
     public CompareIntegerOrFloatOperation compareIntegerOrFloatOperation;
 
+    public enum CompareStringOperation
+    { 
+        areEqualCaseSensitive,
+        areEqualCaseInsensitive, 
+        containsCaseSensitive,
+        containsCaseInsensitive
+    }
+
+    public CompareStringOperation compareStringOperation;
+
     public bool global_BooleanValue;
     public string global_StringValue;
     public int global_IntegerValue;
@@ -253,6 +263,7 @@ public class Interaction
         destiny.global_StringValue = global_StringValue;
         destiny.compareIntegerOrFloatOperation = compareIntegerOrFloatOperation;
         destiny.changeIntegerOrFloatOperation = changeIntegerOrFloatOperation;
+        destiny.compareStringOperation = compareStringOperation;
         destiny.local_defaultBooleanValue = local_defaultBooleanValue;
         destiny.local_defaultIntegerValue = local_defaultIntegerValue;
         destiny.local_defaultStringValue = local_defaultStringValue;

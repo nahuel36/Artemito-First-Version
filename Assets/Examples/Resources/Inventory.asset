@@ -20,21 +20,25 @@ MonoBehaviour:
     cuantity: 0
     local_properties:
     - name: blisterp
-      hasInteger: 0
       integer: 0
-      integerDefault: 0
-      hasBoolean: 0
       boolean: 0
-      booleanDefault: 0
-      hasString: 0
       String: 
+      integerDefault: 0
+      booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
+      hasInteger: 0
+      hasBoolean: 0
+      hasString: 0
     global_properties:
     - name: inv
       integer: 0
       boolean: 0
       String: 
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+      expandedInInspector: 1
       globalID: 2
       config:
         name: inv
@@ -43,10 +47,6 @@ MonoBehaviour:
         hasInteger: 1
         hasBoolean: 1
         hasString: 1
-      expandedInInspector: 1
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
     inventoryActions:
     - specialIndex: 2
       verb:
@@ -128,6 +128,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -206,6 +209,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -260,6 +266,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -280,21 +289,25 @@ MonoBehaviour:
     priority: 0
     current_local_properties:
     - name: new property
-      hasInteger: 0
       integer: 0
-      integerDefault: 0
-      hasBoolean: 0
       boolean: 0
-      booleanDefault: 0
-      hasString: 0
       String: 
+      integerDefault: 0
+      booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
+      hasInteger: 0
+      hasBoolean: 0
+      hasString: 0
     current_global_properties:
     - name: new property
       integer: 0
       boolean: 0
       String: 
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+      expandedInInspector: 0
       globalID: -1
       config:
         name: 
@@ -303,10 +316,6 @@ MonoBehaviour:
         hasInteger: 0
         hasBoolean: 0
         hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
   - itemName: resorte
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
@@ -314,21 +323,25 @@ MonoBehaviour:
     cuantity: 0
     local_properties:
     - name: resortep
-      hasInteger: 0
       integer: 0
-      integerDefault: 0
-      hasBoolean: 1
       boolean: 1
-      booleanDefault: 0
-      hasString: 0
       String: 
+      integerDefault: 0
+      booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
+      hasInteger: 0
+      hasBoolean: 1
+      hasString: 0
     global_properties:
     - name: inv
       integer: 0
       boolean: 1
       String: 
+      integerDefault: 1
+      booleanDefault: 0
+      stringDefault: 1
+      expandedInInspector: 1
       globalID: 2
       config:
         name: inv
@@ -337,10 +350,6 @@ MonoBehaviour:
         hasInteger: 1
         hasBoolean: 1
         hasString: 1
-      expandedInInspector: 1
-      integerDefault: 1
-      booleanDefault: 0
-      stringDefault: 1
     inventoryActions:
     - specialIndex: 1
       verb:
@@ -410,6 +419,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -502,6 +514,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -531,21 +546,25 @@ MonoBehaviour:
     priority: 0
     current_local_properties:
     - name: new property
-      hasInteger: 0
       integer: 0
-      integerDefault: 0
-      hasBoolean: 0
       boolean: 1
-      booleanDefault: 0
-      hasString: 0
       String: 
+      integerDefault: 0
+      booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
+      hasInteger: 0
+      hasBoolean: 0
+      hasString: 0
     current_global_properties:
     - name: new property
       integer: 0
       boolean: 1
       String: 
+      integerDefault: 1
+      booleanDefault: 0
+      stringDefault: 1
+      expandedInInspector: 0
       globalID: -1
       config:
         name: 
@@ -554,10 +573,6 @@ MonoBehaviour:
         hasInteger: 0
         hasBoolean: 0
         hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 0
-      stringDefault: 1
   - itemName: new item 5
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
@@ -565,21 +580,25 @@ MonoBehaviour:
     cuantity: 0
     local_properties:
     - name: newip
-      hasInteger: 1
       integer: 0
-      integerDefault: 0
-      hasBoolean: 0
       boolean: 0
-      booleanDefault: 0
-      hasString: 1
       String: 
+      integerDefault: 0
+      booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
+      hasInteger: 1
+      hasBoolean: 0
+      hasString: 1
     global_properties:
     - name: inv
       integer: 0
       boolean: 0
       String: 
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+      expandedInInspector: 1
       globalID: 2
       config:
         name: inv
@@ -588,10 +607,6 @@ MonoBehaviour:
         hasInteger: 1
         hasBoolean: 1
         hasString: 1
-      expandedInInspector: 1
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
     inventoryActions:
     - specialIndex: 2
       verb:
@@ -661,6 +676,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -753,6 +771,9 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeIntegerOrFloatOperation: 0
+            compareIntegerOrFloatOperation: 0
+            compareStringOperation: 0
             global_BooleanValue: 0
             global_StringValue: 
             global_IntegerValue: 0
@@ -782,21 +803,25 @@ MonoBehaviour:
     priority: 0
     current_local_properties:
     - name: new property
-      hasInteger: 0
       integer: 0
-      integerDefault: 0
-      hasBoolean: 0
       boolean: 0
-      booleanDefault: 0
-      hasString: 0
       String: 
+      integerDefault: 0
+      booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
+      hasInteger: 0
+      hasBoolean: 0
+      hasString: 0
     current_global_properties:
     - name: new property
       integer: 0
       boolean: 0
       String: 
+      integerDefault: 1
+      booleanDefault: 1
+      stringDefault: 1
+      expandedInInspector: 0
       globalID: -1
       config:
         name: 
@@ -805,8 +830,4 @@ MonoBehaviour:
         hasInteger: 0
         hasBoolean: 0
         hasString: 0
-      expandedInInspector: 0
-      integerDefault: 1
-      booleanDefault: 1
-      stringDefault: 1
   specialIndex: 6
