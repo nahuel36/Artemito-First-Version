@@ -34,17 +34,18 @@ MonoBehaviour:
       attempsIteration: 0
       attemps:
       - interactions:
-        - type: 4
+        - type: 2
           expandedInInspector: 1
-          inventoryAction: 0
+          inventoryAction: 3
+          inventorySelected: 1
           character: {fileID: 0}
           characterAction: 0
           WhatToSay: 
           WhereToWalk: {fileID: 0}
-          globalVariableSelected: 0
-          localVariableSelected: 0
-          variablesAction: 0
-          variableObject: {fileID: 0}
+          globalPropertySelected: 0
+          localPropertySelected: 0
+          propertiesAction: 0
+          propertyObject: {fileID: 0}
           dialogAction: 0
           dialogSelected: {fileID: 0}
           newDialogEntry: 0
@@ -90,6 +91,11 @@ MonoBehaviour:
           global_defaultBooleanValue: 0
           global_defaultIntegerValue: 0
           global_defaultStringValue: 
+          changeIntegerOrFloatOperation: 0
+          changeStringOperation: 0
+          replaceValueToFind: 
+          compareIntegerOrFloatOperation: 0
+          compareStringOperation: 0
           global_BooleanValue: 0
           global_StringValue: 
           global_IntegerValue: 0
@@ -146,14 +152,15 @@ MonoBehaviour:
         - type: 4
           expandedInInspector: 1
           inventoryAction: 0
+          inventorySelected: 0
           character: {fileID: 0}
           characterAction: 0
           WhatToSay: 
           WhereToWalk: {fileID: 0}
-          globalVariableSelected: 0
-          localVariableSelected: 0
-          variablesAction: 0
-          variableObject: {fileID: 0}
+          globalPropertySelected: 0
+          localPropertySelected: 0
+          propertiesAction: 0
+          propertyObject: {fileID: 0}
           dialogAction: 0
           dialogSelected: {fileID: 0}
           newDialogEntry: 0
@@ -199,6 +206,11 @@ MonoBehaviour:
           global_defaultBooleanValue: 0
           global_defaultIntegerValue: 0
           global_defaultStringValue: 
+          changeIntegerOrFloatOperation: 0
+          changeStringOperation: 0
+          replaceValueToFind: 
+          compareIntegerOrFloatOperation: 0
+          compareStringOperation: 0
           global_BooleanValue: 0
           global_StringValue: 
           global_IntegerValue: 0

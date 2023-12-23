@@ -380,7 +380,7 @@ public static class PNCEditorUtils
                         else if (interactionSerialized.FindPropertyRelative("changeStringOperation").enumValueIndex == (int)Interaction.ChangeStringOperation.replace)
                             editorDescription = "replace with";
                     }
-                    else
+                    else 
                         editorDescription = "value to set";
                 }
                 else if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeGet, interactionSerialized))
@@ -426,6 +426,13 @@ public static class PNCEditorUtils
                     }
 
                     if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeSet, interactionSerialized)
+                    && variableType == PropertyVariableType.boolean_type)
+                    {
+                        rect.y += EditorGUIUtility.singleLineHeight;
+                        interactionSerialized.FindPropertyRelative("changeBooleanOperation").enumValueIndex = EditorGUI.Popup(rect, interactionSerialized.FindPropertyRelative("changeBooleanOperation").enumValueIndex, interactionSerialized.FindPropertyRelative("changeBooleanOperation").enumDisplayNames);
+                    }
+
+                    if (CheckArePropertyInteraction(PropertyObjectType.any, propertyActionTypeSet, interactionSerialized)
                     && (variableType == PropertyVariableType.integer_type || (variableType == PropertyVariableType.float_type)))
                     {
                         rect.y += EditorGUIUtility.singleLineHeight;
@@ -445,13 +452,13 @@ public static class PNCEditorUtils
                     }
 
                     rect.y += EditorGUIUtility.singleLineHeight;
-                    if (variableType == PropertyVariableType.boolean_type)
+                    if (variableType == PropertyVariableType.boolean_type && interactionSerialized.FindPropertyRelative("changeBooleanOperation").enumValueIndex != (int)Interaction.ChangeBooleanOperation.toggle)
                         interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue = EditorGUI.Toggle(rect, editorDescription, interactionSerialized.FindPropertyRelative(propertyTypeString + "_BooleanValue").boolValue);
                     else if (variableType == PropertyVariableType.integer_type)
                         interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue = EditorGUI.IntField(rect, editorDescription, interactionSerialized.FindPropertyRelative(propertyTypeString + "_IntegerValue").intValue);
                     else if (variableType == PropertyVariableType.string_type)
                         interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue = EditorGUI.TextField(rect, editorDescription, interactionSerialized.FindPropertyRelative(propertyTypeString + "_StringValue").stringValue);
-                    else
+                    else if (variableType == PropertyVariableType.float_type)
                         interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue = EditorGUI.FloatField(rect, editorDescription,interactionSerialized.FindPropertyRelative(propertyTypeString + "_FloatValue").floatValue);
 
 
@@ -759,7 +766,11 @@ public static class PNCEditorUtils
                             height += 1;
                             if (interactionSerialized.FindPropertyRelative(propertyType + "_changeBooleanValue").boolValue
                                 && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_set, interactionSerialized))
+                            {
                                 height += 1;
+                                if(interactionSerialized.FindPropertyRelative("changeBooleanOperation").enumValueIndex != (int)Interaction.ChangeBooleanOperation.toggle)
+                                    height += 1;
+                            }
                         }
                         if (hasInteger)
                         {

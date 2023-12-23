@@ -14,9 +14,12 @@ public class CommandSetGenericProperty : ICommand
         if (InteractionUtils.CheckArePropertyInteraction(InteractionUtils.PropertyObjectType.any, InteractionUtils.PropertyActionType.set_local_property, interaction))
         {
             if (interaction.local_changeBooleanValue)
-            {
+            { 
                 property.booleanDefault = false;
-                property.boolean = interaction.local_BooleanValue;
+                if (interaction.changeBooleanOperation == Interaction.ChangeBooleanOperation.setValue)
+                    property.boolean = interaction.local_BooleanValue;
+                else if (interaction.changeBooleanOperation == Interaction.ChangeBooleanOperation.toggle)
+                    property.boolean = !property.boolean;
             }
             if (interaction.local_changeIntegerValue)
             {

@@ -180,6 +180,13 @@ public class Interaction
     public int global_defaultIntegerValue;
     public string global_defaultStringValue;
 
+    public enum ChangeBooleanOperation
+    { 
+        setValue, toggle
+    }
+
+    public ChangeBooleanOperation changeBooleanOperation;
+
     public enum ChangeIntegerOrFloatOperation
     { 
         add, set, subtract
@@ -268,6 +275,7 @@ public class Interaction
         destiny.global_BooleanValue = global_BooleanValue;
         destiny.global_IntegerValue = global_IntegerValue;
         destiny.global_StringValue = global_StringValue;
+        destiny.changeBooleanOperation = changeBooleanOperation;
         destiny.compareIntegerOrFloatOperation = compareIntegerOrFloatOperation;
         destiny.changeIntegerOrFloatOperation = changeIntegerOrFloatOperation;
         destiny.replaceValueToFind = replaceValueToFind;

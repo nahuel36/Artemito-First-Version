@@ -13082,6 +13082,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].changeBooleanOperation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[4].changeBooleanOperation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].local_changeStringValue
       value: 1
       objectReference: {fileID: 0}
@@ -16249,6 +16259,7 @@ MonoBehaviour:
           global_defaultBooleanValue: 0
           global_defaultIntegerValue: 0
           global_defaultStringValue: 
+          changeBooleanOperation: 0
           changeIntegerOrFloatOperation: 0
           changeStringOperation: 0
           replaceValueToFind: 
