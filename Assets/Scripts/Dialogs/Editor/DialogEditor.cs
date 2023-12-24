@@ -30,7 +30,7 @@ public class DialogEditor : Editor
                 localPropertiesLists.Add(key, null);
                 ReorderableList list = localPropertiesLists[key];
                 PNCEditorUtils.InitializeLocalProperties(out list, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).serializedObject, serializedObject.FindProperty("subDialogs").GetArrayElementAtIndex(i).FindPropertyRelative("options").GetArrayElementAtIndex(j).FindPropertyRelative("local_properties"));
-                PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.dialogOption, ref myTarget.subDialogs[i].options[j].global_properties);
+                PNCEditorUtils.InitializeGlobalProperties(PropertyObjectType.dialogOption, ref myTarget.subDialogs[i].options[j].global_properties);
 
                 localPropertiesLists[key] = list;
             }
@@ -105,7 +105,7 @@ public class DialogEditor : Editor
                                 recOpt.y += PNCEditorUtils.GetLocalPropertiesHeight(local_properties_serialized);
 
 
-                                PNCEditorUtils.ShowGlobalPropertiesOnRect(GlobalPropertyConfig.object_types.dialogOption, ref myTarget.subDialogs[index].options[indexOpt].global_properties, ref global_properties_serialized, recOpt);
+                                PNCEditorUtils.ShowGlobalPropertiesOnRect(PropertyObjectType.dialogOption, ref myTarget.subDialogs[index].options[indexOpt].global_properties, ref global_properties_serialized, recOpt);
                             }
 
 

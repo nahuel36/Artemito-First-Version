@@ -182,18 +182,18 @@ public static class InteractionUtils
     private static int CheckConditionals(int actualindex, Interaction interaction)
     {
         bool result = true;
-        if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.any_get, interaction))
+        if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anyGet, interaction))
         {
             int index;
             PropertyActionType actiontype;
-            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
+            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.getGlobalProperty, interaction))
             {
-                actiontype = PropertyActionType.get_global_property;
+                actiontype = PropertyActionType.getGlobalProperty;
                 index = interaction.globalPropertySelected;
             }
             else
             { 
-                actiontype = PropertyActionType.get_local_property;
+                actiontype = PropertyActionType.getLocalProperty;
                 index = interaction.localPropertySelected;
             }
 
@@ -201,7 +201,7 @@ public static class InteractionUtils
 
 
             GenericProperty property = null;
-            if (interaction.type == Interaction.InteractionType.properties_container)
+            if (interaction.type == Interaction.InteractionType.propertiesContainer)
                 property = interaction.propertyObject.GenericProperties(actiontype)[index];
             else if (interaction.type == Interaction.InteractionType.character)
                 property = interaction.character.GenericProperties(actiontype)[index];
@@ -224,11 +224,11 @@ public static class InteractionUtils
             }
 
 
-            bool compareBoolean, compareInteger, compareString, compareFloat;
-            bool booleanValue, defaultBooleanValue;
-            int integerValue, defaultIntegerValue;
-            string stringValue, defaultStringValue;
-            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.get_global_property, interaction))
+            bool compareBoolean = false, compareInteger = false, compareString = false, compareFloat = false;
+            bool booleanValue = false, defaultBooleanValue = false;
+            int integerValue = 0, defaultIntegerValue = 0;
+            string stringValue = "", defaultStringValue = "";
+            if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.getGlobalProperty, interaction))
             {
                 compareBoolean = interaction.global_compareBooleanValue;
                 compareInteger = interaction.global_compareIntegerValue;
@@ -240,7 +240,7 @@ public static class InteractionUtils
                 defaultIntegerValue = interaction.global_defaultIntegerValue;
                 defaultStringValue = interaction.global_defaultStringValue;
             }
-            else
+            else if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.getLocalProperty, interaction))
             {
                 compareBoolean = interaction.local_compareBooleanValue;
                 compareInteger = interaction.local_compareIntegerValue;
@@ -275,7 +275,7 @@ public static class InteractionUtils
             }
             if (compareString)
             {
-                string valueToCompare = property.stringDefault ? stringValue : property.String;
+                string valueToCompare = property.stringDefault ? defaultStringValue : property.String;
 
                 if ((interaction.compareStringOperation == Interaction.CompareStringOperation.areEqualCaseSensitive
                     && stringValue != valueToCompare)
@@ -398,7 +398,7 @@ public static class InteractionUtils
                 }
             }
         }
-        else if (interaction.type == Interaction.InteractionType.properties_container)
+        else if (interaction.type == Interaction.InteractionType.propertiesContainer)
         {
             PNCPropertiesContainer varContainer = (PNCPropertiesContainer)interaction.propertyObject;
             if (interaction.propertiesAction == Interaction.PropertiesContainerAction.setLocalProperty)
@@ -462,61 +462,15 @@ public static class InteractionUtils
         return action;
     }
 
-    public enum PropertyObjectType
-    {
-        room_object,
-        character,
-        dialog_option,
-        inventory,
-        properties_container,
-        any
-    }
 
-    public enum PropertyActionType
+    public static bool CheckArePropertyInteraction(PropertyObjectType objectType, PropertyActionType propertyType, Interaction interaction)
     {
-        set_global_property,
-        get_global_property,
-        set_local_property,
-        get_local_property,
-        any_local,
-        any_global,
-        any_set,
-        any_get,
-        any
-    }
-
-    public static bool CheckArePropertyInteraction(PropertyObjectType type, PropertyActionType proptype, Interaction interaction)
-    {
-        bool areType = false;
+        bool areObj = false;
         bool areProp = false;
 
-        if (proptype == PropertyActionType.any)
+        if ((propertyType & PropertyActionType.getGlobalProperty)!= 0)
         {
-            if ((interaction.type == Interaction.InteractionType.properties_container &&
-                     (interaction.propertiesAction == Interaction.PropertiesContainerAction.getGlobalProperty
-                   || interaction.propertiesAction == Interaction.PropertiesContainerAction.getLocalProperty
-                   || interaction.propertiesAction == Interaction.PropertiesContainerAction.setGlobalProperty
-                   || interaction.propertiesAction == Interaction.PropertiesContainerAction.setLocalProperty))
-            || (interaction.type == Interaction.InteractionType.inventory &&
-                     (interaction.inventoryAction == Interaction.InventoryAction.getGlobalProperty
-                   || interaction.inventoryAction == Interaction.InventoryAction.getLocalProperty
-                   || interaction.inventoryAction == Interaction.InventoryAction.setGlobalProperty
-                   || interaction.inventoryAction == Interaction.InventoryAction.setLocalProperty))
-            || (interaction.type == Interaction.InteractionType.character &&
-                     (interaction.characterAction == Interaction.CharacterAction.getGlobalProperty
-                   || interaction.characterAction == Interaction.CharacterAction.getLocalProperty
-                   || interaction.characterAction == Interaction.CharacterAction.setGlobalProperty
-                   || interaction.characterAction == Interaction.CharacterAction.setLocalProperty))
-            || (interaction.type == Interaction.InteractionType.dialog &&
-                     (interaction.dialogAction == Interaction.DialogAction.getGlobalProperty
-                   || interaction.dialogAction == Interaction.DialogAction.getLocalProperty
-                   || interaction.dialogAction == Interaction.DialogAction.setGlobalProperty
-                   || interaction.dialogAction == Interaction.DialogAction.setLocalProperty)))
-                areProp = true;
-        }
-        if (proptype == PropertyActionType.get_global_property || proptype == PropertyActionType.any_global || proptype == PropertyActionType.any_get)
-        {
-            if ((interaction.type == Interaction.InteractionType.properties_container &&
+            if ((interaction.type == Interaction.InteractionType.propertiesContainer &&
                      interaction.propertiesAction == Interaction.PropertiesContainerAction.getGlobalProperty)
                || (interaction.type == Interaction.InteractionType.inventory &&
                      interaction.inventoryAction == Interaction.InventoryAction.getGlobalProperty)
@@ -526,9 +480,9 @@ public static class InteractionUtils
                      interaction.dialogAction == Interaction.DialogAction.getGlobalProperty))
                 areProp = true;
         }
-        if (proptype == PropertyActionType.get_local_property || proptype == PropertyActionType.any_local || proptype == PropertyActionType.any_get)
+        if ((propertyType & PropertyActionType.getLocalProperty)!=0)
         {
-            if ((interaction.type == Interaction.InteractionType.properties_container &&
+            if ((interaction.type == Interaction.InteractionType.propertiesContainer &&
                      interaction.propertiesAction == Interaction.PropertiesContainerAction.getLocalProperty)
                || (interaction.type == Interaction.InteractionType.inventory &&
                      interaction.inventoryAction == Interaction.InventoryAction.getLocalProperty)
@@ -538,9 +492,9 @@ public static class InteractionUtils
                      interaction.dialogAction == Interaction.DialogAction.getLocalProperty))
                 areProp = true;
         }
-        if (proptype == PropertyActionType.set_global_property || proptype == PropertyActionType.any_global || proptype == PropertyActionType.any_set)
+        if ((propertyType & PropertyActionType.setGlobalProperty)!=0)
         {
-            if ((interaction.type == Interaction.InteractionType.properties_container &&
+            if ((interaction.type == Interaction.InteractionType.propertiesContainer &&
                      interaction.propertiesAction == Interaction.PropertiesContainerAction.setGlobalProperty)
                || (interaction.type == Interaction.InteractionType.inventory &&
                      interaction.inventoryAction == Interaction.InventoryAction.setGlobalProperty)
@@ -550,9 +504,9 @@ public static class InteractionUtils
                      interaction.dialogAction == Interaction.DialogAction.setGlobalProperty))
                 areProp = true;
         }
-        if (proptype == PropertyActionType.set_local_property || proptype == PropertyActionType.any_local || proptype == PropertyActionType.any_set)
+        if ((propertyType & PropertyActionType.setLocalProperty)!=0)
         {
-            if ((interaction.type == Interaction.InteractionType.properties_container &&
+            if ((interaction.type == Interaction.InteractionType.propertiesContainer &&
                      interaction.propertiesAction == Interaction.PropertiesContainerAction.setLocalProperty)
                || (interaction.type == Interaction.InteractionType.inventory &&
                      interaction.inventoryAction == Interaction.InventoryAction.setLocalProperty)
@@ -564,38 +518,28 @@ public static class InteractionUtils
         }
 
 
-        if (type == PropertyObjectType.any)
+        if ((objectType & PropertyObjectType.propertiesContainer)!= 0)
         {
-            if (interaction.type == Interaction.InteractionType.properties_container
-             || interaction.type == Interaction.InteractionType.inventory
-             || interaction.type == Interaction.InteractionType.character
-             || interaction.type == Interaction.InteractionType.dialog)
-                areType = true;
+            if (interaction.type == Interaction.InteractionType.propertiesContainer)
+                areObj = true;
         }
-        else if (type == PropertyObjectType.properties_container)
-        {
-            if (interaction.type == Interaction.InteractionType.properties_container)
-                areType = true;
-        }
-        else if (type == PropertyObjectType.inventory)
+        if ((objectType & PropertyObjectType.inventory)!= 0)
         {
             if (interaction.type == Interaction.InteractionType.inventory)
-                areType = true;
+                areObj = true;
         }
-        else if (type == PropertyObjectType.character)
+        if ((objectType & PropertyObjectType.character)!= 0)
         {
             if (interaction.type == Interaction.InteractionType.character)
-                areType = true;
+                areObj = true;
         }
-        else if (type == PropertyObjectType.dialog_option)
+        if ((objectType & PropertyObjectType.dialogOption)!= 0)
         {
             if (interaction.type == Interaction.InteractionType.dialog)
-                areType = true;
+                areObj = true;
         }
-        else
-            areType = false;
-
-        return areType && areProp;
+       
+        return areObj && areProp;
     }
 
 }

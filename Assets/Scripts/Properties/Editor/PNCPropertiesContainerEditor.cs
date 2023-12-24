@@ -20,7 +20,7 @@ public class PNCPropertiesContainerEditor : Editor
 
         PNCEditorUtils.InitializeLocalProperties(out localPropertiesList, serializedObject, serializedObject.FindProperty("local_properties"));
 
-        PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.propertiesContainer, ref ((PNCPropertiesContainer)target).global_properties);
+        PNCEditorUtils.InitializeGlobalProperties(PropertyObjectType.propertiesContainer, ref ((PNCPropertiesContainer)target).global_properties);
     }
 
 
@@ -30,7 +30,7 @@ public class PNCPropertiesContainerEditor : Editor
 
         PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesList, ref myTarget.local_properties, ref local_properties_serialized);
 
-        PNCEditorUtils.ShowGlobalPropertiesOnRect(GlobalPropertyConfig.object_types.propertiesContainer, ref myTarget.global_properties, ref global_properties_serialized);
+        PNCEditorUtils.ShowGlobalPropertiesOnRect(PropertyObjectType.propertiesContainer, ref myTarget.global_properties, ref global_properties_serialized);
 
         serializedObject.ApplyModifiedProperties();
 

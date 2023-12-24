@@ -11,7 +11,7 @@ public class CommandSetGenericProperty : ICommand
     public async Task Execute()
     {
         await Task.Yield();
-        if (InteractionUtils.CheckArePropertyInteraction(InteractionUtils.PropertyObjectType.any, InteractionUtils.PropertyActionType.set_local_property, interaction))
+        if (InteractionUtils.CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anySet, interaction))
         {
             if (interaction.local_changeBooleanValue)
             { 

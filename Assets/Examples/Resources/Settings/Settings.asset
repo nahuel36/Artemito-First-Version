@@ -29,46 +29,32 @@ MonoBehaviour:
   globalPropertiesConfig:
   - name: char
     ID: 1
-    object_type: 1
-    hasInteger: 1
-    hasBoolean: 1
-    hasString: 1
+    objectTypes: 1
+    variableTypes: -1
   - name: inv
     ID: 2
-    object_type: 4
-    hasInteger: 1
-    hasBoolean: 1
-    hasString: 1
+    objectTypes: 4
+    variableTypes: -1
   - name: prop
     ID: 3
-    object_type: 8
-    hasInteger: 1
-    hasBoolean: 1
-    hasString: 1
+    objectTypes: 8
+    variableTypes: -1
   - name: obj
     ID: 4
-    object_type: 2
-    hasInteger: 1
-    hasBoolean: 1
-    hasString: 1
+    objectTypes: 2
+    variableTypes: -1
   - name: dialog
     ID: 5
-    object_type: 16
-    hasInteger: 1
-    hasBoolean: 1
-    hasString: 1
+    objectTypes: 16
+    variableTypes: -1
   - name: New Global Property 5
     ID: 6
-    object_type: 8
-    hasInteger: 1
-    hasBoolean: 1
-    hasString: 1
+    objectTypes: 8
+    variableTypes: -1
   - name: New Global Property 6
     ID: 7
-    object_type: 16
-    hasInteger: 1
-    hasBoolean: 0
-    hasString: 0
+    objectTypes: 16
+    variableTypes: 2
   global_propertiesIndex: 7
   pathFindingType: 0
   speechStyle: 0

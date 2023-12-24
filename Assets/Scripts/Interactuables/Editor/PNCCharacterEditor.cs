@@ -16,7 +16,7 @@ public class PnCCharacterEditor : PNCInteractuableEditor
     {
         InitializeVerbs(out verbsList, serializedObject , serializedObject.FindProperty("verbs"),((PNCCharacter)target));
 
-        PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.characters, ref ((PNCCharacter)target).global_properties);
+        PNCEditorUtils.InitializeGlobalProperties(PropertyObjectType.character, ref ((PNCCharacter)target).global_properties);
         PNCEditorUtils.InitializeLocalProperties(out localPropertiesList, serializedObject, serializedObject.FindProperty("local_properties"));
 
 
@@ -49,7 +49,7 @@ public class PnCCharacterEditor : PNCInteractuableEditor
 
         PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesList, ref myTarget.local_properties, ref local_properties_serialized);
 
-        PNCEditorUtils.ShowGlobalPropertiesOnRect(GlobalPropertyConfig.object_types.characters, ref myTarget.global_properties, ref global_properties_serialized);
+        PNCEditorUtils.ShowGlobalPropertiesOnRect(PropertyObjectType.character, ref myTarget.global_properties, ref global_properties_serialized);
 
         serializedObject.ApplyModifiedProperties();
 

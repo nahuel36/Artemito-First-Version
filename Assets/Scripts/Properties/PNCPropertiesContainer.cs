@@ -20,9 +20,7 @@ public class GenericProperty
 [System.Serializable]
 public class LocalProperty : GenericProperty
 {
-    public bool hasInteger = false;
-    public bool hasBoolean = false;
-    public bool hasString = false;
+    public VariableType variableTypes = VariableType.none;
 }
 
 [System.Serializable]
@@ -40,12 +38,13 @@ public class PNCPropertiesContainer : MonoBehaviour, PNCPropertyInterface
     public LocalProperty[] LocalProperties { get { return local_properties; } set { } }
     public GlobalProperty[] GlobalProperties { get { return global_properties; } set { } }
 
-    public GenericProperty[] GenericProperties(InteractionUtils.PropertyActionType action)
+    public GenericProperty[] GenericProperties(PropertyActionType action)
     {
-        if (action == InteractionUtils.PropertyActionType.get_local_property)
+        if ((action & PropertyActionType.anyLocal) != 0)
             return local_properties;
-        else
+        else if((action & PropertyActionType.anyGlobal) != 0)
             return global_properties;
+        return null;
     }
 
     public void SetLocalProperty(Interaction interact, LocalProperty property)

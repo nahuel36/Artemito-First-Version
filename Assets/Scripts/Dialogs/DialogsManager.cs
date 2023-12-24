@@ -189,11 +189,11 @@ public class DialogsManager : MonoBehaviour
         return null;
     }
 
-    public GenericProperty GetGenericProperty(InteractionUtils.PropertyActionType actionType, Dialog dialogSelected, int subDialogIndex, int optionIndex, Interaction interaction)
+    public GenericProperty GetGenericProperty(PropertyActionType actionType, Dialog dialogSelected, int subDialogIndex, int optionIndex, Interaction interaction)
     {
-        if (actionType == InteractionUtils.PropertyActionType.get_global_property)
+        if ((actionType & PropertyActionType.anyGlobal)!=0)
             return GetGlobalProperty(dialogSelected, subDialogIndex, optionIndex, interaction);
-        else if (actionType == InteractionUtils.PropertyActionType.get_local_property)
+        else if ((actionType & PropertyActionType.anyLocal)!=0)
             return GetLocalProperty(dialogSelected, subDialogIndex, optionIndex, interaction);
         else
             return null;

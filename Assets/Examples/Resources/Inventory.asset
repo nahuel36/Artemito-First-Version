@@ -27,9 +27,7 @@ MonoBehaviour:
       booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
-      hasInteger: 0
-      hasBoolean: 0
-      hasString: 0
+      variableTypes: 0
     global_properties:
     - name: inv
       integer: 0
@@ -43,10 +41,8 @@ MonoBehaviour:
       config:
         name: inv
         ID: 2
-        object_type: 4
-        hasInteger: 1
-        hasBoolean: 1
-        hasString: 1
+        objectTypes: 4
+        variableTypes: -1
     inventoryActions:
     - specialIndex: 2
       verb:
@@ -128,7 +124,10 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeBooleanOperation: 0
             changeIntegerOrFloatOperation: 0
+            changeStringOperation: 0
+            replaceValueToFind: 
             compareIntegerOrFloatOperation: 0
             compareStringOperation: 0
             global_BooleanValue: 0
@@ -209,7 +208,10 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeBooleanOperation: 0
             changeIntegerOrFloatOperation: 0
+            changeStringOperation: 0
+            replaceValueToFind: 
             compareIntegerOrFloatOperation: 0
             compareStringOperation: 0
             global_BooleanValue: 0
@@ -266,7 +268,10 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeBooleanOperation: 0
             changeIntegerOrFloatOperation: 0
+            changeStringOperation: 0
+            replaceValueToFind: 
             compareIntegerOrFloatOperation: 0
             compareStringOperation: 0
             global_BooleanValue: 0
@@ -296,9 +301,7 @@ MonoBehaviour:
       booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
-      hasInteger: 0
-      hasBoolean: 0
-      hasString: 0
+      variableTypes: 0
     current_global_properties:
     - name: new property
       integer: 0
@@ -312,10 +315,8 @@ MonoBehaviour:
       config:
         name: 
         ID: -1
-        object_type: 0
-        hasInteger: 0
-        hasBoolean: 0
-        hasString: 0
+        objectTypes: 0
+        variableTypes: 0
   - itemName: resorte
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
@@ -330,9 +331,7 @@ MonoBehaviour:
       booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
-      hasInteger: 0
-      hasBoolean: 1
-      hasString: 0
+      variableTypes: 1
     global_properties:
     - name: inv
       integer: 0
@@ -346,10 +345,8 @@ MonoBehaviour:
       config:
         name: inv
         ID: 2
-        object_type: 4
-        hasInteger: 1
-        hasBoolean: 1
-        hasString: 1
+        objectTypes: 4
+        variableTypes: -1
     inventoryActions:
     - specialIndex: 1
       verb:
@@ -419,7 +416,10 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeBooleanOperation: 0
             changeIntegerOrFloatOperation: 0
+            changeStringOperation: 0
+            replaceValueToFind: 
             compareIntegerOrFloatOperation: 0
             compareStringOperation: 0
             global_BooleanValue: 0
@@ -514,7 +514,10 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeBooleanOperation: 0
             changeIntegerOrFloatOperation: 0
+            changeStringOperation: 0
+            replaceValueToFind: 
             compareIntegerOrFloatOperation: 0
             compareStringOperation: 0
             global_BooleanValue: 0
@@ -547,15 +550,13 @@ MonoBehaviour:
     current_local_properties:
     - name: new property
       integer: 0
-      boolean: 0
+      boolean: 1
       String: 
       integerDefault: 0
       booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
-      hasInteger: 0
-      hasBoolean: 0
-      hasString: 0
+      variableTypes: 0
     current_global_properties:
     - name: new property
       integer: 0
@@ -569,10 +570,8 @@ MonoBehaviour:
       config:
         name: 
         ID: -1
-        object_type: 0
-        hasInteger: 0
-        hasBoolean: 0
-        hasString: 0
+        objectTypes: 0
+        variableTypes: 0
   - itemName: new item 5
     normalImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
     selectedImage: {fileID: 21300000, guid: 1e33228ce02cac74e831bca7e7687e58, type: 3}
@@ -587,9 +586,7 @@ MonoBehaviour:
       booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
-      hasInteger: 1
-      hasBoolean: 0
-      hasString: 1
+      variableTypes: 0
     global_properties:
     - name: inv
       integer: 0
@@ -603,10 +600,8 @@ MonoBehaviour:
       config:
         name: inv
         ID: 2
-        object_type: 4
-        hasInteger: 1
-        hasBoolean: 1
-        hasString: 1
+        objectTypes: 4
+        variableTypes: -1
     inventoryActions:
     - specialIndex: 2
       verb:
@@ -676,7 +671,10 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeBooleanOperation: 0
             changeIntegerOrFloatOperation: 0
+            changeStringOperation: 0
+            replaceValueToFind: 
             compareIntegerOrFloatOperation: 0
             compareStringOperation: 0
             global_BooleanValue: 0
@@ -771,7 +769,10 @@ MonoBehaviour:
             global_defaultBooleanValue: 0
             global_defaultIntegerValue: 0
             global_defaultStringValue: 
+            changeBooleanOperation: 0
             changeIntegerOrFloatOperation: 0
+            changeStringOperation: 0
+            replaceValueToFind: 
             compareIntegerOrFloatOperation: 0
             compareStringOperation: 0
             global_BooleanValue: 0
@@ -810,9 +811,7 @@ MonoBehaviour:
       booleanDefault: 0
       stringDefault: 0
       expandedInInspector: 0
-      hasInteger: 0
-      hasBoolean: 0
-      hasString: 0
+      variableTypes: 0
     current_global_properties:
     - name: new property
       integer: 0
@@ -826,8 +825,6 @@ MonoBehaviour:
       config:
         name: 
         ID: -1
-        object_type: 0
-        hasInteger: 0
-        hasBoolean: 0
-        hasString: 0
+        objectTypes: 0
+        variableTypes: 0
   specialIndex: 6

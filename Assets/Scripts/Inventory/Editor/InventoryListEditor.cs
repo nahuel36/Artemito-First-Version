@@ -30,7 +30,7 @@ public class InventoryListEditor : Editor
         InventoryList myTarget = (InventoryList)target;
         for (int i = 0; i < myTarget.items.Length; i++)
         {
-            PNCEditorUtils.InitializeGlobalProperties(GlobalPropertyConfig.object_types.inventory,ref myTarget.items[i].global_properties);
+            PNCEditorUtils.InitializeGlobalProperties(PropertyObjectType.inventory,ref myTarget.items[i].global_properties);
             string key = serializedObject.FindProperty("items").GetArrayElementAtIndex(i).FindPropertyRelative("specialIndex").intValue.ToString();
 
             localPropertiesLists.Add(key,null);
@@ -187,7 +187,7 @@ public class InventoryListEditor : Editor
 
             PNCEditorUtils.ShowLocalPropertiesOnRect(localPropertiesLists[key], ref myTarget.items[selectedButton].local_properties, ref local_properties_serialized);
 
-            PNCEditorUtils.ShowGlobalPropertiesOnRect(GlobalPropertyConfig.object_types.inventory, ref myTarget.items[selectedButton].global_properties, ref global_properties_serialized);
+            PNCEditorUtils.ShowGlobalPropertiesOnRect(PropertyObjectType.inventory, ref myTarget.items[selectedButton].global_properties, ref global_properties_serialized);
 
             ShowInteractionVerbs(key);
         }

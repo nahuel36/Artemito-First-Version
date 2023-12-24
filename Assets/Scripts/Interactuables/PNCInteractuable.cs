@@ -2,6 +2,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+
+[System.Flags]
+public enum VariableType
+{
+    none = 0,
+    boolean_type = 1 << 0,
+    integer_type = 1 << 1,
+    string_type = 1 << 2,
+    float_type = 1 << 3,
+    object_type = 1 << 4,
+    everything = -1
+}
+
+
+[System.Flags]
+public enum PropertyObjectType
+{
+    character = (1 << 0),
+    room_object = (1 << 1),
+    inventory = (1 << 2),
+    propertiesContainer = (1 << 3),
+    dialogOption = (1 << 4),
+    any = -1
+}
+
+[System.Flags]
+public enum PropertyActionType
+{
+    setGlobalProperty = 1 << 0,
+    getGlobalProperty = 1 << 1,
+    setLocalProperty = 1 << 2,
+    getLocalProperty = 1 << 3,
+    anySet = setGlobalProperty | setLocalProperty,
+    anyGet = getGlobalProperty | getLocalProperty,
+    anyLocal = setLocalProperty | getLocalProperty,
+    anyGlobal = getGlobalProperty | setGlobalProperty,
+    any = -1
+}
+
+
 [System.Serializable]
 public class Verb
 {
@@ -52,11 +93,8 @@ public class InteractionsAttemp
 public class CustomArgument
 {
     public string name;
-    public enum ArgumentType
-    {
-        String, Boolean, Integer, Object
-    }
-    public ArgumentType type;
+
+    public VariableType type;
 
     public string stringArgument;
     public bool boolArgument;
@@ -79,7 +117,7 @@ public class Interaction
     public enum InteractionType
     {
         character,
-        properties_container,
+        propertiesContainer,
         inventory,
         dialog,
         custom
