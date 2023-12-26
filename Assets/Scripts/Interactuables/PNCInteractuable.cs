@@ -13,7 +13,7 @@ public enum VariableType
     string_type = 1 << 2,
     float_type = 1 << 3,
     object_type = 1 << 4,
-    everything = -1
+    everything = ~0
 }
 
 
@@ -25,7 +25,7 @@ public enum PropertyObjectType
     inventory = (1 << 2),
     propertiesContainer = (1 << 3),
     dialogOption = (1 << 4),
-    any = -1
+    any = ~0
 }
 
 [System.Flags]
@@ -39,7 +39,7 @@ public enum PropertyActionType
     anyGet = getGlobalProperty | getLocalProperty,
     anyLocal = setLocalProperty | getLocalProperty,
     anyGlobal = getGlobalProperty | setGlobalProperty,
-    any = -1
+    any = ~0
 }
 
 
