@@ -3,15 +3,8 @@ using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-
-
-
 public static class PNCEditorUtils
 {
-
-    
-
-
     public static void InitializeGlobalProperties(System.Enum type, ref GlobalProperty[] globalProperties)
     {
         Settings settings = Resources.Load<Settings>("Settings/Settings");
@@ -246,9 +239,8 @@ public static class PNCEditorUtils
         else if ((propertyActionType & PropertyActionType.anyLocal)!=0)
         {
             hasProperty = (variableType & propertyObject.LocalProperties[index].variableTypes)!=0;
-            
         }
-
+        
         if (variableType == VariableType.boolean_type)
             variableTypeString = "Boolean";
         else if (variableType == VariableType.integer_type)
@@ -257,7 +249,7 @@ public static class PNCEditorUtils
             variableTypeString = "String";
         else if (variableType == VariableType.float_type)
             variableTypeString = "Float";
-
+        
 
         if (hasProperty)
         {
@@ -268,7 +260,7 @@ public static class PNCEditorUtils
 
                 if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anySet, interactionSerialized))
                 {
-                    actionString = "change";
+                    actionString = "Change";
                     if ((variableType & (VariableType.integer_type | VariableType.float_type))!=0)
                     {
                         if (interactionSerialized.FindPropertyRelative("changeIntegerOrFloatOperation").enumValueIndex == (int)Interaction.ChangeIntegerOrFloatOperation.add)
@@ -290,7 +282,7 @@ public static class PNCEditorUtils
                 }
                 else if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anyGet, interactionSerialized))
                 {
-                    actionString = "compare";
+                    actionString = "Compare";
                     if ((variableType & (VariableType.integer_type | VariableType.float_type))!=0)
                     {
                         if (interactionSerialized.FindPropertyRelative("compareIntegerOrFloatOperation").enumValueIndex == (int)Interaction.CompareIntegerOrFloatOperation.areEqual)
@@ -311,10 +303,15 @@ public static class PNCEditorUtils
                     else
                         editorDescription = "value to compare";
                 }
-
+                
                 rect.y += EditorGUIUtility.singleLineHeight;
-                interactionSerialized.FindPropertyRelative(propertyTypeString + "_" + actionString + variableTypeString + "Value").boolValue = EditorGUI.Toggle(rect, actionString + " " + variableTypeString.ToLower() + " value", interactionSerialized.FindPropertyRelative(propertyTypeString + "_" + actionString + variableTypeString + "Value").boolValue);
-                if (interactionSerialized.FindPropertyRelative(propertyTypeString + "_" + actionString + variableTypeString + "Value").boolValue)
+
+                if(EditorGUI.Toggle(rect, actionString.ToLower() + " " + variableTypeString.ToLower() + " value", (interactionSerialized.FindPropertyRelative(propertyTypeString + "_variablesTo" + actionString).enumValueFlag & (int)variableType)!=0))
+                    interactionSerialized.FindPropertyRelative(propertyTypeString + "_variablesTo" + actionString).enumValueFlag |= (int)variableType;
+                else
+                    interactionSerialized.FindPropertyRelative(propertyTypeString + "_variablesTo" + actionString).enumValueFlag &= (int)~variableType;
+
+                if ((interactionSerialized.FindPropertyRelative(propertyTypeString + "_variablesTo" + actionString).enumValueFlag & (int)variableType)!=0)
                 {
                     if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anyGet, interactionSerialized)
                         && ((variableType & (VariableType.integer_type | VariableType.float_type))!=0))
@@ -671,7 +668,7 @@ public static class PNCEditorUtils
                         if (hasBoolean)
                         {
                             height += 1;
-                            if (interactionSerialized.FindPropertyRelative(propertyType + "_changeBooleanValue").boolValue
+                            if ((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToChange").enumValueFlag & (int)VariableType.boolean_type)!=0
                                 && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anySet, interactionSerialized))
                             {
                                 height += 1;
@@ -682,15 +679,15 @@ public static class PNCEditorUtils
                         if (hasInteger)
                         {
                             height += 1;
-                            if (interactionSerialized.FindPropertyRelative(propertyType + "_changeIntegerValue").boolValue
-                                && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anySet, interactionSerialized))
+                            if ((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToChange").enumValueFlag & (int)VariableType.integer_type)!= 0
+                                 && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anySet, interactionSerialized))
                                 height += 2;
                         }
                         if (hasString)
                         {
                             height += 1;
-                            if (interactionSerialized.FindPropertyRelative(propertyType + "_changeStringValue").boolValue
-                                && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anySet, interactionSerialized))
+                            if ((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToChange").enumValueFlag & (int)VariableType.string_type)!= 0
+                                 && CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anySet, interactionSerialized))
                             {
                                 height += 2;
                                 if (interactionSerialized.FindPropertyRelative("changeStringOperation").enumValueIndex == (int)Interaction.ChangeStringOperation.replace)
@@ -699,15 +696,15 @@ public static class PNCEditorUtils
                         }
                         if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anyGet, interactionSerialized))
                         {
-                            if (interactionSerialized.FindPropertyRelative(propertyType + "_compareBooleanValue").boolValue && hasBoolean)
+                            if ((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToCompare").enumValueFlag & (int)VariableType.boolean_type)!= 0 && hasBoolean)
                                 height += 2;
-                            if (interactionSerialized.FindPropertyRelative(propertyType + "_compareIntegerValue").boolValue && hasInteger)
+                            if ((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToCompare").enumValueFlag & (int)VariableType.integer_type)!= 0 && hasInteger)
                                 height += 3;
-                            if (interactionSerialized.FindPropertyRelative(propertyType + "_compareStringValue").boolValue && hasString)
+                            if ((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToCompare").enumValueFlag & (int)VariableType.string_type) != 0 && hasString)
                                 height += 3;
-                            if ((interactionSerialized.FindPropertyRelative(propertyType + "_compareBooleanValue").boolValue && hasBoolean) ||
-                                (interactionSerialized.FindPropertyRelative(propertyType + "_compareIntegerValue").boolValue && hasInteger) ||
-                                (interactionSerialized.FindPropertyRelative(propertyType + "_compareStringValue").boolValue && hasString))
+                            if (((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToCompare").enumValueFlag & (int)VariableType.boolean_type) != 0 && hasBoolean) ||
+                                ((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToCompare").enumValueFlag & (int)VariableType.integer_type) != 0 && hasInteger) ||
+                                ((interactionSerialized.FindPropertyRelative(propertyType + "_variablesToCompare").enumValueFlag & (int)VariableType.string_type) != 0 && hasString))
                                 height += GetGoToLineHeight(interactionSerialized);
                         }
                     }
@@ -1068,9 +1065,9 @@ public static class PNCEditorUtils
                                                             PropertyInteraction(ref interactRect, interactionSerialized, propertyObject, PropertyActionType.anyGlobal, VariableType.string_type);
                                                             
                                                             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.getGlobalProperty, interactionSerialized) &&
-                                                                    ((interactionSerialized.FindPropertyRelative("global_compareBooleanValue").boolValue && (propertyObject.GlobalProperties[index].config.variableTypes & VariableType.boolean_type) != 0)||
-                                                                    (interactionSerialized.FindPropertyRelative("global_compareIntegerValue").boolValue && (propertyObject.GlobalProperties[index].config.variableTypes & VariableType.integer_type) != 0)||
-                                                                    (interactionSerialized.FindPropertyRelative("global_compareStringValue").boolValue && (propertyObject.GlobalProperties[index].config.variableTypes & VariableType.string_type)!=0)))
+                                                                    (((interactionSerialized.FindPropertyRelative("global_variablesToCompare").enumValueFlag & (int)VariableType.boolean_type)!=0 && (propertyObject.GlobalProperties[index].config.variableTypes & VariableType.boolean_type) != 0)||
+                                                                    ((interactionSerialized.FindPropertyRelative("global_variablesToCompare").enumValueFlag & (int)VariableType.integer_type) != 0 & (propertyObject.GlobalProperties[index].config.variableTypes & VariableType.integer_type) != 0)||
+                                                                    ((interactionSerialized.FindPropertyRelative("global_variablesToCompare").enumValueFlag & (int)VariableType.string_type) != 0 && (propertyObject.GlobalProperties[index].config.variableTypes & VariableType.string_type)!=0)))
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 ShowLineToGo(ref interactRect, interactionSerialized, attemps, indexA);
@@ -1102,9 +1099,9 @@ public static class PNCEditorUtils
                                                             PropertyInteraction(ref interactRect, interactionSerialized, propertyObject, PropertyActionType.anyLocal, VariableType.string_type);
 
                                                             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.getLocalProperty, interactionSerialized) &&
-                                                                    ((interactionSerialized.FindPropertyRelative("local_compareBooleanValue").boolValue && (propertyObject.LocalProperties[index].variableTypes & VariableType.boolean_type) != 0)||
-                                                                    (interactionSerialized.FindPropertyRelative("local_compareIntegerValue").boolValue && (propertyObject.LocalProperties[index].variableTypes & VariableType.integer_type)!=0) ||
-                                                                    (interactionSerialized.FindPropertyRelative("local_compareStringValue").boolValue && (propertyObject.LocalProperties[index].variableTypes & VariableType.string_type)!=0)))
+                                                                    (((interactionSerialized.FindPropertyRelative("local_variablesToCompare").enumValueFlag & (int)VariableType.boolean_type) != 0  && (propertyObject.LocalProperties[index].variableTypes & VariableType.boolean_type) != 0)||
+                                                                    ((interactionSerialized.FindPropertyRelative("local_variablesToCompare").enumValueFlag & (int)VariableType.integer_type) != 0 && (propertyObject.LocalProperties[index].variableTypes & VariableType.integer_type)!=0) ||
+                                                                    ((interactionSerialized.FindPropertyRelative("local_variablesToCompare").enumValueFlag & (int)VariableType.string_type) != 0 && (propertyObject.LocalProperties[index].variableTypes & VariableType.string_type)!=0)))
                                                             {
                                                                 interactRect.y += EditorGUIUtility.singleLineHeight;
                                                                 ShowLineToGo(ref interactRect, interactionSerialized, attemps, indexA);

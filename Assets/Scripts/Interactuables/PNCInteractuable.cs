@@ -197,20 +197,12 @@ public class Interaction
     //CUSTOM
     public UnityEvent<List<CustomArgument>> action;
     
-    public bool global_changeBooleanValue;
-    public bool global_changeStringValue;
-    public bool global_changeIntegerValue;
-    public bool local_changeBooleanValue;
-    public bool local_changeStringValue;
-    public bool local_changeIntegerValue;
-    
-    public bool global_compareBooleanValue;
-    public bool global_compareStringValue;
-    public bool global_compareIntegerValue;
-    public bool local_compareBooleanValue;
-    public bool local_compareStringValue;
-    public bool local_compareIntegerValue;
-    
+    public VariableType global_variablesToChange;
+    public VariableType local_variablesToChange;
+
+    public VariableType global_variablesToCompare;
+    public VariableType local_variablesToCompare;
+
     public bool local_defaultBooleanValue;
     public int local_defaultIntegerValue;
     public string local_defaultStringValue;
@@ -295,18 +287,10 @@ public class Interaction
         destiny.propertiesAction = propertiesAction;
         destiny.WhatToSay = WhatToSay;
         destiny.WhereToWalk = WhereToWalk;
-        destiny.local_changeBooleanValue = local_changeBooleanValue;
-        destiny.local_changeIntegerValue = local_changeIntegerValue;
-        destiny.local_changeStringValue = local_changeStringValue;
-        destiny.global_changeBooleanValue = global_changeBooleanValue;
-        destiny.global_changeIntegerValue = global_changeIntegerValue;
-        destiny.global_changeStringValue = global_changeStringValue;
-        destiny.local_compareBooleanValue = local_compareBooleanValue;
-        destiny.local_compareIntegerValue = local_compareIntegerValue;
-        destiny.local_compareStringValue = local_compareStringValue;
-        destiny.global_compareBooleanValue = global_compareBooleanValue;
-        destiny.global_compareIntegerValue = global_compareIntegerValue;
-        destiny.global_compareStringValue = global_compareStringValue;
+        destiny.local_variablesToChange = local_variablesToChange;
+        destiny.local_variablesToCompare = local_variablesToCompare;
+        destiny.global_variablesToChange = global_variablesToChange;
+        destiny.global_variablesToCompare = global_variablesToCompare;
         destiny.local_BooleanValue = local_BooleanValue;
         destiny.local_IntegerValue = local_IntegerValue;
         destiny.local_StringValue = local_StringValue;

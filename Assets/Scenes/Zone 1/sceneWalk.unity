@@ -10790,7 +10790,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_properties.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11085,7 +11085,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: global_properties.Array.data[0].booleanDefault
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -11134,6 +11134,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: global_properties.Array.data[0].config.objectTypes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: global_properties.Array.data[0].config.object_type
       value: 1
       objectReference: {fileID: 0}
@@ -11161,6 +11166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: global_properties.Array.data[1].expandedInInspector
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: global_properties.Array.data[0].config.variableTypes
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -13228,7 +13238,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_variablesToChange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].local_changeStringValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].local_variablesToChange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_variablesToChange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[4].local_variablesToChange
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -13258,6 +13288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_variablesToCompare
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].local_changeIntegerValue
       value: 1
       objectReference: {fileID: 0}
@@ -13273,6 +13308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_variablesToCompare
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[4].local_changeIntegerValue
       value: 1
       objectReference: {fileID: 0}
@@ -13283,12 +13323,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[5].local_variablesToCompare
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[6].local_changeIntegerValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[7].local_changeIntegerValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[7].local_variablesToCompare
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -27632,7 +27682,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -28441,7 +28491,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].type
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -29246,13 +29296,13 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].WhatToSay
-      value: me usaste
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].character
       value: 
-      objectReference: {fileID: 1958450923}
+      objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[1].interactions.Array.data[0].WhatToSay
@@ -29535,6 +29585,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].global_variablesToChange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_changeBooleanValue
       value: 0
       objectReference: {fileID: 0}
@@ -29555,6 +29610,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].global_variablesToChange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[2].local_changeBooleanValue
       value: 0
       objectReference: {fileID: 0}
@@ -29565,12 +29625,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].global_variablesToChange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_changeBooleanValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_compareStringValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[1].attempsContainer.attemps.Array.data[0].interactions.Array.data[4].global_variablesToChange
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -29655,6 +29725,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].global_variablesToCompare
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[1].local_compareBooleanValue
       value: 0
       objectReference: {fileID: 0}
@@ -29700,6 +29775,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].global_variablesToCompare
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[3].local_compareBooleanValue
       value: 0
       objectReference: {fileID: 0}
@@ -29740,6 +29820,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[5].global_variablesToCompare
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[5].local_compareBooleanValue
       value: 1
       objectReference: {fileID: 0}
@@ -29766,6 +29851,11 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[7].global_changeBooleanValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[7].global_variablesToCompare
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
@@ -30611,7 +30701,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -31089,7 +31179,7 @@ PrefabInstance:
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -31101,6 +31191,11 @@ PrefabInstance:
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1958450922}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -31115,6 +31210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
@@ -31203,6 +31303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
         type: 3}
+      propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
       propertyPath: verbs.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -31286,6 +31391,11 @@ PrefabInstance:
       propertyPath: verbs.Array.data[2].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4358683522733026007, guid: d6814d23b62b95a46a297e31d019ff29,
+        type: 3}
+      propertyPath: inventoryActions.Array.data[0].attempsContainer.attemps.Array.data[0].interactions.Array.data[0].action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6814d23b62b95a46a297e31d019ff29, type: 3}
 --- !u!1 &1958450922 stripped
@@ -31367,18 +31477,10 @@ MonoBehaviour:
           action:
             m_PersistentCalls:
               m_Calls: []
-          global_changeBooleanValue: 0
-          global_changeStringValue: 0
-          global_changeIntegerValue: 0
-          local_changeBooleanValue: 0
-          local_changeStringValue: 0
-          local_changeIntegerValue: 0
-          global_compareBooleanValue: 0
-          global_compareStringValue: 0
-          global_compareIntegerValue: 0
-          local_compareBooleanValue: 0
-          local_compareStringValue: 0
-          local_compareIntegerValue: 0
+          global_variablesToChange: 0
+          local_variablesToChange: 0
+          global_variablesToCompare: 0
+          local_variablesToCompare: 0
           local_defaultBooleanValue: 0
           local_defaultIntegerValue: 0
           local_defaultStringValue: 

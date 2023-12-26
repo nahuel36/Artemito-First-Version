@@ -13,7 +13,13 @@ public class CommandSetGenericProperty : ICommand
         await Task.Yield();
         if (InteractionUtils.CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anySet, interaction))
         {
-            if (interaction.local_changeBooleanValue)
+            VariableType variablesToChange = VariableType.boolean_type;
+            if (InteractionUtils.CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anyGlobal, interaction))
+                variablesToChange = interaction.global_variablesToChange;
+            if (InteractionUtils.CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.anyLocal, interaction))
+                variablesToChange = interaction.local_variablesToChange;
+
+            if ((variablesToChange & VariableType.boolean_type)!=0)
             { 
                 property.booleanDefault = false;
                 if (interaction.changeBooleanOperation == Interaction.ChangeBooleanOperation.setValue)
@@ -21,7 +27,7 @@ public class CommandSetGenericProperty : ICommand
                 else if (interaction.changeBooleanOperation == Interaction.ChangeBooleanOperation.toggle)
                     property.boolean = !property.boolean;
             }
-            if (interaction.local_changeIntegerValue)
+            if ((variablesToChange & VariableType.integer_type)!=0)
             {
                 property.integerDefault = false;
                 if (interaction.changeIntegerOrFloatOperation == Interaction.ChangeIntegerOrFloatOperation.set)
@@ -31,7 +37,7 @@ public class CommandSetGenericProperty : ICommand
                 else if (interaction.changeIntegerOrFloatOperation == Interaction.ChangeIntegerOrFloatOperation.subtract)
                     property.integer -= interaction.local_IntegerValue;
             }
-            if (interaction.local_changeStringValue)
+            if ((variablesToChange & VariableType.string_type)!=0)
             {
                 property.stringDefault = false;
                 if (interaction.changeStringOperation == Interaction.ChangeStringOperation.change)

@@ -230,9 +230,9 @@ public static class InteractionUtils
             string stringValue = "", defaultStringValue = "";
             if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.getGlobalProperty, interaction))
             {
-                compareBoolean = interaction.global_compareBooleanValue;
-                compareInteger = interaction.global_compareIntegerValue;
-                compareString = interaction.global_compareStringValue;
+                compareBoolean = (interaction.global_variablesToCompare & VariableType.boolean_type)!=0;
+                compareInteger = (interaction.global_variablesToCompare & VariableType.integer_type)!= 0;
+                compareString = (interaction.global_variablesToCompare & VariableType.string_type)!= 0;
                 booleanValue = interaction.global_BooleanValue;
                 integerValue = interaction.global_IntegerValue;
                 stringValue = interaction.global_StringValue;
@@ -242,9 +242,9 @@ public static class InteractionUtils
             }
             else if (CheckArePropertyInteraction(PropertyObjectType.any, PropertyActionType.getLocalProperty, interaction))
             {
-                compareBoolean = interaction.local_compareBooleanValue;
-                compareInteger = interaction.local_compareIntegerValue;
-                compareString = interaction.local_compareStringValue;
+                compareBoolean = (interaction.local_variablesToCompare & VariableType.boolean_type)!= 0;
+                compareInteger = (interaction.local_variablesToCompare & VariableType.integer_type)!= 0;
+                compareString = (interaction.local_variablesToCompare & VariableType.string_type)!= 0;
                 booleanValue = interaction.local_BooleanValue;
                 integerValue = interaction.local_IntegerValue;
                 stringValue = interaction.local_StringValue;
