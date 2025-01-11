@@ -62,18 +62,10 @@ MonoBehaviour:
                     m_StringArgument: 2
                     m_BoolArgument: 0
                   m_CallState: 2
-            global_changeBooleanValue: 0
-            global_changeStringValue: 0
-            global_changeIntegerValue: 0
-            local_changeBooleanValue: 0
-            local_changeStringValue: 0
-            local_changeIntegerValue: 0
-            global_compareBooleanValue: 0
-            global_compareStringValue: 0
-            global_compareIntegerValue: 0
-            local_compareBooleanValue: 0
-            local_compareStringValue: 0
-            local_compareIntegerValue: 0
+            global_variablesToChange: 0
+            local_variablesToChange: 0
+            global_variablesToCompare: 0
+            local_variablesToCompare: 0
             local_defaultBooleanValue: 0
             local_defaultIntegerValue: 0
             local_defaultStringValue: 
@@ -97,7 +89,7 @@ MonoBehaviour:
             customScriptAction: 0
             customActionArguments: []
           expandedInInspector: 1
-        expandedInInspector: 1
+        expandedInInspector: 0
         executedTimes: 0
       subDialogDestinyIndex: 2
       initialState: 0
@@ -376,18 +368,10 @@ MonoBehaviour:
             action:
               m_PersistentCalls:
                 m_Calls: []
-            global_changeBooleanValue: 0
-            global_changeStringValue: 0
-            global_changeIntegerValue: 0
-            local_changeBooleanValue: 0
-            local_changeStringValue: 0
-            local_changeIntegerValue: 0
-            global_compareBooleanValue: 0
-            global_compareStringValue: 0
-            global_compareIntegerValue: 0
-            local_compareBooleanValue: 0
-            local_compareStringValue: 0
-            local_compareIntegerValue: 0
+            global_variablesToChange: 0
+            local_variablesToChange: 0
+            global_variablesToCompare: 0
+            local_variablesToCompare: 0
             local_defaultBooleanValue: 0
             local_defaultIntegerValue: 0
             local_defaultStringValue: 
@@ -623,8 +607,8 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 110.17674
-      y: 189
+      x: 107.776764
+      y: 108.19998
       width: 212
       height: 275
     expandedInInspector: 1
@@ -850,8 +834,8 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 618.7305
-      y: 390
+      x: 616.3305
+      y: 309.19995
       width: 212
       height: 162.5
     expandedInInspector: 0
@@ -1149,8 +1133,8 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 366.95004
-      y: 66
+      x: 364.55002
+      y: -14.800018
       width: 212
       height: 200
     expandedInInspector: 0
@@ -1520,11 +1504,11 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 656.4461
-      y: 56
+      x: 654.0461
+      y: -24.800018
       width: 212
       height: 237.5
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: plata
     index: 8
@@ -1819,8 +1803,8 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 351.7711
-      y: 421
+      x: 349.37106
+      y: 340.19995
       width: 212
       height: 200
     expandedInInspector: 0
@@ -2118,8 +2102,8 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 864.62885
-      y: 423
+      x: 862.2288
+      y: 342.19995
       width: 212
       height: 200
     expandedInInspector: 0
@@ -2417,11 +2401,11 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 864.62885
-      y: 423
+      x: 862.2288
+      y: 342.19995
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: que mal
     index: 13
@@ -2716,11 +2700,11 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 864.62885
-      y: 423
+      x: 862.2288
+      y: 342.19995
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: que mal
     index: 14
@@ -3015,11 +2999,11 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 864.62885
-      y: 423
+      x: 862.2288
+      y: 342.19995
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: que mal
     index: 15
@@ -3314,11 +3298,11 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 864.62885
-      y: 423
+      x: 862.2288
+      y: 342.19995
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   - text: que mal
     index: 16
@@ -3613,24 +3597,24 @@ MonoBehaviour:
           variableTypes: 0
     nodeRect:
       serializedVersion: 2
-      x: 864.62885
-      y: 423
+      x: 862.2288
+      y: 342.19995
       width: 212
       height: 200
-    expandedInInspector: 1
+    expandedInInspector: 0
     optionSpecialIndex: 5
   subDialogIndex: 16
   initial_entryDialogIndex: 1
   current_entryDialogIndex: 1
   enterNodeRect:
     serializedVersion: 2
-    x: -9.714996
-    y: 92
+    x: -12.11496
+    y: 11.199982
     width: 212
     height: 53
   exitNodeRect:
     serializedVersion: 2
-    x: 1082.9
-    y: 268
+    x: 1080.5
+    y: 187.19998
     width: 212
     height: 53
