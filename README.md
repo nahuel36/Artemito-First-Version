@@ -4,6 +4,7 @@ This will be an Adventure Graphic (or Point and Click) Asset, to make your own g
 # Descripción
 
 En esta version las interacciones no tienen sus propias variables sino que esta todo en la clase interacción, esto luego se cambió en la siguiente versión para que tenga mas flexibilidad y mejor customización.
+La idea es que el usuario pueda crear sus propias interacciones, y esto no era muy ví­able poniendo todo en una misma clase.
 
 ### A* Pathfinding Project Dependency
 
