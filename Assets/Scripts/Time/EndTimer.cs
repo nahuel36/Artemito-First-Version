@@ -25,9 +25,5 @@ public class EndTimer : ICommand
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
